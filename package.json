@@ -16,7 +16,6 @@
     "build.test": "gulp build.test --color",
     "build.test.watch": "gulp build.test.watch --color",
     "docs": "npm run gulp -- build.docs --color && npm run gulp -- serve.docs --color",
-    "e2e": "protractor",
     "e2e.live": "protractor --elementExplorer",
     "gulp": "gulp",
     "karma": "karma",
@@ -27,9 +26,7 @@
     "serve.dev": "gulp serve.dev --color",
     "serve.e2e": "gulp serve.e2e --color",
     "serve.prod": "gulp serve.prod --color",
-    "start": "gulp serve.dev --color",
     "tasks.list": "gulp --tasks-simple --color",
-    "test": "gulp test --color",
     "webdriver-start": "webdriver-manager start",
     "webdriver-update": "webdriver-manager update"
   },
@@ -46,8 +43,7 @@
     "core-js": "^2.4.1",
     "rxjs": "^5.0.1",
     "ts-helpers": "^1.1.1",
-    "zone.js": "^0.7.2",
-
+    "zone.js": "^0.7.2"
   },
   "devDependencies": {
     "@angular/compiler-cli": "^2.3.1",
