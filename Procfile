@@ -1,1 +1,1 @@
-web: node ./src/heroku.ts
+web: node ./src/heroku.js
