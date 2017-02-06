@@ -8,13 +8,13 @@ import {Component} from '@angular/core';
 })
 
 export class ThemeComponent {
-  // constructor(private themeService: ThemeService) {
-  // }
+  constructor(private themeService: ThemeService) {
+  }
 
-  // submit(name: string, description: string, tags: string, publicAccess: boolean) {
-  //   if (!name || !description || !tags) {
-  //     return;
-  //   }
-  //   this.themeService.create(name, description, tags, publicAccess);
-  // }
+  submit(name: string, description: string, tags: string, publicAccess: boolean) {
+    if (!name || !description || !tags) {
+      return;
+    }
+    this.themeService.create(name, description, tags, publicAccess);
+  }
 }
