@@ -1,16 +1,18 @@
-import {TestBed, async, ComponentFixture} from '@angular/core/testing';
+import {TestBed, async, ComponentFixture, inject} from '@angular/core/testing';
 import {ThemeComponent} from './theme.component';
 import {DebugElement} from "@angular/core";
 import {ThemeService} from "./theme.service";
+import {Router} from "@angular/router";
+import {RouterStub} from "./testing/router-stubs";
+import {ThemeServiceStub} from "./testing/service-stubs";
 
 describe('ThemeComponent', () => {
-  let comp:ThemeComponent;
-  let fixture:ComponentFixture<ThemeComponent>;
-  let de:DebugElement;
-  let el:HTMLElement;
+  let comp: ThemeComponent;
+  let fixture: ComponentFixture<ThemeComponent>;
+  let de: DebugElement;
+  let el: HTMLElement;
 
-  let themeService:ThemeService;
-  let themeServiceStub:MockThemeService;
+  let themeServiceStub: ThemeServiceStub;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -18,15 +20,16 @@ describe('ThemeComponent', () => {
         ThemeComponent
       ],
       providers: [
-        {provide: ThemeService, useValue: themeServiceStub}
+        {provide: ThemeService, useValue: themeServiceStub},
+        {provide: Router, useClass: RouterStub}
       ]
     }).compileComponents()
       .then(() => {
         fixture = TestBed.createComponent(ThemeComponent);
         comp = fixture.componentInstance;
 
-        themeService = TestBed.get(ThemeService);
-        themeServiceStub = new MockThemeService;
+        themeServiceStub = new ThemeServiceStub;
+
         de = fixture.debugElement;
         el = de.nativeElement;
       });
@@ -56,23 +59,66 @@ describe('ThemeComponent', () => {
     expect(el.querySelector('#submit')).not.toBeNull();
   });
 
+  /*  it('should tell ROUTER to navigate when theme name clicked',
+   inject([Router], (router: Router) => {
+   const spy = spyOn(router, 'navigateTo');
+   el.querySelector('li').click();
+   const navArgs = spy.calls.first().args[0];
+   const id =  comp.themes[0].id;
+   expect(navArgs).toBe('/theme/' + id, 'should nav to ThemeDetail for first theme');
+   }));*/
+
   it('should return json stringify', () => {
-    themeServiceStub.name = 'bier';
-    themeServiceStub.description = 'bier en zo';
-    themeServiceStub.tags = 'test';
-    themeServiceStub.publicAccess = false;
+    expect(themeServiceStub.createTheme('bier', 'bier en zo', 'test', false)).toEqual(JSON.stringify({
+      name: 'bier',
+      description: 'bier en zo',
+      tags: 'test',
+      publicAccess: false
+    }));
+  });
 
-    expect(themeServiceStub.create()).toEqual(JSON.stringify({name: 'bier',description: 'bier en zo',tags: 'test',publicAccess: false}));
-  })
+  it('should return list of themes', () => {
+    expect(themeServiceStub.readThemes()).toEqual([
+      {
+        "name": "test01",
+        "description": "test",
+        "tags": "test",
+        "publicAccess": false,
+        "id": 14
+      },
+      {
+        "name": "test02",
+        "description": "test",
+        "tags": "test",
+        "publicAccess": false,
+        "id": 15
+      },
+      {
+        "name": "test03",
+        "description": "djsmfqjm",
+        "tags": "mjm",
+        "publicAccess": false,
+        "id": 17
+      }
+    ]);
+  });
+
+  it('should remove theme id 15', () => {
+    expect(themeServiceStub.deleteTheme()).toEqual([
+      {
+        "name": "test01",
+        "description": "test",
+        "tags": "test",
+        "publicAccess": false,
+        "id": 14
+      },
+      {
+        "name": "test03",
+        "description": "djsmfqjm",
+        "tags": "mjm",
+        "publicAccess": false,
+        "id": 17
+      }
+    ]);
+  });
 });
-
-class MockThemeService {
-  public name: string = 'theme';
-  public description: string = 'mock theme';
-  public tags: string = 'test';
-  public publicAccess: boolean = true;
-
-  create() {
-    return JSON.stringify({name: this.name, description: this.description, tags: this.tags, publicAccess: this.publicAccess})
-  }
-}

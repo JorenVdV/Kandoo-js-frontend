@@ -6,16 +6,20 @@ import {HttpModule} from '@angular/http';
 import {AppComponent} from './app.component';
 import {ThemeComponent} from "./theme.component";
 import {ThemeService} from "./theme.service";
+import {AppRoutingModule} from "./app-routing.module";
+import {ThemeDetailComponent} from "./theme-detail.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    ThemeComponent
+    ThemeComponent,
+    ThemeDetailComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AppRoutingModule
   ],
   providers: [
     ThemeService
