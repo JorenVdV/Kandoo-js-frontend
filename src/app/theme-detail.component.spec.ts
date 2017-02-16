@@ -4,7 +4,7 @@ import {ThemeService} from "./theme.service";
 import {ThemeServiceStub} from "./testing/service-stubs";
 import {Router, ActivatedRoute} from "@angular/router";
 import {ThemeDetailComponent} from "./theme-detail.component";
-import {ActivatedRouteStub} from "./testing/router-stubs";
+import {ActivatedRouteStub, RouterStub} from "./testing/router-stubs";
 import {Theme} from "./theme";
 import {FormsModule} from "@angular/forms";
 
@@ -27,7 +27,8 @@ describe('ThemeDetailComponent', () => {
       ],
       providers: [
         {provide: ThemeService, useValue: themeServiceStub},
-        {provide: ActivatedRoute, useValue: activatedRoute}
+        {provide: ActivatedRoute, useValue: activatedRoute},
+        {provide: Router, useClass: RouterStub}
       ]
     }).compileComponents()
       .then(() => {
@@ -36,7 +37,7 @@ describe('ThemeDetailComponent', () => {
 
         activatedRoute = new ActivatedRouteStub();
         activatedRoute.testParams = {id: expectedTheme.id};
-        createComponent();
+        //createComponent();
       });
   }));
 
@@ -75,7 +76,7 @@ class Page {
 
   constructor() {
     const router = TestBed.get(Router);
-    this.navSpy = spyOn(router, 'navigate');
+    this.navSpy = spyOn(router, 'navigateTo');
   }
 
   addPageElements() {
