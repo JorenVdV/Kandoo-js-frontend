@@ -14,7 +14,6 @@ import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
 import {CardComponent} from "./card/card.component";
 import {MockBackend} from "@angular/http/testing";
-import {fakeBackendProvider} from "./helpers/fake-backend";
 import {CardService} from "./services/card.service";
 import {UserService} from "./services/user.service";
 import {AuthenticationService} from "./services/authentication.service";
@@ -46,7 +45,6 @@ import {AuthGuard} from "./guards/auth.guard";
     UserService,
     CardService,
     // providers used to create fake backend
-    fakeBackendProvider,
     MockBackend,
     BaseRequestOptions
   ],
