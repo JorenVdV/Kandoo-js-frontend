@@ -1,0 +1,18 @@
+<h1>Voeg een thema toe</h1>
+<div>
+  <label>Naam<br><input id="name" type="text" #themeName></label><br>
+  <label>Omschrijving<br><input id="description" type="text" #themeDescription></label><br>
+  <label>Tags<br><input id="tags" type="text" #themeTags></label><br>
+  <label><input id="public" type="checkbox" #themePublic>Publiek</label><br>
+  <button id="submit" (click)="submitTheme(themeName.value, themeDescription.value, themeTags.value, themePublic.checked)">
+    Voeg toe
+  </button>
+</div>
+<div>
+  <ul>
+    <li *ngFor="let theme of themes" (click)="selectTheme(theme)">
+      <span>{{theme.name}}</span>
+      <button (click)="deleteTheme(theme)">DELETE</button>
+    </li>
+  </ul>
+</div>
