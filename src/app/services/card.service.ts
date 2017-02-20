@@ -5,18 +5,19 @@ import {Injectable} from "@angular/core";
 import {Headers, Http, Response} from "@angular/http";
 import {Observable} from "rxjs";
 import {Card} from "../models/card";
+import {Theme} from "../models/theme";
 
 @Injectable()
 export class CardService {
   private headers = new Headers({'Content-Type': 'application/json'});
-  private cardUrl = 'http://localhost:3000/cards';
+  private cardUrl = 'http://api.teamjs.xyz/';
 
   constructor(private http: Http) {
   }
 
-  createCard(card: Card): Observable<Card> {
+  createCard(theme: Theme, card: Card): Observable<Card> {
     return this.http
-      .post(this.cardUrl, JSON.stringify({
+      .post(this.cardUrl + '/theme/' + theme.id + '/card', JSON.stringify({
         card
       }), {headers: this.headers})
       .map((res: Response) => res.json())
