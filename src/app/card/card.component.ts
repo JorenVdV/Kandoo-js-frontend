@@ -31,7 +31,7 @@ export class CardComponent implements OnInit {
         if (!description || !priority) {
             return;
         }
-        this.cardService.createCard(description, priority).subscribe(
+        this.cardService.createCard(description).subscribe(
             card => {
                 this.cards.push(card);
             },

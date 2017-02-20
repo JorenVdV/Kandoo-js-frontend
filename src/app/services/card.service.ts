@@ -15,10 +15,10 @@ export class CardService {
     constructor(private http: Http) {
     }
 
-  createCard(theme: Theme, card: Card): Observable<Card> {
+  createCard(description): Observable<Card> {
     return this.http
-      .post(this.cardUrl + '/theme/' + theme.id + '/card', JSON.stringify({
-        card
+      .post(this.cardUrl + '/theme/' + 1 + '/card', JSON.stringify({
+        description
       }), {headers: this.headers})
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -47,11 +47,11 @@ export class CardService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    deleteCard(id: number): Observable<Card> {
-        const url = `${this.cardUrl}/${id}`;
-        return this.http
-            .delete(url)
-            .map((res: Response) => res.json())
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-    }
+  deleteCard(id: number): Observable<Card> {
+    const url = `${this.cardUrl}/${id}`;
+    return this.http
+      .delete(url)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 }
