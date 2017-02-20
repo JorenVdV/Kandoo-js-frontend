@@ -1,0 +1,5 @@
+machine:
+    node:
+        version: 7.5.0
+    npm:
+        version: 4.2.0
