@@ -8,11 +8,12 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --aot -prod"
+    "start": "node server.js",
+    "postinstall": "ng build --target=production -e ${NODE_ENV:-production} --aot",
+    "update": "ng update --style scss --prefix xc",
   },
   "private": true,
   "dependencies": {
