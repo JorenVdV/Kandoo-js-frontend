@@ -8,13 +8,13 @@
   },
   "scripts": {
     "ng": "ng",
-    "test": "ng test",
+    "test": "ng test --single-run",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "start": "node server.js",
     "postinstall": "ng build --target=production --aot",
     "update": "ng update --style scss --prefix xc",
-    "run":"ng serve"
+    "run": "ng serve"
   },
   "private": true,
   "dependencies": {
@@ -48,5 +48,7 @@
     "typescript": "~2.0.0",
     "zone.js": "^0.7.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "karma-phantomjs-launcher": "^1.0.2"
+  }
 }
