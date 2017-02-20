@@ -1,29 +1,68 @@
 import {Component, OnInit} from '@angular/core';
 import {Card} from "../models/card";
 import {CardService} from "../services/card.service";
+import {Router} from "@angular/router";
 
 
 @Component({
-  moduleId: module.id,
-  templateUrl: 'card.component.html'
+    selector: 'card',
+    templateUrl: 'card.component.html'
 })
 
 export class CardComponent implements OnInit {
-  currentCard: Card;
-  cards: Card[] = [];
+    cards: Card[] = [];
 
-  constructor(private cardService: CardService) {
+    constructor(private cardService: CardService,
+                private router: Router) {
 
-  }
+    }
 
-  ngOnInit() {
-    this.cardService.readCard(14).subscribe(card => this.currentCard = card);
-    this.loadAllCards();
-  }
+    getCards(): void {
+        this.cardService.readCards().subscribe(
+            cards => {
+                this.cards = cards
+            },
+            err => {
+                console.log(err);
+            });
+    }
 
-  private loadAllCards() {
-    this.cardService.readCards().subscribe(cards => {
-      this.cards = cards;
-    });
-  }
+    submitCard(description: string, priority: string) {
+        if (!description || !priority) {
+            return;
+        }
+        this.cardService.createCard(description, priority).subscribe(
+            card => {
+                this.cards.push(card);
+            },
+            err => {
+                console.log(err);
+            });
+    }
+
+    deleteCard(card: Card) {
+        this.cardService.deleteCard(card.id).subscribe(
+            cardObject => {
+                let index = -1;
+                for (let i = 0; i < this.cards.length; i++) {
+                    if (this.cards[i].id === card.id) {
+                        index = i;
+                        break;
+                    }
+                }
+                if (index != -1)
+                    this.cards.splice(index, 1);
+            },
+            err => {
+                console.log(err);
+            });
+    }
+
+    ngOnInit() {
+        this.getCards();
+    }
+
+    selectCard(card: Card) {
+        this.router.navigate(['/card', card.id]);
+    }
 }

@@ -7,22 +7,24 @@ import {RegisterComponent} from "../register/register.component";
 import {LoginComponent} from "../login/login.component";
 import {AuthGuard} from "../guards/auth.guard";
 import {HomeComponent} from "../home/home.component";
+import {CardDetailComponent} from "../card/card-detail.component";
 
 export const routes: Routes = [
-  {path: '', redirectTo: '/theme', pathMatch: 'full'},
-  {path: 'theme', component: ThemeComponent},
-  {path: 'theme/:id', component: ThemeDetailComponent},
-  {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'card', component: CardComponent},
-  // otherwise redirect to home
-  {path: '**', redirectTo: ''}
+    {path: '', redirectTo: '/themes', pathMatch: 'full'},
+    {path: 'themes', component: ThemeComponent},
+    {path: 'theme/:id', component: ThemeDetailComponent},
+    {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
+    {path: 'login', component: LoginComponent},
+    {path: 'register', component: RegisterComponent},
+    {path: 'cards', component: CardComponent},
+    {path: 'card/:id', component: CardDetailComponent},
+    // otherwise redirect to home
+    {path: '**', redirectTo: ''}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class AppRouting {
 }

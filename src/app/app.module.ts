@@ -19,36 +19,38 @@ import {UserService} from "./services/user.service";
 import {AuthenticationService} from "./services/authentication.service";
 import {AlertService} from "./services/alert.service";
 import {AuthGuard} from "./guards/auth.guard";
+import {CardDetailComponent} from "./card/card-detail.component";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ThemeComponent,
-    ThemeDetailComponent,
-    AlertComponent,
-    HomeComponent,
-    LoginComponent,
-    RegisterComponent,
-    CardComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    AppRouting
-  ],
-  providers: [
-    ThemeService,
-    AuthGuard,
-    AlertService,
-    AuthenticationService,
-    UserService,
-    CardService,
-    // providers used to create fake backend
-    MockBackend,
-    BaseRequestOptions
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        ThemeComponent,
+        ThemeDetailComponent,
+        AlertComponent,
+        HomeComponent,
+        LoginComponent,
+        RegisterComponent,
+        CardComponent,
+        CardDetailComponent
+    ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        AppRouting
+    ],
+    providers: [
+        ThemeService,
+        AuthGuard,
+        AlertService,
+        AuthenticationService,
+        UserService,
+        CardService,
+        // providers used to create fake backend
+        MockBackend,
+        BaseRequestOptions
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }

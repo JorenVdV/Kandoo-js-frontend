@@ -1,0 +1,6 @@
+<div *ngIf="card">
+    <h1>{{card.description}}</h1>
+    <label>Omschrijving<br><input id="description" type="text" [(ngModel)]="card.description"></label><br>
+    <label>Prioriteit<br><input id="priority" type="text" [(ngModel)]="card.priority"></label><br>
+    <button id="save" (click)="updateCard()">Opslaan</button>
+</div>
