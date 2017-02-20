@@ -12,7 +12,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "start": "node server.js",
-    "postinstall": "ng build --target=production -e ${NODE_ENV:-production} --aot",
+    "postinstall": "ng build --target=production --aot",
     "update": "ng update --style scss --prefix xc"
   },
   "private": true,

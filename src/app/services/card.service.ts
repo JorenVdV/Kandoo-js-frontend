@@ -5,24 +5,24 @@ import {Injectable} from "@angular/core";
 import {Headers, Http, Response} from "@angular/http";
 import {Observable} from "rxjs";
 import {Card} from "../models/card";
+import {Theme} from "../models/theme";
 
 @Injectable()
 export class CardService {
-    private headers = new Headers({'Content-Type': 'application/json'});
-    private cardUrl = 'http://localhost:3000/cards';
+  private headers = new Headers({'Content-Type': 'application/json'});
+  private cardUrl = 'http://api.teamjs.xyz/';
 
     constructor(private http: Http) {
     }
 
-    createCard(description: string, priority: string): Observable<Card> {
-        return this.http
-            .post(this.cardUrl, JSON.stringify({
-                description,
-                priority
-            }), {headers: this.headers})
-            .map((res: Response) => res.json())
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-    }
+  createCard(description): Observable<Card> {
+    return this.http
+      .post(this.cardUrl + '/theme/' + 1 + '/card', JSON.stringify({
+        description
+      }), {headers: this.headers})
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 
     readCard(id: number): Observable<Card> {
         const url = `${this.cardUrl}/${id}`;
@@ -47,11 +47,11 @@ export class CardService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    deleteCard(id: number): Observable<Card> {
-        const url = `${this.cardUrl}/${id}`;
-        return this.http
-            .delete(url)
-            .map((res: Response) => res.json())
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-    }
+  deleteCard(id: number): Observable<Card> {
+    const url = `${this.cardUrl}/${id}`;
+    return this.http
+      .delete(url)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 }
