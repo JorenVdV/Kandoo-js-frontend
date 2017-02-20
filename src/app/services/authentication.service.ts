@@ -9,7 +9,7 @@ export class AuthenticationService {
   }
 
   login(emailAddress: string, password: string) {
-    return this.http.post('login', JSON.stringify({
+    return this.http.post('http://api.teamjs.xyz/login', JSON.stringify({
       emailAddress: emailAddress,
       password: password
     }))
