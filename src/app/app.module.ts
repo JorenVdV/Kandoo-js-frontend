@@ -20,6 +20,7 @@ import {AuthenticationService} from "./services/authentication.service";
 import {AlertService} from "./services/alert.service";
 import {AuthGuard} from "./guards/auth.guard";
 import {CardDetailComponent} from "./card/card-detail.component";
+import {GameComponent} from "./game/game.component";
 
 @NgModule({
     declarations: [
@@ -31,7 +32,8 @@ import {CardDetailComponent} from "./card/card-detail.component";
         LoginComponent,
         RegisterComponent,
         CardComponent,
-        CardDetailComponent
+        CardDetailComponent,
+        GameComponent
     ],
     imports: [
         BrowserModule,

@@ -8,6 +8,7 @@ import {LoginComponent} from "../login/login.component";
 import {AuthGuard} from "../guards/auth.guard";
 import {HomeComponent} from "../home/home.component";
 import {CardDetailComponent} from "../card/card-detail.component";
+import {GameComponent} from "../game/game.component";
 
 export const routes: Routes = [
     {path: '', redirectTo: '/themes', pathMatch: 'full'},
@@ -18,6 +19,7 @@ export const routes: Routes = [
     {path: 'register', component: RegisterComponent},
     {path: 'cards', component: CardComponent},
     {path: 'card/:id', component: CardDetailComponent},
+    {path: 'game', component: GameComponent},
     // otherwise redirect to home
     {path: '**', redirectTo: ''}
 ];

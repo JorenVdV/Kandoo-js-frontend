@@ -1,16 +1,7 @@
 <h1>Voeg een kaart toe</h1>
 <div>
     <label>Omschrijving<br><input id="description" type="text" #cardDescription></label><br>
-    <label>Prioriteit<br><input id="priority" type="text" #cardPriority></label><br>
-    <button id="submit" (click)="submitCard(cardDescription.value, cardPriority.value)">
+    <button id="submit" (click)="submitCard(cardDescription.value)">
         Voeg toe
     </button>
-</div>
-<div>
-    <ul>
-        <li *ngFor="let card of cards" (click)="selectCard(card)">
-            <span>{{card.description}}</span>
-            <button (click)="deleteCard(card)">DELETE</button>
-        </li>
-    </ul>
 </div>
