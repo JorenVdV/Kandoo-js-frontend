@@ -29,7 +29,7 @@ export class SessionService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
     
-    readSession(id: number): Observable<Session> {
+    readSession(id: string): Observable<Session> {
         const url = `${this.sessionUrl}/${id}`;
         return this.http
             .get(url)
@@ -52,7 +52,7 @@ export class SessionService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    deleteSession(id: number): Observable<Session> {
+    deleteSession(id: string): Observable<Session> {
         const url = `${this.sessionUrl}/${id}`;
         return this.http
             .delete(url)

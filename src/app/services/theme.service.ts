@@ -14,13 +14,13 @@ export class ThemeService {
   constructor(private http: Http) {
   }
 
-  createTheme(name: string, description: string, tags: string, publicAccess: boolean): Observable<Theme> {
+  createTheme(theme: Theme): Observable<Theme> {
     return this.http
       .post(this.themeUrl, JSON.stringify({
-        name: name,
-        description: description,
-        tags: tags,
-        publicAccess: publicAccess
+        name: theme.name,
+        description: theme.description,
+        tags: theme.tags,
+        publicAccess: theme.publicAccess
       }), {headers: this.headers})
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
