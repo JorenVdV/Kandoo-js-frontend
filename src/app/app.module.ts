@@ -22,6 +22,7 @@ import {AuthGuard} from "./guards/auth.guard";
 import {CardDetailComponent} from "./card/card-detail.component";
 import {SessionService} from "./services/session.service";
 import {SessionComponent} from "./session/session.component";
+import {GameComponent} from "./game/game.component";
 
 @NgModule({
     declarations: [
@@ -34,7 +35,8 @@ import {SessionComponent} from "./session/session.component";
         RegisterComponent,
         CardComponent,
         CardDetailComponent,
-        SessionComponent
+        SessionComponent,
+        GameComponent
     ],
     imports: [
         BrowserModule,
@@ -51,7 +53,6 @@ import {SessionComponent} from "./session/session.component";
         CardService,
         // providers used to create fake backend
         MockBackend,
-        SessionService,
         BaseRequestOptions
     ],
     bootstrap: [AppComponent]
