@@ -24,7 +24,6 @@ export class SessionService {
 
         return this.http
             .post(this.sessionUrl + '/theme/' + '58acad839561f00004c6a1f1' + '/sessions', JSON.stringify({
-                title, description, circleType,,
             }), {headers: this.headers})
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
