@@ -5,7 +5,7 @@
     <label>Tags<br><input id="tags" type="text" [(ngModel)]="theme.tags"></label><br>
     <label><input id="public" type="checkbox" [(ngModel)]="theme.publicAccess">Publiek</label><br>
     <button id="save" (click)="updateTheme()">Opslaan</button>
-    <card></card>
+    <!--<card></card>-->
     <ul>
         <li *ngFor="let card of theme.cards" (click)="selectCard(card)">
             <span>{{card.description}}</span>
