@@ -1,0 +1,54 @@
+<script src="../../../node_modules/angular-bootstrap-durationpicker/dist/main.js"></script>
+<div class="col-md-6 col-md-offset-3">
+    <form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+        <h1>Create A Session!</h1>
+        <div>
+            <label>Theme<br><select class="form-control" id="theme" #sessionTheme>
+                <option value="1">Theme 1</option>
+                <option value="2">Theme 2</option>
+            </select></label><br>
+
+            <label>Title<br><input id="title" type="text" #sessionTitle class="form-control"></label><br>
+
+            <label>Description<br><input id="description" type="text" #sessionDescription class="form-control"></label><br>
+
+            <label>Circle<br><select class="form-control" id="circleType" #circleType>
+                <option value="blue">Kansen</option>
+                <option value="red">Problemen</option>
+            </select></label><br>
+
+            <label>Duration in minutes<br><input id="duration" type="number" #sessionDuration class="form-control"></label><br>
+
+            <label>Startdate<br><input type="datetime-local" name="startDate" class="form-control" #sessionStartDate></label><br>
+
+            <label class="col-md-6 no-left-padding">Min Cards per Person<br><input id="minCards" type="number" #sessionMinCard class="form-control"></label>
+
+            <label class="col-md-6 no-right-padding">Max Cards per Person<br><input id="maxCards" type="number" #sessionMaxCard class="form-control"></label>
+
+            <label class="col-md-6 no-left-padding"><input id="cardsCanBeReviewed" type="checkbox" #sessioncardsCanBeReviewed>Cards Can Be Reviewed</label><br>
+
+            <label class="col-md-6 no-right-padding"><input id="cardsCanBeAdded" type="checkbox" #sessioncardsCanBeAdded>Cards Can Be Added</label><br>
+
+
+
+            <button class="btn btn-info btn-block" id="submit" (click)="submitSession(sessionStartDate.value, sessionTheme.value, sessionTitle.value, sessionDuration.value, sessioncardsCanBeReviewed.value, sessioncardsCanBeAdded.checked,circleType.value, sessionMinCard.value, sessionMaxCard.value )">
+                Voeg toe
+            </button>
+        </div>
+    </form>
+</div>
+<hr>
+<br>
+<div class="container">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="row">
+            <br>
+            <ul>
+                <li *ngFor="let session of sessions" (click)="selectSession(session)">
+                    <span>{{session.title}}</span>
+                    <button (click)="deleteSession(session)" class="btn btn-danger">DELETE</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
