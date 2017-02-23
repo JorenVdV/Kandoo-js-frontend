@@ -37,7 +37,13 @@
           class="btn-success">
     Save theme
   </button>
-  <button [hidden]="!model.id"
+  <button [routerLink]="['/sessions']"
+          [hidden]="editable"
+          class="btn-success">
+    create new session
+  </button>
+  <button [routerLink]="['/themes']"
+          [hidden]="!model.id"
           (click)="deleteTheme()"
           class="btn-danger">
     Remove theme

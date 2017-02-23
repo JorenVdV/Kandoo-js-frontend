@@ -1,0 +1,13 @@
+<p>
+  session works!
+</p>
+<button *ngIf="!model.startDate"
+        (click)="startSession()"
+        class="btn-success">
+  Start session
+</button>
+<button *ngIf="!model.endDate && model.startDate"
+        (click)="stopSession()"
+        class="btn-danger">
+  End session
+</button>

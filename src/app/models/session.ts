@@ -16,7 +16,8 @@ export class Session {
     themeId: string;
     creator: User;
     callback: string;
-    startDate: string;
+    startDate: Date;
+    endDate: Date;
     amountOfCircles: number;
     turnDurationInMinutes: number;
     id: string;

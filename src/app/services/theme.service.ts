@@ -26,7 +26,7 @@ export class ThemeService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  readTheme(id: number): Observable<Theme> {
+  readTheme(id: string): Observable<Theme> {
     const url = `${this.themeUrl}/${id}`;
     return this.http
       .get(url)
@@ -49,7 +49,7 @@ export class ThemeService {
       .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  deleteTheme(id: number): Observable<Theme> {
+  deleteTheme(id: string): Observable<Theme> {
     const url = `${this.themeUrl}/${id}`;
     return this.http
       .delete(url)

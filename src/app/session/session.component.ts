@@ -6,7 +6,7 @@ import {SessionService} from "../services/session.service";
 
 @Component({
     selector: 'session',
-    templateUrl: './session.component.html',
+    templateUrl: './details.component.html',
 })
 
 export class SessionComponent implements OnInit {
@@ -62,6 +62,6 @@ export class SessionComponent implements OnInit {
     }
 
     selectSession(session: Session) {
-        this.router.navigate(['/session', session.id]);
+        this.router.navigate(['/details', session.id]);
     }
 }
