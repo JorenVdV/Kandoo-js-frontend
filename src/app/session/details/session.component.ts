@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Session} from "../../models/session";
+import {SessionService} from "../../services/session.service";
 
 @Component({
     selector: 'app-session',
@@ -8,21 +9,22 @@ import {Session} from "../../models/session";
     providers: [Session]
 })
 export class SessionComponent implements OnInit {
-    private model: Session;
-
-    constructor(session: Session) {
+  private model: Session;
+    
+    constructor(session: Session,
+                private sessionService: SessionService) {
         this.model = session;
     }
 
-    ngOnInit() {
-    }
+  ngOnInit() {
+  }
 
-    startSession() {
+  startSession(){
+    this.sessionService.startSession(this.model.id).subscribe();
+  }
 
-    }
-
-    stopSession() {
-
-    }
+  stopSession(){
+    this.sessionService.stopSession(this.model.id).subscribe();
+  }
 
 }

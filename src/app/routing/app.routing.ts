@@ -22,9 +22,10 @@ export const routes: Routes = [
     {path: 'cards', component: CardComponent},
     {path: 'card/:id', component: CardDetailComponent},
     {path: 'sessions', component: SessionComponent},
+    // {path: 'sessionDetail', component: SessionDetailsComponent},
     {path: 'game', component: GameComponent},
     // otherwise redirect to home
-    {path: 'full', redirectTo: ''}
+    {path: '**', redirectTo: ''}
 ];
 
 @NgModule({
