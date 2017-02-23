@@ -3,8 +3,8 @@ import {Session} from "../../models/session";
 
 @Component({
   selector: 'app-session',
-  templateUrl: './details.component.html',
-  styleUrls: ['./details.component.css']
+  templateUrl: './session.component.html',
+  styleUrls: ['./session.component.css']
 })
 export class SessionComponent implements OnInit {
   private session: Session;
