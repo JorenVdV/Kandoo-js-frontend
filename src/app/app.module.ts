@@ -22,7 +22,9 @@ import {CardDetailComponent} from "./card/card-detail.component";
 import {SessionService} from "./services/session.service";
 import {SessionComponent} from "./session/session.component";
 import {GameComponent} from "./game/game.component";
-import { ThemeListComponent } from './theme/theme-list/theme-list.component';
+import {ThemeListComponent} from './theme/theme-list/theme-list.component';
+import {RouterModule} from "@angular/router";
+
 
 @NgModule({
     declarations: [
@@ -42,7 +44,8 @@ import { ThemeListComponent } from './theme/theme-list/theme-list.component';
         BrowserModule,
         FormsModule,
         HttpModule,
-        AppRouting
+        AppRouting,
+        RouterModule
     ],
     providers: [
         ThemeService,
