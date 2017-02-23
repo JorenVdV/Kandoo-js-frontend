@@ -43,12 +43,6 @@
     height: 50vh;
 }
 
-.test {
-    background: yellow;
-    height: 500px;
-    width: 500px;
-}
-
 .card-list {
     position: relative;
     z-index: 5;
