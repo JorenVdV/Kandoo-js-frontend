@@ -1,7 +1,7 @@
 const compression = require('compression');
 const path = require('path');
 const express = require('express');
-const app = express();
+const app = express(); 
 const port = process.env.PORT || 8080;
 
 // Gzip

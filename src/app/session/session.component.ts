@@ -40,7 +40,7 @@ export class SessionComponent implements OnInit {
     }
 
     deleteSession(session: Session) {
-        this.sessionService.deleteSession(Number.parseInt(session.id)).subscribe(
+        this.sessionService.deleteSession(session.id).subscribe(
             sessionObject => {
                 let index = -1;
                 for (let i = 0; i < this.sessions.length; i++) {
