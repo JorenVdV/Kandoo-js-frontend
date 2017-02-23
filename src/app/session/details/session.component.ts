@@ -1,25 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Session} from "../../models/session";
 
 @Component({
-  selector: 'app-session',
-  templateUrl: './session.component.html',
-  styleUrls: ['./session.component.css']
+    selector: 'app-session',
+    templateUrl: './session.component.html',
+    styleUrls: ['./session.component.css'],
+    providers: [Session]
 })
 export class SessionComponent implements OnInit {
-  private session: Session;
+    private model: Session;
 
-  constructor() { }
+    constructor(session: Session) {
+        this.model = session;
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
-  startSession(){
-    
-  }
+    startSession() {
 
-  stopSession(){
+    }
 
-  }
+    stopSession() {
+
+    }
 
 }

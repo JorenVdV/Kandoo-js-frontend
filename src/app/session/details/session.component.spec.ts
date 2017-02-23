@@ -14,14 +14,12 @@ describe('SessionComponent', () => {
   }));
 
   beforeEach(() => {
-
-
+      fixture = TestBed.createComponent(SessionComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
   });
 
   it('should create', () => {
-    fixture = TestBed.createComponent(SessionComponent);
-    component = fixture.componentInstance;
-      fixture.detectChanges();
     expect(component).toBeTruthy();
   });
 });
