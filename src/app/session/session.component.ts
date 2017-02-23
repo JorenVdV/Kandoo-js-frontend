@@ -63,6 +63,6 @@ export class SessionComponent implements OnInit {
     }
 
     selectSession(session: Session) {
-        this.router.navigate(['/session', session.id]);
+        this.router.navigate(['/details', session.id]);
     }
 }

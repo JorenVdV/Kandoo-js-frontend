@@ -48,8 +48,8 @@ export class SessionService {
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
-
-    readSession(id: number): Observable < Session > {
+    
+    readSession(id: string): Observable<Session> {
         const url = `${this.sessionUrl}/${id}`;
         return this.http
             .get(url)
@@ -57,14 +57,14 @@ export class SessionService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    readSessions(): Observable < Session[] > {
+    readSessions(): Observable<Session[]> {
         return this.http
             .get(this.sessionUrl + '/theme/' + '58acad839561f00004c6a1f1' + '/sessions')
             .map((res: Response) => res.json().sessions)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    updateSession(session: Session): Observable < Session > {
+    updateSession(session: Session): Observable<Session> {
         const url = `${this.sessionUrl}/${session.id}`;
         return this.http
             .put(url, JSON.stringify(session), {headers: this.headers})
@@ -72,11 +72,13 @@ export class SessionService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    deleteSession(id: string): Observable < Session > {
+    deleteSession(id: string): Observable<Session> {
         const url = `${this.sessionUrl}/${id}`;
         return this.http
             .delete(url)
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
+
+    startSession(id: string){}
 }

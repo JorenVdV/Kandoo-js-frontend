@@ -1,0 +1,55 @@
+<h1>Create a new theme</h1>
+<input  type="checkbox"
+        [(ngModel)]="editable"
+        name="editable">
+<form>
+  <div class="form-group">
+    <label>Name</label>
+    <input  [disabled]="!editable"
+            type="text"
+            [(ngModel)]="model.name"
+            name="name">
+  </div>
+  <div class="form-group">
+    <label>Description</label>
+    <input  [disabled]="!editable"
+            type="text"
+            [(ngModel)]="model.description"
+            name="description">
+  </div>
+  <div class="form-group">
+    <label>Tags</label>
+    <input  [disabled]="!editable"
+            type="text"
+            [(ngModel)]="model.tags"
+            name="tags">
+  </div>
+  <div class="form-group">
+    <label>Public</label>
+    <input  [disabled]="!editable"
+            type="checkbox"
+            [(ngModel)]="model.publicAccess"
+            name="publicAccess">
+  </div>
+  <!--CARDS-->
+  <button [hidden]="!editable"
+          (click)="saveTheme()"
+          class="btn-success">
+    Save theme
+  </button>
+  <button [routerLink]="['/sessions']"
+          [hidden]="editable"
+          class="btn-success">
+    create new session
+  </button>
+  <button [routerLink]="['/themes']"
+          [hidden]="!model.id"
+          (click)="deleteTheme()"
+          class="btn-danger">
+    Remove theme
+  </button>
+  <button [routerLink]="['/themes']"
+          class="btn-info">
+    Back to List
+  </button>
+</form>
