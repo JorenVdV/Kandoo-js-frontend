@@ -58,5 +58,4 @@ export class ThemeComponent implements OnInit {
           this.router.navigate(['/themes']);
         });
   }
-  
 }

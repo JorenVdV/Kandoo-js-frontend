@@ -13,7 +13,7 @@ import { ThemeListComponent } from '../theme/theme-list/theme-list.component';
 
 export const routes: Routes = [
     {path: '', redirectTo: '/themes', pathMatch: 'full'},
-    // {path: 'themes', component: ThemeListComponent},
+    {path: 'themes', component: ThemeListComponent},
     {path: 'theme', component: ThemeComponent},
     {path: 'theme/:id', component: ThemeComponent},
     {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},

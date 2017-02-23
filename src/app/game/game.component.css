@@ -17,25 +17,25 @@
 #circle-1 {
     width: 10vh;
     height: 10vh;
-    transform: translateY(24%);
+    transform: translateY(32%);
 }
 
 #circle-2 {
     width: 20vh;
     height: 20vh;
-    transform: translateY(14%);
+    transform: translateY(15%);
 }
 
 #circle-3 {
     width: 30vh;
     height: 30vh;
-    transform: translateY(10%);
+    transform: translateY(11%);
 }
 
 #circle-4 {
     width: 40vh;
     height: 40vh;
-    transform: translateY(8%);
+    transform: translateY(8.5%);
 }
 
 #circle-5 {
