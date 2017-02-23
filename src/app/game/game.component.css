@@ -1,34 +1,60 @@
-.circle {
-    border-radius: 50%;
-    border: 5px solid blue;
+.circle-container {
+    position: relative;
+    width: 50%;
 }
 
-.circle-container {
-    width: 25%;
+.circle {
+    border-radius: 50%;
+    border: 10px solid #3F9FD7;
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 
 #circle-1 {
-    width: 20%;
-    padding-bottom: 20%;
-    margin-bottom: 100px;
+    width: 10vh;
+    height: 10vh;
+    transform: translateY(24%);
 }
 
 #circle-2 {
-    width: 40%;
-    padding-bottom: 40%;
+    width: 20vh;
+    height: 20vh;
+    transform: translateY(14%);
 }
 
 #circle-3 {
-    width: 60%;
-    padding-bottom: 60%;
+    width: 30vh;
+    height: 30vh;
+    transform: translateY(10%);
 }
 
 #circle-4 {
-    width: 80%;
-    padding-bottom: 80%;
+    width: 40vh;
+    height: 40vh;
+    transform: translateY(8%);
 }
 
 #circle-5 {
-    width: 100%;
-    padding-bottom: 100%;
+    width: 50vh;
+    height: 50vh;
+}
+
+.test {
+    background: yellow;
+    height: 500px;
+    width: 500px;
+}
+
+.card-list {
+    position: relative;
+    z-index: 5;
+    cursor: pointer;
+}
+
+.resize {
+    width: 10%;
 }

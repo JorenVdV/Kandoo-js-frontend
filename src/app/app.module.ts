@@ -21,6 +21,7 @@ import {AlertService} from "./services/alert.service";
 import {AuthGuard} from "./guards/auth.guard";
 import {CardDetailComponent} from "./card/card-detail.component";
 import {GameComponent} from "./game/game.component";
+import {DndModule} from "ng2-dnd";
 
 @NgModule({
     declarations: [
@@ -39,7 +40,8 @@ import {GameComponent} from "./game/game.component";
         BrowserModule,
         FormsModule,
         HttpModule,
-        AppRouting
+        AppRouting,
+        DndModule.forRoot()
     ],
     providers: [
         ThemeService,

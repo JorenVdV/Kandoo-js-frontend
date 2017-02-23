@@ -1,17 +1,44 @@
 <div class="circle-container">
     <div class="circle" id="circle-5">
-
+        <ul>
+            <li class="card-list" *ngFor="let card of circleFive" (click)="onClick(card, 5)">
+                {{card.description}}
+            </li>
+        </ul>
+        <div class="circle" id="circle-4">
+            <ul>
+                <li class="card-list" *ngFor="let card of circleFour" (click)="onClick(card, 4)">
+                    {{card.description}}
+                </li>
+            </ul>
+            <div class="circle" id="circle-3">
+                <ul>
+                    <li class="card-list" *ngFor="let card of circleThree" (click)="onClick(card, 3)">
+                        {{card.description}}
+                    </li>
+                </ul>
+                <div class="circle" id="circle-2">
+                    <ul>
+                        <li class="card-list" *ngFor="let card of circleTwo" (click)="onClick(card, 2)">
+                            {{card.description}}
+                        </li>
+                    </ul>
+                    <div class="circle" id="circle-1">
+                        <ul>
+                            <li class="card-list" *ngFor="let card of circleOne">
+                                {{card.description}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="circle" id="circle-4">
-
-    </div>
-    <div class="circle" id="circle-3">
-
-    </div>
-    <div class="circle" id="circle-2">
-
-    </div>
-    <div class="circle" id="circle-1">
-
-    </div>
+</div>
+<div class="resize">
+    <ul>
+        <li class="card-list" *ngFor="let card of cards" (click)="onClick(card, 0)">
+            {{card.description}}
+        </li>
+    </ul>
 </div>
