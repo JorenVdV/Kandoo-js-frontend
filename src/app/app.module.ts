@@ -4,8 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {HttpModule, BaseRequestOptions} from '@angular/http';
 
 import {AppComponent} from './app.component';
-import {ThemeComponent} from "./theme/theme.component";
-import {ThemeDetailComponent} from "./theme/theme-detail.component";
+import {ThemeComponent} from "./theme/details/theme.component";
 import {AppRouting} from "./routing/app.routing";
 import {ThemeService} from "./services/theme.service";
 import {AlertComponent} from "./directives/alert.component";
@@ -20,28 +19,30 @@ import {AuthenticationService} from "./services/authentication.service";
 import {AlertService} from "./services/alert.service";
 import {AuthGuard} from "./guards/auth.guard";
 import {CardDetailComponent} from "./card/card-detail.component";
+import {SessionService} from "./services/session.service";
+import {SessionComponent} from "./session/session.component";
 import {GameComponent} from "./game/game.component";
-import {DndModule} from "ng2-dnd";
+import { ThemeListComponent } from './theme/theme-list/theme-list.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         ThemeComponent,
-        ThemeDetailComponent,
         AlertComponent,
         HomeComponent,
         LoginComponent,
         RegisterComponent,
         CardComponent,
         CardDetailComponent,
-        GameComponent
+        SessionComponent,
+        GameComponent,
+        ThemeListComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
         HttpModule,
-        AppRouting,
-        DndModule.forRoot()
+        AppRouting
     ],
     providers: [
         ThemeService,
@@ -52,7 +53,8 @@ import {DndModule} from "ng2-dnd";
         CardService,
         // providers used to create fake backend
         MockBackend,
-        BaseRequestOptions
+        BaseRequestOptions,
+        SessionService
     ],
     bootstrap: [AppComponent]
 })

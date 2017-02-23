@@ -5,6 +5,3 @@ machine:
 test:
   override:
     - ng test --watch=false --single-run
-install:
-  override:
-    - ng build
