@@ -6,7 +6,7 @@ import {SessionService} from "../services/session.service";
 
 @Component({
     selector: 'session',
-    templateUrl: './details.component.html',
+    templateUrl: './session.component.html',
 })
 
 export class SessionComponent implements OnInit {

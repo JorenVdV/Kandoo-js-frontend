@@ -22,7 +22,7 @@ import {CardDetailComponent} from "./card/card-detail.component";
 import {SessionService} from "./services/session.service";
 import {SessionComponent} from "./session/session.component";
 import {GameComponent} from "./game/game.component";
-// import { ThemeListComponent } from './theme/theme-list/theme-list.component';
+import { ThemeListComponent } from './theme/theme-list/theme-list.component';
 
 @NgModule({
     declarations: [
@@ -35,8 +35,8 @@ import {GameComponent} from "./game/game.component";
         CardComponent,
         CardDetailComponent,
         SessionComponent,
-        GameComponent
-        // ThemeListComponent
+        GameComponent,
+        ThemeListComponent
     ],
     imports: [
         BrowserModule,

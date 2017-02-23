@@ -9,7 +9,7 @@ import {HomeComponent} from "../home/home.component";
 import {CardDetailComponent} from "../card/card-detail.component";
 import {SessionComponent} from "../session/session.component";
 import {GameComponent} from "../game/game.component";
-// import { ThemeListComponent } from '../theme/theme-list/theme-list.component';
+import { ThemeListComponent } from '../theme/theme-list/theme-list.component';
 
 export const routes: Routes = [
     {path: '', redirectTo: '/themes', pathMatch: 'full'},
