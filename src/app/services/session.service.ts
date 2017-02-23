@@ -18,18 +18,38 @@ export class SessionService {
     constructor(private http: Http) {
     }
 
-    createSession(startdate, theme, title, description, turnDurationInMinutes, cardsCanBeReviewed, cardsCanBeAdded, circleType, minCardsPerParticipant, maxCardsPerParticipant): Observable<Session> {
+    createSession(title, description, circleType, minCardsPerParticipant, maxCardsPerParticipant, cardsCanBeReviewed, cardsCanBeAdded, themeId, creator, startDate, amountOfCircles, turnDurationInMinutes): Observable<Session> {
 
-        var cardsPerParticipant = JSON.stringify(minCardsPerParticipant,maxCardsPerParticipant);
+
+        if(startDate == ""){
+            startDate = new Date();
+        }
+
+        let object = {
+            title: title,
+            description: description,
+            circleType: circleType,
+            minCardsPerParticipant: minCardsPerParticipant,
+            maxCardsPerParticipant: maxCardsPerParticipant,
+            cards: [],
+            cardsCanBeReviewed: cardsCanBeReviewed,
+            cardsCanBeAdded: cardsCanBeAdded,
+            participants: [],
+            themeid: themeId,
+            creotor: creator,
+            callback: "",
+            startDate: startDate,
+            amountOfCircles: amountOfCircles,
+            turnDurationInMinutes: turnDurationInMinutes
+        };
 
         return this.http
-            .post(this.sessionUrl + '/theme/' + '58acad839561f00004c6a1f1' + '/sessions', JSON.stringify({
-            }), {headers: this.headers})
+            .post(this.sessionUrl+'/theme/'+'58acad839561f00004c6a1f1'+'/sessions',object, {headers: this.headers})
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
-    
-    readSession(id: number): Observable<Session> {
+
+    readSession(id: number): Observable < Session > {
         const url = `${this.sessionUrl}/${id}`;
         return this.http
             .get(url)
@@ -37,14 +57,14 @@ export class SessionService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    readSessions(): Observable<Session[]> {
+    readSessions(): Observable < Session[] > {
         return this.http
             .get(this.sessionUrl + '/theme/' + '58acad839561f00004c6a1f1' + '/sessions')
             .map((res: Response) => res.json().sessions)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    updateSession(session: Session): Observable<Session> {
+    updateSession(session: Session): Observable < Session > {
         const url = `${this.sessionUrl}/${session.id}`;
         return this.http
             .put(url, JSON.stringify(session), {headers: this.headers})
@@ -52,7 +72,7 @@ export class SessionService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    deleteSession(id: number): Observable<Session> {
+    deleteSession(id: string): Observable < Session > {
         const url = `${this.sessionUrl}/${id}`;
         return this.http
             .delete(url)

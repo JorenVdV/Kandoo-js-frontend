@@ -53,7 +53,8 @@ import {GameComponent} from "./game/game.component";
         CardService,
         // providers used to create fake backend
         MockBackend,
-        BaseRequestOptions
+        BaseRequestOptions,
+        SessionService
     ],
     bootstrap: [AppComponent]
 })

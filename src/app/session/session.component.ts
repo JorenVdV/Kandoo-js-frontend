@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {Session} from "../models/session";
 import {Theme} from "../models/theme";
 import {SessionService} from "../services/session.service";
+import {User} from "../models/user";
 
 @Component({
     selector: 'session',
@@ -26,11 +27,11 @@ export class SessionComponent implements OnInit {
             });
     }
 
-    submitSession(startdate: string, theme: Theme, title: string, description: string, turnDurationInMinutes: number, cardsCanBeReviewed: boolean, cardsCanBeAdded: boolean, circleType: string, minCardsPerParticipant: number, maxCardsPerParticipant: number) {
+    submitSession(title: string, description: string, circleType: string, minCardsPerParticipant: number, maxCardsPerParticipant: number, cardsCanBeReviewed: boolean, cardsCanBeAdded: boolean, themeId: string, creator: User, startDate: string, amountOfCircles: number, turnDurationInMinutes: number) {
         if (!name || !description) {
             return;
         }
-        this.sessionService.createSession(startdate, theme, title,description, turnDurationInMinutes, cardsCanBeReviewed, cardsCanBeAdded, circleType, minCardsPerParticipant, maxCardsPerParticipant).subscribe(
+        this.sessionService.createSession(title, description, circleType, minCardsPerParticipant, maxCardsPerParticipant, cardsCanBeReviewed, cardsCanBeAdded, themeId, creator, startDate, amountOfCircles, turnDurationInMinutes).subscribe(
             session => {
                 this.sessions.push(session);
             },
