@@ -9,14 +9,14 @@ import {HomeComponent} from "../home/home.component";
 import {CardDetailComponent} from "../card/card-detail.component";
 import {SessionComponent} from "../session/session.component";
 import {GameComponent} from "../game/game.component";
-import { ThemeListComponent } from '../theme/theme-list/theme-list.component';
+import {ThemeListComponent} from '../theme/theme-list/theme-list.component';
 
-export const routes: Routes = [
+export const routes = [
     {path: '', redirectTo: '/themes', pathMatch: 'full'},
     {path: 'themes', component: ThemeListComponent},
     {path: 'theme', component: ThemeComponent},
     {path: 'theme/:id', component: ThemeComponent},
-    {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
+    {path: 'home', component: HomeComponent, canActivate: [AuthGuard], name: 'Home'},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
     {path: 'cards', component: CardComponent},

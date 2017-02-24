@@ -38,7 +38,7 @@ import {AuthenticationService} from "./services/authentication.service";
         CardDetailComponent,
         SessionComponent,
         GameComponent,
-        ThemeListComponent
+        ThemeListComponent,
     ],
     imports: [
         BrowserModule,
@@ -59,7 +59,18 @@ import {AuthenticationService} from "./services/authentication.service";
         BaseRequestOptions,
         SessionService
     ],
-    bootstrap: [AppComponent]
+    exports: [  AppComponent,
+        ThemeComponent,
+        AlertComponent,
+        HomeComponent,
+        LoginComponent,
+        RegisterComponent,
+        CardComponent,
+        CardDetailComponent,
+        SessionComponent,
+        GameComponent,
+        ThemeListComponent,],
+    bootstrap: [ AppComponent ]
 })
 export class AppModule {
 }

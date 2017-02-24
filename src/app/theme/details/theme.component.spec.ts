@@ -3,6 +3,9 @@ import {RouterTestingModule} from "@angular/router/testing";
 import {ThemeComponent} from './theme.component';
 import {ThemeListComponent} from "../theme-list/theme-list.component";
 import {SessionComponent} from "../../session/session.component";
+import {NgModule, NO_ERRORS_SCHEMA} from "@angular/core";
+
+
 
 describe('ThemeComponent', () => {
     let component: ThemeComponent;
@@ -15,7 +18,7 @@ describe('ThemeComponent', () => {
                 RouterTestingModule.withRoutes([
                 {path: '/themes', component: ThemeListComponent},
                 {path: '/sessions', component: SessionComponent}
-            ])]
+            ])],
 
         })
             .compileComponents();

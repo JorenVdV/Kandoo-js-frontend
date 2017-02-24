@@ -8,7 +8,7 @@ import {ThemeService} from "../../services/theme.service";
     selector: 'theme',
     templateUrl: './theme.component.html',
     styleUrls: ['./theme.component.css'],
-    providers: [Theme],
+    providers: [Theme, ThemeService, CardService],
 })
 export class ThemeComponent implements OnInit {
     model: Theme;
