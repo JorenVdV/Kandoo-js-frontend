@@ -1,4 +1,5 @@
-﻿﻿
+﻿import {Response} from "@angular/http";
+﻿
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 import {AuthenticationService} from "../services/authentication.service";
@@ -15,8 +16,7 @@ export class LoginComponent implements OnInit {
     private redirectUrl: string = 'themes';
 
     constructor(private router: Router,
-                private authenticationService: AuthenticationService
-        ,
+                private authenticationService: AuthenticationService,
                 private alertService: AlertService) {
     }
 
@@ -31,16 +31,19 @@ export class LoginComponent implements OnInit {
     login() {
         this.loading = true;
         this.authenticationService.login(this.model.emailAddress, this.model.password)
-        // .map(response => response.json())
-            .subscribe((response) => {
-                console.log("Success Response" + response.json());
-                this.loading = false;
-                this.redirect();
-            });
+            // .map(response => response)
+            .subscribe(
+                (response: Response) => {
+                    console.log("Success Response" + response.json());
+                    this.loading = false;
+                    this.redirect();
+                },
+                err => {
+                    console.log('Error: ' + err);
+                });
     }
 
-    private
-    redirect(): void {
+    private redirect(): void {
         console.log("Redirect function");
         this.router.navigate([this.redirectUrl]); //use the stored url here
     }
