@@ -9,7 +9,7 @@ import {ActivatedRoute, Router} from "@angular/router";
     styleUrls: ['./theme-list.component.css']
 })
 export class ThemeListComponent implements OnInit {
-    themes: Theme[];
+    private themes: Theme[];
 
     constructor(private themeService:ThemeService,
                 private route:ActivatedRoute,  private router: Router) {
