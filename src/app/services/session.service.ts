@@ -80,5 +80,11 @@ export class SessionService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    startSession(id: string){}
+    startSession(id: string): Observable<any>{
+        return this.http.post(`${this.sessionUrl}/start/${id}`,null, this.options);
+    }
+
+    stopSession(id: string): Observable<any>{
+        return this.http.post(`${this.sessionUrl}/stop/${id}`,null, this.options);
+    }
 }

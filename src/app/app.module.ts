@@ -24,7 +24,7 @@ import {RegisterComponent} from "./register/register.component";
 import {ThemeListComponent} from './theme/theme-list/theme-list.component';
 import {CardDetailComponent} from "./card/card-detail.component";
 import {AuthenticationService} from "./services/authentication.service";
-
+import { TagInputModule } from 'ng2-tag-input';
 
 @NgModule({
     declarations: [
@@ -38,14 +38,15 @@ import {AuthenticationService} from "./services/authentication.service";
         CardDetailComponent,
         SessionComponent,
         GameComponent,
-        ThemeListComponent
+        ThemeListComponent,
     ],
     imports: [
         BrowserModule,
         FormsModule,
         HttpModule,
         AppRouting,
-        RouterModule
+        RouterModule,
+        TagInputModule
     ],
     providers: [
         ThemeService,
@@ -59,7 +60,18 @@ import {AuthenticationService} from "./services/authentication.service";
         BaseRequestOptions,
         SessionService
     ],
-    bootstrap: [AppComponent]
+    exports: [  AppComponent,
+        ThemeComponent,
+        AlertComponent,
+        HomeComponent,
+        LoginComponent,
+        RegisterComponent,
+        CardComponent,
+        CardDetailComponent,
+        SessionComponent,
+        GameComponent,
+        ThemeListComponent,],
+    bootstrap: [ AppComponent ]
 })
 export class AppModule {
 }

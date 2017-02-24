@@ -5,27 +5,29 @@ import 'rxjs/add/operator/map'
 
 @Injectable()
 export class AuthenticationService {
-  constructor(private http: Http) {
-  }
+    constructor(private http: Http) {
+    }
 
-  login(emailAddress: string, password: string) {
-    return this.http.post('http://api.teamjs.xyz/login', JSON.stringify({
-      emailAddress: emailAddress,
-      password: password
-    }))
-      .map((response: Response) => {
-        // login successful if there's a jwt token in the response
-        console.log(response);
-        let user = response.json();
-        if (user && user.token) {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify(user));
-        }
-      });
-  }
+    login(emailAddress: string, password: string) {
+        return this.http.post('http://api.teamjs.xyz/login', JSON.stringify({
+            emailAddress: emailAddress,
+            password: password
+        }))
+            .map((response: Response) => {
+                // if (!response) return;
 
-  logout() {
-    // remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
-  }
+                let user = response.json();
+                if (user && user.token) {
+                    // store user details and jwt token in local storage to keep user logged in between page refreshes
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                }
+                if (response.status == 200)
+                    return response;
+            });
+    }
+
+    logout() {
+        // remove user from local storage to log user out
+        localStorage.removeItem('currentUser');
+    }
 }

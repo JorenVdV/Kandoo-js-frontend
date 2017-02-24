@@ -19,12 +19,12 @@ export const routes: Routes = [
     {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
-    {path: 'theme/:_id/cards', component: CardComponent},
-    {path: 'card/:_id', component: CardDetailComponent},
+    {path: 'cards', component: CardComponent},
+    {path: 'card/:id', component: CardDetailComponent},
     {path: 'sessions', component: SessionComponent},
     {path: 'game', component: GameComponent},
     // otherwise redirect to home
-    {path: 'full', redirectTo: 'theme'}
+    {path: '**', redirectTo: ''}
 ];
 
 @NgModule({
