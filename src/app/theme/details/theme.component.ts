@@ -54,6 +54,7 @@ export class ThemeComponent implements OnInit {
         //       console.log(err);
         //     });
 
+        // if()return;
         if (this.model._id) {
             this.themeService.updateTheme(this.model).subscribe(
                 done => {
@@ -72,10 +73,6 @@ export class ThemeComponent implements OnInit {
             done => {
                 this.router.navigate(['/themes']);
             });
-    }
-
-    addCards() {
-       this.router.navigate(["theme", this.model._id, "cards"]);
     }
 
 }

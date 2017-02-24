@@ -1,53 +1,61 @@
-<div class="container">
-    <input type="checkbox" [(ngModel)]="editable" name="editable">
-    <form>
-        <div class="form-group">
-            <label>Name</label>
-            <input [disabled]="!editable" type="text" [(ngModel)]="model.title" name="name" class="form-control">
-        </div>
-        <div class="form-group">
-            <label>Description</label>
-            <input [disabled]="!editable" type="text" [(ngModel)]="model.description" name="description" class="form-control">
-        </div>
-        <div class="form-group">
-            <label>Tags</label>
-            <input [disabled]="!editable"
-                   type="text"
-                   [(ngModel)]="model.tags"
-                   name="tags" class="form-control">
-        </div>
-        <div class="form-group">
-            <label>Public</label>
-            <input [disabled]="!editable"
-                   type="checkbox"
-                   [(ngModel)]="model.publicAccess"
-                   name="publicAccess">
-        </div>
-        <!--CARDS-->
-        <button [hidden]="!editable"
-                (click)="saveTheme()"
-                class="btn btn-success">
-            Save theme
-        </button>
-        <button [routerLink]="['/sessions']"
-                [hidden]="editable"
-                class="btn btn-default">
-            create new session
-        </button>
-        <button [routerLink]="['/themes']"
-                [hidden]="!model._id"
-                (click)="deleteTheme()"
-                class="btn btn-danger">
-            Remove theme
-        </button>
-        <button [routerLink]="['/themes']"
-                class="btn btn-info">
-            Back to List
-        </button>
-
-        <button (click)="addCards()"
-                class="btn btn-danger">
-            Add cards
-        </button>
-    </form>
-</div>
+<h1>Create a new theme</h1>
+<input  type="checkbox"
+        [(ngModel)]="editable"
+        name="editable">
+<form>
+  <div class="form-group">
+    <label>Name</label>
+    <input  [disabled]="!editable"
+            type="text"
+            [(ngModel)]="model.name"
+            required
+            name="name">
+  </div>
+  <div class="form-group">
+    <label>Description</label>
+    <input  [disabled]="!editable"
+            type="text"
+            [(ngModel)]="model.description"
+            name="description">
+  </div>
+  <div class="form-group">
+    <label>Tags</label>
+    <tag-input [readonly]="!editable"
+               [(ngModel)]="model.tags"
+               separatorKeys="[32]"
+               placeholder="Add another tag"
+               [validators]="validators"
+               [errorMessages]="errorMessages"
+               [theme]="'minimal'"
+               name="tags">
+    </tag-input>
+  </div>
+  <div class="form-group">
+    <label>Public</label>
+    <input  [disabled]="!editable"
+            type="checkbox"
+            [(ngModel)]="model.publicAccess"
+            name="publicAccess">
+  </div>
+  <!--CARDS-->
+  <button [hidden]="!editable"
+          (click)="saveTheme()"
+          class="btn-success">
+    Save theme
+  </button>
+  <button [routerLink]="['/sessions']"
+          [hidden]="editable"
+          class="btn-success">
+    create new session
+  </button>
+  <button [routerLink]="['/themes']"
+          [hidden]="!model.id"
+          (click)="deleteTheme()"
+          class="btn-danger">
+    Remove theme
+  </button>
+  <button [routerLink]="['/themes']"
+          class="btn-info">
+    Back to List
+  </button>
+</form>

@@ -1,34 +1,26 @@
 <button [routerLink]="['/theme']"
-        class="row btn btn-success">
+        class="row btn-success">
     Create a new theme
 </button>
-<div class="row">
-    <hr>
-</div>
 
+<div *ngFor="let theme of themes" class="row">
+    <div [routerLink]="['/theme', theme._id]"
+         class="col-md-6">
+        {{theme.name}}
+        <span class="label label-default"
+              *ngFor="let tag of theme.tags">
+            {{tag.value}}
+        </span>
+        <span *ngIf="theme.created"
+                class="label label-default">
+            {{theme.created}}
+        </span>
+    </div>
 
-<div class="container">
-    <div class="col-md-8 col-md-offset-2">
-        <div *ngFor="let theme of themes" class="row">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="col-md-4">
-                        <h2>{{theme.title}}</h2>
-                        <p>Tags: <span class="text-muted">{{theme.tags}}</span></p>
-                    </div>
-                    <div class="col-md-8">
-                        <h2>
-                            <a [routerLink]="['/theme', theme._id]" class="btn btn-info ">Edit</a>
-                            <button (click)="deleteTheme(theme)" class="btn btn-danger ">Remove</button>
-                            <button (click)="addCards(theme._id)" class="btn btn-success ">Add Cards</button>
-                            <button (click)="addSession(theme._id)" class="btn btn-warning ">Add Session</button>
-                        </h2>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
+    <div class="col-md-6">
+        <button (click)="deleteTheme(theme)"
+                class="btn-danger">
+            Remove
+        </button>
     </div>
 </div>
-

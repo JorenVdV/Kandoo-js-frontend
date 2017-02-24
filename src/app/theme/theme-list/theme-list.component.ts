@@ -18,7 +18,7 @@ export class ThemeListComponent implements OnInit {
     ngOnInit() {
         this.themeService.readThemes().subscribe(
             themes => {
-                this.themes = themes
+                this.themes = themes;
                 console.log(this.themes)
             },
             err => {
