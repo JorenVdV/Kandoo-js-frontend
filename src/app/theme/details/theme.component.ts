@@ -3,23 +3,33 @@ import {Theme} from "../../models/theme";
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {CardService} from "../../services/card.service";
 import {ThemeService} from "../../services/theme.service";
+import {FormControl} from "@angular/forms";
 
 @Component({
     selector: 'theme',
     templateUrl: './theme.component.html',
-    styleUrls: ['./theme.component.css'],
-    providers: [Theme, ThemeService, CardService],
+    styleUrls: ['./theme.component.css']
 })
-export class ThemeComponent implements OnInit {
-    model: Theme;
-    private editable = false;
 
-    constructor(private themeService: ThemeService,
-                private cardService: CardService,
-                theme: Theme,
-                private route: ActivatedRoute,
-                private router: Router) {
-        this.model = theme;
+export class ThemeComponent implements OnInit {
+    private model = new Theme();
+    private editable = false;
+    public validators = [this.maxCharacters25];
+    private maxCharacters25(control: FormControl) {
+        if(control.value.length > 25){
+            return {
+                'isTagToLong': true
+            };
+        }
+    };
+    public errorMessages = {
+        'isTagToLong': 'Your tag need to be shorter than 25 charaters'
+    };
+
+    constructor(private themeService:ThemeService,
+                private cardService:CardService,
+                private route:ActivatedRoute,
+                private router:Router) {
     }
 
     ngOnInit() {
@@ -32,6 +42,7 @@ export class ThemeComponent implements OnInit {
         } else {
             this.model.publicAccess = true;
             this.editable = true;
+            // this.model.tags = ['test'];
         }
     }
 
@@ -43,6 +54,7 @@ export class ThemeComponent implements OnInit {
         //       console.log(err);
         //     });
 
+        // if()return;
         if (this.model.id) {
             this.themeService.updateTheme(this.model).subscribe(
                 done => {

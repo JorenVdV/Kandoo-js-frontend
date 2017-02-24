@@ -24,7 +24,7 @@ import {RegisterComponent} from "./register/register.component";
 import {ThemeListComponent} from './theme/theme-list/theme-list.component';
 import {CardDetailComponent} from "./card/card-detail.component";
 import {AuthenticationService} from "./services/authentication.service";
-
+import { TagInputModule } from 'ng2-tag-input';
 
 @NgModule({
     declarations: [
@@ -45,7 +45,8 @@ import {AuthenticationService} from "./services/authentication.service";
         FormsModule,
         HttpModule,
         AppRouting,
-        RouterModule
+        RouterModule,
+        TagInputModule
     ],
     providers: [
         ThemeService,
