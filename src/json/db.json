@@ -4,24 +4,6 @@
       "name": "first theme",
       "publicAccess": true,
       "id": 1
-    },
-    {
-      "tags": [
-        {
-          "display": "ggdggggggggg",
-          "value": "ggdggggggggg"
-        },
-        {
-          "display": "fld,",
-          "value": "fld,"
-        },
-        {
-          "display": "k",
-          "value": "k"
-        }
-      ],
-      "publicAccess": true,
-      "id": 2
     }
   ],
   "cards": [
