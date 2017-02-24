@@ -7,8 +7,9 @@
     <div [routerLink]="['/theme', theme.id]"
          class="col-md-6">
         {{theme.name}}
-        <span class="label label-default">
-            {{theme.tags}}
+        <span class="label label-default"
+              *ngFor="let tag of theme.tags">
+            {{tag.value}}
         </span>
         <span *ngIf="theme.created"
                 class="label label-default">
