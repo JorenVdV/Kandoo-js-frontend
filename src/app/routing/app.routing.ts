@@ -15,16 +15,16 @@ export const routes: Routes = [
     {path: '', redirectTo: '/themes', pathMatch: 'full'},
     {path: 'themes', component: ThemeListComponent},
     {path: 'theme', component: ThemeComponent},
-    {path: 'theme/:id', component: ThemeComponent},
+    {path: 'theme/:_id', component: ThemeComponent},
     {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
-    {path: 'cards', component: CardComponent},
-    {path: 'card/:id', component: CardDetailComponent},
+    {path: 'theme/:_id/cards', component: CardComponent},
+    {path: 'card/:_id', component: CardDetailComponent},
     {path: 'sessions', component: SessionComponent},
     {path: 'game', component: GameComponent},
     // otherwise redirect to home
-    {path: 'full', redirectTo: ''}
+    {path: 'full', redirectTo: 'theme'}
 ];
 
 @NgModule({

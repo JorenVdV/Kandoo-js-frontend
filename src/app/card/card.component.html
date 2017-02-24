@@ -1,7 +1,19 @@
-<h1>Voeg een kaart toe</h1>
-<div>
-    <label>Omschrijving<br><input id="description" type="text" #cardDescription></label><br>
-    <button id="submit" (click)="submitCard(cardDescription.value)">
-        Voeg toe
-    </button>
+<div class="container">
+    <div class="col-md-6">
+        <h1>Voeg een kaart toe</h1>
+        <div>
+            <label>Omschrijving<br><textarea id="description" #cardDescription
+                                             class="form-control"></textarea></label><br>
+
+            <button id="submit" (click)="submitCard(cardDescription.value)" class="btn btn-success">
+                Voeg toe
+            </button>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h1>Huidige kaartjes!</h1>
+
+    </div>
+
 </div>
+

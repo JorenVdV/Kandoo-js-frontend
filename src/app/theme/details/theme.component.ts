@@ -23,7 +23,7 @@ export class ThemeComponent implements OnInit {
     }
 
     ngOnInit() {
-        let id = this.route.snapshot.params['id'];
+        let id = this.route.snapshot.params['_id'];
         if (id) {
             this.themeService.readTheme(id)
                 .subscribe(theme => {
@@ -37,13 +37,13 @@ export class ThemeComponent implements OnInit {
 
     saveTheme() {
         //TODO: one method?
-        // let method = this.model.id?this.themeService.updateTheme: this.themeService.createTheme;
+        // let method = this.model._id?this.themeService.updateTheme: this.themeService.createTheme;
         // method(this.model).subscribe(
         //     err => {
         //       console.log(err);
         //     });
 
-        if (this.model.id) {
+        if (this.model._id) {
             this.themeService.updateTheme(this.model).subscribe(
                 done => {
                     this.router.navigate(['/themes']);//TODO error
@@ -57,10 +57,14 @@ export class ThemeComponent implements OnInit {
     }
 
     deleteTheme() {
-        this.themeService.deleteTheme(this.model.id).subscribe(
+        this.themeService.deleteTheme(this.model._id).subscribe(
             done => {
                 this.router.navigate(['/themes']);
             });
+    }
+
+    addCards() {
+       this.router.navigate(["theme", this.model._id, "cards"]);
     }
 
 }

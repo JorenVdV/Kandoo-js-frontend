@@ -15,12 +15,12 @@ export class CardService {
     constructor(private http: Http) {
     }
 
-  createCard(description): Observable<Card> {
+  createCard(description, id): Observable<Card> {
     return this.http
-      .post(this.cardUrl + '/theme/' + 1 + '/card', JSON.stringify({
-        description
+      .post(this.cardUrl + 'theme/' + id + '/card', JSON.stringify({
+        description: description
       }), {headers: this.headers})
-      .map((res: Response) => res.json())
+      .map((res: Response) => res.json().cards)
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
@@ -32,9 +32,9 @@ export class CardService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    readCards(): Observable<Card[]> {
+    readCards(id: string): Observable<Card[]> {
         return this.http
-            .get(this.cardUrl)
+            .get(this.cardUrl+'theme/' + id + '/cards')
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }

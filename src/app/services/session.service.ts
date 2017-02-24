@@ -59,7 +59,7 @@ export class SessionService {
 
     readSessions(): Observable<Session[]> {
         return this.http
-            .get(this.sessionUrl + '/theme/' + '58acad839561f00004c6a1f1' + '/sessions')
+            .get(this.sessionUrl + '/theme/58aed9312ff14c2c14977cff/sessions')
             .map((res: Response) => res.json().sessions)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }

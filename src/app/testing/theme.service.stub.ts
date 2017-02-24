@@ -5,25 +5,25 @@ import {Theme} from "../models/theme";
 export class ThemeServiceStub {
   themes: Theme[] = [
     {
-      "name": "test01",
+      "title": "test01",
       "description": "test",
       "tags": "test",
       "publicAccess": false,
-      "id": 14
+      "_id": 14
     },
     {
-      "name": "test02",
+      "title": "test02",
       "description": "test",
       "tags": "test",
       "publicAccess": false,
-      "id": 15
+      "_id": 15
     },
     {
-      "name": "test03",
+      "title": "test03",
       "description": "djsmfqjm",
       "tags": "mjm",
       "publicAccess": false,
-      "id": 17
+      "_id": 17
     }
   ];
 
@@ -40,7 +40,7 @@ export class ThemeServiceStub {
   }
 
   findTheme(theme: Theme) {
-    return theme.id === 15;
+    return theme._id === 15;
   }
 
   deleteTheme() {
