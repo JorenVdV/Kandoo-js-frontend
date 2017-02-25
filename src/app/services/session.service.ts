@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import {Injectable} from "@angular/core";
-import {Headers, Http, Response} from "@angular/http";
+import {Headers, Http, Response, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs";
 import {Session} from "../models/session";
 import {Theme} from "../models/theme";
@@ -14,6 +14,7 @@ import {Theme} from "../models/theme";
 export class SessionService {
     private headers = new Headers({'Content-Type': 'application/json'});
     private sessionUrl = 'http://api.teamjs.xyz';
+    private options = new RequestOptions({headers: this.headers});
 
     constructor(private http: Http) {
     }
