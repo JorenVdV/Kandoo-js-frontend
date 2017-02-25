@@ -1,0 +1,6 @@
+<label>Naam<br><input id="name" type="text" [(ngModel)]="theme.name"></label><br>
+<label>Omschrijving<br><input id="description" type="text" [(ngModel)]="theme.description"></label><br>
+<label>Tags<br><input id="tags" type="text" [(ngModel)]="theme.tags"></label><br>
+<label><input id="public" type="checkbox" [(ngModel)]="theme.publicAccess">Publiek</label><br>
+<button id="save" (click)="saveTheme()">SAVE</button>
+<button id="delete" (click)="deleteTheme()">DELETE</button>

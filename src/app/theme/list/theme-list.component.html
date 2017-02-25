@@ -1,0 +1,10 @@
+<h2>Themes</h2>
+<button (click)="createTheme()">CREATE</button>
+<div>
+  <ul>
+    <li *ngFor="let theme of themes" (click)="selectTheme(theme)">
+      <span>{{theme.name}}</span>
+      <button (click)="deleteTheme(theme)">DELETE</button>
+    </li>
+  </ul>
+</div>
