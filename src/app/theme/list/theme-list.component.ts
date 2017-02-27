@@ -26,7 +26,7 @@ export class ThemeListComponent implements OnInit {
     }
 
     selectTheme(theme: Theme) {
-        this.router.navigate(['/theme', theme._id]);
+        this.router.navigate(['/theme/', theme._id]);
     }
 
     createTheme() {
@@ -36,7 +36,7 @@ export class ThemeListComponent implements OnInit {
     deleteTheme(theme: Theme) {
         this.themeService.deleteTheme(theme._id).subscribe(
             done => {
-                this.themes.splice(t => t._id === theme._id, 1);
+                //this.themes.splice(t => t._id === theme._id, 1);
             },
             err => {
                 console.log(err);

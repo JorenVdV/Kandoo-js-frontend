@@ -35,7 +35,7 @@ describe('ThemeListComponent', () => {
             });
     }));
 
-    /*  it('should tell ROUTER to navigate when theme name clicked',
+    /*  it('should tell ROUTER to navigate when theme title clicked',
      inject([Router], (router: Router) => {
      const spy = spyOn(router, 'navigateTo');
      el.querySelector('li').click();
@@ -46,7 +46,7 @@ describe('ThemeListComponent', () => {
 
     /*it('should return json stringify', () => {
      expect(themeServiceStub.createTheme('bier', 'bier en zo', 'test', false)).toEqual(JSON.stringify({
-     name: 'bier',
+     title: 'bier',
      description: 'bier en zo',
      tags: 'test',
      publicAccess: false
@@ -56,21 +56,21 @@ describe('ThemeListComponent', () => {
      it('should return list of themes', () => {
      expect(themeServiceStub.readThemes()).toEqual([
      {
-     "name": "test01",
+     "title": "test01",
      "description": "test",
      "tags": "test",
      "publicAccess": false,
      "_id": 14
      },
      {
-     "name": "test02",
+     "title": "test02",
      "description": "test",
      "tags": "test",
      "publicAccess": false,
      "_id": 15
      },
      {
-     "name": "test03",
+     "title": "test03",
      "description": "djsmfqjm",
      "tags": "mjm",
      "publicAccess": false,
@@ -82,14 +82,14 @@ describe('ThemeListComponent', () => {
      it('should remove theme _id 15', () => {
      expect(themeServiceStub.deleteTheme()).toEqual([
      {
-     "name": "test01",
+     "title": "test01",
      "description": "test",
      "tags": "test",
      "publicAccess": false,
      "_id": 14
      },
      {
-     "name": "test03",
+     "title": "test03",
      "description": "djsmfqjm",
      "tags": "mjm",
      "publicAccess": false,
