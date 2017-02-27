@@ -42,7 +42,7 @@ export class ThemeService {
   }
 
   updateTheme(theme: Theme): Observable<Theme> {
-    const url = `${this.themeUrl}/${theme.id}`;
+    const url = `${this.themeUrl}/${theme._id}`;
     return this.http
       .put(url, JSON.stringify(theme), {headers: this.headers})
       .map((res: Response) => res.json())

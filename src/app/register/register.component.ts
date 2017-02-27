@@ -4,7 +4,6 @@ import {UserService} from "../services/user.service";
 import {AlertService} from "../services/alert.service";
 
 @Component({
-  moduleId: module.id,
   templateUrl: 'register.component.html'
 })
 

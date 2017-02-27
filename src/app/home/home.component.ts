@@ -3,7 +3,6 @@ import {User} from "../models/user";
 import {UserService} from "../services/user.service";
 
 @Component({
-  moduleId: module.id,
   templateUrl: 'home.component.html'
 })
 

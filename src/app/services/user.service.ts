@@ -12,8 +12,8 @@ export class UserService {
         return this.http.get(this.usersUrl, this.jwt()).map((response: Response) => response.json());
     }
 
-    // getById(id: number) {
-    //     return this.http.get('http://api.teamjs.xyz/users/' + id, this.jwt()).map((response: Response) => response.json());
+    // getById(_id: number) {
+    //     return this.http.get('http://api.teamjs.xyz/users/' + _id, this.jwt()).map((response: Response) => response.json());
     // }
 
     create(user: User) {
@@ -23,7 +23,7 @@ export class UserService {
     }
 
     // update(user: User) {
-    //     return this.http.put('http://api.teamjs.xyz/users/' + user.id, user, this.jwt()).map((response: Response) => response.json());
+    //     return this.http.put('http://api.teamjs.xyz/users/' + user._id, user, this.jwt()).map((response: Response) => response.json());
     // }
 
     delete(id: number) {

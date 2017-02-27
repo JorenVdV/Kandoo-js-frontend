@@ -4,7 +4,6 @@ import {FormsModule} from '@angular/forms';
 import {HttpModule, BaseRequestOptions} from '@angular/http';
 
 import {AppComponent} from './app.component';
-import {ThemeComponent} from "./theme/details/theme.component";
 import {AppRouting} from "./routing/app.routing";
 import {ThemeService} from "./services/theme.service";
 import {AlertComponent} from "./directives/alert.component";
@@ -22,12 +21,12 @@ import {CardDetailComponent} from "./card/card-detail.component";
 import {SessionService} from "./services/session.service";
 import {SessionComponent} from "./session/session.component";
 import {GameComponent} from "./game/game.component";
-import { ThemeListComponent } from './theme/theme-list/theme-list.component';
+import {ThemeListComponent} from "./theme/list/theme-list.component";
+import {ThemeDetailComponent} from "./theme/details/theme-detail.component";
 
 @NgModule({
     declarations: [
         AppComponent,
-        ThemeComponent,
         AlertComponent,
         HomeComponent,
         LoginComponent,
@@ -36,7 +35,8 @@ import { ThemeListComponent } from './theme/theme-list/theme-list.component';
         CardDetailComponent,
         SessionComponent,
         GameComponent,
-        ThemeListComponent
+        ThemeListComponent,
+        ThemeDetailComponent
     ],
     imports: [
         BrowserModule,

@@ -17,7 +17,7 @@ export class CardDetailComponent implements OnInit {
 
     ngOnInit() {
         this.route.params
-            .switchMap((params: Params) => this.cardService.readCard(+params['id']))
+            .switchMap((params: Params) => this.cardService.readCard(+params['_id']))
             .subscribe(card => this.card = card);
     }
 

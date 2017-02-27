@@ -3,7 +3,7 @@ import {Theme} from "../models/theme";
 
 @Injectable()
 export class ThemeServiceStub {
-    themes: Theme[] = [
+    themes: Theme[]/* = [
         {
             "name": "test01",
             "description": "test",
@@ -12,9 +12,9 @@ export class ThemeServiceStub {
             "cards": [{
                 "description": "heh?",
                 "priority": 1,
-                "id": 1
+                "_id": 1
             }],
-            "id": 14
+            "_id": 14
         },
         {
             "name": "test02",
@@ -24,9 +24,9 @@ export class ThemeServiceStub {
             "cards": [{
                 "description": "heh?",
                 "priority": 1,
-                "id": 1
+                "_id": 1
             }],
-            "id": 15
+            "_id": 15
         },
         {
             "name": "test03",
@@ -36,11 +36,11 @@ export class ThemeServiceStub {
             "cards": [{
                 "description": "heh?",
                 "priority": 1,
-                "id": 1
+                "_id": 1
             }],
-            "id": 17
+            "_id": 17
         }
-    ];
+    ]*/;
 
     createTheme(name: string, description: string, tags: string, publicAccess: boolean) {
         return JSON.stringify({name: name, description: description, tags: tags, publicAccess: publicAccess})
@@ -55,7 +55,7 @@ export class ThemeServiceStub {
     }
 
     findTheme(theme: Theme) {
-        return theme.id === 15;
+        return theme._id === "15";
     }
 
     deleteTheme() {

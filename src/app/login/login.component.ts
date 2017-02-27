@@ -4,7 +4,6 @@ import {AuthenticationService} from "../services/authentication.service";
 import {AlertService} from "../services/alert.service";
 
 @Component({
-  moduleId: module.id,
   templateUrl: 'login.component.html'
 })
 

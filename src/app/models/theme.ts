@@ -2,7 +2,7 @@ import {Card} from "./card";
 import {User} from "./user";
 
 export class Theme {
-    id: string;
+    _id: string;
     name: string;
     description: string;
     tags: string;
