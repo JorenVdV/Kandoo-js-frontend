@@ -1,6 +1,12 @@
-<label>Naam<br><input id="title" type="text" [(ngModel)]="theme.title"></label><br>
-<label>Omschrijving<br><input id="description" type="text" [(ngModel)]="theme.description"></label><br>
-<label>Tags<br><input id="tags" type="text" [(ngModel)]="theme.tags"></label><br>
-<label><input id="public" type="checkbox" [(ngModel)]="theme.publicAccess">Publiek</label><br>
-<button id="save" (click)="saveTheme()">SAVE</button>
-<button id="delete" (click)="deleteTheme()">DELETE</button>
+<div class="container">
+    <div class="col-md-8 col-md-offset-2">
+        <label>Naam<br><input id="title" type="text" [(ngModel)]="theme.title" class="form-control"></label><br>
+        <label>Omschrijving<br><input id="description" type="text" [(ngModel)]="theme.description" class="form-control"></label><br>
+        <label>Tags<br><input id="tags" type="text" [(ngModel)]="theme.tags" class="form-control"></label><br>
+        <label><input id="public" type="checkbox" [(ngModel)]="theme.publicAccess">Publiek</label><br>
+        <button id="save" (click)="saveTheme()" class="btn btn-success">SAVE</button>
+        <button id="delete" (click)="deleteTheme()" class="btn btn-danger">DELETE</button>
+        <button class="btn btn-info" (click)="addCards(theme)">ADD CARDS</button>
+    </div>
+</div>
+

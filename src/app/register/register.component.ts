@@ -5,7 +5,8 @@ import {AlertService} from "../services/alert.service";
 
 @Component({
   moduleId: module.id,
-  templateUrl: 'register.component.html'
+  templateUrl: 'register.component.html',
+    selector: 'register'
 })
 
 export class RegisterComponent {
@@ -30,4 +31,8 @@ export class RegisterComponent {
           this.loading = false;
         });
   }
+    navigateToLogin() {
+        this.router.navigate(['/login']);
+    }
+
 }

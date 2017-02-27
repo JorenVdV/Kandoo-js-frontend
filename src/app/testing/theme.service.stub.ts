@@ -12,7 +12,7 @@ export class ThemeServiceStub {
             "cards": [{
                 "description": "heh?",
                 "priority": 1,
-                "id": 1
+                "_id": 1
             }],
             "id": 14
         },
@@ -24,7 +24,7 @@ export class ThemeServiceStub {
             "cards": [{
                 "description": "heh?",
                 "priority": 1,
-                "id": 1
+                "_id": 1
             }],
             "id": 15
         },
@@ -36,7 +36,7 @@ export class ThemeServiceStub {
             "cards": [{
                 "description": "heh?",
                 "priority": 1,
-                "id": 1
+                "_id": 1
             }],
             "id": 17
         }

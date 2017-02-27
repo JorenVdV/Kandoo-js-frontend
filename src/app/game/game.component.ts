@@ -12,17 +12,17 @@ export class GameComponent {
         {
             "description": "card01",
             "priority": 5,
-            "id": 14
+            "_id": "14"
         },
         {
             "description": "card02",
             "priority": 5,
-            "id": 15
+            "_id": "15"
         },
         {
             "description": "card03",
             "priority": 5,
-            "id": 17
+            "_id": "17"
         }
     ];
     circleFive: Card[] = [];

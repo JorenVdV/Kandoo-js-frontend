@@ -23,6 +23,8 @@ import {SessionService} from "./services/session.service";
 import {SessionComponent} from "./session/session.component";
 import {GameComponent} from "./game/game.component";
 import { ThemeListComponent } from './theme/list/theme-list.component';
+import {LandingComponent} from "./landing/landing.component";
+import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
 
 @NgModule({
     declarations: [
@@ -36,13 +38,15 @@ import { ThemeListComponent } from './theme/list/theme-list.component';
         CardDetailComponent,
         SessionComponent,
         GameComponent,
-        ThemeListComponent
+        ThemeListComponent,
+        LandingComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
         HttpModule,
-        AppRouting
+        AppRouting,
+        Ng2Bs3ModalModule
     ],
     providers: [
         ThemeService,
