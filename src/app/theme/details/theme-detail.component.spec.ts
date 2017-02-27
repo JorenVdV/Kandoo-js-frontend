@@ -43,7 +43,7 @@ describe('ThemeDetailComponent', () => {
 
   /*it('should return theme _id 15', () => {
     expect(themeServiceStub.readTheme()).toEqual({
-      "name": "test02",
+      "title": "test02",
       "description": "test",
       "tags": "test",
       "publicAccess": false,
@@ -83,7 +83,7 @@ class Page {
     if (comp.theme) {
       this.saveBtn = fixture.debugElement.nativeElement.querySelector('button');
       this.nameDisplay = fixture.debugElement.nativeElement.querySelector('h1');
-      this.nameInput = fixture.debugElement.nativeElement.querySelector('#name');
+      this.nameInput = fixture.debugElement.nativeElement.querySelector('#title');
       this.descriptionInput = fixture.debugElement.nativeElement.querySelector('#description');
       this.tagsInput = fixture.debugElement.nativeElement.querySelector('#tags');
       this.publicAccessInput = fixture.debugElement.nativeElement.querySelector('#public');

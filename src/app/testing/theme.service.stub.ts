@@ -5,7 +5,7 @@ import {Theme} from "../models/theme";
 export class ThemeServiceStub {
     themes: Theme[]/* = [
         {
-            "name": "test01",
+            "title": "test01",
             "description": "test",
             "tags": "test",
             "publicAccess": false,
@@ -17,7 +17,7 @@ export class ThemeServiceStub {
             "_id": 14
         },
         {
-            "name": "test02",
+            "title": "test02",
             "description": "test",
             "tags": "test",
             "publicAccess": false,
@@ -29,7 +29,7 @@ export class ThemeServiceStub {
             "_id": 15
         },
         {
-            "name": "test03",
+            "title": "test03",
             "description": "djsmfqjm",
             "tags": "mjm",
             "publicAccess": false,

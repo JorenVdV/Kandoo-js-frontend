@@ -3,7 +3,7 @@ import {User} from "./user";
 
 export class Theme {
     _id: string;
-    name: string;
+    title: string;
     description: string;
     tags: string;
     publicAccess: boolean;

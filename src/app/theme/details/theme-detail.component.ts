@@ -9,8 +9,7 @@ import {ThemeService} from "../../services/theme.service";
 })
 
 export class ThemeDetailComponent implements OnInit {
-    theme: Theme;
-
+    theme = new Theme();
     constructor(private themeService: ThemeService,
                 private route: ActivatedRoute,
                 private router: Router) {
@@ -31,6 +30,7 @@ export class ThemeDetailComponent implements OnInit {
 
     saveTheme() {
         if (this.theme._id) {
+            alert("If Executed!");
             this.themeService.updateTheme(this.theme).subscribe(
                 done => {
                     this.navigateToThemes();
@@ -39,6 +39,7 @@ export class ThemeDetailComponent implements OnInit {
                     console.log(err);
                 });
         } else {
+            alert("Else Executed!");
             this.themeService.createTheme(this.theme).subscribe(
                 done => {
                     this.navigateToThemes();
@@ -50,7 +51,7 @@ export class ThemeDetailComponent implements OnInit {
     }
 
     deleteTheme(theme: Theme) {
-        this.themeService.deleteTheme(theme._id).subscribe(
+                this.themeService.deleteTheme(theme._id).subscribe(
             done => {
                 this.navigateToThemes();
             },
