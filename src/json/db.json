@@ -1,9 +1,11 @@
 {
   "themes": [
     {
+      "id": 1,
       "name": "first theme",
-      "publicAccess": true,
-      "id": 1
+      "description": "description",
+      "tags": "tags",
+      "publicAccess": true
     }
   ],
   "cards": [
