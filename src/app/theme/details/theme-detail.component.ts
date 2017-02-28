@@ -10,6 +10,7 @@ import {ThemeService} from "../../services/theme.service";
 
 export class ThemeDetailComponent implements OnInit {
     theme = new Theme();
+
     constructor(private themeService: ThemeService,
                 private route: ActivatedRoute,
                 private router: Router) {
@@ -51,7 +52,7 @@ export class ThemeDetailComponent implements OnInit {
     }
 
     deleteTheme(theme: Theme) {
-                this.themeService.deleteTheme(theme._id).subscribe(
+        this.themeService.deleteTheme(theme._id).subscribe(
             done => {
                 this.navigateToThemes();
             },

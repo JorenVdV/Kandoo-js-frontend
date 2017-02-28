@@ -1,44 +1,41 @@
 <div class="circle-container">
     <div class="circle" id="circle-5">
-        <ul>
-            <li class="card-list" *ngFor="let card of circleFive" (click)="onClick(card, 5)">
-                {{card.description}}
-            </li>
-        </ul>
+        <div *ngFor="let card of circleFive; let i = index;" [class]="'circle-item item-' + i"
+             (click)="onClick(card)">
+            <img [src]="card.image" [alt]="card.description">
+        </div>
         <div class="circle" id="circle-4">
-            <ul>
-                <li class="card-list" *ngFor="let card of circleFour" (click)="onClick(card, 4)">
-                    {{card.description}}
-                </li>
-            </ul>
+            <div *ngFor="let card of circleFour; let i = index;" [class]="'circle-item item-' + i"
+                 (click)="onClick(card)">
+                <img [src]="card.image" [alt]="card.description">
+            </div>
             <div class="circle" id="circle-3">
-                <ul>
-                    <li class="card-list" *ngFor="let card of circleThree" (click)="onClick(card, 3)">
-                        {{card.description}}
-                    </li>
-                </ul>
+                <div *ngFor="let card of circleThree; let i = index;" [class]="'circle-item item-' + i"
+                     (click)="onClick(card)">
+                    <img [src]="card.image" [alt]="card.description">
+                </div>
                 <div class="circle" id="circle-2">
-                    <ul>
-                        <li class="card-list" *ngFor="let card of circleTwo" (click)="onClick(card, 2)">
-                            {{card.description}}
-                        </li>
-                    </ul>
+                    <div *ngFor="let card of circleTwo; let i = index;" [class]="'circle-item item-' + i"
+                         (click)="onClick(card)">
+                        <img [src]="card.image" [alt]="card.description">
+                    </div>
                     <div class="circle" id="circle-1">
-                        <ul>
-                            <li class="card-list" *ngFor="let card of circleOne">
-                                {{card.description}}
-                            </li>
-                        </ul>
+                        <div *ngFor="let card of circleOne">
+                            <img [src]="card.image" [alt]="card.description">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="resize">
-    <ul>
-        <li class="card-list" *ngFor="let card of cards" (click)="onClick(card, 0)">
-            {{card.description}}
-        </li>
-    </ul>
+<div class="card-list">
+    <div class="card-list-item" *ngFor="let card of cards" (click)="onClick(card, 0)">
+        <img [src]="card.image" [alt]="card.description">
+    </div>
+</div>
+<div *ngIf="selectedCard">
+    <div>Description: {{selectedCard.description}}</div>
+    <div>Priority: {{selectedCard.priority}}</div>
+    <button *ngIf="selectedCard.priority != 1" (click)="increasePriority(selectedCard)">INCREASE PRIORITY</button>
 </div>

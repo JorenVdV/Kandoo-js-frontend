@@ -1,6 +1,5 @@
 .circle-container {
     position: relative;
-    width: 50%;
 }
 
 .circle {
@@ -43,12 +42,279 @@
     height: 50vh;
 }
 
-.card-list {
-    position: relative;
-    z-index: 5;
+.circle-item {
+    position: absolute;
+    width: 32px;
+    margin: -16px;
+    top: 50%;
+    left: 50%;
     cursor: pointer;
 }
 
-.resize {
-    width: 10%;
+.card-image {
+    border: 1px solid white;
+}
+
+.card-list {
+    display: flex;
+}
+
+.card-list-item {
+    cursor: pointer;
+}
+
+#circle-5 .item-0 {
+    -webkit-transform: rotate(270deg) translate(25vh) rotate(-270deg);
+    -moz-transform: rotate(270deg) translate(25vh) rotate(-270deg);
+    -ms-transform: rotate(270deg) translate(25vh) rotate(-270deg);
+    -o-transform: rotate(270deg) translate(25vh) rotate(-270deg);
+    transform: rotate(270deg) translate(25vh) rotate(-270deg);
+}
+
+#circle-5 .item-1 {
+    -webkit-transform: rotate(315deg) translate(25vh) rotate(-315deg);
+    -moz-transform: rotate(315deg) translate(25vh) rotate(-315deg);
+    -ms-transform: rotate(315deg) translate(25vh) rotate(-315deg);
+    -o-transform: rotate(315deg) translate(25vh) rotate(-315deg);
+    transform: rotate(315deg) translate(25vh) rotate(-315deg);
+}
+
+#circle-5 .item-2 {
+    -webkit-transform: translate(25vh);
+    -moz-transform: translate(25vh);
+    -ms-transform: translate(25vh);
+    -o-transform: translate(25vh);
+    transform: translate(25vh);
+}
+
+#circle-5 .item-3 {
+    -webkit-transform: rotate(45deg) translate(25vh) rotate(-45deg);
+    -moz-transform: rotate(45deg) translate(25vh) rotate(-45deg);
+    -ms-transform: rotate(45deg) translate(25vh) rotate(-45deg);
+    -o-transform: rotate(45deg) translate(25vh) rotate(-45deg);
+    transform: rotate(45deg) translate(25vh) rotate(-45deg);
+}
+
+#circle-5 .item-4 {
+    -webkit-transform: rotate(90deg) translate(25vh) rotate(-90deg);
+    -moz-transform: rotate(90deg) translate(25vh) rotate(-90deg);
+    -ms-transform: rotate(90deg) translate(25vh) rotate(-90deg);
+    -o-transform: rotate(90deg) translate(25vh) rotate(-90deg);
+    transform: rotate(90deg) translate(25vh) rotate(-90deg);
+}
+
+#circle-5 .item-5 {
+    -webkit-transform: rotate(135deg) translate(25vh) rotate(-135deg);
+    -moz-transform: rotate(135deg) translate(25vh) rotate(-135deg);
+    -ms-transform: rotate(135deg) translate(25vh) rotate(-135deg);
+    -o-transform: rotate(135deg) translate(25vh) rotate(-135deg);
+    transform: rotate(135deg) translate(25vh) rotate(-135deg);
+}
+
+#circle-5 .item-6 {
+    -webkit-transform: translate(-25vh);
+    -moz-transform: translate(-25vh);
+    -ms-transform: translate(-25vh);
+    -o-transform: translate(-25vh);
+    transform: translate(-25vh);
+}
+
+#circle-5 .item-7 {
+    -webkit-transform: rotate(225deg) translate(25vh) rotate(-225deg);
+    -moz-transform: rotate(225deg) translate(25vh) rotate(-225deg);
+    -ms-transform: rotate(225deg) translate(25vh) rotate(-225deg);
+    -o-transform: rotate(225deg) translate(25vh) rotate(-225deg);
+    transform: rotate(225deg) translate(25vh) rotate(-225deg);
+}
+
+#circle-4 .item-0 {
+    -webkit-transform: rotate(270deg) translate(20vh) rotate(-270deg);
+    -moz-transform: rotate(270deg) translate(20vh) rotate(-270deg);
+    -ms-transform: rotate(270deg) translate(20vh) rotate(-270deg);
+    -o-transform: rotate(270deg) translate(20vh) rotate(-270deg);
+    transform: rotate(270deg) translate(20vh) rotate(-270deg);
+}
+
+#circle-4 .item-1 {
+    -webkit-transform: rotate(315deg) translate(20vh) rotate(-315deg);
+    -moz-transform: rotate(315deg) translate(20vh) rotate(-315deg);
+    -ms-transform: rotate(315deg) translate(20vh) rotate(-315deg);
+    -o-transform: rotate(315deg) translate(20vh) rotate(-315deg);
+    transform: rotate(315deg) translate(20vh) rotate(-315deg);
+}
+
+#circle-4 .item-2 {
+    -webkit-transform: translate(20vh);
+    -moz-transform: translate(20vh);
+    -ms-transform: translate(20vh);
+    -o-transform: translate(20vh);
+    transform: translate(20vh);
+}
+
+#circle-4 .item-3 {
+    -webkit-transform: rotate(45deg) translate(20vh) rotate(-45deg);
+    -moz-transform: rotate(45deg) translate(20vh) rotate(-45deg);
+    -ms-transform: rotate(45deg) translate(20vh) rotate(-45deg);
+    -o-transform: rotate(45deg) translate(20vh) rotate(-45deg);
+    transform: rotate(45deg) translate(20vh) rotate(-45deg);
+}
+
+#circle-4 .item-4 {
+    -webkit-transform: rotate(90deg) translate(20vh) rotate(-90deg);
+    -moz-transform: rotate(90deg) translate(20vh) rotate(-90deg);
+    -ms-transform: rotate(90deg) translate(20vh) rotate(-90deg);
+    -o-transform: rotate(90deg) translate(20vh) rotate(-90deg);
+    transform: rotate(90deg) translate(20vh) rotate(-90deg);
+}
+
+#circle-4 .item-5 {
+    -webkit-transform: rotate(135deg) translate(20vh) rotate(-135deg);
+    -moz-transform: rotate(135deg) translate(20vh) rotate(-135deg);
+    -ms-transform: rotate(135deg) translate(20vh) rotate(-135deg);
+    -o-transform: rotate(135deg) translate(20vh) rotate(-135deg);
+    transform: rotate(135deg) translate(20vh) rotate(-135deg);
+}
+
+#circle-4 .item-6 {
+    -webkit-transform: translate(-20vh);
+    -moz-transform: translate(-20vh);
+    -ms-transform: translate(-20vh);
+    -o-transform: translate(-20vh);
+    transform: translate(-20vh);
+}
+
+#circle-4 .item-7 {
+    -webkit-transform: rotate(225deg) translate(20vh) rotate(-225deg);
+    -moz-transform: rotate(225deg) translate(20vh) rotate(-225deg);
+    -ms-transform: rotate(225deg) translate(20vh) rotate(-225deg);
+    -o-transform: rotate(225deg) translate(20vh) rotate(-225deg);
+    transform: rotate(225deg) translate(20vh) rotate(-225deg);
+}
+
+#circle-3 .item-0 {
+    -webkit-transform: rotate(270deg) translate(15vh) rotate(-270deg);
+    -moz-transform: rotate(270deg) translate(15vh) rotate(-270deg);
+    -ms-transform: rotate(270deg) translate(15vh) rotate(-270deg);
+    -o-transform: rotate(270deg) translate(15vh) rotate(-270deg);
+    transform: rotate(270deg) translate(15vh) rotate(-270deg);
+}
+
+#circle-3 .item-1 {
+    -webkit-transform: rotate(315deg) translate(15vh) rotate(-315deg);
+    -moz-transform: rotate(315deg) translate(15vh) rotate(-315deg);
+    -ms-transform: rotate(315deg) translate(15vh) rotate(-315deg);
+    -o-transform: rotate(315deg) translate(15vh) rotate(-315deg);
+    transform: rotate(315deg) translate(15vh) rotate(-315deg);
+}
+
+#circle-3 .item-2 {
+    -webkit-transform: translate(15vh);
+    -moz-transform: translate(15vh);
+    -ms-transform: translate(15vh);
+    -o-transform: translate(15vh);
+    transform: translate(15vh);
+}
+
+#circle-3 .item-3 {
+    -webkit-transform: rotate(45deg) translate(15vh) rotate(-45deg);
+    -moz-transform: rotate(45deg) translate(15vh) rotate(-45deg);
+    -ms-transform: rotate(45deg) translate(15vh) rotate(-45deg);
+    -o-transform: rotate(45deg) translate(15vh) rotate(-45deg);
+    transform: rotate(45deg) translate(15vh) rotate(-45deg);
+}
+
+#circle-3 .item-4 {
+    -webkit-transform: rotate(90deg) translate(15vh) rotate(-90deg);
+    -moz-transform: rotate(90deg) translate(15vh) rotate(-90deg);
+    -ms-transform: rotate(90deg) translate(15vh) rotate(-90deg);
+    -o-transform: rotate(90deg) translate(15vh) rotate(-90deg);
+    transform: rotate(90deg) translate(15vh) rotate(-90deg);
+}
+
+#circle-3 .item-5 {
+    -webkit-transform: rotate(135deg) translate(15vh) rotate(-135deg);
+    -moz-transform: rotate(135deg) translate(15vh) rotate(-135deg);
+    -ms-transform: rotate(135deg) translate(15vh) rotate(-135deg);
+    -o-transform: rotate(135deg) translate(15vh) rotate(-135deg);
+    transform: rotate(135deg) translate(15vh) rotate(-135deg);
+}
+
+#circle-3 .item-6 {
+    -webkit-transform: translate(-15vh);
+    -moz-transform: translate(-15vh);
+    -ms-transform: translate(-15vh);
+    -o-transform: translate(-15vh);
+    transform: translate(-15vh);
+}
+
+#circle-3 .item-7 {
+    -webkit-transform: rotate(225deg) translate(15vh) rotate(-225deg);
+    -moz-transform: rotate(225deg) translate(15vh) rotate(-225deg);
+    -ms-transform: rotate(225deg) translate(15vh) rotate(-225deg);
+    -o-transform: rotate(225deg) translate(15vh) rotate(-225deg);
+    transform: rotate(225deg) translate(15vh) rotate(-225deg);
+}
+
+#circle-2 .item-0 {
+    -webkit-transform: rotate(270deg) translate(10vh) rotate(-270deg);
+    -moz-transform: rotate(270deg) translate(10vh) rotate(-270deg);
+    -ms-transform: rotate(270deg) translate(10vh) rotate(-270deg);
+    -o-transform: rotate(270deg) translate(10vh) rotate(-270deg);
+    transform: rotate(270deg) translate(10vh) rotate(-270deg);
+}
+
+#circle-2 .item-1 {
+    -webkit-transform: rotate(315deg) translate(10vh) rotate(-315deg);
+    -moz-transform: rotate(315deg) translate(10vh) rotate(-315deg);
+    -ms-transform: rotate(315deg) translate(10vh) rotate(-315deg);
+    -o-transform: rotate(315deg) translate(10vh) rotate(-315deg);
+    transform: rotate(315deg) translate(10vh) rotate(-315deg);
+}
+
+#circle-2 .item-2 {
+    -webkit-transform: translate(10vh);
+    -moz-transform: translate(10vh);
+    -ms-transform: translate(10vh);
+    -o-transform: translate(10vh);
+    transform: translate(10vh);
+}
+
+#circle-2 .item-3 {
+    -webkit-transform: rotate(45deg) translate(10vh) rotate(-45deg);
+    -moz-transform: rotate(45deg) translate(10vh) rotate(-45deg);
+    -ms-transform: rotate(45deg) translate(10vh) rotate(-45deg);
+    -o-transform: rotate(45deg) translate(10vh) rotate(-45deg);
+    transform: rotate(45deg) translate(10vh) rotate(-45deg);
+}
+
+#circle-2 .item-4 {
+    -webkit-transform: rotate(90deg) translate(10vh) rotate(-90deg);
+    -moz-transform: rotate(90deg) translate(10vh) rotate(-90deg);
+    -ms-transform: rotate(90deg) translate(10vh) rotate(-90deg);
+    -o-transform: rotate(90deg) translate(10vh) rotate(-90deg);
+    transform: rotate(90deg) translate(10vh) rotate(-90deg);
+}
+
+#circle-2 .item-5 {
+    -webkit-transform: rotate(135deg) translate(10vh) rotate(-135deg);
+    -moz-transform: rotate(135deg) translate(10vh) rotate(-135deg);
+    -ms-transform: rotate(135deg) translate(10vh) rotate(-135deg);
+    -o-transform: rotate(135deg) translate(10vh) rotate(-135deg);
+    transform: rotate(135deg) translate(10vh) rotate(-135deg);
+}
+
+#circle-2 .item-6 {
+    -webkit-transform: translate(-10vh);
+    -moz-transform: translate(-10vh);
+    -ms-transform: translate(-10vh);
+    -o-transform: translate(-10vh);
+    transform: translate(-10vh);
+}
+
+#circle-2 .item-7 {
+    -webkit-transform: rotate(225deg) translate(10vh) rotate(-225deg);
+    -moz-transform: rotate(225deg) translate(10vh) rotate(-225deg);
+    -ms-transform: rotate(225deg) translate(10vh) rotate(-225deg);
+    -o-transform: rotate(225deg) translate(10vh) rotate(-225deg);
+    transform: rotate(225deg) translate(10vh) rotate(-225deg);
 }
