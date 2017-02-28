@@ -1,7 +1,22 @@
 <h1>Voeg een kaart toe</h1>
-<div>
-    <label>Omschrijving<br><input id="description" type="text" #cardDescription></label><br>
-    <button id="submit" (click)="submitCard(cardDescription.value)">
-        Voeg toe
-    </button>
+<div class="container">
+    <div class="col-md-6">
+        <label>Omschrijving<br><input id="description" type="text" #cardDescription class="form-control"></label><br>
+        <button id="submit" (click)="submitCard(cardDescription.value)" class="btn btn-default">
+            Voeg toe
+        </button>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default" *ngFor="let card of cards" >
+            <div class="panel-body">
+                <div class="col-md-11">
+                    {{card.description}}
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-default" (click)="deleteCard(card)"><strong>X</strong></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>

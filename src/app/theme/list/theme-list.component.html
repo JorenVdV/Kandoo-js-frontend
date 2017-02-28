@@ -1,10 +1,21 @@
-<h2>Themes</h2>
-<button class="btn btn-success" (click)="createTheme()">CREATE</button>
-<div>
-  <ul>
-    <li *ngFor="let theme of themes" (click)="selectTheme(theme)">
-      <span>{{theme.title}}</span>
-      <button class="btn btn-danger" (click)="deleteTheme(theme)">DELETE</button>
-    </li>
-  </ul>
+<div class="container">
+    <h2>Themes</h2>
+    <button class="btn btn-success" (click)="createTheme()">CREATE</button>
+    <div class="row">
+        <hr>
+    </div>
+    <div class="col-md-10 col-md-offset-1">
+        <div class="panel panel-default" *ngFor="let theme of themes" >
+            <div class="panel-body">
+                <div class="col-md-6">
+                    <h4><strong>{{theme.title}}:</strong> {{theme.description}}</h4>
+                </div>
+                <button class="btn btn-info" (click)="selectTheme(theme)">INFO</button>
+                <button class="btn btn-danger" (click)="deleteTheme(theme)">DELETE</button>
+                <button class="btn btn-success" (click)="addCards(theme)">ADD CARDS</button>
+                <button class="btn btn-warning" (click)="getSessions(theme)">SESSIONS</button>
+            </div>
+        </div>
+    </div>
+
 </div>

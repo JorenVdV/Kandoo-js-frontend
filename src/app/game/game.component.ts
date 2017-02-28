@@ -1,6 +1,5 @@
 import {Component, OnInit} from "@angular/core";
 import {Card} from "../models/card";
-import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
     selector: 'game',
@@ -14,49 +13,49 @@ export class GameComponent implements OnInit{
             "description": "card01",
             "priority": 6,
             "img": "",
-            "id": 1
+            "_id": 1
         },
         {
             "description": "card02",
             "priority": 6,
             "img": "",
-            "id": 2
+            "_id": 2
         },
         {
             "description": "card03",
             "priority": 6,
             "img": "",
-            "id": 3
+            "_id": 3
         },
         {
             "description": "card04",
             "priority": 6,
             "img": "",
-            "id": 4
+            "_id": 4
         },
         {
             "description": "card05",
             "priority": 6,
             "img": "",
-            "id": 5
+            "_id": 5
         },
         {
             "description": "card06",
             "priority": 6,
             "img": "",
-            "id": 6
+            "_id": 6
         },
         {
             "description": "card07",
             "priority": 6,
             "img": "",
-            "id": 7
+            "_id": 7
         },
         {
             "description": "card08",
             "priority": 6,
             "img": "",
-            "id": 8
+            "_id": 8
         }
     ];
     circleFive: Card[] = [];

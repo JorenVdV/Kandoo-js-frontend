@@ -4,6 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {HttpModule, BaseRequestOptions} from '@angular/http';
 
 import {AppComponent} from './app.component';
+import {ThemeDetailComponent} from "./theme/details/theme-detail.component";
 import {AppRouting} from "./routing/app.routing";
 import {ThemeService} from "./services/theme.service";
 import {AlertComponent} from "./directives/alert.component";
@@ -21,12 +22,14 @@ import {CardDetailComponent} from "./card/card-detail.component";
 import {SessionService} from "./services/session.service";
 import {SessionComponent} from "./session/session.component";
 import {GameComponent} from "./game/game.component";
-import {ThemeListComponent} from "./theme/list/theme-list.component";
-import {ThemeDetailComponent} from "./theme/details/theme-detail.component";
+import { ThemeListComponent } from './theme/list/theme-list.component';
+import {LandingComponent} from "./landing/landing.component";
+import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
 
 @NgModule({
     declarations: [
         AppComponent,
+        ThemeDetailComponent,
         AlertComponent,
         HomeComponent,
         LoginComponent,
@@ -36,13 +39,14 @@ import {ThemeDetailComponent} from "./theme/details/theme-detail.component";
         SessionComponent,
         GameComponent,
         ThemeListComponent,
-        ThemeDetailComponent
+        LandingComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
         HttpModule,
-        AppRouting
+        AppRouting,
+        Ng2Bs3ModalModule
     ],
     providers: [
         ThemeService,

@@ -19,7 +19,7 @@ export class UserService {
     create(user: User) {
         console.log(user);
         console.log(JSON.stringify(user));
-        return this.http.post('http://api.teamjs.xyz/register', JSON.stringify(user), this.jwt()).map((response: Response) => response.json());
+        return this.http.post('http://api.teamjs.xyz/register', user, this.jwt()).map((response: Response) => response.json());
     }
 
     // update(user: User) {

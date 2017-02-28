@@ -42,4 +42,12 @@ export class ThemeListComponent implements OnInit {
                 console.log(err);
             });
     }
+
+    addCards(theme: Theme) {
+        this.router.navigate(['/theme/', theme._id, 'cards']);
+    }
+
+    getSessions(theme: Theme) {
+        this.router.navigate(['/theme/', theme._id, 'sessions']);
+    }
 }

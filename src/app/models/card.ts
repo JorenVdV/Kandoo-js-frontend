@@ -2,11 +2,11 @@ export class Card {
     description: string;
     priority: number;
     image: string;
-    id: number;
+    _id: string;
 
-    constructor(description: string, priority: number, id: number) {
+    constructor(description: string, priority: number, id: string) {
         this.description = description;
         this.priority = priority;
-        this.id = id;
+        this._id = id;
     }
 }

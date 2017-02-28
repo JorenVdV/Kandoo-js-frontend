@@ -4,6 +4,7 @@ import {Session} from "../models/session";
 import {Theme} from "../models/theme";
 import {SessionService} from "../services/session.service";
 import {User} from "../models/user";
+import {Params, ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'session',
@@ -12,13 +13,14 @@ import {User} from "../models/user";
 
 export class SessionComponent implements OnInit {
     sessions: Session[];
+    themeId: string;
 
     constructor(private sessionService: SessionService,
-                private router: Router) {
+                private router: Router, private route: ActivatedRoute) {
     }
 
     getSessions(): void {
-        this.sessionService.readSessions().subscribe(
+        this.sessionService.readSessions(this.themeId).subscribe(
             sessions => {
                 this.sessions = sessions
             },
@@ -27,11 +29,11 @@ export class SessionComponent implements OnInit {
             });
     }
 
-    submitSession(title: string, description: string, circleType: string, minCardsPerParticipant: number, maxCardsPerParticipant: number, cardsCanBeReviewed: boolean, cardsCanBeAdded: boolean, themeId: string, creator: User, startDate: string, amountOfCircles: number, turnDurationInMinutes: number) {
+    submitSession(title: string, description: string, circleType: string, minCardsPerParticipant: number, maxCardsPerParticipant: number, cardsCanBeReviewed: boolean, cardsCanBeAdded: boolean, creator: User, startDate: string, amountOfCircles: number, turnDurationInMinutes: number) {
         if (!name || !description) {
             return;
         }
-        this.sessionService.createSession(title, description, circleType, minCardsPerParticipant, maxCardsPerParticipant, cardsCanBeReviewed, cardsCanBeAdded, themeId, creator, startDate, amountOfCircles, turnDurationInMinutes).subscribe(
+        this.sessionService.createSession(title, description, circleType, minCardsPerParticipant, maxCardsPerParticipant, cardsCanBeReviewed, cardsCanBeAdded, this.themeId, creator, startDate, amountOfCircles, turnDurationInMinutes).subscribe(
             session => {
                 this.sessions.push(session);
             },
@@ -59,7 +61,17 @@ export class SessionComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getSessions();
+        this.themeId = this.route.snapshot.params['_id'];
+        if (this.themeId) {
+            this.sessionService.readSessions(this.themeId)
+                .subscribe(sessions => {
+                        this.sessions = sessions;
+                    },
+                    err => {
+                        console.log(err);
+                    });
+        }
+
     }
 
     selectSession(session: Session) {

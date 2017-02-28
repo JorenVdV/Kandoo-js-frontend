@@ -31,7 +31,6 @@ export class ThemeDetailComponent implements OnInit {
 
     saveTheme() {
         if (this.theme._id) {
-            alert("If Executed!");
             this.themeService.updateTheme(this.theme).subscribe(
                 done => {
                     this.navigateToThemes();
@@ -40,7 +39,6 @@ export class ThemeDetailComponent implements OnInit {
                     console.log(err);
                 });
         } else {
-            alert("Else Executed!");
             this.themeService.createTheme(this.theme).subscribe(
                 done => {
                     this.navigateToThemes();
@@ -49,6 +47,10 @@ export class ThemeDetailComponent implements OnInit {
                     console.log(err);
                 });
         }
+    }
+
+    addCards(theme: Theme) {
+        this.router.navigate(['/theme/', theme._id, 'cards']);
     }
 
     deleteTheme(theme: Theme) {
