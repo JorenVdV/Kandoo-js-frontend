@@ -49,7 +49,7 @@ export class ThemeService {
 
     readThemes(): Observable<Theme[]> {
         return this.http
-            .get(this.themeUrl+'themes')
+            .get(this.themeUrl+'themes/')
             .map((res: Response) => res.json().themes)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
@@ -63,7 +63,7 @@ export class ThemeService {
     }
 
     deleteTheme(id: string): Observable<Theme> {
-        const url = `${this.themeUrl}/${id}`;
+        const url = this.themeUrl+'theme/' + id + '/delete';
         return this.http
             .delete(url)
             .map((res: Response) => res.json())
