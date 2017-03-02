@@ -1,3 +1,13 @@
+<div class="card-list">
+    <div class="card-list-item" *ngFor="let card of cards" (click)="onClick(card, 0)">
+        <img [src]="card.image" [alt]="card.description">
+    </div>
+</div>
+<div *ngIf="selectedCard">
+    <div>Description: {{selectedCard.description}}</div>
+    <div>Priority: {{selectedCard.priority}}</div>
+    <button *ngIf="selectedCard.priority != 1" (click)="increasePriority(selectedCard)">INCREASE PRIORITY</button>
+</div>
 <div class="circle-container">
     <div class="circle" id="circle-5">
         <div *ngFor="let card of circleFive; let i = index;" [class]="'circle-item item-' + i"
@@ -28,14 +38,4 @@
             </div>
         </div>
     </div>
-</div>
-<div class="card-list">
-    <div class="card-list-item" *ngFor="let card of cards" (click)="onClick(card, 0)">
-        <img [src]="card.image" [alt]="card.description">
-    </div>
-</div>
-<div *ngIf="selectedCard">
-    <div>Description: {{selectedCard.description}}</div>
-    <div>Priority: {{selectedCard.priority}}</div>
-    <button *ngIf="selectedCard.priority != 1" (click)="increasePriority(selectedCard)">INCREASE PRIORITY</button>
 </div>
