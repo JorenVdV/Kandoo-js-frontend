@@ -9,7 +9,7 @@ export class UserService {
     constructor(private http: Http) { }
 
     getAll() {
-        return this.http.get(this.usersUrl, this.jwt()).map((response: Response) => response.json());
+        return this.http.get(this.usersUrl, this.jwt()).map((response: Response) => response.json().users);
     }
 
     // getById(_id: number) {
@@ -17,8 +17,6 @@ export class UserService {
     // }
 
     create(user: User) {
-        console.log(user);
-        console.log(JSON.stringify(user));
         return this.http.post('http://api.teamjs.xyz/register', user, this.jwt()).map((response: Response) => response.json());
     }
 

@@ -16,21 +16,24 @@ export class ThemeService {
 
     createTheme(theme: Theme): Observable<Theme> {
 
+        let currentUser = localStorage.getItem('currentUser');
+
+
         var tags = [];
-        console.log(theme.tags);
         for(var i = 0; i < theme.tags.length; i++){
-            console.log(theme.tags[i]["display"]);
             tags[i] = theme.tags[i]["display"];
         }
         console.log(tags);
         const themeTags = tags;
+
 
         return this.http
             .post(this.themeUrl + 'theme/', JSON.stringify({
                 title: theme.title,
                 description: theme.description,
                 tags: themeTags,
-                isPublic: theme.publicAccess
+                isPublic: theme.publicAccess,
+                organiser: JSON.parse(currentUser)._id
             }), {headers: this.headers})
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
