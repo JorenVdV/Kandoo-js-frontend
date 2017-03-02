@@ -4,9 +4,11 @@ import {Router, ActivatedRoute} from '@angular/router';
 import {AuthenticationService} from "../services/authentication.service";
 import {AlertService} from "../services/alert.service";
 import {RegisterComponent} from "../register/register.component"
+import {UserService} from "../services/user.service";
 
 @Component({
     templateUrl: 'login.component.html',
+    selector: 'login'
 })
 
 export class LoginComponent implements OnInit {
@@ -16,7 +18,7 @@ export class LoginComponent implements OnInit {
 
     constructor(private router: Router,
                 private authenticationService: AuthenticationService,
-                private alertService: AlertService) {
+                private alertService: AlertService, private userService: UserService) {
     }
 
     ngOnInit() {
@@ -39,6 +41,20 @@ export class LoginComponent implements OnInit {
                 },
                 err => {
                     console.log('Error: ' + err);
+                });
+    }
+
+    register() {
+        this.loading = true;
+        this.userService.create(this.model)
+            .subscribe(
+                data => {
+                    this.alertService.success('Registration successful', true);
+                    this.router.navigate(['/login']);
+                },
+                error => {
+                    this.alertService.error(error);
+                    this.loading = false;
                 });
     }
 

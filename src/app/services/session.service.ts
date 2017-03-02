@@ -19,33 +19,27 @@ export class SessionService {
     constructor(private http: Http) {
     }
 
-    createSession(title, description, circleType, minCardsPerParticipant, maxCardsPerParticipant, cardsCanBeReviewed, cardsCanBeAdded, themeId, creator, startDate, amountOfCircles, turnDurationInMinutes): Observable<Session> {
+    createSession(session: Session, themeId: string): Observable<Session> {
 
-
-        if(startDate == ""){
+        if(session.startDate == ""){
             startDate = new Date();
         }
 
-        let object = {
-            title: title,
-            description: description,
-            circleType: circleType,
-            minCardsPerParticipant: minCardsPerParticipant,
-            maxCardsPerParticipant: maxCardsPerParticipant,
-            cards: [],
-            cardsCanBeReviewed: cardsCanBeReviewed,
-            cardsCanBeAdded: cardsCanBeAdded,
-            participants: [],
-            themeid: themeId,
-            creotor: creator,
-            callback: "",
-            startDate: startDate,
-            amountOfCircles: amountOfCircles,
-            turnDurationInMinutes: turnDurationInMinutes
-        };
+
 
         return this.http
-            .post(this.sessionUrl+'/theme/'+'58acad839561f00004c6a1f1'+'/sessions',object, {headers: this.headers})
+            .post(this.sessionUrl+'theme/'+themeId+'/session',JSON.stringify(
+                {
+                    title: session.title,
+                    description: session.description,
+                    circleType: "opportunity",
+                    minCardsPerParticipant: session.minCardsPerParticipant,
+                    maxCardsPerParticipant: session.maxCardsPerParticipant,
+                    cardsCanBeReviewed: session.cardsCanBeReviewed,
+                    cardsCanBeAdded: session.cardsCanBeAdded,
+                    creator: session.creator
+
+                }), {headers: this.headers})
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }

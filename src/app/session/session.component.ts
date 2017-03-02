@@ -14,9 +14,11 @@ import {Params, ActivatedRoute} from "@angular/router";
 export class SessionComponent implements OnInit {
     sessions: Session[];
     themeId: string;
+    session = new Session();
 
     constructor(private sessionService: SessionService,
                 private router: Router, private route: ActivatedRoute) {
+
     }
 
     getSessions(): void {
@@ -29,17 +31,18 @@ export class SessionComponent implements OnInit {
             });
     }
 
-    submitSession(title: string, description: string, circleType: string, minCardsPerParticipant: number, maxCardsPerParticipant: number, cardsCanBeReviewed: boolean, cardsCanBeAdded: boolean, creator: User, startDate: string, amountOfCircles: number, turnDurationInMinutes: number) {
-        if (!name || !description) {
-            return;
-        }
-        this.sessionService.createSession(title, description, circleType, minCardsPerParticipant, maxCardsPerParticipant, cardsCanBeReviewed, cardsCanBeAdded, this.themeId, creator, startDate, amountOfCircles, turnDurationInMinutes).subscribe(
-            session => {
-                this.sessions.push(session);
+    saveSession() {
+        alert("ThemeId: " + this.themeId);
+        this.session.creator = "58aed9312ff14c2c14977cfe";
+
+        this.sessionService.createSession(this.session, this.themeId).subscribe(
+            done => {
+                //this.navigateToSessions();
             },
             err => {
                 console.log(err);
             });
+
     }
 
     deleteSession(session: Session) {

@@ -1,59 +1,40 @@
 <script src="../../../node_modules/angular-bootstrap-durationpicker/dist/main.js"></script>
 <div class="col-md-6 col-md-offset-3">
-    <form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
-        <h1>Create A Session!</h1>
-        <div>
-            <label>Theme<br><select class="form-control" id="theme" #sessionTheme>
-                <option value="1">Theme 1</option>
-                <option value="2">Theme 2</option>
-            </select></label><br>
+    <h1>Create A Session!</h1>
+    <div>
+        <label>Title<br><input id="title" type="text" [(ngModel)]="session.title" class="form-control"></label><br>
 
-            <label>Title<br><input id="title" type="text" #sessionTitle class="form-control"></label><br>
-
-            <label>Description<br><input id="description" type="text" #sessionDescription
-                                         class="form-control"></label><br>
-
-            <label class="col-md-6 no-left-padding">Circle<br><select class="form-control" id="circleType" #sessionCircleType>
-                <option value="blue">Kansen</option>
-                <option value="red">Problemen</option>
-            </select></label>
-            <label class="col-md-6 no-right-padding">Circle<br><input type="number" id="numberOfCircles"
-                                                                      #sessionNumberOfCircles
-                                                                      class="form-control"></label><br>
-
-            <label>Duration in minutes<br><input id="duration" type="number" #sessionDuration
-                                                 class="form-control"></label><br>
-
-            <label>Startdate<br><input type="datetime-local" name="startDate" class="form-control"
-                                       #sessionStartDate></label><br>
-
-            <label class="col-md-6 no-left-padding">Min Cards per Person<br><input id="minCards" type="number"
-                                                                                   #sessionMinCard class="form-control"></label>
-
-            <label class="col-md-6 no-right-padding">Max Cards per Person<br><input id="maxCards" type="number"
-                                                                                    #sessionMaxCard
-                                                                                    class="form-control"></label>
-
-            <label class="col-md-6 no-left-padding"><input id="cardsCanBeReviewed" type="checkbox"
-                                                           #sessioncardsCanBeReviewed>Cards Can Be Reviewed</label><br>
-
-            <label class="col-md-6 no-right-padding"><input id="cardsCanBeAdded" type="checkbox"
-                                                            #sessioncardsCanBeAdded>Cards Can Be Added</label><br>
-
-           <div class="row">
-
-           </div>
-
-                <br>
-                <button class="btn btn-info btn-block" id="submit"
-
-                        (click)="submitSession(sessionTitle.value, sessionDescription.value, sessionCircleType.value, sessionMinCard.value, sessionMaxCard.value, sessioncardsCanBeReviewed.value, sessioncardsCanBeAdded.value, sessionTheme.value, 'Sander', sessionStartDate.value, sessionNumberOfCircles.value, sessionDuration.value  )">
-                    Voeg toe
-                </button>
-
-
+        <label>Description<br><input id="description" type="text" [(ngModel)]="session.description"
+                                     class="form-control"></label><br>
+        <label class="col-md-6 no-left-padding">Circle<br><select class="form-control" id="circleType"
+                                                                  [(ngModel)]="session.circleType">
+            <option value="blue">Kansen</option>
+            <option value="red">Problemen</option>
+        </select></label>
+        <label class="col-md-6 no-right-padding">Circle<br><input type="number" id="numberOfCircles"
+                                                                  [(ngModel)]="session.amountOfCircles"
+                                                                  class="form-control"></label><br>
+        <label>Duration in minutes<br><input id="duration" type="number" [(ngModel)]="session.turnDuration"
+                                             class="form-control"></label><br>
+        <label>Startdate<br><input type="datetime-local" name="startDate" class="form-control"
+                                   [(ngModel)]="session.startDate"></label><br>
+        <label class="col-md-6 no-left-padding">Min Cards per Person<br><input id="minCards" type="number"
+                                                                               [(ngModel)]="session.minCardsPerParticipant"
+                                                                               class="form-control"></label>
+        <label class="col-md-6 no-right-padding">Max Cards per Person<br><input id="maxCards" type="number"
+                                                                                [(ngModel)]="session.maxCardsPerParticipant"
+                                                                                class="form-control"></label>
+        <label class="col-md-6 no-left-padding"><input id="cardsCanBeReviewed" type="checkbox"
+                                                       [(ngModel)]="session.cardsCanBeReviewed">Cards Can Be
+            Reviewed</label><br>
+        <label class="col-md-6 no-right-padding"><input id="cardsCanBeAdded" type="checkbox"
+                                                        [(ngModel)]="session.cardsCanBeAdded">Cards Can Be
+            Added</label><br>
+        <div class="row">
         </div>
-    </form>
+        <br>
+        <button id="save" (click)="saveSession()" class="btn btn-success">SAVE</button>
+    </div>
     <div class="row">
         <br>
         <hr>

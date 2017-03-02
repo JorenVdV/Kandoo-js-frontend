@@ -15,11 +15,21 @@ export class ThemeService {
     }
 
     createTheme(theme: Theme): Observable<Theme> {
+
+        var tags = [];
+        console.log(theme.tags);
+        for(var i = 0; i < theme.tags.length; i++){
+            console.log(theme.tags[i]["display"]);
+            tags[i] = theme.tags[i]["display"];
+        }
+        console.log(tags);
+        const themeTags = tags;
+
         return this.http
             .post(this.themeUrl + 'theme/', JSON.stringify({
                 title: theme.title,
                 description: theme.description,
-                tags: theme.tags,
+                tags: themeTags,
                 isPublic: theme.publicAccess
             }), {headers: this.headers})
             .map((res: Response) => res.json())

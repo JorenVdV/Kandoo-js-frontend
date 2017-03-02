@@ -8,19 +8,20 @@ export class Session {
     title: string;
     description: string;
     circleType: string;
-    cardsPerParticipant: string;
+    minCardsPerParticipant: string;
+    maxCardsPerParticipant: string;
     cards: Card[];
     cardsCanBeReviewed: boolean;
     cardsCanBeAdded: boolean;
     participants: User[];
     themeId: string;
-    creator: User;
+    creator: string;
     callback: string;
-    startDate: Date;
+    startDate: string;
     endDate: Date;
     amountOfCircles: number;
-    turnDurationInMinutes: number;
-    id: string;
+    turnDuration: number;
+    _id: string;
 
 
 }
