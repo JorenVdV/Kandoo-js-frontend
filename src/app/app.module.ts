@@ -25,6 +25,8 @@ import {GameComponent} from "./game/game.component";
 import { ThemeListComponent } from './theme/list/theme-list.component';
 import {LandingComponent} from "./landing/landing.component";
 import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
+import { TagInputModule } from 'ng2-tag-input';
+import {RouterModule} from "@angular/router";
 
 @NgModule({
     declarations: [
@@ -39,14 +41,15 @@ import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
         SessionComponent,
         GameComponent,
         ThemeListComponent,
-        LandingComponent
+        LandingComponent,
     ],
     imports: [
         BrowserModule,
         FormsModule,
         HttpModule,
         AppRouting,
-        Ng2Bs3ModalModule
+        Ng2Bs3ModalModule,
+        TagInputModule
     ],
     providers: [
         ThemeService,
