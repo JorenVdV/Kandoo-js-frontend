@@ -1,4 +1,4 @@
-import {ComponentFixture, async, TestBed} from "@angular/core/testing";
+import {ComponentFixture, async, TestBed, fakeAsync} from "@angular/core/testing";
 import {DebugElement} from "@angular/core";
 import {Router, ActivatedRoute} from "@angular/router";
 import {ThemeDetailComponent} from "./theme-detail.component";
@@ -7,86 +7,80 @@ import {ActivatedRouteStub, RouterStub} from "../../testing/router.stub";
 import {ThemeServiceStub} from "../../testing/theme.service.stub";
 import {Theme} from "../../models/theme";
 import {ThemeService} from "../../services/theme.service";
-
-let activatedRoute: ActivatedRouteStub;
-let comp: ThemeDetailComponent;
-let fixture: ComponentFixture<ThemeDetailComponent>;
-let page: Page;
+import {TagInputModule} from 'ng2-tag-input';
 
 describe('ThemeDetailComponent', () => {
-  let themeServiceStub: ThemeServiceStub;
-  let expectedTheme: Theme;
+    let activatedRoute: ActivatedRouteStub;
+    let comp: ThemeDetailComponent;
+    let fixture: ComponentFixture<ThemeDetailComponent>;
+    let page: Page;
+    let themeServiceStub: ThemeServiceStub;
+    let expectedTheme: Theme;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [
-        ThemeDetailComponent
-      ],
-      imports: [
-        FormsModule
-      ],
-      providers: [
-        {provide: ThemeService, useValue: themeServiceStub},
-        {provide: ActivatedRoute, useValue: activatedRoute},
-        {provide: Router, useClass: RouterStub}
-      ]
-    }).compileComponents()
-      .then(() => {
-        themeServiceStub = new ThemeServiceStub;
-        expectedTheme = themeServiceStub.themes[0];
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [ThemeDetailComponent],
+            imports: [FormsModule, TagInputModule],
+            providers: [
+                {provide: ThemeService, useValue: themeServiceStub},
+                {provide: ActivatedRoute, useValue: activatedRoute},
+                {provide: Router, useClass: RouterStub}
+            ]
+        }).compileComponents()
+            .then(() => {
+                themeServiceStub = new ThemeServiceStub();
+                activatedRoute = new ActivatedRouteStub();
+            });
+    }));
 
-        activatedRoute = new ActivatedRouteStub();
-        activatedRoute.testParams = {id: expectedTheme._id};
-        //createComponent();
-      });
-  }));
+    // it('should display first theme', fakeAsync(() => {
+    //     expectedTheme = themeServiceStub.themes[0];
+    //     activatedRoute.testParams = {_id: expectedTheme._id};
+    //     createComponent().then(() => {
+    //         expect(page.titleInput.textContent).toBe(expectedTheme.title);
+    //     });
+    // }));
 
-  /*it('should return theme _id 15', () => {
-    expect(themeServiceStub.readTheme()).toEqual({
-      "title": "test02",
-      "description": "test",
-      "tags": "test",
-      "publicAccess": false,
-      "_id": 15
+    it('should return theme with id 2', () => {
+        expect(themeServiceStub.readTheme()).toEqual({
+            "_id": "2", "title": "test02", "description": "test", "tags": "test", "publicAccess": false
+        });
     });
-  });*/
 });
 
 function createComponent() {
-  fixture = TestBed.createComponent(ThemeDetailComponent);
-  comp = fixture.componentInstance;
-  page = new Page();
+    fixture = TestBed.createComponent(ThemeDetailComponent);
+    comp = fixture.componentInstance;
+    page = new Page();
 
-  fixture.detectChanges();
-  return fixture.whenStable().then(() => {
     fixture.detectChanges();
-    page.addPageElements();
-  })
+    return fixture.whenStable().then(() => {
+        fixture.detectChanges();
+        page.addPageElements();
+    })
 }
 
 class Page {
-  navSpy: jasmine.Spy;
+    navSpy: jasmine.Spy;
 
-  saveBtn: DebugElement;
-  nameDisplay: HTMLElement;
-  nameInput: HTMLInputElement;
-  descriptionInput: HTMLInputElement;
-  tagsInput: HTMLInputElement;
-  publicAccessInput: HTMLInputElement;
+    saveBtn: DebugElement;
+    titleInput: HTMLInputElement;
+    descriptionInput: HTMLInputElement;
+    tagsInput: HTMLInputElement;
+    publicAccessInput: HTMLInputElement;
 
-  constructor() {
-    const router = TestBed.get(Router);
-    this.navSpy = spyOn(router, 'navigateTo');
-  }
-
-  addPageElements() {
-    if (comp.theme) {
-      this.saveBtn = fixture.debugElement.nativeElement.querySelector('button');
-      this.nameDisplay = fixture.debugElement.nativeElement.querySelector('h1');
-      this.nameInput = fixture.debugElement.nativeElement.querySelector('#title');
-      this.descriptionInput = fixture.debugElement.nativeElement.querySelector('#description');
-      this.tagsInput = fixture.debugElement.nativeElement.querySelector('#tags');
-      this.publicAccessInput = fixture.debugElement.nativeElement.querySelector('#public');
+    constructor() {
+        const router = TestBed.get(Router);
+        this.navSpy = spyOn(router, 'navigateTo');
     }
-  }
+
+    addPageElements() {
+        if (comp.theme) {
+            this.saveBtn = fixture.debugElement.nativeElement.querySelector('button');
+            this.titleInput = fixture.debugElement.nativeElement.querySelector('#title');
+            this.descriptionInput = fixture.debugElement.nativeElement.querySelector('#description');
+            this.tagsInput = fixture.debugElement.nativeElement.querySelector('#tags');
+            this.publicAccessInput = fixture.debugElement.nativeElement.querySelector('#public');
+        }
+    }
 }
