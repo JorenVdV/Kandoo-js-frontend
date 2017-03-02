@@ -5,6 +5,7 @@ import {AuthenticationService} from "../services/authentication.service";
 import {AlertService} from "../services/alert.service";
 import {RegisterComponent} from "../register/register.component"
 import {UserService} from "../services/user.service";
+import {User} from "../models/user";
 
 @Component({
     templateUrl: 'login.component.html',
@@ -12,7 +13,7 @@ import {UserService} from "../services/user.service";
 })
 
 export class LoginComponent implements OnInit {
-    model: any = {};
+    model = new User();
     loading = false;
     private redirectUrl: string = 'themes';
 
@@ -37,7 +38,6 @@ export class LoginComponent implements OnInit {
                 (response: Response) => {
                     console.log("Success Response" + response.json());
                     this.loading = false;
-                    this.redirect();
                 },
                 err => {
                     console.log('Error: ' + err);
@@ -57,6 +57,7 @@ export class LoginComponent implements OnInit {
                     this.loading = false;
                 });
     }
+
 
     private redirect(): void {
         console.log("Redirect function");

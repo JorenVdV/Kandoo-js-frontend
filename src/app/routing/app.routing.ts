@@ -17,7 +17,7 @@ export const routes: Routes = [
     {path: 'themes', component: ThemeListComponent},
     {path: 'theme', component: ThemeDetailComponent},
     {path: 'theme/:_id', component: ThemeDetailComponent},
-    {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
+    {path: 'home', component: HomeComponent},
     {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
     {path: 'cards', component: CardComponent},
