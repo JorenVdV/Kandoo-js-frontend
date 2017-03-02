@@ -3,47 +3,14 @@ import {Theme} from "../models/theme";
 
 @Injectable()
 export class ThemeServiceStub {
-    themes: Theme[]/* = [
-        {
-            "title": "test01",
-            "description": "test",
-            "tags": "test",
-            "publicAccess": false,
-            "cards": [{
-                "description": "heh?",
-                "priority": 1,
-                "_id": 1
-            }],
-            "_id": 14
-        },
-        {
-            "title": "test02",
-            "description": "test",
-            "tags": "test",
-            "publicAccess": false,
-            "cards": [{
-                "description": "heh?",
-                "priority": 1,
-                "_id": 1
-            }],
-            "_id": 15
-        },
-        {
-            "title": "test03",
-            "description": "djsmfqjm",
-            "tags": "mjm",
-            "publicAccess": false,
-            "cards": [{
-                "description": "heh?",
-                "priority": 1,
-                "_id": 1
-            }],
-            "_id": 17
-        }
-    ]*/;
+    themes: Theme[] = [
+        {"_id": "1", "title": "test01", "description": "test", "tags": "test", "publicAccess": false},
+        {"_id": "2", "title": "test02", "description": "test", "tags": "test", "publicAccess": false}
+    ];
 
-    createTheme(name: string, description: string, tags: string, publicAccess: boolean) {
-        return JSON.stringify({name: name, description: description, tags: tags, publicAccess: publicAccess})
+    createTheme(title: string, description: string, tags: string, publicAccess: boolean) {
+        this.themes.push({"_id": "" + (this.themes.length + 1), "title": title, "description": description, "tags": tags, "publicAccess": publicAccess});
+        return this.themes;
     }
 
     readTheme() {
@@ -55,7 +22,7 @@ export class ThemeServiceStub {
     }
 
     findTheme(theme: Theme) {
-        return theme._id === "15";
+        return theme._id === "2";
     }
 
     deleteTheme() {

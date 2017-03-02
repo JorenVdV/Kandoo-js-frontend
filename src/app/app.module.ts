@@ -22,12 +22,11 @@ import {CardDetailComponent} from "./card/card-detail.component";
 import {SessionService} from "./services/session.service";
 import {SessionComponent} from "./session/session.component";
 import {GameComponent} from "./game/game.component";
-import { ThemeListComponent } from './theme/list/theme-list.component';
+import {ThemeListComponent} from './theme/list/theme-list.component';
 import {LandingComponent} from "./landing/landing.component";
-import { Ng2Bs3ModalModule } from 'ng2-bs3-modal/ng2-bs3-modal';
-import { TagInputModule } from 'ng2-tag-input';
+import {Ng2Bs3ModalModule} from 'ng2-bs3-modal/ng2-bs3-modal';
+import {TagInputModule} from 'ng2-tag-input';
 import {NavbarComponent} from "./navbar/navbar.component";
-
 
 @NgModule({
     declarations: [

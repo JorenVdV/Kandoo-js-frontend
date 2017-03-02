@@ -1,100 +1,88 @@
-import {TestBed, async, ComponentFixture, inject} from '@angular/core/testing';
+import {TestBed, async, ComponentFixture} from '@angular/core/testing';
 import {ThemeListComponent} from './theme-list.component';
 import {DebugElement} from "@angular/core";
 import {Router} from "@angular/router";
 import {ThemeService} from "../../services/theme.service";
 import {ThemeServiceStub} from "../../testing/theme.service.stub";
 import {RouterStub} from "../../testing/router.stub";
+import {NavbarComponent} from "../../navbar/navbar.component";
+import {LoginComponent} from "../../login/login.component";
+import {Ng2Bs3ModalModule} from "ng2-bs3-modal/ng2-bs3-modal";
+import {FormsModule} from "@angular/forms";
+import {AuthenticationService} from "../../services/authentication.service";
+import {Http, ConnectionBackend, RequestOptions} from "@angular/http";
 
 describe('ThemeListComponent', () => {
     let comp: ThemeListComponent;
     let fixture: ComponentFixture<ThemeListComponent>;
     let de: DebugElement;
     let el: HTMLElement;
-
     let themeServiceStub: ThemeServiceStub;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                ThemeListComponent
-            ],
+            declarations: [ThemeListComponent, NavbarComponent, LoginComponent],
+            imports: [Ng2Bs3ModalModule, FormsModule],
             providers: [
                 {provide: ThemeService, useValue: themeServiceStub},
-                {provide: Router, useClass: RouterStub}
+                {provide: Router, useClass: RouterStub},
+                AuthenticationService,
+                Http,
+                ConnectionBackend,
+                RequestOptions
             ]
         }).compileComponents()
             .then(() => {
                 fixture = TestBed.createComponent(ThemeListComponent);
                 comp = fixture.componentInstance;
-
-                themeServiceStub = new ThemeServiceStub;
-
+                themeServiceStub = new ThemeServiceStub();
                 de = fixture.debugElement;
                 el = de.nativeElement;
             });
     }));
 
-    /*  it('should tell ROUTER to navigate when theme title clicked',
-     inject([Router], (router: Router) => {
-     const spy = spyOn(router, 'navigateTo');
-     el.querySelector('li').click();
-     const navArgs = spy.calls.first().args[0];
-     const _id =  comp.themes[0]._id;
-     expect(navArgs).toBe('/theme/' + _id, 'should nav to ThemeDetail for first theme');
-     }));*/
+/*    it('should contain container element', () => {
+        expect(el.querySelector('.container')).toBeTruthy();
+    });
 
-    /*it('should return json stringify', () => {
-     expect(themeServiceStub.createTheme('bier', 'bier en zo', 'test', false)).toEqual(JSON.stringify({
-     title: 'bier',
-     description: 'bier en zo',
-     tags: 'test',
-     publicAccess: false
-     }));
-     });
+    it('should contain h2', () => {
+        expect(el.querySelector('h2')).toBeTruthy();
+    });
 
-     it('should return list of themes', () => {
-     expect(themeServiceStub.readThemes()).toEqual([
-     {
-     "title": "test01",
-     "description": "test",
-     "tags": "test",
-     "publicAccess": false,
-     "_id": 14
-     },
-     {
-     "title": "test02",
-     "description": "test",
-     "tags": "test",
-     "publicAccess": false,
-     "_id": 15
-     },
-     {
-     "title": "test03",
-     "description": "djsmfqjm",
-     "tags": "mjm",
-     "publicAccess": false,
-     "_id": 17
-     }
-     ]);
-     });
+    it('should contain create button', () => {
+        expect(el.querySelector('#create-btn')).toBeTruthy();
+    });
 
-     it('should remove theme _id 15', () => {
-     expect(themeServiceStub.deleteTheme()).toEqual([
-     {
-     "title": "test01",
-     "description": "test",
-     "tags": "test",
-     "publicAccess": false,
-     "_id": 14
-     },
-     {
-     "title": "test03",
-     "description": "djsmfqjm",
-     "tags": "mjm",
-     "publicAccess": false,
-     "_id": 17
-     }
-     ]);
-     });*/
+    it('should contain row element', () => {
+        expect(el.querySelector('.row')).toBeTruthy();
+    });
+
+    it('should contain hr', () => {
+        expect(el.querySelector('hr')).toBeTruthy();
+    });
+
+    it('should contain col element', () => {
+        expect(el.querySelector('.col-md-10')).toBeTruthy();
+    });
+
+    it('should return list of themes', () => {
+        expect(themeServiceStub.readThemes()).toEqual([
+            {"_id": "1", "title": "test01", "description": "test", "tags": "test", "publicAccess": false},
+            {"_id": "2", "title": "test02", "description": "test", "tags": "test", "publicAccess": false}
+        ]);
+    });
+
+    it('should return list of themes with new theme', () => {
+        expect(themeServiceStub.createTheme('test03', 'test', 'test', false)).toEqual([
+            {"_id": "1", "title": "test01", "description": "test", "tags": "test", "publicAccess": false},
+            {"_id": "2", "title": "test02", "description": "test", "tags": "test", "publicAccess": false},
+            {"_id": "3", "title": "test03", "description": "test", "tags": "test", "publicAccess": false}
+        ]);
+    });
+
+    it('should return list of themes without theme (id: 2)', () => {
+        expect(themeServiceStub.deleteTheme()).toEqual([
+            {"_id": "1", "title": "test01", "description": "test", "tags": "test", "publicAccess": false}
+        ]);
+    });*/
 });
