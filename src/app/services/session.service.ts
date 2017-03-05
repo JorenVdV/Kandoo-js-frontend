@@ -21,12 +21,9 @@ export class SessionService {
 
     createSession(session: Session, themeId: string): Observable<Session> {
 
-        if(session.startDate == ""){
-            startDate = new Date();
-        }
-
-
-
+        // if(session.startDate == ""){
+        //     startDate = new Date();
+        // }
         return this.http
             .post(this.sessionUrl+'theme/'+themeId+'/session',JSON.stringify(
                 {
@@ -43,7 +40,7 @@ export class SessionService {
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
-    
+
     readSession(id: string): Observable<Session> {
         const url = `${this.sessionUrl}/${id}`;
         return this.http
@@ -60,7 +57,7 @@ export class SessionService {
     }
 
     updateSession(session: Session): Observable<Session> {
-        const url = `${this.sessionUrl}/${session.id}`;
+        const url = `${this.sessionUrl}/${session._id}`;
         return this.http
             .put(url, JSON.stringify(session), {headers: this.headers})
             .map((res: Response) => res.json())

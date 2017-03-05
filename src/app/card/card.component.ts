@@ -45,7 +45,7 @@ export class CardComponent {
     deleteCard(card: Card){
         this.cardService.deleteCard(card._id).subscribe(
             done => {
-                //this.themes.splice(t => t._id === theme._id, 1);
+                this.cards.splice(this.cards.findIndex(c => c._id === card._id), 1);
             },
             err => {
                 console.log(err);

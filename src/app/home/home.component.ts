@@ -14,6 +14,8 @@ export class HomeComponent implements OnInit {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
+  ngOnInit() {
+  }
 
   deleteUser(id: number) {
     this.userService.delete(id).subscribe(() => {

@@ -46,11 +46,11 @@ export class SessionComponent implements OnInit {
     }
 
     deleteSession(session: Session) {
-        this.sessionService.deleteSession(session.id).subscribe(
+        this.sessionService.deleteSession(session._id).subscribe(
             sessionObject => {
                 let index = -1;
                 for (let i = 0; i < this.sessions.length; i++) {
-                    if (this.sessions[i].id === session.id) {
+                    if (this.sessions[i]._id === session._id) {
                         index = i;
                         break;
                     }
@@ -78,6 +78,6 @@ export class SessionComponent implements OnInit {
     }
 
     selectSession(session: Session) {
-        this.router.navigate(['/details', session.id]);
+        this.router.navigate(['/details', session._id]);
     }
 }
