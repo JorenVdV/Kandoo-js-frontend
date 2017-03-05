@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "angular-cli": {},
+  "engines": {
+    "node": "7"
+  },
   "scripts": {
     "ng": "ng",
     "test": "ng test --single-run",
