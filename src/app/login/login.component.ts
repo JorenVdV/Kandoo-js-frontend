@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
                 (response: Response) => {
                     console.log("Success Response" + response.json());
                     this.loading = false;
+                    this.redirect();
                 },
                 err => {
                     console.log('Error: ' + err);
