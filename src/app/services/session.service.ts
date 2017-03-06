@@ -13,7 +13,7 @@ import {Theme} from "../models/theme";
 @Injectable()
 export class SessionService {
     private headers = new Headers({'Content-Type': 'application/json'});
-    private sessionUrl = 'http://api.teamjs.xyz/';
+    private sessionUrl = 'https://api.teamjs.xyz/';
     private options = new RequestOptions({headers: this.headers});
 
     constructor(private http: Http) {
