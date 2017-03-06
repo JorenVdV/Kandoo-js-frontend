@@ -15,6 +15,7 @@ export class SessionComponent implements OnInit {
     sessions: Session[];
     themeId: string;
     session = new Session();
+    id: string;
 
     constructor(private sessionService: SessionService,
                 private router: Router, private route: ActivatedRoute) {
@@ -32,9 +33,6 @@ export class SessionComponent implements OnInit {
     }
 
     saveSession() {
-        alert("ThemeId: " + this.themeId);
-        this.session.creator = "58aed9312ff14c2c14977cfe";
-
         this.sessionService.createSession(this.session, this.themeId).subscribe(
             done => {
                 //this.navigateToSessions();
@@ -65,6 +63,7 @@ export class SessionComponent implements OnInit {
 
     ngOnInit() {
         this.themeId = this.route.snapshot.params['_id'];
+        this.id = this.route.snapshot.params['sessionId'];
         if (this.themeId) {
             this.sessionService.readSessions(this.themeId)
                 .subscribe(sessions => {
@@ -73,6 +72,17 @@ export class SessionComponent implements OnInit {
                     err => {
                         console.log(err);
                     });
+        }
+        if (this.id) {
+            this.sessionService.readSession(this.id)
+                .subscribe(s => {
+                    console.log(s);
+                        this.session = s;
+                    },
+                    err => {
+                        console.log(err);
+                    });
+            console.log(this.session)
         }
 
     }

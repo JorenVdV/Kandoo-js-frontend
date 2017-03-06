@@ -10,6 +10,7 @@ import {ThemeService} from "../../services/theme.service";
 
 export class ThemeDetailComponent implements OnInit {
     theme = new Theme();
+    sessions: Sessions[];
 
     constructor(private themeService: ThemeService,
                 private route: ActivatedRoute,
@@ -26,7 +27,15 @@ export class ThemeDetailComponent implements OnInit {
                     err => {
                         console.log(err);
                     });
+            this.themeService.readThemeSessions(id).subscribe(
+                sessions => {
+                    this.sessions = sessions
+                },
+                err => {
+                    console.log(err);
+                });
         }
+
     }
 
     saveTheme() {

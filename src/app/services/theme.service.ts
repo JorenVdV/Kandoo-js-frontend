@@ -11,12 +11,14 @@ export class ThemeService {
     private headers = new Headers({'Content-Type': 'application/json'});
     private themeUrl = 'http://api.teamjs.xyz/';
 
+
     constructor(private http: Http) {
     }
 
-    createTheme(theme: Theme): Observable<Theme> {
 
-        let currentUser = localStorage.getItem('currentUser');
+    createTheme(theme: Theme): Observable<Theme> {
+    let currentUser = localStorage.getItem('currentUser');
+
 
 
         var tags = [];
@@ -47,9 +49,17 @@ export class ThemeService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    readThemes(): Observable<Theme[]> {
+    readThemeSessions(themeId: string): Observable<Theme> {
         return this.http
-            .get(this.themeUrl+'themes/')
+            .get(this.themeUrl + 'theme/' + themeId + '/sessions')
+            .map((res: Response) => res.json().sessions)
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
+    readThemes(): Observable<Theme[]> {
+    let currentUser = localStorage.getItem('currentUser');
+        return this.http
+            .get(this.themeUrl+'themes')
             .map((res: Response) => res.json().themes)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }

@@ -1,6 +1,7 @@
 <navbar></navbar>
-<h1>Voeg een kaart toe</h1>
+
 <div class="container">
+    <h1>Voeg een kaart toe</h1>
     <div class="col-md-6">
         <label>Omschrijving<br><input id="description" type="text" #cardDescription class="form-control"></label><br>
         <button id="submit" (click)="submitCard(cardDescription.value)" class="btn btn-default">
@@ -11,7 +12,7 @@
         <div class="panel panel-default" *ngFor="let card of cards" >
             <div class="panel-body">
                 <div class="col-md-11">
-                    {{card.description}}
+                    <h3 style="margin: 0; padding: 0; ">{{card.description}}</h3>
                 </div>
                 <div class="col-md-1">
                     <button class="btn btn-default" (click)="deleteCard(card)"><strong>X</strong></button>
