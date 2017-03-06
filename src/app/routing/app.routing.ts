@@ -1,12 +1,12 @@
 import {Routes, RouterModule} from "@angular/router";
 import {NgModule} from "@angular/core";
 import {ThemeDetailComponent} from "../theme/details/theme-detail.component";
-import {CardComponent} from "../card/card.component";
+import {CardComponent} from "../card/list/card.component";
 import {RegisterComponent} from "../register/register.component";
 import {LoginComponent} from "../login/login.component";
 import {AuthGuard} from "../guards/auth.guard";
 import {HomeComponent} from "../home/home.component";
-import {CardDetailComponent} from "../card/card-detail.component";
+import {CardDetailComponent} from "../card/details/card-detail.component";
 import {SessionComponent} from "../session/session.component";
 import {GameComponent} from "../game/game.component";
 import { ThemeListComponent } from '../theme/list/theme-list.component';
