@@ -21,34 +21,43 @@ export class SessionService {
 
     createSession(session: Session, themeId: string): Observable<Session> {
 
-        if(session.startDate == ""){
-            startDate = new Date();
+        // if(session.startDate == ""){
+        //     startDate = new Date();
+        // }
+        let currentUser = localStorage.getItem('currentUser');
+        console.log(session.invitees);
+
+        for(var i = 0; i < session.invitees.length; i++){
+            invitees[i] = session.invitees[i]["display"];
         }
+        const sessionInvitees = invitees;
 
 
+        //console.log(sessionInvitees);
 
-        return this.http
-            .post(this.sessionUrl+'theme/'+themeId+'/session',JSON.stringify(
-                {
-                    title: session.title,
-                    description: session.description,
-                    circleType: "opportunity",
-                    minCardsPerParticipant: session.minCardsPerParticipant,
-                    maxCardsPerParticipant: session.maxCardsPerParticipant,
-                    cardsCanBeReviewed: session.cardsCanBeReviewed,
-                    cardsCanBeAdded: session.cardsCanBeAdded,
-                    creator: session.creator
 
-                }), {headers: this.headers})
-            .map((res: Response) => res.json())
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-    }
-    
+         return this.http
+         .post(this.sessionUrl+'theme/'+themeId+'/session',JSON.stringify(
+         {
+         title: session.title,
+         description: session.description,
+         circleType: "opportunity",
+         minCardsPerParticipant: session.minCardsPerParticipant,
+         maxCardsPerParticipant: session.maxCardsPerParticipant,
+         cardsCanBeReviewed: session.cardsCanBeReviewed,
+         cardsCanBeAdded: session.cardsCanBeAdded,
+         creator: JSON.parse(currentUser)._id
+
+         }), {headers: this.headers})
+         .map((res: Response) => res.json())
+         .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+            }
+
+
     readSession(id: string): Observable<Session> {
-        const url = `${this.sessionUrl}/${id}`;
         return this.http
-            .get(url)
-            .map((res: Response) => res.json())
+            .get('http://api.teamjs.xyz/session/'+id)
+            .map((res: Response) => res.json().session)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
@@ -60,7 +69,7 @@ export class SessionService {
     }
 
     updateSession(session: Session): Observable<Session> {
-        const url = `${this.sessionUrl}/${session.id}`;
+        const url = `${this.sessionUrl}/${session._id}`;
         return this.http
             .put(url, JSON.stringify(session), {headers: this.headers})
             .map((res: Response) => res.json())
@@ -75,5 +84,6 @@ export class SessionService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    startSession(id: string){}
+    startSession(id: string) {
+    }
 }

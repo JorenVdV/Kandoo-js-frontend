@@ -15,6 +15,7 @@ export class SessionComponent implements OnInit {
     sessions: Session[];
     themeId: string;
     session = new Session();
+    id: string;
 
     constructor(private sessionService: SessionService,
                 private router: Router, private route: ActivatedRoute) {
@@ -32,9 +33,6 @@ export class SessionComponent implements OnInit {
     }
 
     saveSession() {
-        alert("ThemeId: " + this.themeId);
-        this.session.creator = "58aed9312ff14c2c14977cfe";
-
         this.sessionService.createSession(this.session, this.themeId).subscribe(
             done => {
                 //this.navigateToSessions();
@@ -46,11 +44,11 @@ export class SessionComponent implements OnInit {
     }
 
     deleteSession(session: Session) {
-        this.sessionService.deleteSession(session.id).subscribe(
+        this.sessionService.deleteSession(session._id).subscribe(
             sessionObject => {
                 let index = -1;
                 for (let i = 0; i < this.sessions.length; i++) {
-                    if (this.sessions[i].id === session.id) {
+                    if (this.sessions[i]._id === session._id) {
                         index = i;
                         break;
                     }
@@ -65,6 +63,7 @@ export class SessionComponent implements OnInit {
 
     ngOnInit() {
         this.themeId = this.route.snapshot.params['_id'];
+        this.id = this.route.snapshot.params['sessionId'];
         if (this.themeId) {
             this.sessionService.readSessions(this.themeId)
                 .subscribe(sessions => {
@@ -74,10 +73,21 @@ export class SessionComponent implements OnInit {
                         console.log(err);
                     });
         }
+        if (this.id) {
+            this.sessionService.readSession(this.id)
+                .subscribe(s => {
+                    console.log(s);
+                        this.session = s;
+                    },
+                    err => {
+                        console.log(err);
+                    });
+            console.log(this.session)
+        }
 
     }
 
     selectSession(session: Session) {
-        this.router.navigate(['/details', session.id]);
+        this.router.navigate(['/details', session._id]);
     }
 }

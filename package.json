@@ -3,13 +3,17 @@
   "version": "0.0.0",
   "license": "MIT",
   "angular-cli": {},
+  "engines": {
+    "node": "^7.6",
+    "npm": "^4.1.2"
+  },
   "scripts": {
     "ng": "ng",
     "test": "ng test --single-run",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "start": "node server.js",
-    "postinstall": "ng build --target=production --aot",
+    "postinstall": "ng build --target=production --aot=false",
     "update": "ng update --style scss --prefix xc",
     "run": "ng serve"
   },
@@ -31,11 +35,12 @@
     "zone.js": "^0.7.2"
   },
   "devDependencies": {
+    "@angular/cli": "^1.0.0-rc.1",
     "@angular/compiler-cli": "^2.3.1",
     "@types/jasmine": "2.5.38",
     "@types/node": "^6.0.42",
-    "angular-cli": "1.0.0-beta.28.3",
     "codelyzer": "~2.0.0-beta.1",
+    "grunt-browser-sync": "^2.2.0",
     "jasmine-core": "2.5.2",
     "jasmine-spec-reporter": "2.5.0",
     "karma": "1.2.0",
@@ -43,11 +48,11 @@
     "karma-cli": "^1.0.1",
     "karma-jasmine": "^1.0.2",
     "karma-remap-istanbul": "^0.2.1",
+    "postcss-load-config": "1.0.0",
+    "postcss-loader": "^1.0.0",
     "protractor": "~4.0.13",
     "ts-node": "1.2.1",
     "tslint": "^4.3.0",
-    "typescript": "~2.0.3",
-    "postcss-loader": "^1.0.0",
-    "postcss-load-config": "1.0.0"
+    "typescript": "~2.0.3"
   }
 }

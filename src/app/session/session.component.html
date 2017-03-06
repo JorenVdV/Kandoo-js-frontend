@@ -9,8 +9,8 @@
                                      class="form-control"></label><br>
         <label class="col-md-6 no-left-padding">Circle<br><select class="form-control" id="circleType"
                                                                   [(ngModel)]="session.circleType">
-            <option value="blue">Kansen</option>
-            <option value="red">Problemen</option>
+            <option value="opportunity">Opportunity</option>
+            <option value="threat">Threat</option>
         </select></label>
         <label class="col-md-6 no-right-padding">Circle<br><input type="number" id="numberOfCircles"
                                                                   [(ngModel)]="session.amountOfCircles"
@@ -19,6 +19,8 @@
                                              class="form-control"></label><br>
         <label>Startdate<br><input type="datetime-local" name="startDate" class="form-control"
                                    [(ngModel)]="session.startDate"></label><br>
+        <label>Invite<br><tag-input style="height: auto !important; padding: 0 !important;" [(ngModel)]="session.invitees" separatorKeys="[32]" placeholder="Add another email" [validators]="validators" [errorMessages]="errorMessages" [theme]="'minimal'" name="invitees" class="form-control" secondaryPlaceholder="Add a new email"></tag-input></label><br>
+
         <label class="col-md-6 no-left-padding">Min Cards per Person<br><input id="minCards" type="number"
                                                                                [(ngModel)]="session.minCardsPerParticipant"
                                                                                class="form-control"></label>

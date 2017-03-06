@@ -25,6 +25,7 @@ export const routes: Routes = [
     {path: 'card/:_id', component: CardDetailComponent},
     {path: 'sessions', component: SessionComponent},
     {path: 'theme/:_id/sessions', component: SessionComponent},
+    {path: 'session/:sessionId', component: SessionComponent},
     {path: 'game', component: GameComponent},
     // otherwise redirect to home
     {path: 'full', redirectTo: ''}

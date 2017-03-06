@@ -36,7 +36,7 @@ export class ThemeListComponent implements OnInit {
     deleteTheme(theme: Theme) {
         this.themeService.deleteTheme(theme._id).subscribe(
             done => {
-                this.themes.splice(this.themes.indexOf(t => t._id === theme._id), 1);
+                this.themes.splice(this.themes.findIndex(t=> t._id === theme._id) , 1);
             },
             err => {
                 console.log(err);

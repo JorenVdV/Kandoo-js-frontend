@@ -22,7 +22,7 @@ export class Session {
     amountOfCircles: number;
     turnDuration: number;
     _id: string;
-
+    invitees: String [];
 
 }
 

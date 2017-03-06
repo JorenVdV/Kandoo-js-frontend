@@ -59,7 +59,6 @@ import {NavbarComponent} from "./navbar/navbar.component";
         AuthenticationService,
         UserService,
         CardService,
-        // providers used to create fake backend
         MockBackend,
         BaseRequestOptions,
         SessionService

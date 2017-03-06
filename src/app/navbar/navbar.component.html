@@ -37,11 +37,14 @@
                         <li>
                             <login *ngIf="isLoggedOut"></login>
                         </li>
-                        <li *ngIf="isLoggedIn"><a class="btn btn-default" href="#" (click)="logout()">Logout</a></li>
+                        <li *ngIf="isLoggedIn" style="display:inline"><a class="btn btn-default" href="#">Account</a>
+                        </li>
+                        <li *ngIf="isLoggedIn" style="display:inline"><a class="btn btn-default" href="#"
+                                                                         (click)="logout()">Logout</a></li>
                     </div>
                 </div>
-
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+    </div><!-- /.navbar-collapse -->
+    <!-- /.container-fluid -->
 </nav>
