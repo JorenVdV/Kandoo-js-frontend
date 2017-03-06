@@ -9,7 +9,7 @@ import {Theme} from "../models/theme";
 @Injectable()
 export class ThemeService {
     private headers = new Headers({'Content-Type': 'application/json'});
-    private themeUrl = 'http://api.teamjs.xyz/';
+    private themeUrl = 'https://api.teamjs.xyz/';
 
 
     constructor(private http: Http) {

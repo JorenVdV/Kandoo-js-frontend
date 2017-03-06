@@ -4,7 +4,7 @@ import {User} from "../models/user";
 
 @Injectable()
 export class UserService {
-    private usersUrl = 'http://api.teamjs.xyz/users/';
+    private usersUrl = 'https://api.teamjs.xyz/users/';
 
     constructor(private http: Http) { }
 
@@ -17,7 +17,7 @@ export class UserService {
     // }
 
     create(user: User) {
-        return this.http.post('http://api.teamjs.xyz/register', user, this.jwt()).map((response: Response) => response.json());
+        return this.http.post('https://api.teamjs.xyz/register', user, this.jwt()).map((response: Response) => response.json());
     }
 
     // update(user: User) {

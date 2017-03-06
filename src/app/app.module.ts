@@ -27,6 +27,7 @@ import {LandingComponent} from "./landing/landing.component";
 import {Ng2Bs3ModalModule} from 'ng2-bs3-modal/ng2-bs3-modal';
 import {TagInputModule} from 'ng2-tag-input';
 import {NavbarComponent} from "./navbar/navbar.component";
+import {ChangePwdComponent} from "./account/change-password.component";
 
 @NgModule({
     declarations: [
@@ -42,7 +43,8 @@ import {NavbarComponent} from "./navbar/navbar.component";
         GameComponent,
         ThemeListComponent,
         LandingComponent,
-        NavbarComponent
+        NavbarComponent,
+        //ChangePwdComponent
     ],
     imports: [
         BrowserModule,

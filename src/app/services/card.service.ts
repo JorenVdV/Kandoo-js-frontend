@@ -10,7 +10,7 @@ import {Theme} from "../models/theme";
 @Injectable()
 export class CardService {
   private headers = new Headers({'Content-Type': 'application/json'});
-  private cardUrl = 'http://api.teamjs.xyz/';
+  private cardUrl = 'https://api.teamjs.xyz/';
 
     constructor(private http: Http) {
     }

@@ -56,7 +56,7 @@ export class SessionService {
 
     readSession(id: string): Observable<Session> {
         return this.http
-            .get('http://api.teamjs.xyz/session/'+id)
+            .get('https://api.teamjs.xyz/session/'+id)
             .map((res: Response) => res.json().session)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
