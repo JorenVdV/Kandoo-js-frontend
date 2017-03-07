@@ -91,7 +91,6 @@ export class GameComponent {
 
     onClick(card: Card) {
         this.selectedCard = card;
-        this.increasePriority(card);
     }
 
     increasePriority(card: Card) {
