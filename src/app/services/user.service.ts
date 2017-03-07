@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions, Response} from '@angular/http';
 import {User} from "../models/user";
 import {Observable} from "rxjs";
+import current = SyntaxKind.current;
 
 @Injectable()
 export class UserService {
@@ -30,12 +31,12 @@ export class UserService {
         return this.http.delete(this.usersUrl + id, this.jwt()).map((response: Response) => response.json());
     }
 
-    changepwd(id: string, password: string): Observable<User> {
+    changepwd(id: string, currentPwd: string, newPwd: string): Observable<User> {
         const url = 'https://api.teamjs.xyz/user/' + id + '/update';
         console.log(url);
         console.log(password);
         return this.http
-            .put(url, JSON.stringify({password: password}), {headers: this.headers})
+            .put(url, JSON.stringify({password: newPwd, originalPassword: currentPwd}), {headers: this.headers})
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
