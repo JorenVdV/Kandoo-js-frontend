@@ -15,22 +15,22 @@
     <div class="col-md-6">
         <div class="circle-container">
             <div class="circle" id="circle-5">
-                <div *ngFor="let card of circleFive; let i = index;" [class]="'circle-item item-' + i"
+                <div *ngFor="let card of circleFive; let i = index;" [class]="'circle-item ' + card.circlePosition"
                      (click)="onClick(card)">
                     <span>{{card.listNumber}}</span>
                 </div>
                 <div class="circle" id="circle-4">
-                    <div *ngFor="let card of circleFour; let i = index;" [class]="'circle-item item-' + i"
+                    <div *ngFor="let card of circleFour; let i = index;" [class]="'circle-item ' + card.circlePosition"
                          (click)="onClick(card)">
                         <span>{{card.listNumber}}</span>
                     </div>
                     <div class="circle" id="circle-3">
-                        <div *ngFor="let card of circleThree; let i = index;" [class]="'circle-item item-' + i"
+                        <div *ngFor="let card of circleThree; let i = index;" [class]="'circle-item ' + card.circlePosition"
                              (click)="onClick(card)">
                             <span>{{card.listNumber}}</span>
                         </div>
                         <div class="circle" id="circle-2">
-                            <div *ngFor="let card of circleTwo; let i = index;" [class]="'circle-item item-' + i"
+                            <div *ngFor="let card of circleTwo; let i = index;" [class]="'circle-item ' + card.circlePosition"
                                  (click)="onClick(card)">
                                 <span>{{card.listNumber}}</span>
                             </div>
