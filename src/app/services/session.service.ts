@@ -33,6 +33,8 @@ export class SessionService {
 
          */
         //console.log(sessionInvitees);
+        let currentUser = localStorage.getItem('currentUser');
+
         return this.http
             .post(this.sessionUrl + 'theme/' + themeId + '/session', JSON.stringify(
                 {
@@ -43,6 +45,7 @@ export class SessionService {
                     maxCardsPerParticipant: session.maxCardsPerParticipant,
                     cardsCanBeReviewed: session.cardsCanBeReviewed,
                     cardsCanBeAdded: session.cardsCanBeAdded,
+                    creator: JSON.parse(currentUser)._id
 
                 }), {headers: this.headers})
             .map((res: Response) => res.json())
