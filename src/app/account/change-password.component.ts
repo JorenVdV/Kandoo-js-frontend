@@ -28,10 +28,10 @@ export class ChangePwdComponent {
 
 
 
-    changepwd(password: string) {
+    changepwd(currentPwd: string, newPwd: string) {
         this.loading = true;
         let currentUser = localStorage.getItem('currentUser');
-        this.userService.changepwd(JSON.parse(currentUser)._id, password)
+        this.userService.changepwd(JSON.parse(currentUser)._id, currentPwd, newPwd)
             .subscribe(
                 data => {
                     this.alertService.success('Change of password successful', true);

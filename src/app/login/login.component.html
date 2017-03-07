@@ -1,4 +1,5 @@
-﻿<button type="button" class="btn btn-default" (click)="modal.open()">Login</button>
+﻿
+<button type="button" class="btn btn-default" (click)="modal.open()">Login</button>
 
 <modal #modal>
     <modal-header [show-close]="true">
@@ -44,6 +45,7 @@
         <h4 class="modal-title">Register</h4>
     </modal-header>
     <modal-body>
+        <alert></alert>
         <form name="registerForm" (ngSubmit)="registerForm.form.valid && register()" #registerForm="ngForm" novalidate>
             <div class="form-group" [ngClass]="{ 'has-error': registerForm.submitted && !emailAddress.valid }">
                 <label for="firstname">First Name</label>
@@ -100,7 +102,7 @@
             </div>
             <br>
             <div class="form-group">
-                <a (click)="register(model.password, repeatPassword.value)" (click)="registerModal.close()"
+                <a (click)="register(model.password, repeatPassword.value)"
                    class="btn btn-primary btn-block">Register</a>
 
                 <img *ngIf="loading"

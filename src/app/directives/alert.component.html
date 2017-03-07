@@ -1,4 +1,5 @@
-﻿<div *ngIf="message"
-     [ngClass]="{ 'alert': message, 'alert-success': message.type === 'success', 'alert-danger': message.type === 'error' }">
+﻿<div *ngIf="message" class="alert-dismissable"
+     [ngClass]="{ 'alert': message, 'alert-success': message.type === 'success', 'alert-danger': message.type === 'error' } ">
   {{message.text}}
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 </div>

@@ -55,7 +55,39 @@ export class LoginComponent implements OnInit {
     }
 
     register(password: string, repeatPwd: string) {
-        if (password == repeatPwd) {
+        var numberOfErrors = 0;
+
+        if(this.model.firstname == "" || this.model.firstname == null){
+            this.alertService.error("Firstname can't be empty!");
+            numberOfErrors++;
+        }
+
+        if(this.model.lastname == "" || this.model.lastname == null){
+            this.alertService.error("Lastname can't be empty!");
+            numberOfErrors++;
+        }
+
+        if(this.model.emailAddress == "" || this.model.emailAddress == null){
+            this.alertService.error("Email address can't be empty!");
+            numberOfErrors++;
+        }
+
+        if(password == "" || password == null){
+            this.alertService.error("Password can't be empty!");
+            numberOfErrors++;
+        }
+
+        if(repeatPwd == "" || repeatPwd == null){
+            this.alertService.error("Repeated password can't be empty!");
+            numberOfErrors++;
+        }
+
+       if (password != repeatPwd) {
+            this.alertService.error("Passwords don't match!");
+            numberOfErrors++;
+        }
+
+        if(numberOfErrors == 0) {
             this.loading = true;
             this.userService.create(this.model)
                 .subscribe(
@@ -68,8 +100,6 @@ export class LoginComponent implements OnInit {
                         this.alertService.error(error);
                         this.loading = false;
                     });
-        } else {
-            alert("passwords didn't match!")
         }
 
     }
