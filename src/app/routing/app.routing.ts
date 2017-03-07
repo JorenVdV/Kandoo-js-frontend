@@ -27,10 +27,10 @@ export const routes: Routes = [
     {path: 'sessions', component: SessionComponent},
     {path: 'theme/:_id/sessions', component: SessionComponent},
     {path: 'session/:sessionId', component: SessionComponent},
-    //{path: 'changepwd', component: ChangePwdComponent},
+    {path: 'changepwd', component: ChangePwdComponent},
     {path: 'game', component: GameComponent},
     // otherwise redirect to home
-    {path: 'full', redirectTo: ''}
+    {path: 'full', redirectTo: 'themes'}
 ];
 
 @NgModule({

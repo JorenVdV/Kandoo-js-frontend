@@ -54,18 +54,24 @@ export class LoginComponent implements OnInit {
                 });
     }
 
-    register() {
-        this.loading = true;
-        this.userService.create(this.model)
-            .subscribe(
-                data => {
-                    this.alertService.success('Registration successful', true);
-                    this.router.navigate(['/login']);
-                },
-                error => {
-                    this.alertService.error(error);
-                    this.loading = false;
-                });
+    register(password: string, repeatPwd: string) {
+        if (password == repeatPwd) {
+            this.loading = true;
+            this.userService.create(this.model)
+                .subscribe(
+                    data => {
+                        this.alertService.success('Registration successful', true);
+                        this.router.navigate(['/login']);
+                        alert("Registration succesfull!")
+                    },
+                    error => {
+                        this.alertService.error(error);
+                        this.loading = false;
+                    });
+        } else {
+            alert("passwords didn't match!")
+        }
+
     }
 
 

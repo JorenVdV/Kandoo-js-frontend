@@ -44,7 +44,7 @@ import {ChangePwdComponent} from "./account/change-password.component";
         ThemeListComponent,
         LandingComponent,
         NavbarComponent,
-        //ChangePwdComponent
+        ChangePwdComponent
     ],
     imports: [
         BrowserModule,

@@ -90,9 +90,17 @@
                 <div *ngIf="registerForm.submitted && !password.valid" class="help-block">Password is required
                 </div>
             </div>
+
+            <div class="form-group" [ngClass]="{ 'has-error': registerForm.submitted && !password.valid }">
+                <label for="password">Repeat password</label>
+                <input type="password" class="form-control" name="repeatPassword" #repeatPassword
+                       required/>
+                <div *ngIf="registerForm.submitted && !password.valid" class="help-block">Password is required
+                </div>
+            </div>
             <br>
             <div class="form-group">
-                <a (click)="register()" (click)="registerModal.close()"
+                <a (click)="register(model.password, repeatPassword.value)" (click)="registerModal.close()"
                    class="btn btn-primary btn-block">Register</a>
 
                 <img *ngIf="loading"
@@ -108,7 +116,6 @@
             </div>
 
         </form>
-
     </modal-body>
 </modal>
 
