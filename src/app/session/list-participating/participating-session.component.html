@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="row">
+            <ul>
+                <li *ngFor="let session of sessions" (click)="selectSession(session)">
+                    <span>{{session.title}}</span>
+                    <button (click)="deleteSession(session)" class="btn btn-danger">DELETE</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

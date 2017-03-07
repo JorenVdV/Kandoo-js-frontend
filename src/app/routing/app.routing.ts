@@ -12,6 +12,7 @@ import {GameComponent} from "../game/game.component";
 import { ThemeListComponent } from '../theme/list/theme-list.component';
 import {LandingComponent} from "../landing/landing.component";
 import {ChangePwdComponent} from "../account/change-password.component";
+import {ParticipatingSessionComponent} from "../session/list-participating/participating-session.component";
 
 export const routes: Routes = [
     {path: '', component: LandingComponent},
@@ -29,6 +30,9 @@ export const routes: Routes = [
     {path: 'session/:sessionId', component: SessionComponent},
     {path: 'changepwd', component: ChangePwdComponent},
     {path: 'game', component: GameComponent},
+    {path: 'participating', component: ParticipatingSessionComponent},
+
+
     // otherwise redirect to home
     {path: 'full', redirectTo: 'themes'}
 ];

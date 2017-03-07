@@ -91,15 +91,41 @@ export class LoginComponent implements OnInit {
         if(numberOfErrors == 0) {
             this.loading = true;
             this.userService.create(this.model)
+                .map(response => response)
                 .subscribe(
-                    data => {
+                    (response: Response) => {
                         this.alertService.success('Registration successful', true);
-                        this.router.navigate(['/login']);
-                        alert("Registration succesfull!")
+                        let delay = (function () {
+                            let timer = 0;
+                            return function (callback, ms) {
+                                clearTimeout(timer);
+                                timer = setTimeout(callback, ms);
+                            };
+                        })();
+                        delay(function () {
+                            router.navigate(['/themes']);
+                        }, 600); // end delay
                     },
                     error => {
-                        this.alertService.error(error);
-                        this.loading = false;
+                        console.log(error);
+                        if (error instanceof SyntaxError) {
+                            let router = this.router;
+                            this.alertService.success('Registration successful', true);
+                            let delay = (function () {
+                                let timer = 0;
+                                return function (callback, ms) {
+                                    clearTimeout(timer);
+                                    timer = setTimeout(callback, ms);
+                                };
+                            })();
+                            delay(function () {
+                                router.navigate(['/themes']);
+                            }, 600); // end delay
+                        } else {
+                            this.alertService.error(error);
+                            this.loading = false;
+                        }
+
                     });
         }
 
