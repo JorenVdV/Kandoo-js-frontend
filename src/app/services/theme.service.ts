@@ -59,7 +59,7 @@ export class ThemeService {
     readThemes(): Observable<Theme[]> {
     let currentUser = localStorage.getItem('currentUser');
         return this.http
-            .get(this.themeUrl+'themes')
+            .get(this.themeUrl+'user/'+ JSON.parse(currentUser)._id + '/themes')
             .map((res: Response) => res.json().themes)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
