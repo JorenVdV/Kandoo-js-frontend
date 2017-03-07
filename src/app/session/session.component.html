@@ -1,60 +1,72 @@
 <script src="../../../node_modules/angular-bootstrap-durationpicker/dist/main.js"></script>
 <navbar></navbar>
-<div class="col-md-6 col-md-offset-3">
-    <h1>Create A Session!</h1>
-    <div>
-        <label>Title<br><input id="title" type="text" [(ngModel)]="session.title" class="form-control"></label><br>
-
-        <label>Description<br><input id="description" type="text" [(ngModel)]="session.description"
-                                     class="form-control"></label><br>
-        <label class="col-md-6 no-left-padding">Circle<br><select class="form-control" id="circleType"
-                                                                  [(ngModel)]="session.circleType">
-            <option value="opportunity">Opportunity</option>
-            <option value="threat">Threat</option>
-        </select></label>
-        <label class="col-md-6 no-right-padding">Circle<br><input type="number" id="numberOfCircles"
-                                                                  [(ngModel)]="session.amountOfCircles"
-                                                                  class="form-control"></label><br>
-        <label>Duration in minutes<br><input id="duration" type="number" [(ngModel)]="session.turnDuration"
-                                             class="form-control"></label><br>
-        <label>Startdate<br><input type="datetime-local" name="startDate" class="form-control"
-                                   [(ngModel)]="session.startDate"></label><br>
-        <label>Invite<br><tag-input style="height: auto !important; padding: 0 !important;" [(ngModel)]="session.invitees" separatorKeys="[32]" placeholder="Add another email" [validators]="validators" [errorMessages]="errorMessages" [theme]="'minimal'" name="invitees" class="form-control" secondaryPlaceholder="Add a new email"></tag-input></label><br>
-
-        <label class="col-md-6 no-left-padding">Min Cards per Person<br><input id="minCards" type="number"
-                                                                               [(ngModel)]="session.minCardsPerParticipant"
-                                                                               class="form-control"></label>
-        <label class="col-md-6 no-right-padding">Max Cards per Person<br><input id="maxCards" type="number"
-                                                                                [(ngModel)]="session.maxCardsPerParticipant"
-                                                                                class="form-control"></label>
-        <label class="col-md-6 no-left-padding"><input id="cardsCanBeReviewed" type="checkbox"
-                                                       [(ngModel)]="session.cardsCanBeReviewed">Cards Can Be
-            Reviewed</label><br>
-        <label class="col-md-6 no-right-padding"><input id="cardsCanBeAdded" type="checkbox"
-                                                        [(ngModel)]="session.cardsCanBeAdded">Cards Can Be
-            Added</label><br>
-        <div class="row">
-        </div>
-        <br>
-        <button id="save" (click)="saveSession()" class="btn btn-success">SAVE</button>
-    </div>
-    <div class="row">
-        <br>
-        <hr>
-        <br>
-    </div>
-
-</div>
-
 <div class="container">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-8 col-md-offset-2">
+        <h1>Create A Session!</h1>
+        <div>
+            <label>Title<br><input id="title" type="text" [(ngModel)]="session.title" class="form-control"></label><br>
+
+            <label>Description<br><input id="description" type="text" [(ngModel)]="session.description"
+                                         class="form-control"></label><br>
+            <label class="col-md-6 no-left-padding">Circle<br><select class="form-control" id="circleType"
+                                                                      [(ngModel)]="session.circleType">
+                <option value="opportunity">Opportunity</option>
+                <option value="threat">Threat</option>
+            </select></label>
+            <label class="col-md-6 no-right-padding">Circle<br><input type="number" id="numberOfCircles"
+                                                                      [(ngModel)]="session.amountOfCircles"
+                                                                      class="form-control"></label><br>
+            <label>Duration in minutes<br><input id="duration" type="number" [(ngModel)]="session.turnDuration"
+                                                 class="form-control"></label><br>
+            <label>Startdate<br><input type="datetime-local" name="startDate" class="form-control"
+                                       [(ngModel)]="session.startDate"></label><br>
+
+            <div *ngIf="sessionLoaded">
+
+                <label>Invite<br>
+                    <tag-input style="height: auto !important; padding: 0 !important;" [(ngModel)]="session.invitees"
+                               separatorKeys="[32]" placeholder="Add another email" [validators]="validators"
+                               [errorMessages]="errorMessages" [theme]="'minimal'" name="invitees" class="form-control"
+                               secondaryPlaceholder="Add a new email"></tag-input>
+                </label><br>
+
+            </div>
+
+            <label class="col-md-6 no-left-padding">Min Cards per Person<br><input id="minCards" type="number"
+                                                                                   [(ngModel)]="session.minCardsPerParticipant"
+                                                                                   class="form-control"></label>
+            <label class="col-md-6 no-right-padding">Max Cards per Person<br><input id="maxCards" type="number"
+                                                                                    [(ngModel)]="session.maxCardsPerParticipant"
+                                                                                    class="form-control"></label>
+            <label class="col-md-6 no-left-padding"><input id="cardsCanBeReviewed" type="checkbox"
+                                                           [(ngModel)]="session.cardsCanBeReviewed">Cards Can Be
+                Reviewed</label><br>
+            <label class="col-md-6 no-right-padding"><input id="cardsCanBeAdded" type="checkbox"
+                                                            [(ngModel)]="session.cardsCanBeAdded">Cards Can Be
+                Added</label><br>
+            <div class="row">
+            </div>
+            <br>
+            <button id="save" (click)="saveSession()" class="btn btn-success">SAVE</button>
+        </div>
         <div class="row">
-            <ul>
-                <li *ngFor="let session of sessions" (click)="selectSession(session)">
-                    <span>{{session.title}}</span>
-                    <button (click)="deleteSession(session)" class="btn btn-danger">DELETE</button>
-                </li>
-            </ul>
+            <br>
+            <hr>
+            <br>
+        </div>
+
+    </div>
+
+    <div class="container">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="row">
+                <ul>
+                    <li *ngFor="let session of sessions" (click)="selectSession(session)">
+                        <span>{{session.title}}</span>
+                        <button (click)="deleteSession(session)" class="btn btn-danger">DELETE</button>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

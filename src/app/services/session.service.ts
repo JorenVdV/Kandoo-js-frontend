@@ -13,7 +13,7 @@ import {Theme} from "../models/theme";
 @Injectable()
 export class SessionService {
     private headers = new Headers({'Content-Type': 'application/json'});
-    private sessionUrl = 'http://api.teamjs.xyz/';
+    private sessionUrl = 'https://api.teamjs.xyz/';
     private options = new RequestOptions({headers: this.headers});
 
     constructor(private http: Http) {
@@ -56,7 +56,7 @@ export class SessionService {
 
     readSession(id: string): Observable<Session> {
         return this.http
-            .get('http://api.teamjs.xyz/session/'+id)
+            .get('https://api.teamjs.xyz/session/'+id)
             .map((res: Response) => res.json().session)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }

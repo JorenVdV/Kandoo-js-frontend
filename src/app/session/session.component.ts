@@ -16,6 +16,7 @@ export class SessionComponent implements OnInit {
     themeId: string;
     session = new Session();
     id: string;
+    sessionLoaded: boolean;
 
     constructor(private sessionService: SessionService,
                 private router: Router, private route: ActivatedRoute) {
@@ -74,6 +75,7 @@ export class SessionComponent implements OnInit {
                     });
         }
         if (this.id) {
+            this.sessionLoaded = true;
             this.sessionService.readSession(this.id)
                 .subscribe(s => {
                     console.log(s);
@@ -83,6 +85,8 @@ export class SessionComponent implements OnInit {
                         console.log(err);
                     });
             console.log(this.session)
+        } else {
+            this.sessionLoaded = false;
         }
 
     }
