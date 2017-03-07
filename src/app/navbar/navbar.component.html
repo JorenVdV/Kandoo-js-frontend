@@ -9,7 +9,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Kandoe</a>
+            <a class="navbar-brand" href="/themes">Kandoe</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -37,7 +37,7 @@
                         <li>
                             <login *ngIf="isLoggedOut"></login>
                         </li>
-                        <li *ngIf="isLoggedIn" style="display:inline"><a class="btn btn-default" href="#">Account</a>
+                        <li *ngIf="isLoggedIn" style="display:inline"><change-pwd></change-pwd>
                         </li>
                         <li *ngIf="isLoggedIn" style="display:inline"><a class="btn btn-default" href="#"
                                                                          (click)="logout()">Logout</a></li>

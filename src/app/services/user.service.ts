@@ -33,8 +33,7 @@ export class UserService {
 
     changepwd(id: string, currentPwd: string, newPwd: string): Observable<User> {
         const url = 'https://api.teamjs.xyz/user/' + id + '/update';
-        console.log(url);
-        console.log(password);
+
         return this.http
             .put(url, JSON.stringify({password: newPwd, originalPassword: currentPwd}), {headers: this.headers})
             .map((res: Response) => res.json())

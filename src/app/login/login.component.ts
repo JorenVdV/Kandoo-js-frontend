@@ -42,15 +42,16 @@ export class LoginComponent implements OnInit {
     login() {
         this.loading = true;
         this.authenticationService.login(this.model.emailAddress, this.model.password)
-        // .map(response => response)
+            .map(response => response)
             .subscribe(
                 (response: Response) => {
                     console.log("Success Response" + response.json());
                     this.loading = false;
                     this.redirect();
                 },
-                err => {
-                    console.log('Error: ' + err);
+                error => {
+                    this.alertService.error(JSON.parse(error._body).error);
+                    this.loading = false;
                 });
     }
 

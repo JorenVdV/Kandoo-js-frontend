@@ -6,6 +6,7 @@
         <h4 class="modal-title">Login</h4>
     </modal-header>
     <modal-body>
+        <alert></alert>
         <form name="login" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
             <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !emailAddress.valid }">
                 <label for="emailAddress">Email</label>

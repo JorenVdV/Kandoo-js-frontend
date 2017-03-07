@@ -1,7 +1,12 @@
 <navbar></navbar>
 <div class="card-list">
     <div class="card-list-item" *ngFor="let card of cards" (click)="onClick(card, 0)">
-        <img [src]="card.image" [alt]="card.description">
+        <div class="panel panel-default">
+            <div style="padding: 7px" class="panel-body">
+                {{card.description}}
+            </div>
+        </div>
+        <!--<img [src]="card.image" [alt]="card.description">-->
     </div>
 </div>
 <div *ngIf="selectedCard">
@@ -13,26 +18,51 @@
     <div class="circle" id="circle-5">
         <div *ngFor="let card of circleFive; let i = index;" [class]="'circle-item item-' + i"
              (click)="onClick(card)">
-            <img [src]="card.image" [alt]="card.description">
+            <div class="panel panel-default">
+                <div style="padding: 7px" class="panel-body">
+                    {{card.description}}
+                </div>
+            </div>
+            <!--<img [src]="card.image" [alt]="card.description">-->
         </div>
         <div class="circle" id="circle-4">
             <div *ngFor="let card of circleFour; let i = index;" [class]="'circle-item item-' + i"
                  (click)="onClick(card)">
-                <img [src]="card.image" [alt]="card.description">
+                <div class="panel panel-default">
+                    <div style="padding: 7px" class="panel-body">
+                        {{card.description}}
+                    </div>
+                </div>
+                <!--<img [src]="card.image" [alt]="card.description">-->
             </div>
             <div class="circle" id="circle-3">
                 <div *ngFor="let card of circleThree; let i = index;" [class]="'circle-item item-' + i"
                      (click)="onClick(card)">
-                    <img [src]="card.image" [alt]="card.description">
+                    <div class="panel panel-default">
+                        <div style="padding: 7px" class="panel-body">
+                            {{card.description}}
+                        </div>
+                    </div>
+                    <!--<img [src]="card.image" [alt]="card.description">-->
                 </div>
                 <div class="circle" id="circle-2">
                     <div *ngFor="let card of circleTwo; let i = index;" [class]="'circle-item item-' + i"
                          (click)="onClick(card)">
-                        <img [src]="card.image" [alt]="card.description">
+                        <div class="panel panel-default">
+                            <div style="padding: 7px" class="panel-body">
+                                {{card.description}}
+                            </div>
+                        </div>
+                        <!--<img [src]="card.image" [alt]="card.description">-->
                     </div>
                     <div class="circle" id="circle-1">
                         <div *ngFor="let card of circleOne">
-                            <img [src]="card.image" [alt]="card.description">
+                            <div class="panel panel-default">
+                                <div style="padding: 7px" class="panel-body">
+                                    {{card.description}}
+                                </div>
+                            </div>
+                            <!--<img [src]="card.image" [alt]="card.description">-->
                         </div>
                     </div>
                 </div>
