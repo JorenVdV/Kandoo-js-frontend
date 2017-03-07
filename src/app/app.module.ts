@@ -28,6 +28,7 @@ import {Ng2Bs3ModalModule} from 'ng2-bs3-modal/ng2-bs3-modal';
 import {TagInputModule} from 'ng2-tag-input';
 import {NavbarComponent} from "./navbar/navbar.component";
 import {ChangePwdComponent} from "./account/change-password.component";
+import {ParticipatingSessionComponent} from "./session/list-participating/participating-session.component";
 
 @NgModule({
     declarations: [
@@ -44,7 +45,8 @@ import {ChangePwdComponent} from "./account/change-password.component";
         ThemeListComponent,
         LandingComponent,
         NavbarComponent,
-        ChangePwdComponent
+        ChangePwdComponent,
+        ParticipatingSessionComponent
     ],
     imports: [
         BrowserModule,
