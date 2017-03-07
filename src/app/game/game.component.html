@@ -1,38 +1,44 @@
 <navbar></navbar>
-<div class="card-list">
-    <div class="card-list-item" *ngFor="let card of cards" (click)="onClick(card, 0)">
-        {{card.description}}
-    </div>
-</div>
-<div *ngIf="selectedCard">
-    <div>Description: {{selectedCard.description}}</div>
-    <div>Priority: {{selectedCard.priority}}</div>
-    <button *ngIf="selectedCard.priority != 1" (click)="increasePriority(selectedCard)">INCREASE PRIORITY</button>
-</div>
-<div class="circle-container">
-    <div class="circle" id="circle-5">
-        <div *ngFor="let card of circleFive; let i = index;" [class]="'circle-item item-' + i"
-             (click)="onClick(card)">
-            {{card.description}}
-        </div>
-        <div class="circle" id="circle-4">
-            <div *ngFor="let card of circleFour; let i = index;" [class]="'circle-item item-' + i"
-                 (click)="onClick(card)">
-                {{card.description}}
+<div class="container">
+    <div class="col-md-2">
+        <div class="card-list">
+            <div class="card-list-item" *ngFor="let card of cards" (click)="onClick(card, 0)">
+                <span>{{card.listNumber}}</span>
             </div>
-            <div class="circle" id="circle-3">
-                <div *ngFor="let card of circleThree; let i = index;" [class]="'circle-item item-' + i"
+        </div>
+        <div class="card-description" *ngIf="selectedCard">
+            <div>Description: {{selectedCard.description}}</div>
+            <button *ngIf="selectedCard.priority != 1" (click)="increasePriority(selectedCard)">INCREASE PRIORITY
+            </button>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="circle-container">
+            <div class="circle" id="circle-5">
+                <div *ngFor="let card of circleFive; let i = index;" [class]="'circle-item item-' + i"
                      (click)="onClick(card)">
-                    {{card.description}}
+                    <span>{{card.listNumber}}</span>
                 </div>
-                <div class="circle" id="circle-2">
-                    <div *ngFor="let card of circleTwo; let i = index;" [class]="'circle-item item-' + i"
+                <div class="circle" id="circle-4">
+                    <div *ngFor="let card of circleFour; let i = index;" [class]="'circle-item item-' + i"
                          (click)="onClick(card)">
-                        {{card.description}}
+                        <span>{{card.listNumber}}</span>
                     </div>
-                    <div class="circle" id="circle-1">
-                        <div *ngFor="let card of circleOne">
-                            {{card.description}}
+                    <div class="circle" id="circle-3">
+                        <div *ngFor="let card of circleThree; let i = index;" [class]="'circle-item item-' + i"
+                             (click)="onClick(card)">
+                            <span>{{card.listNumber}}</span>
+                        </div>
+                        <div class="circle" id="circle-2">
+                            <div *ngFor="let card of circleTwo; let i = index;" [class]="'circle-item item-' + i"
+                                 (click)="onClick(card)">
+                                <span>{{card.listNumber}}</span>
+                            </div>
+                            <div class="circle" id="circle-1">
+                                <div *ngFor="let card of circleOne" class="circle-item">
+                                    <span>{{card.listNumber}}</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
