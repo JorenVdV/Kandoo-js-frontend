@@ -48,6 +48,10 @@ export class ThemeListComponent implements OnInit {
     }
 
     getSessions(theme: Theme) {
-        this.router.navigate(['/theme/', theme._id, 'sessions']);
+        this.router.navigate(['/theme/', theme._id, 'themesessions']);
+    }
+
+    createSession(theme: Theme){
+        this.router.navigate(['/theme/', theme._id, 'session']);
     }
 }

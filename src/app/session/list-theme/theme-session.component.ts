@@ -5,11 +5,11 @@ import {Session} from "../../models/session";
 import {SessionService} from "../../services/session.service";
 
 @Component({
-    selector: 'participating-session',
-    templateUrl: './participating-session.component.html',
+    selector: 'theme-session',
+    templateUrl: 'theme-session.component.html',
 })
 
-export class ParticipatingSessionComponent implements OnInit {
+export class ThemeSessionComponent implements OnInit {
     sessions: Session[];
     themeId: string;
     session = new Session();
@@ -17,16 +17,6 @@ export class ParticipatingSessionComponent implements OnInit {
     constructor(private sessionService: SessionService,
                 private router: Router, private route: ActivatedRoute) {
 
-    }
-
-    getSessions(): void {
-        this.sessionService.readParticipantSessions().subscribe(
-            sessions => {
-                this.sessions = sessions
-            },
-            err => {
-                console.log(err);
-            });
     }
 
     deleteSession(session: Session) {
@@ -48,8 +38,8 @@ export class ParticipatingSessionComponent implements OnInit {
     }
 
     ngOnInit() {
-        let currentUser = localStorage.getItem('currentUser');
-        this.sessionService.readParticipantSessions()
+        this.themeId = this.route.snapshot.params['_id'];
+        this.sessionService.readThemeSessions(this.themeId)
             .subscribe(sessions => {
                     this.sessions = sessions;
                 },
@@ -61,15 +51,5 @@ export class ParticipatingSessionComponent implements OnInit {
 
     selectSession(session: Session) {
         this.router.navigate(['/session', session._id]);
-    }
-
-    inviteToSession(session: Session){
-        this.sessionService.inviteToSession(session).subscribe(
-            done => {
-                alert("Success!")
-            },
-            err => {
-                console.log(err);
-            });
     }
 }

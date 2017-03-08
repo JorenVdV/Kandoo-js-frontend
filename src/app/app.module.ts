@@ -29,6 +29,7 @@ import {TagInputModule} from 'ng2-tag-input';
 import {NavbarComponent} from "./navbar/navbar.component";
 import {ChangePwdComponent} from "./account/change-password.component";
 import {ParticipatingSessionComponent} from "./session/list-participating/participating-session.component";
+import {ThemeSessionComponent} from "./session/list-theme/theme-session.component";
 
 @NgModule({
     declarations: [
@@ -46,7 +47,8 @@ import {ParticipatingSessionComponent} from "./session/list-participating/partic
         LandingComponent,
         NavbarComponent,
         ChangePwdComponent,
-        ParticipatingSessionComponent
+        ParticipatingSessionComponent,
+        ThemeSessionComponent
     ],
     imports: [
         BrowserModule,

@@ -75,4 +75,8 @@ export class ThemeDetailComponent implements OnInit {
     navigateToThemes() {
         this.router.navigate(['themes']);
     }
+
+    selectSession(session: Session) {
+        this.router.navigate(['/session', session._id]);
+    }
 }

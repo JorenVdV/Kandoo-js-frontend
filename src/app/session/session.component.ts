@@ -34,13 +34,27 @@ export class SessionComponent implements OnInit {
     }
 
     saveSession() {
-        this.sessionService.createSession(this.session, this.themeId).subscribe(
-            done => {
-                //this.navigateToSessions();
-            },
-            err => {
-                console.log(err);
-            });
+        if (this.session._id) {
+            this.sessionService.updateSession(this.session).subscribe(
+                done => {
+                    this.navigateToThemes();
+                },
+                err => {
+                    console.log(err);
+                });
+        } else {
+            this.sessionService.createSession(this.session, this.themeId).subscribe(
+                done => {
+                    alert("Done!")
+                },
+                err => {
+                    console.log(err);
+                });
+        }
+
+
+
+
 
     }
 
