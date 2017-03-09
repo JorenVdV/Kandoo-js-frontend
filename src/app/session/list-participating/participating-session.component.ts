@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {Params, ActivatedRoute} from "@angular/router";
 import {Session} from "../../models/session";
 import {SessionService} from "../../services/session.service";
+import {AlertService} from "../../services/alert.service";
+import {ModalComponent} from "ng2-bs3-modal/components/modal";
 
 @Component({
     selector: 'participating-session',
@@ -14,7 +16,10 @@ export class ParticipatingSessionComponent implements OnInit {
     themeId: string;
     session = new Session();
 
-    constructor(private sessionService: SessionService,
+    @ViewChild('modal')
+    modal: ModalComponent;
+
+    constructor(private sessionService: SessionService, private alertService: AlertService,
                 private router: Router, private route: ActivatedRoute) {
 
     }
@@ -63,10 +68,24 @@ export class ParticipatingSessionComponent implements OnInit {
         this.router.navigate(['/session', session._id]);
     }
 
+    close() {
+        this.modal.close();
+    }
+
     inviteToSession(session: Session){
         this.sessionService.inviteToSession(session).subscribe(
             done => {
-                alert("Success!")
+                this.alertService.success('Invite successful', false);
+                let delay = (function () {
+                    let timer = 0;
+                    return function (callback, ms) {
+                        clearTimeout(timer);
+                        timer = setTimeout(callback, ms);
+                    };
+                })();
+                delay(function () {
+                    document.getElementsByTagName("alert")[0].innerHTML = "";
+                }, 600); // end delay
             },
             err => {
                 console.log(err);
