@@ -79,16 +79,8 @@ export class SessionService {
             } else {
                 invitees[i] = session.invitees[i];
             }
-            console.log("Array Element["+i+"]");
-            console.log(session.invitees[i]);
-
         }
-        console.log("/n/n session.invitees");
-        console.log(session.invitees);
 
-        console.log("/n/n created array");
-        console.log(invitees)
-        alert(session.invitees[session.invitees.length]);
 
         const sessionInvitees = invitees;
         const url = 'https://api.teamjs.xyz/session/'+session._id+'/invitees';
@@ -99,13 +91,15 @@ export class SessionService {
     }
 
     updateSession(session: Session): Observable<Session> {
-        var invitees = [];
-        invitees[0] = "sander@outlook.com";
-        invitees[1] = "nick@outlook.com";
-        const inviteesArray = invitees;
-        const url = 'https://api.teamjs.xyz/session/58bed29459d1b7000433e6fb/invitees';
+        const url = 'https://api.teamjs.xyz/session/'+session._id +'/update';
         return this.http
-            .put(url, JSON.stringify({invitees: inviteesArray}), {headers: this.headers})
+            .put(url, JSON.stringify({title: session.title,
+                description: session.description,
+                circleType: session.circleType,
+                minCardsPerParticipant: session.minCardsPerParticipant,
+                maxCardsPerParticipant: session.maxCardsPerParticipant,
+                cardsCanBeReviewed: session.cardsCanBeReviewed,
+                cardsCanBeAdded: session.cardsCanBeAdded,}), {headers: this.headers})
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
@@ -126,7 +120,7 @@ export class SessionService {
     }
 
     deleteSession(id: string): Observable<Session> {
-        const url = `${this.sessionUrl}/${id}`;
+        const url = this.sessionUrl + 'session/' + id + '/delete';
         return this.http
             .delete(url)
             .map((res: Response) => res.json())

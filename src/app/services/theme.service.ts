@@ -65,10 +65,27 @@ export class ThemeService {
     }
 
     updateTheme(theme: Theme): Observable<Theme> {
-        const url = this.themeUrl+'theme/' + theme._id;
+        function isObject(obj) {
+            return obj === Object(obj);
+        }
+
+        var tags = [];
+        for(var i = 0; i < theme.tags.length; i++){
+            if(isObject(theme.tags[i])){
+                tags[i] = theme.tags[i]["display"];
+            } else {
+                tags[i] = theme.tags[i];
+            }
+        }
+        theme.tags = tags;
+
+
+
+
+        const url = this.themeUrl+'theme/' + theme._id + '/update';
         return this.http
             .put(url, theme, {headers: this.headers})
-            .map((res: Response) => res.json().themes)
+            .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 

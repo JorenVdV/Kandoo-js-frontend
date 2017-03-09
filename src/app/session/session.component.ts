@@ -37,7 +37,7 @@ export class SessionComponent implements OnInit {
         if (this.session._id) {
             this.sessionService.updateSession(this.session).subscribe(
                 done => {
-                    this.navigateToThemes();
+                    this.router.navigate(['/themes']);
                 },
                 err => {
                     console.log(err);
@@ -45,7 +45,7 @@ export class SessionComponent implements OnInit {
         } else {
             this.sessionService.createSession(this.session, this.themeId).subscribe(
                 done => {
-                    alert("Done!")
+                    this.router.navigate(['/themes']);
                 },
                 err => {
                     console.log(err);
