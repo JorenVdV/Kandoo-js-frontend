@@ -42,30 +42,93 @@ export class LoginComponent implements OnInit {
     login() {
         this.loading = true;
         this.authenticationService.login(this.model.emailAddress, this.model.password)
-        // .map(response => response)
+            .map(response => response)
             .subscribe(
                 (response: Response) => {
                     console.log("Success Response" + response.json());
                     this.loading = false;
                     this.redirect();
                 },
-                err => {
-                    console.log('Error: ' + err);
+                error => {
+                    this.alertService.error(JSON.parse(error._body).error);
+                    this.loading = false;
                 });
     }
 
-    register() {
-        this.loading = true;
-        this.userService.create(this.model)
-            .subscribe(
-                data => {
-                    this.alertService.success('Registration successful', true);
-                    this.router.navigate(['/login']);
-                },
-                error => {
-                    this.alertService.error(error);
-                    this.loading = false;
-                });
+    register(password: string, repeatPwd: string) {
+        var numberOfErrors = 0;
+
+        if(this.model.firstname == "" || this.model.firstname == null){
+            this.alertService.error("Firstname can't be empty!");
+            numberOfErrors++;
+        }
+
+        if(this.model.lastname == "" || this.model.lastname == null){
+            this.alertService.error("Lastname can't be empty!");
+            numberOfErrors++;
+        }
+
+        if(this.model.emailAddress == "" || this.model.emailAddress == null){
+            this.alertService.error("Email address can't be empty!");
+            numberOfErrors++;
+        }
+
+        if(password == "" || password == null){
+            this.alertService.error("Password can't be empty!");
+            numberOfErrors++;
+        }
+
+        if(repeatPwd == "" || repeatPwd == null){
+            this.alertService.error("Repeated password can't be empty!");
+            numberOfErrors++;
+        }
+
+       if (password != repeatPwd) {
+            this.alertService.error("Passwords don't match!");
+            numberOfErrors++;
+        }
+
+        if(numberOfErrors == 0) {
+            this.loading = true;
+            this.userService.create(this.model)
+                .map(response => response)
+                .subscribe(
+                    (response: Response) => {
+                        this.alertService.success('Registration successful', true);
+                        let delay = (function () {
+                            let timer = 0;
+                            return function (callback, ms) {
+                                clearTimeout(timer);
+                                timer = setTimeout(callback, ms);
+                            };
+                        })();
+                        delay(function () {
+                            router.navigate(['/themes']);
+                        }, 600); // end delay
+                    },
+                    error => {
+                        console.log(error);
+                        if (error instanceof SyntaxError) {
+                            let router = this.router;
+                            this.alertService.success('Registration successful', true);
+                            let delay = (function () {
+                                let timer = 0;
+                                return function (callback, ms) {
+                                    clearTimeout(timer);
+                                    timer = setTimeout(callback, ms);
+                                };
+                            })();
+                            delay(function () {
+                                router.navigate(['/themes']);
+                            }, 600); // end delay
+                        } else {
+                            this.alertService.error(error);
+                            this.loading = false;
+                        }
+
+                    });
+        }
+
     }
 
 

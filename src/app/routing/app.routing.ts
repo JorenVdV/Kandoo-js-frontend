@@ -1,17 +1,19 @@
 import {Routes, RouterModule} from "@angular/router";
 import {NgModule} from "@angular/core";
 import {ThemeDetailComponent} from "../theme/details/theme-detail.component";
-import {CardComponent} from "../card/card.component";
+import {CardComponent} from "../card/list/card.component";
 import {RegisterComponent} from "../register/register.component";
 import {LoginComponent} from "../login/login.component";
 import {AuthGuard} from "../guards/auth.guard";
 import {HomeComponent} from "../home/home.component";
-import {CardDetailComponent} from "../card/card-detail.component";
+import {CardDetailComponent} from "../card/details/card-detail.component";
 import {SessionComponent} from "../session/session.component";
 import {GameComponent} from "../game/game.component";
 import { ThemeListComponent } from '../theme/list/theme-list.component';
 import {LandingComponent} from "../landing/landing.component";
 import {ChangePwdComponent} from "../account/change-password.component";
+import {ParticipatingSessionComponent} from "../session/list-participating/participating-session.component";
+import {ThemeSessionComponent} from "../session/list-theme/theme-session.component";
 
 export const routes: Routes = [
     {path: '', component: LandingComponent},
@@ -24,13 +26,17 @@ export const routes: Routes = [
     {path: 'cards', component: CardComponent},
     {path: 'theme/:_id/cards', component: CardComponent},
     {path: 'card/:_id', component: CardDetailComponent},
-    {path: 'sessions', component: SessionComponent},
-    {path: 'theme/:_id/sessions', component: SessionComponent},
+    {path: 'session', component: SessionComponent},
+    {path: 'theme/:_id/session', component: SessionComponent},
     {path: 'session/:sessionId', component: SessionComponent},
-    //{path: 'changepwd', component: ChangePwdComponent},
+    {path: 'changepwd', component: ChangePwdComponent},
     {path: 'game', component: GameComponent},
+    {path: 'participating', component: ParticipatingSessionComponent},
+    {path: 'theme/:_id/themesessions', component: ThemeSessionComponent},
+
+
     // otherwise redirect to home
-    {path: 'full', redirectTo: ''}
+    {path: 'full', redirectTo: 'themes'}
 ];
 
 @NgModule({

@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
-import {Card} from "../models/card";
-import {CardService} from "../services/card.service";
+import {Component, OnInit} from '@angular/core';
+import {Card} from "../../models/card";
+import {CardService} from "../../services/card.service";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
@@ -8,7 +8,7 @@ import {ActivatedRoute} from "@angular/router";
     templateUrl: 'card.component.html'
 })
 
-export class CardComponent {
+export class CardComponent implements OnInit{
     cards: Card[] = [];
     id: string;
 
@@ -21,8 +21,8 @@ export class CardComponent {
 
     ngOnInit() {
         this.cardService.readCards(this.id).subscribe(
-            themes => {
-                this.cards = themes
+            cards => {
+                this.cards = cards;
             },
             err => {
                 console.log(err);
@@ -45,7 +45,7 @@ export class CardComponent {
     deleteCard(card: Card){
         this.cardService.deleteCard(card._id).subscribe(
             done => {
-                this.cards.splice(this.cards.findIndex(c => c._id === card._id), 1);
+                this.cards.splice(this.cards.indexOf(c => c._id === card._id), 1);
             },
             err => {
                 console.log(err);

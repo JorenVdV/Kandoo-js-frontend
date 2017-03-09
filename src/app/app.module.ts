@@ -11,14 +11,14 @@ import {AlertComponent} from "./directives/alert.component";
 import {HomeComponent} from "./home/home.component";
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
-import {CardComponent} from "./card/card.component";
+import {CardComponent} from "./card/list/card.component";
 import {MockBackend} from "@angular/http/testing";
 import {CardService} from "./services/card.service";
 import {UserService} from "./services/user.service";
 import {AuthenticationService} from "./services/authentication.service";
 import {AlertService} from "./services/alert.service";
 import {AuthGuard} from "./guards/auth.guard";
-import {CardDetailComponent} from "./card/card-detail.component";
+import {CardDetailComponent} from "./card/details/card-detail.component";
 import {SessionService} from "./services/session.service";
 import {SessionComponent} from "./session/session.component";
 import {GameComponent} from "./game/game.component";
@@ -28,6 +28,8 @@ import {Ng2Bs3ModalModule} from 'ng2-bs3-modal/ng2-bs3-modal';
 import {TagInputModule} from 'ng2-tag-input';
 import {NavbarComponent} from "./navbar/navbar.component";
 import {ChangePwdComponent} from "./account/change-password.component";
+import {ParticipatingSessionComponent} from "./session/list-participating/participating-session.component";
+import {ThemeSessionComponent} from "./session/list-theme/theme-session.component";
 
 @NgModule({
     declarations: [
@@ -44,7 +46,9 @@ import {ChangePwdComponent} from "./account/change-password.component";
         ThemeListComponent,
         LandingComponent,
         NavbarComponent,
-        //ChangePwdComponent
+        ChangePwdComponent,
+        ParticipatingSessionComponent,
+        ThemeSessionComponent
     ],
     imports: [
         BrowserModule,

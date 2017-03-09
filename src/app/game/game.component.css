@@ -1,53 +1,58 @@
 .circle-container {
     position: relative;
+    width: 100%;
+    padding-top: 100%;
 }
 
 .circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     border-radius: 50%;
     border: 10px solid #3F9FD7;
-    margin: 0 auto;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
 }
 
 #circle-1 {
-    width: 10vh;
-    height: 10vh;
-    transform: translateY(32%);
+    width: 60%;
+    height: 60%;
 }
 
 #circle-2 {
-    width: 20vh;
-    height: 20vh;
-    transform: translateY(15%);
+    width: 70%;
+    height: 70%;
 }
 
 #circle-3 {
-    width: 30vh;
-    height: 30vh;
-    transform: translateY(11%);
+    width: 80%;
+    height: 80%;
 }
 
 #circle-4 {
-    width: 40vh;
-    height: 40vh;
-    transform: translateY(8.5%);
+    width: 85%;
+    height: 85%;
 }
 
 #circle-5 {
-    width: 50vh;
-    height: 50vh;
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 .circle-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
-    width: 32px;
-    margin: -16px;
-    top: 50%;
-    left: 50%;
+    border: 1px solid black;
+    background: white;
+    width: 22px;
+    height: 32px;
     cursor: pointer;
 }
 
@@ -57,264 +62,255 @@
 
 .card-list {
     display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
 }
 
 .card-list-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
+    border: 1px solid black;
+    background: white;
+    width: 22px;
+    height: 32px;
+    margin: 1%;
 }
 
-#circle-5 .item-0 {
-    -webkit-transform: rotate(270deg) translate(25vh) rotate(-270deg);
-    -moz-transform: rotate(270deg) translate(25vh) rotate(-270deg);
-    -ms-transform: rotate(270deg) translate(25vh) rotate(-270deg);
-    -o-transform: rotate(270deg) translate(25vh) rotate(-270deg);
-    transform: rotate(270deg) translate(25vh) rotate(-270deg);
+.card-description {
+    margin: 1%;
 }
 
 #circle-5 .item-1 {
-    -webkit-transform: rotate(315deg) translate(25vh) rotate(-315deg);
-    -moz-transform: rotate(315deg) translate(25vh) rotate(-315deg);
-    -ms-transform: rotate(315deg) translate(25vh) rotate(-315deg);
-    -o-transform: rotate(315deg) translate(25vh) rotate(-315deg);
-    transform: rotate(315deg) translate(25vh) rotate(-315deg);
+    top: 0;
 }
 
 #circle-5 .item-2 {
-    -webkit-transform: translate(25vh);
-    -moz-transform: translate(25vh);
-    -ms-transform: translate(25vh);
-    -o-transform: translate(25vh);
-    transform: translate(25vh);
+    top: 7%;
+    right: 24%;
 }
 
 #circle-5 .item-3 {
-    -webkit-transform: rotate(45deg) translate(25vh) rotate(-45deg);
-    -moz-transform: rotate(45deg) translate(25vh) rotate(-45deg);
-    -ms-transform: rotate(45deg) translate(25vh) rotate(-45deg);
-    -o-transform: rotate(45deg) translate(25vh) rotate(-45deg);
-    transform: rotate(45deg) translate(25vh) rotate(-45deg);
+    top: 24%;
+    right: 7%;
 }
 
 #circle-5 .item-4 {
-    -webkit-transform: rotate(90deg) translate(25vh) rotate(-90deg);
-    -moz-transform: rotate(90deg) translate(25vh) rotate(-90deg);
-    -ms-transform: rotate(90deg) translate(25vh) rotate(-90deg);
-    -o-transform: rotate(90deg) translate(25vh) rotate(-90deg);
-    transform: rotate(90deg) translate(25vh) rotate(-90deg);
+    top: 48%;
+    right: 0;
 }
 
 #circle-5 .item-5 {
-    -webkit-transform: rotate(135deg) translate(25vh) rotate(-135deg);
-    -moz-transform: rotate(135deg) translate(25vh) rotate(-135deg);
-    -ms-transform: rotate(135deg) translate(25vh) rotate(-135deg);
-    -o-transform: rotate(135deg) translate(25vh) rotate(-135deg);
-    transform: rotate(135deg) translate(25vh) rotate(-135deg);
+    bottom: 24%;
+    right: 7%;
 }
 
 #circle-5 .item-6 {
-    -webkit-transform: translate(-25vh);
-    -moz-transform: translate(-25vh);
-    -ms-transform: translate(-25vh);
-    -o-transform: translate(-25vh);
-    transform: translate(-25vh);
+    bottom: 7%;
+    right: 24%;
 }
 
 #circle-5 .item-7 {
-    -webkit-transform: rotate(225deg) translate(25vh) rotate(-225deg);
-    -moz-transform: rotate(225deg) translate(25vh) rotate(-225deg);
-    -ms-transform: rotate(225deg) translate(25vh) rotate(-225deg);
-    -o-transform: rotate(225deg) translate(25vh) rotate(-225deg);
-    transform: rotate(225deg) translate(25vh) rotate(-225deg);
+    bottom: 0;
 }
 
-#circle-4 .item-0 {
-    -webkit-transform: rotate(270deg) translate(20vh) rotate(-270deg);
-    -moz-transform: rotate(270deg) translate(20vh) rotate(-270deg);
-    -ms-transform: rotate(270deg) translate(20vh) rotate(-270deg);
-    -o-transform: rotate(270deg) translate(20vh) rotate(-270deg);
-    transform: rotate(270deg) translate(20vh) rotate(-270deg);
+#circle-5 .item-8 {
+    bottom: 7%;
+    left: 24%;
+}
+
+#circle-5 .item-9 {
+    bottom: 24%;
+    left: 7%;
+}
+
+#circle-5 .item-10 {
+    top: 48%;
+    left: 0;
+}
+
+#circle-5 .item-11 {
+    top: 24%;
+    left: 7%;
+}
+
+#circle-5 .item-12 {
+    top: 7%;
+    left: 24%;
 }
 
 #circle-4 .item-1 {
-    -webkit-transform: rotate(315deg) translate(20vh) rotate(-315deg);
-    -moz-transform: rotate(315deg) translate(20vh) rotate(-315deg);
-    -ms-transform: rotate(315deg) translate(20vh) rotate(-315deg);
-    -o-transform: rotate(315deg) translate(20vh) rotate(-315deg);
-    transform: rotate(315deg) translate(20vh) rotate(-315deg);
+    top: 9.5%;
 }
 
 #circle-4 .item-2 {
-    -webkit-transform: translate(20vh);
-    -moz-transform: translate(20vh);
-    -ms-transform: translate(20vh);
-    -o-transform: translate(20vh);
-    transform: translate(20vh);
+    top: 15%;
+    right: 29%;
 }
 
 #circle-4 .item-3 {
-    -webkit-transform: rotate(45deg) translate(20vh) rotate(-45deg);
-    -moz-transform: rotate(45deg) translate(20vh) rotate(-45deg);
-    -ms-transform: rotate(45deg) translate(20vh) rotate(-45deg);
-    -o-transform: rotate(45deg) translate(20vh) rotate(-45deg);
-    transform: rotate(45deg) translate(20vh) rotate(-45deg);
+    top: 29.5%;
+    right: 15%;
 }
 
 #circle-4 .item-4 {
-    -webkit-transform: rotate(90deg) translate(20vh) rotate(-90deg);
-    -moz-transform: rotate(90deg) translate(20vh) rotate(-90deg);
-    -ms-transform: rotate(90deg) translate(20vh) rotate(-90deg);
-    -o-transform: rotate(90deg) translate(20vh) rotate(-90deg);
-    transform: rotate(90deg) translate(20vh) rotate(-90deg);
+    top: 48%;
+    right: 9.5%;
 }
 
 #circle-4 .item-5 {
-    -webkit-transform: rotate(135deg) translate(20vh) rotate(-135deg);
-    -moz-transform: rotate(135deg) translate(20vh) rotate(-135deg);
-    -ms-transform: rotate(135deg) translate(20vh) rotate(-135deg);
-    -o-transform: rotate(135deg) translate(20vh) rotate(-135deg);
-    transform: rotate(135deg) translate(20vh) rotate(-135deg);
+    bottom: 29.5%;
+    right: 15%;
 }
 
 #circle-4 .item-6 {
-    -webkit-transform: translate(-20vh);
-    -moz-transform: translate(-20vh);
-    -ms-transform: translate(-20vh);
-    -o-transform: translate(-20vh);
-    transform: translate(-20vh);
+    bottom: 15%;
+    right: 29%;
 }
 
 #circle-4 .item-7 {
-    -webkit-transform: rotate(225deg) translate(20vh) rotate(-225deg);
-    -moz-transform: rotate(225deg) translate(20vh) rotate(-225deg);
-    -ms-transform: rotate(225deg) translate(20vh) rotate(-225deg);
-    -o-transform: rotate(225deg) translate(20vh) rotate(-225deg);
-    transform: rotate(225deg) translate(20vh) rotate(-225deg);
+    bottom: 9.5%;
 }
 
-#circle-3 .item-0 {
-    -webkit-transform: rotate(270deg) translate(15vh) rotate(-270deg);
-    -moz-transform: rotate(270deg) translate(15vh) rotate(-270deg);
-    -ms-transform: rotate(270deg) translate(15vh) rotate(-270deg);
-    -o-transform: rotate(270deg) translate(15vh) rotate(-270deg);
-    transform: rotate(270deg) translate(15vh) rotate(-270deg);
+#circle-4 .item-8 {
+    bottom: 15%;
+    left: 29%;
+}
+
+#circle-4 .item-9 {
+    bottom: 29.5%;
+    left: 15%;
+}
+
+#circle-4 .item-10 {
+    top: 48%;
+    left: 9.5%;
+}
+
+#circle-4 .item-11 {
+    top: 29.5%;
+    left: 15%;
+}
+
+#circle-4 .item-12 {
+    top: 15%;
+    left: 29%;
 }
 
 #circle-3 .item-1 {
-    -webkit-transform: rotate(315deg) translate(15vh) rotate(-315deg);
-    -moz-transform: rotate(315deg) translate(15vh) rotate(-315deg);
-    -ms-transform: rotate(315deg) translate(15vh) rotate(-315deg);
-    -o-transform: rotate(315deg) translate(15vh) rotate(-315deg);
-    transform: rotate(315deg) translate(15vh) rotate(-315deg);
+    top: 19.5%;
 }
 
 #circle-3 .item-2 {
-    -webkit-transform: translate(15vh);
-    -moz-transform: translate(15vh);
-    -ms-transform: translate(15vh);
-    -o-transform: translate(15vh);
-    transform: translate(15vh);
+    top: 24%;
+    right: 34%;
 }
 
 #circle-3 .item-3 {
-    -webkit-transform: rotate(45deg) translate(15vh) rotate(-45deg);
-    -moz-transform: rotate(45deg) translate(15vh) rotate(-45deg);
-    -ms-transform: rotate(45deg) translate(15vh) rotate(-45deg);
-    -o-transform: rotate(45deg) translate(15vh) rotate(-45deg);
-    transform: rotate(45deg) translate(15vh) rotate(-45deg);
+    top: 33.5%;
+    right: 24%;
 }
 
 #circle-3 .item-4 {
-    -webkit-transform: rotate(90deg) translate(15vh) rotate(-90deg);
-    -moz-transform: rotate(90deg) translate(15vh) rotate(-90deg);
-    -ms-transform: rotate(90deg) translate(15vh) rotate(-90deg);
-    -o-transform: rotate(90deg) translate(15vh) rotate(-90deg);
-    transform: rotate(90deg) translate(15vh) rotate(-90deg);
+    top: 48%;
+    right: 19.5%;
 }
 
 #circle-3 .item-5 {
-    -webkit-transform: rotate(135deg) translate(15vh) rotate(-135deg);
-    -moz-transform: rotate(135deg) translate(15vh) rotate(-135deg);
-    -ms-transform: rotate(135deg) translate(15vh) rotate(-135deg);
-    -o-transform: rotate(135deg) translate(15vh) rotate(-135deg);
-    transform: rotate(135deg) translate(15vh) rotate(-135deg);
+    bottom: 33.5%;
+    right: 24%;
 }
 
 #circle-3 .item-6 {
-    -webkit-transform: translate(-15vh);
-    -moz-transform: translate(-15vh);
-    -ms-transform: translate(-15vh);
-    -o-transform: translate(-15vh);
-    transform: translate(-15vh);
+    bottom: 24%;
+    right: 34%;
 }
 
 #circle-3 .item-7 {
-    -webkit-transform: rotate(225deg) translate(15vh) rotate(-225deg);
-    -moz-transform: rotate(225deg) translate(15vh) rotate(-225deg);
-    -ms-transform: rotate(225deg) translate(15vh) rotate(-225deg);
-    -o-transform: rotate(225deg) translate(15vh) rotate(-225deg);
-    transform: rotate(225deg) translate(15vh) rotate(-225deg);
+    bottom: 19.5%;
 }
 
-#circle-2 .item-0 {
-    -webkit-transform: rotate(270deg) translate(10vh) rotate(-270deg);
-    -moz-transform: rotate(270deg) translate(10vh) rotate(-270deg);
-    -ms-transform: rotate(270deg) translate(10vh) rotate(-270deg);
-    -o-transform: rotate(270deg) translate(10vh) rotate(-270deg);
-    transform: rotate(270deg) translate(10vh) rotate(-270deg);
+#circle-3 .item-8 {
+    bottom: 24%;
+    left: 34%;
+}
+
+#circle-3 .item-9 {
+    bottom: 33.5%;
+    left: 24%;
+}
+
+#circle-3 .item-10 {
+    top: 48%;
+    left: 19.5%;
+}
+
+#circle-3 .item-11 {
+    top: 33.5%;
+    left: 24%;
+}
+
+#circle-3 .item-12 {
+    top: 24%;
+    left: 34%;
 }
 
 #circle-2 .item-1 {
-    -webkit-transform: rotate(315deg) translate(10vh) rotate(-315deg);
-    -moz-transform: rotate(315deg) translate(10vh) rotate(-315deg);
-    -ms-transform: rotate(315deg) translate(10vh) rotate(-315deg);
-    -o-transform: rotate(315deg) translate(10vh) rotate(-315deg);
-    transform: rotate(315deg) translate(10vh) rotate(-315deg);
+    top: 30.5%;
 }
 
 #circle-2 .item-2 {
-    -webkit-transform: translate(10vh);
-    -moz-transform: translate(10vh);
-    -ms-transform: translate(10vh);
-    -o-transform: translate(10vh);
-    transform: translate(10vh);
+    top: 33%;
+    right: 40%;
 }
 
 #circle-2 .item-3 {
-    -webkit-transform: rotate(45deg) translate(10vh) rotate(-45deg);
-    -moz-transform: rotate(45deg) translate(10vh) rotate(-45deg);
-    -ms-transform: rotate(45deg) translate(10vh) rotate(-45deg);
-    -o-transform: rotate(45deg) translate(10vh) rotate(-45deg);
-    transform: rotate(45deg) translate(10vh) rotate(-45deg);
+    top: 39%;
+    right: 33.5%;
 }
 
 #circle-2 .item-4 {
-    -webkit-transform: rotate(90deg) translate(10vh) rotate(-90deg);
-    -moz-transform: rotate(90deg) translate(10vh) rotate(-90deg);
-    -ms-transform: rotate(90deg) translate(10vh) rotate(-90deg);
-    -o-transform: rotate(90deg) translate(10vh) rotate(-90deg);
-    transform: rotate(90deg) translate(10vh) rotate(-90deg);
+    top: 47%;
+    right: 30.5%;
 }
 
 #circle-2 .item-5 {
-    -webkit-transform: rotate(135deg) translate(10vh) rotate(-135deg);
-    -moz-transform: rotate(135deg) translate(10vh) rotate(-135deg);
-    -ms-transform: rotate(135deg) translate(10vh) rotate(-135deg);
-    -o-transform: rotate(135deg) translate(10vh) rotate(-135deg);
-    transform: rotate(135deg) translate(10vh) rotate(-135deg);
+    bottom: 39%;
+    right: 33.5%;
 }
 
 #circle-2 .item-6 {
-    -webkit-transform: translate(-10vh);
-    -moz-transform: translate(-10vh);
-    -ms-transform: translate(-10vh);
-    -o-transform: translate(-10vh);
-    transform: translate(-10vh);
+    bottom: 33%;
+    right: 40%;
 }
 
 #circle-2 .item-7 {
-    -webkit-transform: rotate(225deg) translate(10vh) rotate(-225deg);
-    -moz-transform: rotate(225deg) translate(10vh) rotate(-225deg);
-    -ms-transform: rotate(225deg) translate(10vh) rotate(-225deg);
-    -o-transform: rotate(225deg) translate(10vh) rotate(-225deg);
-    transform: rotate(225deg) translate(10vh) rotate(-225deg);
+    bottom: 30.5%;
+}
+
+#circle-2 .item-8 {
+    bottom: 33%;
+    left: 40%;
+}
+
+#circle-2 .item-9 {
+    bottom: 39%;
+    left: 33.5%;
+}
+
+#circle-2 .item-10 {
+    top: 47%;
+    left: 30.5%;
+}
+
+#circle-2 .item-11 {
+    top: 39%;
+    left: 33.5%;
+}
+
+#circle-2 .item-12 {
+    top: 33%;
+    left: 40%;
 }

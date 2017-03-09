@@ -24,39 +24,38 @@ export class SessionService {
         // if(session.startDate == ""){
         //     startDate = new Date();
         // }
-        let currentUser = localStorage.getItem('currentUser');
-        console.log(session.invitees);
 
-        for(var i = 0; i < session.invitees.length; i++){
-            invitees[i] = session.invitees[i]["display"];
-        }
-        const sessionInvitees = invitees;
+        /*
+         for(var i = 0; i < session.invitees.length; i++){
+         invitees[i] = session.invitees[i]["display"];
+         }
+         const sessionInvitees = invitees;
 
-
+         */
         //console.log(sessionInvitees);
+        let currentUser = localStorage.getItem('currentUser');
 
+        return this.http
+            .post(this.sessionUrl + 'theme/' + themeId + '/session', JSON.stringify(
+                {
+                    title: session.title,
+                    description: session.description,
+                    circleType: session.circleType,
+                    minCardsPerParticipant: session.minCardsPerParticipant,
+                    maxCardsPerParticipant: session.maxCardsPerParticipant,
+                    cardsCanBeReviewed: session.cardsCanBeReviewed,
+                    cardsCanBeAdded: session.cardsCanBeAdded,
+                    creator: JSON.parse(currentUser)._id
 
-         return this.http
-         .post(this.sessionUrl+'theme/'+themeId+'/session',JSON.stringify(
-         {
-         title: session.title,
-         description: session.description,
-         circleType: "opportunity",
-         minCardsPerParticipant: session.minCardsPerParticipant,
-         maxCardsPerParticipant: session.maxCardsPerParticipant,
-         cardsCanBeReviewed: session.cardsCanBeReviewed,
-         cardsCanBeAdded: session.cardsCanBeAdded,
-         creator: JSON.parse(currentUser)._id
-
-         }), {headers: this.headers})
-         .map((res: Response) => res.json())
-         .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-            }
+                }), {headers: this.headers})
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
 
 
     readSession(id: string): Observable<Session> {
         return this.http
-            .get('https://api.teamjs.xyz/session/'+id)
+            .get('https://api.teamjs.xyz/session/' + id)
             .map((res: Response) => res.json().session)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
@@ -68,16 +67,60 @@ export class SessionService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    updateSession(session: Session): Observable<Session> {
-        const url = `${this.sessionUrl}/${session._id}`;
+    inviteToSession(session: Session): Observable<Session> {
+        function isObject(obj) {
+            return obj === Object(obj);
+        }
+
+        var invitees = [];
+        for(var i = 0; i < session.invitees.length; i++){
+            if(isObject(session.invitees[i])){
+                invitees[i] = session.invitees[i]["display"];
+            } else {
+                invitees[i] = session.invitees[i];
+            }
+        }
+
+
+        const sessionInvitees = invitees;
+        const url = 'https://api.teamjs.xyz/session/'+session._id+'/invitees';
         return this.http
-            .put(url, JSON.stringify(session), {headers: this.headers})
+            .put(url, JSON.stringify({invitees: sessionInvitees}), {headers: this.headers})
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
+    updateSession(session: Session): Observable<Session> {
+        const url = 'https://api.teamjs.xyz/session/'+session._id +'/update';
+        return this.http
+            .put(url, JSON.stringify({title: session.title,
+                description: session.description,
+                circleType: session.circleType,
+                minCardsPerParticipant: session.minCardsPerParticipant,
+                maxCardsPerParticipant: session.maxCardsPerParticipant,
+                cardsCanBeReviewed: session.cardsCanBeReviewed,
+                cardsCanBeAdded: session.cardsCanBeAdded,}), {headers: this.headers})
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
+    readParticipantSessions(): Observable<Session[]> {
+        let currentUser = localStorage.getItem('currentUser');
+        return this.http
+            .get(this.sessionUrl + 'user/' + JSON.parse(currentUser)._id + '/sessions/participating')
+            .map((res: Response) => res.json().sessions)
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
+    readThemeSessions(id: string): Observable<Session[]> {
+        return this.http
+            .get(this.sessionUrl + 'theme/' + id + '/sessions')
+            .map((res: Response) => res.json().sessions)
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
     deleteSession(id: string): Observable<Session> {
-        const url = `${this.sessionUrl}/${id}`;
+        const url = this.sessionUrl + 'session/' + id + '/delete';
         return this.http
             .delete(url)
             .map((res: Response) => res.json())
