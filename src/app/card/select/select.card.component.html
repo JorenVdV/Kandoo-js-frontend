@@ -1,0 +1,45 @@
+<navbar></navbar>
+
+<div class="container">
+    <div *ngIf="cardsCanBeAdded">
+        <h1>Voeg een kaart toe</h1>
+        <div class="col-md-12">
+            <label>Omschrijving<br><input id="description" type="text" #cardDescription
+                                          class="form-control"></label><br>
+            <button id="submit" (click)="submitCard(cardDescription.value)" class="btn btn-default">
+                Voeg toe
+            </button>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <h3>Mogelijke kaarten</h3>
+        <div class="panel panel-default" *ngFor="let card of cards">
+            <div class="panel-body">
+                <div class="col-md-10">
+                    <h4>{{card.description}}</h4>
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-primary" (click)="selectCard(card)">-></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <h3>Geselecteerde kaarten</h3>
+        <div class="panel panel-default" *ngFor="let card of sessionCards">
+            <div class="panel-body">
+                <div class="col-md-10">
+                    <h4>{{card.description}}</h4>
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-danger" (click)="deleteCard(card)"><strong>X</strong></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-primary" (click)="updateSessionCards()">SAVE</button>
+
+</div>

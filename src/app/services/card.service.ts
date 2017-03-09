@@ -20,7 +20,7 @@ export class CardService {
       .post(this.cardUrl + 'theme/' + id + '/card', JSON.stringify({
         description
       }), {headers: this.headers})
-      .map((res: Response) => res.json().cards)
+      .map((res: Response) => res.json().card)
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
