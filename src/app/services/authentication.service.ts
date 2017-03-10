@@ -1,13 +1,12 @@
 ﻿import {Injectable} from '@angular/core';
 import {Http, Headers, Response} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 import {Router} from "@angular/router";
 
 @Injectable()
 export class AuthenticationService {
     private headers = new Headers({'Content-Type': 'application/json'});
-    private baseURL = 'https://kandoo-js-backend.herokuapp.com';
+    private baseURL = 'http://localhost:8000';
     constructor(private http: Http, private router: Router) {
     }
 

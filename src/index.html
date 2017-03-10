@@ -16,9 +16,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
-    <script>
-        var socket = io.connect('wss://kandoo-js-backend.herokuapp.com/',{transports: ['websocket']});
-    </script>
     <!--<script src="node_modules/ng2-bs3-modal/bundles/ng2-bs3-modal.js"></script>-->
 
     <style>
@@ -59,12 +56,5 @@
 </head>
 <body>
 <app-root style="height:100vh;">Loading...</app-root>
-
-
-<script>
-    socket.on('connect', function (data) {
-        socket.emit('join', 'Hello World from cliens');
-    });
-</script>
 </body>
 </html>

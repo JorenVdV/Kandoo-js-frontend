@@ -14,7 +14,7 @@ import {Card} from "../models/card";
 @Injectable()
 export class SessionService {
     private headers = new Headers({'Content-Type': 'application/json'});
-    private baseURL = 'https://kandoo-js-backend.herokuapp.com';
+    private baseURL = 'http://localhost:8000';
 
     private options = new RequestOptions({headers: this.headers});
 
