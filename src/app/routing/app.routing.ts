@@ -15,6 +15,7 @@ import {ChangePwdComponent} from "../account/change-password.component";
 import {ParticipatingSessionComponent} from "../session/list-participating/participating-session.component";
 import {ThemeSessionComponent} from "../session/list-theme/theme-session.component";
 import {SelectCardComponent} from "../card/select/select.card.component";
+import {AccountComponent} from "../account/account.component";
 
 export const routes: Routes = [
     {path: '', component: LandingComponent},
@@ -35,6 +36,7 @@ export const routes: Routes = [
     {path: 'participating', component: ParticipatingSessionComponent},
     {path: 'theme/:_id/themesessions', component: ThemeSessionComponent},
     {path: 'session/:_id/selectcards', component: SelectCardComponent},
+    {path: 'changeaccount', component: AccountComponent},
 
 
     // otherwise redirect to home

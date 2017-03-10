@@ -121,20 +121,20 @@ export class SessionService {
     readParticipantSessions(): Observable<Session[]> {
         let currentUser = localStorage.getItem('currentUser');
         return this.http
-            .get(this.baseURL + 'user/' + JSON.parse(currentUser)._id + '/sessions/participating')
+            .get(this.baseURL + '/user/' + JSON.parse(currentUser)._id + '/sessions/participating')
             .map((res: Response) => res.json().sessions)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
     readThemeSessions(id: string): Observable<Session[]> {
         return this.http
-            .get(this.baseURL + 'theme/' + id + '/sessions')
+            .get(this.baseURL + '/theme/' + id + '/sessions')
             .map((res: Response) => res.json().sessions)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
     deleteSession(id: string): Observable<Session> {
-        const url = this.baseURL + 'session/' + id + '/delete';
+        const url = this.baseURL + '/session/' + id + '/delete';
         return this.http
             .delete(url)
             .map((res: Response) => res.json())
