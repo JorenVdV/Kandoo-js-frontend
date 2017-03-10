@@ -9,7 +9,7 @@ import {Theme} from "../models/theme";
 @Injectable()
 export class ThemeService {
     private headers = new Headers({'Content-Type': 'application/json'});
-    private themeUrl = 'https://api.teamjs.xyz/';
+    private baseURL = 'https://kandoo-js-backend.herokuapp.com';
 
 
     constructor(private http: Http) {
@@ -17,12 +17,11 @@ export class ThemeService {
 
 
     createTheme(theme: Theme): Observable<Theme> {
-    let currentUser = localStorage.getItem('currentUser');
-
+        let currentUser = localStorage.getItem('currentUser');
 
 
         var tags = [];
-        for(var i = 0; i < theme.tags.length; i++){
+        for (var i = 0; i < theme.tags.length; i++) {
             tags[i] = theme.tags[i]["display"];
         }
         console.log(tags);
@@ -30,7 +29,7 @@ export class ThemeService {
 
 
         return this.http
-            .post(this.themeUrl + 'theme/', JSON.stringify({
+            .post(this.baseURL + '/theme/', JSON.stringify({
                 title: theme.title,
                 description: theme.description,
                 tags: themeTags,
@@ -42,7 +41,7 @@ export class ThemeService {
     }
 
     readTheme(id: string): Observable<Theme> {
-        const url = `${this.themeUrl+'theme'}/${id}`;
+        const url = `${this.baseURL + '/theme'}/${id}`;
         return this.http
             .get(url)
             .map((res: Response) => res.json().theme)
@@ -51,15 +50,15 @@ export class ThemeService {
 
     readThemeSessions(themeId: string): Observable<Theme> {
         return this.http
-            .get(this.themeUrl + 'theme/' + themeId + '/sessions')
+            .get(this.baseURL + '/theme/' + themeId + '/sessions')
             .map((res: Response) => res.json().sessions)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
     readThemes(): Observable<Theme[]> {
-    let currentUser = localStorage.getItem('currentUser');
+        let currentUser = localStorage.getItem('currentUser');
         return this.http
-            .get(this.themeUrl+'user/'+ JSON.parse(currentUser)._id + '/themes')
+            .get(this.baseURL + '/user/' + JSON.parse(currentUser)._id + '/themes')
             .map((res: Response) => res.json().themes)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
@@ -70,8 +69,8 @@ export class ThemeService {
         }
 
         var tags = [];
-        for(var i = 0; i < theme.tags.length; i++){
-            if(isObject(theme.tags[i])){
+        for (var i = 0; i < theme.tags.length; i++) {
+            if (isObject(theme.tags[i])) {
                 tags[i] = theme.tags[i]["display"];
             } else {
                 tags[i] = theme.tags[i];
@@ -80,9 +79,7 @@ export class ThemeService {
         theme.tags = tags;
 
 
-
-
-        const url = this.themeUrl+'theme/' + theme._id + '/update';
+        const url = this.baseURL + '/theme/' + theme._id + '/update';
         return this.http
             .put(url, theme, {headers: this.headers})
             .map((res: Response) => res.json())
@@ -90,7 +87,7 @@ export class ThemeService {
     }
 
     deleteTheme(id: string): Observable<Theme> {
-        const url = this.themeUrl+'theme/' + id + '/delete';
+        const url = this.baseURL + '/theme/' + id + '/delete';
         return this.http
             .delete(url)
             .map((res: Response) => res.json())
