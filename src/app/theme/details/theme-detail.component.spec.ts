@@ -42,7 +42,7 @@ describe('ThemeDetailComponent', () => {
     //     });
     // }));
 
-/*    it('should return theme with id 2', () => {
+/*    it('should return theme with themeId 2', () => {
         expect(themeServiceStub.readTheme()).toEqual({
             "_id": "2", "title": "test02", "description": "test", "tags": "test", "publicAccess": false
         });

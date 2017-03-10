@@ -1,5 +1,8 @@
 ﻿
-<button type="button" class="btn btn-default" (click)="modal.open()">Login</button>
+
+<button type="button" class="btn btn-primary btn-block" (click)="modal.open()">LOGIN</button>
+<br>
+<button type="button" class="btn btn-primary btn-block" (click)="registerModal.open()">REGISTER</button>
 
 <modal #modal>
     <modal-header [show-close]="true">
@@ -40,7 +43,6 @@
 </modal>
 
 
-<button type="button" class="btn btn-default" (click)="registerModal.open()">Register</button>
 <modal #registerModal>
     <modal-header [show-close]="true">
         <h4 class="modal-title">Register</h4>

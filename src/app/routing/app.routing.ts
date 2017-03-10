@@ -14,6 +14,7 @@ import {LandingComponent} from "../landing/landing.component";
 import {ChangePwdComponent} from "../account/change-password.component";
 import {ParticipatingSessionComponent} from "../session/list-participating/participating-session.component";
 import {ThemeSessionComponent} from "../session/list-theme/theme-session.component";
+import {SelectCardComponent} from "../card/select/select.card.component";
 
 export const routes: Routes = [
     {path: '', component: LandingComponent},
@@ -33,6 +34,7 @@ export const routes: Routes = [
     {path: 'game', component: GameComponent},
     {path: 'participating', component: ParticipatingSessionComponent},
     {path: 'theme/:_id/themesessions', component: ThemeSessionComponent},
+    {path: 'session/:_id/selectcards', component: SelectCardComponent},
 
 
     // otherwise redirect to home

@@ -10,17 +10,17 @@ import {ActivatedRoute} from "@angular/router";
 
 export class CardComponent implements OnInit{
     cards: Card[] = [];
-    id: string;
+    themeId: string;
 
     constructor(private cardService: CardService, private route: ActivatedRoute) {
         this.route.params.subscribe(params => {
-            this.id = params['_id'];   //<----- + sign converts string value to number
+            this.themeId = params['_id'];   //<----- + sign converts string value to number
         });
-        console.log(this.id);
+        console.log(this.themeId);
     }
 
     ngOnInit() {
-        this.cardService.readCards(this.id).subscribe(
+        this.cardService.readCards(this.themeId).subscribe(
             cards => {
                 this.cards = cards;
             },
@@ -33,8 +33,10 @@ export class CardComponent implements OnInit{
         if (!description) {
             return;
         }
-        this.cardService.createCard(description, this.id).subscribe(
+        this.cardService.createCard(description, this.themeId).subscribe(
             card => {
+                console.log(card);
+
                 this.cards.push(card);
             },
             err => {
@@ -45,7 +47,13 @@ export class CardComponent implements OnInit{
     deleteCard(card: Card){
         this.cardService.deleteCard(card._id).subscribe(
             done => {
-                this.cards.splice(this.cards.indexOf(c => c._id === card._id), 1);
+                this.cardService.readCards(this.themeId).subscribe(
+                    cards => {
+                        this.cards = cards;
+                    },
+                    err => {
+                        console.log(err);
+                    });
             },
             err => {
                 console.log(err);

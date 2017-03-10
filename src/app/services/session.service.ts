@@ -9,6 +9,7 @@ import {Headers, Http, Response, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs";
 import {Session} from "../models/session";
 import {Theme} from "../models/theme";
+import {Card} from "../models/card";
 
 @Injectable()
 export class SessionService {
@@ -35,6 +36,10 @@ export class SessionService {
          */
         //console.log(sessionInvitees);
         let currentUser = localStorage.getItem('currentUser');
+
+        if(session.cardsCanBeAdded != true){
+            session.cardsCanBeAdded = false;
+        }
 
         return this.http
             .post(this.baseURL + 'theme/' + themeId + '/session', JSON.stringify(
@@ -101,6 +106,14 @@ export class SessionService {
                 maxCardsPerParticipant: session.maxCardsPerParticipant,
                 cardsCanBeReviewed: session.cardsCanBeReviewed,
                 cardsCanBeAdded: session.cardsCanBeAdded,}), {headers: this.headers})
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
+    updateSessionCards(session: Session, cards: Card[]): Observable<Session> {
+        const url = 'https://api.teamjs.xyz/session/'+session._id +'/update';
+        return this.http
+            .put(url, JSON.stringify({sessionCards: cards}), {headers: this.headers})
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }

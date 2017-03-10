@@ -80,7 +80,7 @@ describe('ThemeListComponent', () => {
         ]);
     });
 
-    it('should return list of themes without theme (id: 2)', () => {
+    it('should return list of themes without theme (themeId: 2)', () => {
         expect(themeServiceStub.deleteTheme()).toEqual([
             {"_id": "1", "title": "test01", "description": "test", "tags": "test", "publicAccess": false}
         ]);

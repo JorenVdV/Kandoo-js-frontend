@@ -4,16 +4,11 @@
             <div class="col-md-5">
                 <h4>{{session.title}}</h4>
             </div>
-            <div class="col-md-7">
-
+            <div class="col-md-7" *ngIf="session.creator == userId">
                 <div class="col-md-3"><a class="btn btn-primary btn-block" (click)="selectSession(session)">INFO</a></div>
                 <div class="col-md-3"><button class="btn btn-primary btn-block" (click)="modal.open()">INVITE</button></div>
                 <div class="col-md-3"></div>
                 <div class="col-md-3"><button (click)="deleteSession(session)" class="btn btn-danger btn-block">DELETE</button></div>
-
-
-
-
 
             </div>
         </div>
