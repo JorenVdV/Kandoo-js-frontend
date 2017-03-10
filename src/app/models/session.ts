@@ -23,6 +23,8 @@ export class Session {
     turnDuration: number;
     _id: string;
     invitees: String [];
+    sessionCards: Card[];
+    pickedCards: Card[];
 
 }
 

@@ -15,6 +15,7 @@ export class ParticipatingSessionComponent implements OnInit {
     sessions: Session[];
     themeId: string;
     session = new Session();
+    userId: string;
 
     @ViewChild('modal')
     modal: ModalComponent;
@@ -62,6 +63,7 @@ export class ParticipatingSessionComponent implements OnInit {
                     console.log(err);
                 });
         console.log(this.sessions);
+        this.userId = JSON.parse(localStorage.getItem('currentUser'))._id;
     }
 
     selectSession(session: Session) {

@@ -29,12 +29,18 @@ export class SelectCardComponent implements OnInit {
         this.sessionService.readSession(this.sessionId)
             .subscribe(s => {
                     this.session = s;
-                    if(this.session.cardsCanBeAdded){
+                    this.themeId = s.theme;
+                    if (this.session.cardsCanBeAdded) {
                         this.cardsCanBeAdded = true;
                     }
+                    this.sessionCards = this.session.sessionCards;
+
                     this.cardService.readCards(this.session.theme).subscribe(
                         cards => {
                             this.cards = cards;
+                            for (var i = 0; i < this.sessionCards; i++) {
+                                this.cards.splice(this.cards.indexOf(this.sessionCards[i]), 1);
+                            }
 
                         },
                         err => {
@@ -44,7 +50,7 @@ export class SelectCardComponent implements OnInit {
                 err => {
 
                 })
-        this.sessionCards = [];
+
 
     }
 
@@ -59,12 +65,28 @@ export class SelectCardComponent implements OnInit {
                 });
     }
 
-    selectCard(card: Card){
+    selectCard(card: Card) {
+        this.cards.splice(this.cards.indexOf(card), 1);
         this.sessionCards.push(card);
+
     }
 
 
     deleteCard(card: Card) {
         this.sessionCards.splice(this.sessionCards.indexOf(card), 1);
+        this.cards.push(card);
+    }
+
+    submitCard(cardDescription: string){
+        if (!description) {
+            return;
+        }
+        this.cardService.createCard(cardDescription, this.themeId).subscribe(
+            card => {
+                this.cards.push(card);
+            },
+            err => {
+                console.log(err);
+            });
     }
 }
