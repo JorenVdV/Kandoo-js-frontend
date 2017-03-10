@@ -32,16 +32,36 @@ export class UserService {
         return this.http.delete(this.baseURL + '/users/'+id, this.jwt()).map((response: Response) => response.json());
     }
 
+    get(id: string){
+        return this.http.get(this.baseURL + '/user/'+id, this.jwt()).map((response: Response) => response.json());
+    }
+
+    /*
     changepwd(id: string, currentPwd: string, newPwd: string): Observable<User> {
         const url = this.baseURL + '/user/' + id + '/update';
 
         return this.http
             .put(url, JSON.stringify({password: newPwd, originalPassword: currentPwd}), {headers: this.headers})
             .map((res: Response) => res.json())
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+            .catch((error: any) => Observable.throw(error));
+    }
+*/
+    changepwd(id: string, currentPwd: string, newPwd: string): Observable<User> {
+        const url = this.baseURL + '/user/' + id + '/update';
+        return this.http
+            .put(url, JSON.stringify({password: newPwd, originalPassword: currentPwd}), {headers: this.headers})
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error));
     }
 
-    // private helper methods
+    updateAccount(user: User, id:string): Observable<User> {
+        const url = this.baseURL + '/user/' + id + '/update';
+
+        return this.http
+            .put(url, JSON.stringify({firstname: user.firstname, lastname: user.lastname, emailAddress: user.emailAddress, organisation: user.organisation }), {headers: this.headers})
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error));
+    }
 
 
     private jwt() {

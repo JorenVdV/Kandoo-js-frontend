@@ -31,6 +31,7 @@ import {ChangePwdComponent} from "./account/change-password.component";
 import {ParticipatingSessionComponent} from "./session/list-participating/participating-session.component";
 import {ThemeSessionComponent} from "./session/list-theme/theme-session.component";
 import {SelectCardComponent} from "./card/select/select.card.component";
+import {AccountComponent} from "./account/account.component";
 
 @NgModule({
     declarations: [
@@ -50,7 +51,8 @@ import {SelectCardComponent} from "./card/select/select.card.component";
         ChangePwdComponent,
         ParticipatingSessionComponent,
         ThemeSessionComponent,
-        SelectCardComponent
+        SelectCardComponent,
+        AccountComponent
     ],
     imports: [
         BrowserModule,
