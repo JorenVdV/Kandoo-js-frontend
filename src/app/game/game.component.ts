@@ -1,5 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import {Card} from "../models/card";
+import {Observable} from "rxjs";
 
 @Component({
     selector: 'game',
@@ -7,7 +8,7 @@ import {Card} from "../models/card";
     styleUrls: ['./game.component.css']
 })
 
-export class GameComponent implements OnInit{
+export class GameComponent implements OnInit {
     cards: Card[];
     circleFive: Card[] = [];
     circleFour: Card[] = [];
@@ -15,96 +16,136 @@ export class GameComponent implements OnInit{
     circleTwo: Card[] = [];
     circleOne: Card[] = [];
     selectedCard: Card;
+    isCircleFilled: boolean = false;
+    ticks: number = 0;
+    subscription;
 
     ngOnInit() {
         this.cards = [
             {
-                "description": "card01",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
                 "priority": 6,
-                "listNumber": "1",
                 "_id": "1"
             },
             {
-                "description": "card02",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
                 "priority": 6,
-                "listNumber": "2",
                 "_id": "2"
             },
             {
-                "description": "card03",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
                 "priority": 6,
-                "listNumber": "3",
                 "_id": "3"
             },
             {
-                "description": "card04",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
                 "priority": 6,
-                "listNumber": "4",
                 "_id": "4"
             },
             {
-                "description": "card05",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
                 "priority": 6,
-                "listNumber": "5",
                 "_id": "5"
             },
             {
-                "description": "card06",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
                 "priority": 6,
-                "listNumber": "6",
                 "_id": "6"
             },
             {
-                "description": "card07",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
                 "priority": 6,
-                "listNumber": "7",
                 "_id": "7"
             },
             {
-                "description": "card08",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
                 "priority": 6,
-                "listNumber": "8",
                 "_id": "8"
             },
             {
-                "description": "card09",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
                 "priority": 6,
-                "listNumber": "9",
                 "_id": "9"
             },
             {
-                "description": "card10",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
                 "priority": 6,
-                "listNumber": "10",
                 "_id": "10"
             },
             {
-                "description": "card11",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
                 "priority": 6,
-                "listNumber": "11",
                 "_id": "11"
             },
             {
-                "description": "card12",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
                 "priority": 6,
-                "listNumber": "12",
+                "_id": "12"
+            }
+            ,
+            {
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
+                "priority": 6,
+                "_id": "7"
+            },
+            {
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
+                "priority": 6,
+                "_id": "8"
+            },
+            {
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
+                "priority": 6,
+                "_id": "9"
+            },
+            {
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
+                "priority": 6,
+                "_id": "10"
+            },
+            {
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
+                "priority": 6,
+                "_id": "11"
+            },
+            {
+                "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
+                "priority": 6,
                 "_id": "12"
             }
         ];
+
         for (let i = 0; i < this.cards.length; i++) {
-            this.cards[i].circlePosition = "item-" + (i + 1);
+            this.cards[i].listNumber = i + 1;
         }
     }
 
-    onClick(card: Card) {
+    selectCard(card: Card) {
         this.selectedCard = card;
     }
 
-    increasePriority(card: Card) {
-        if (card.priority === 6) {
-            this.cards.splice(this.cards.indexOf(card), 1);
-            this.circleFive.push(card);
+    addToCircle(card: Card) {
+        if (this.circleFive.length != 12) {
+            if (card.priority === 6) {
+                this.cards.splice(this.cards.indexOf(card), 1);
+                card.circlePosition = "item-" + (this.circleFive.length + 1);
+                this.circleFive.push(card);
+                card.priority--;
+            }
+            if (this.circleFive.length === 12) {
+                this.isCircleFilled = true;
+            }
+            if (this.isCircleFilled) {
+                let timer = Observable.timer(0, 1000);
+                this.subscription = timer.subscribe(t => {
+                    this.ticks = t;
+                    this.unsubTimer(t);
+                });
+            }
         }
+    }
+
+    increasePriority(card: Card) {
         if (card.priority === 5) {
             this.circleFive.splice(this.circleFive.indexOf(card), 1);
             this.circleFour.push(card);
@@ -122,5 +163,18 @@ export class GameComponent implements OnInit{
             this.circleOne.push(card);
         }
         card.priority--;
+
+        this.subscription.unsubscribe();
+        let timer = Observable.timer(0, 1000);
+        this.subscription = timer.subscribe(t => {
+            this.ticks = t;
+            this.unsubTimer(t);
+        });
+    }
+
+    unsubTimer(t) {
+        if (t === 60) {
+            this.subscription.unsubscribe();
+        }
     }
 }
