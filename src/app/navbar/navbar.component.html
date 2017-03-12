@@ -32,17 +32,20 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <div class="navbar-form">
-                    <div class="form-group">
+
                         <li>
                             <login *ngIf="isLoggedOut"></login>
                         </li>
-                        <li *ngIf="isLoggedIn" style="display:inline"><change-pwd></change-pwd>
+                        <li *ngIf="isLoggedIn" class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                               aria-expanded="false">Acount <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li style="cursor: pointer"><a><change-pwd></change-pwd></a></li>
+                                <li style="cursor: pointer"><a><change-account></change-account></a></li>
+                            </ul>
                         </li>
-                        <li *ngIf="isLoggedIn" style="display:inline"><a class="btn btn-default" href="#"
+                        <li *ngIf="isLoggedIn" style="display:inline"><a href="#"
                                                                          (click)="logout()">Logout</a></li>
-                    </div>
-                </div>
             </ul>
         </div>
     </div><!-- /.navbar-collapse -->

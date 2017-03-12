@@ -110,7 +110,7 @@ export class LoginComponent implements OnInit {
                             };
                         })();
                         delay(function () {
-                            router.navigate(['/themes']);
+                            router.navigate(['/landing']);
                         }, 600); // end delay
                     },
                     error => {
@@ -126,7 +126,7 @@ export class LoginComponent implements OnInit {
                                 };
                             })();
                             delay(function () {
-                                router.navigate(['/themes']);
+                                router.navigate(['/landing']);
                             }, 600); // end delay
                         } else {
                             this.alertService.error(error);

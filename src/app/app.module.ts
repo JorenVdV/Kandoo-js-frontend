@@ -32,6 +32,7 @@ import {ParticipatingSessionComponent} from "./session/list-participating/partic
 import {ThemeSessionComponent} from "./session/list-theme/theme-session.component";
 import {SelectCardComponent} from "./card/select/select.card.component";
 import {AccountComponent} from "./account/account.component";
+import {InvitedSessionComponent} from "./session/list-invited/invited-session.component";
 
 @NgModule({
     declarations: [
@@ -52,7 +53,8 @@ import {AccountComponent} from "./account/account.component";
         ParticipatingSessionComponent,
         ThemeSessionComponent,
         SelectCardComponent,
-        AccountComponent
+        AccountComponent,
+        InvitedSessionComponent
     ],
     imports: [
         BrowserModule,

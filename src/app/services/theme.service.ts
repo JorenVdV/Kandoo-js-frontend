@@ -9,7 +9,7 @@ import {Theme} from "../models/theme";
 @Injectable()
 export class ThemeService {
     private headers = new Headers({'Content-Type': 'application/json'});
-    private baseURL = 'http://localhost:8000';
+    private baseURL = 'https://kandoo-js-backend.herokuapp.com';
 
 
     constructor(private http: Http) {

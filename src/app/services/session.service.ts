@@ -14,7 +14,7 @@ import {Card} from "../models/card";
 @Injectable()
 export class SessionService {
     private headers = new Headers({'Content-Type': 'application/json'});
-    private baseURL = 'http://localhost:8000';
+    private baseURL = 'https://kandoo-js-backend.herokuapp.com';
 
     private options = new RequestOptions({headers: this.headers});
 
@@ -111,7 +111,7 @@ export class SessionService {
     }
 
     updateSessionCards(session: Session, cards: Card[]): Observable<Session> {
-        const url = 'https://api.teamjs.xyz/session/'+session._id +'/update';
+        const url = 'https://kandoo-js-backend.herokuapp.com/session/'+session._id +'/update';
         return this.http
             .put(url, JSON.stringify({sessionCards: cards}), {headers: this.headers})
             .map((res: Response) => res.json())
@@ -142,5 +142,22 @@ export class SessionService {
     }
 
     startSession(id: string) {
+    }
+
+    readInvitedSessions(): Observable<Session[]> {
+        let currentUser = localStorage.getItem('currentUser');
+        return this.http
+            .get(this.baseURL + '/user/' + JSON.parse(currentUser)._id + '/sessions/invited')
+            .map((res: Response) => res.json().sessions)
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
+    acceptInvite(session: Session): Observable<Session[]> {
+        let currentUser = localStorage.getItem('currentUser');
+        const url = this.baseURL+'/session/'+session._id +'/accept';
+        return this.http
+            .put(url, JSON.stringify({userId: JSON.parse(currentUser)._id}), {headers: this.headers})
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 }
