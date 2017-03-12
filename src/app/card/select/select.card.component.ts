@@ -4,6 +4,7 @@ import {CardService} from "../../services/card.service";
 import {ActivatedRoute} from "@angular/router";
 import {SessionService} from "../../services/session.service";
 import {Session} from "../../models/session";
+import {AlertService} from "../../services/alert.service";
 
 @Component({
     selector: 'selectcard',
@@ -18,9 +19,10 @@ export class SelectCardComponent implements OnInit {
     session: Session;
     cardsCanBeAdded: boolean;
 
-    constructor(private cardService: CardService, private route: ActivatedRoute, private sessionService: SessionService) {
+    constructor(private cardService: CardService, private route: ActivatedRoute, private sessionService: SessionService, private alertService: AlertService) {
         this.route.params.subscribe(params => {
             this.sessionId = params['_id'];
+            this.sessionCards = new Array(0);
         });
     }
 
@@ -33,15 +35,23 @@ export class SelectCardComponent implements OnInit {
                     if (this.session.cardsCanBeAdded) {
                         this.cardsCanBeAdded = true;
                     }
-                    this.sessionCards = this.session.sessionCards;
-
+                    if (this.session.creator == JSON.parse(localStorage.getItem("currentUser"))._id) {
+                        this.sessionCards = this.session.sessionCards;
+                    }
                     this.cardService.readCards(this.session.theme).subscribe(
                         cards => {
-                            this.cards = cards;
-                            for (var i = 0; i < this.sessionCards; i++) {
-                                this.cards.splice(this.cards.indexOf(this.sessionCards[i]), 1);
+                            if (this.session.creator == JSON.parse(localStorage.getItem("currentUser"))._id) {
+                                this.cards = cards;
+                                for (let i = 0; i < this.sessionCards.length; i++) {
+                                    for (let j = 0; j < this.cards.length; j++) {
+                                        if (this.sessionCards[i].description == this.cards[j].description) {
+                                            this.cards.splice(j, 1);
+                                        }
+                                    }
+                                }
+                            } else {
+                                this.cards = this.session.sessionCards;
                             }
-
                         },
                         err => {
 
@@ -50,15 +60,19 @@ export class SelectCardComponent implements OnInit {
                 err => {
 
                 })
-
-
     }
 
     updateSessionCards() {
+        if (this.session.creator != JSON.parse(localStorage.getItem('currentUser'))._id) {
+            if (this.sessionCards.length < this.session.minCardsPerParticipant) {
+                this.alertService.error("You have to take " + this.session.minCardsPerParticipant + " cards!");
+                return;
+            }
+        }
         this.sessionService.updateSessionCards(this.session, this.sessionCards)
             .subscribe(
                 card => {
-                    alert("Cards added to session!")
+                    this.alertService.success("Cards updated!");
                 },
                 err => {
                     console.log(err);
@@ -66,8 +80,18 @@ export class SelectCardComponent implements OnInit {
     }
 
     selectCard(card: Card) {
-        this.cards.splice(this.cards.indexOf(card), 1);
-        this.sessionCards.push(card);
+        if (this.session.creator != JSON.parse(localStorage.getItem("currentUser"))._id) {
+            if (this.session.maxCardsPerParticipant <= this.sessionCards.length) {
+                this.alertService.error("You can't take more than " + this.session.maxCardsPerParticipant + " cards!");
+            } else {
+                this.cards.splice(this.cards.indexOf(card), 1);
+                this.sessionCards.push(card);
+            }
+        }
+        else {
+            this.cards.splice(this.cards.indexOf(card), 1);
+            this.sessionCards.push(card);
+        }
 
     }
 
@@ -77,10 +101,12 @@ export class SelectCardComponent implements OnInit {
         this.cards.push(card);
     }
 
-    submitCard(cardDescription: string){
+    submitCard(cardDescription: string) {
         if (!description) {
             return;
         }
+
+
         this.cardService.createCard(cardDescription, this.themeId).subscribe(
             card => {
                 this.cards.push(card);

@@ -18,7 +18,7 @@ export class CardService {
 
   createCard(description, id): Observable<Card> {
     return this.http
-      .post(this.baseURL + 'theme/' + id + '/card', JSON.stringify({
+      .post(this.baseURL + '/theme/' + id + '/card', JSON.stringify({
         description
       }), {headers: this.headers})
       .map((res: Response) => res.json().card)
@@ -35,9 +35,9 @@ export class CardService {
 
     readCards(id: string): Observable<Card[]> {
         return this.http
-            .get(this.baseURL + 'theme/' + id + '/cards')
+            .get(this.baseURL + '/theme/' + id + '/cards')
             .map((res: Response) => res.json().cards)
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+            .catch((error: any) => Observable.throw(error));
     }
 
     updateCard(Card: Card): Observable<Card> {
@@ -49,7 +49,7 @@ export class CardService {
     }
 
   deleteCard(id: string): Observable<Card> {
-    const url = this.baseURL + 'card/' + id +'/delete';
+    const url = this.baseURL + '/card/' + id +'/delete';
     return this.http
       .delete(url)
       .map((res: Response) => res.json())

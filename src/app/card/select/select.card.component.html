@@ -1,6 +1,7 @@
 <navbar></navbar>
 
 <div class="container">
+    <alert></alert>
     <div>
         <div *ngIf="cardsCanBeAdded" class="col-md-6">
 
@@ -29,7 +30,7 @@
                     <h4 style="margin-top: 7px; margin-bottom: 7px">{{card.description}}</h4>
                 </div>
                 <div class="col-md-1">
-                    <button class="btn btn-primary" (click)="selectCard(card)">-></button>
+                    <button class="btn btn-primary" (click)="selectCard(card)"><strong>></strong></button>
                 </div>
             </div>
         </div>

@@ -44,7 +44,9 @@ export class InvitedSessionComponent implements OnInit {
     acceptInvite(session: Session){
         this.sessionService.acceptInvite(session)
             .subscribe(sessions => {
+                this.sessions.splice(this.sessions.indexOf(session), 1);
                     this.alertService.success("Session accepted!", false);
+                    location.reload();
                 },
                 err => {
                 });

@@ -42,7 +42,7 @@ export class SessionService {
         }
 
         return this.http
-            .post(this.baseURL + 'theme/' + themeId + '/session', JSON.stringify(
+            .post(this.baseURL + '/theme/' + themeId + '/session', JSON.stringify(
                 {
                     title: session.title,
                     description: session.description,
@@ -68,7 +68,7 @@ export class SessionService {
 
     readSessions(id: string): Observable<Session[]> {
         return this.http
-            .get(this.baseURL + 'theme/' + id + '/sessions')
+            .get(this.baseURL + '/theme/' + id + '/sessions')
             .map((res: Response) => res.json().sessions)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
@@ -111,7 +111,21 @@ export class SessionService {
     }
 
     updateSessionCards(session: Session, cards: Card[]): Observable<Session> {
-        const url = 'https://kandoo-js-backend.herokuapp.com/session/'+session._id +'/update';
+        const url;
+        if(session.creator==JSON.parse(localStorage.getItem('currentUser'))._id){
+            url = 'https://kandoo-js-backend.herokuapp.com/session/'+session._id +'/update';
+            return this.http
+                .put(url, JSON.stringify({sessionCards: cards}), {headers: this.headers})
+                .map((res: Response) => res.json())
+                .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+        } else {
+            url = 'https://kandoo-js-backend.herokuapp.com/session/'+session._id +'/pick';
+            return this.http
+                .put(url, JSON.stringify({cards: cards, userId:JSON.parse(localStorage.getItem('currentUser'))._id }), {headers: this.headers})
+                .map((res: Response) => res.json())
+                .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+        }
+
         return this.http
             .put(url, JSON.stringify({sessionCards: cards}), {headers: this.headers})
             .map((res: Response) => res.json())

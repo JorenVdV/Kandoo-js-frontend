@@ -40,7 +40,7 @@ export const routes: Routes = [
 
 
     // otherwise redirect to home
-    {path: 'full', redirectTo: 'themes'}
+    {path: 'full', redirectTo: 'landing'}
 ];
 
 @NgModule({

@@ -25,6 +25,13 @@ export class ParticipatingSessionComponent implements OnInit {
 
     }
 
+
+    selectCards(session: Session){
+        this.router.navigate(['/session',session._id,'selectcards']);
+    }
+
+
+
     getSessions(): void {
         this.sessionService.readParticipantSessions().subscribe(
             sessions => {
@@ -90,7 +97,7 @@ export class ParticipatingSessionComponent implements OnInit {
                 }, 600); // end delay
             },
             err => {
-                console.log(err);
+                this.alertService.error(err,false);
             });
     }
 }
