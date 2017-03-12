@@ -1,6 +1,7 @@
 <navbar></navbar>
 <div class="container">
     <div class="col-md-8 col-md-offset-2">
+        <h2>Theme: </h2>
         <label>Naam<br><input id="title" type="text" [(ngModel)]="theme.title" class="form-control"></label><br>
         <label>Omschrijving<br><input id="description" type="text" [(ngModel)]="theme.description" class="form-control"></label><br>
         <label>Tags<br>
@@ -19,11 +20,14 @@
         <div class="row">
             <hr>
         </div>
-        <div class="panel panel-default" *ngFor="let session of sessions">
-            <div class="panel-body">
-                <h3>{{session.title}}</h3>
+        <h2>Sessions: </h2>
+        <a *ngFor="let session of sessions" style="cursor: pointer" (click)="selectSession(session)">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4>{{session.title}}</h4>
+                </div>
             </div>
-        </div>
+        </a>
     </div>
 
 

@@ -13,6 +13,9 @@ import { ThemeListComponent } from '../theme/list/theme-list.component';
 import {LandingComponent} from "../landing/landing.component";
 import {ChangePwdComponent} from "../account/change-password.component";
 import {ParticipatingSessionComponent} from "../session/list-participating/participating-session.component";
+import {ThemeSessionComponent} from "../session/list-theme/theme-session.component";
+import {SelectCardComponent} from "../card/select/select.card.component";
+import {AccountComponent} from "../account/account.component";
 
 export const routes: Routes = [
     {path: '', component: LandingComponent},
@@ -25,12 +28,15 @@ export const routes: Routes = [
     {path: 'cards', component: CardComponent},
     {path: 'theme/:_id/cards', component: CardComponent},
     {path: 'card/:_id', component: CardDetailComponent},
-    {path: 'sessions', component: SessionComponent},
-    {path: 'theme/:_id/sessions', component: SessionComponent},
+    {path: 'session', component: SessionComponent},
+    {path: 'theme/:_id/session', component: SessionComponent},
     {path: 'session/:sessionId', component: SessionComponent},
     {path: 'changepwd', component: ChangePwdComponent},
     {path: 'game', component: GameComponent},
     {path: 'participating', component: ParticipatingSessionComponent},
+    {path: 'theme/:_id/themesessions', component: ThemeSessionComponent},
+    {path: 'session/:_id/selectcards', component: SelectCardComponent},
+    {path: 'changeaccount', component: AccountComponent},
 
 
     // otherwise redirect to home

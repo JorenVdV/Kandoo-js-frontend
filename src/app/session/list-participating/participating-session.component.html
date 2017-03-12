@@ -1,12 +1,38 @@
-<div class="container">
-    <div class="col-md-6 col-md-offset-3">
-        <div class="row">
-            <ul>
-                <li *ngFor="let session of sessions" (click)="selectSession(session)">
-                    <span>{{session.title}}</span>
-                    <button (click)="deleteSession(session)" class="btn btn-danger">DELETE</button>
-                </li>
-            </ul>
+<div *ngFor="let session of sessions" style="cursor: pointer">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="col-md-5">
+                <h4>{{session.title}}</h4>
+            </div>
+            <div class="col-md-7" *ngIf="session.creator == userId">
+                <div class="col-sm-6 col-lg-3"><a class="btn btn-primary btn-block" (click)="selectSession(session)">INFO</a><br></div>
+                <div class="col-sm-6 col-lg-3"><button class="btn btn-primary btn-block" (click)="modal.open()">INVITE</button><br></div>
+                <div class="col-sm-6 col-lg-3"></div>
+                <div class="col-sm-6 col-lg-3"><button (click)="deleteSession(session)" class="btn btn-danger btn-block">DELETE</button><br></div>
+
+            </div>
         </div>
     </div>
+
+
+    <modal #modal>
+        <modal-header [show-close]="true">
+            <h4 class="modal-title">Invite to session</h4>
+        </modal-header>
+        <modal-body>
+            <alert></alert>
+            <tag-input style="height: auto !important; padding: 0 !important;" [(ngModel)]="session.invitees"
+                       separatorKeys="[32]" placeholder="Add another email" [validators]="validators"
+                       [errorMessages]="errorMessages" [theme]="'minimal'" name="invitees" class="form-control"
+                       secondaryPlaceholder="Add a new email"></tag-input>
+            <br>
+            <button (click)="inviteToSession(session)" class="btn btn-primary btn-block">INVITE</button>
+
+        </modal-body>
+    </modal>
+
 </div>
+
+
+
+

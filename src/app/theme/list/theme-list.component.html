@@ -1,21 +1,49 @@
 <navbar></navbar>
 <div class="container">
-    <h2>Themes</h2>
-    <button id="create-btn" class="btn btn-success" (click)="createTheme()">CREATE</button>
+
+    <button id="create-btn" class="btn btn-success" (click)="createTheme()">CREATE THEME</button>
     <div class="row">
         <hr>
     </div>
     <div class="col-md-10 col-md-offset-1">
-        <div class="panel panel-default" *ngFor="let theme of themes" >
+        <h2>Themes:</h2>
+        <div class="panel panel-default" *ngFor="let theme of themes">
             <div class="panel-body">
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <h4><strong>{{theme.title}}:</strong> {{theme.description}}</h4>
                 </div>
-                <button class="btn btn-info" (click)="selectTheme(theme)">INFO</button>
-                <button class="btn btn-danger" (click)="deleteTheme(theme)">DELETE</button>
-                <button class="btn btn-success" (click)="addCards(theme)">ADD CARDS</button>
-                <button class="btn btn-warning" (click)="getSessions(theme)">ADD SESSION</button>
+                <div class="col-md-7">
+                    <div class="col-sm-6 col-lg-3">
+                        <button class="btn btn-primary btn-block" (click)="selectTheme(theme)">INFO</button>
+                        <br>
+                    </div>
+                    <div class=" col-sm-6 col-lg-3">
+                        <button class="btn btn-primary btn-block" (click)="addCards(theme)">CARDS</button>
+                        <br>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <button class="btn btn-primary btn-block" (click)="createSession(theme)">SESSION</button>
+                        <br>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <button class="btn btn-danger btn-block" (click)="deleteTheme(theme)">DELETE</button>
+                        <br>
+                    </div>
+                </div>
+
+
             </div>
         </div>
+        <div class="row">
+            <hr>
+        </div>
+        <h2>Participating sessions:</h2>
+        <participating-session></participating-session>
+
+        <h2>invited sessions:</h2>
+        <invited-session></invited-session>
+
     </div>
 </div>
+
+

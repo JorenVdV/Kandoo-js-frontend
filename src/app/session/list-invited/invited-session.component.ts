@@ -7,32 +7,20 @@ import {AlertService} from "../../services/alert.service";
 import {ModalComponent} from "ng2-bs3-modal/components/modal";
 
 @Component({
-    selector: 'participating-session',
-    templateUrl: './participating-session.component.html',
+    selector: 'invited-session',
+    templateUrl: './invited-session.component.html',
 })
 
-export class ParticipatingSessionComponent implements OnInit {
+export class InvitedSessionComponent implements OnInit {
     sessions: Session[];
     themeId: string;
     session = new Session();
     userId: string;
 
-    @ViewChild('modal')
-    modal: ModalComponent;
 
     constructor(private sessionService: SessionService, private alertService: AlertService,
                 private router: Router, private route: ActivatedRoute) {
 
-    }
-
-    getSessions(): void {
-        this.sessionService.readParticipantSessions().subscribe(
-            sessions => {
-                this.sessions = sessions
-            },
-            err => {
-                console.log(err);
-            });
     }
 
     deleteSession(session: Session) {
@@ -53,44 +41,27 @@ export class ParticipatingSessionComponent implements OnInit {
             });
     }
 
+    acceptInvite(session: Session){
+        this.sessionService.acceptInvite(session)
+            .subscribe(sessions => {
+                    this.alertService.success("Session accepted!", false);
+                },
+                err => {
+                });
+    }
+
     ngOnInit() {
-        let currentUser = localStorage.getItem('currentUser');
-        this.sessionService.readParticipantSessions()
+
+        this.sessionService.readInvitedSessions()
             .subscribe(sessions => {
                     this.sessions = sessions;
                 },
                 err => {
-                    console.log(err);
                 });
-        console.log(this.sessions);
         this.userId = JSON.parse(localStorage.getItem('currentUser'))._id;
     }
 
     selectSession(session: Session) {
         this.router.navigate(['/session', session._id]);
-    }
-
-    close() {
-        this.modal.close();
-    }
-
-    inviteToSession(session: Session){
-        this.sessionService.inviteToSession(session).subscribe(
-            done => {
-                this.alertService.success('Invite successful', false);
-                let delay = (function () {
-                    let timer = 0;
-                    return function (callback, ms) {
-                        clearTimeout(timer);
-                        timer = setTimeout(callback, ms);
-                    };
-                })();
-                delay(function () {
-                    document.getElementsByTagName("alert")[0].innerHTML = "";
-                }, 600); // end delay
-            },
-            err => {
-                console.log(err);
-            });
     }
 }
