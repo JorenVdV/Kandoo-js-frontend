@@ -35,7 +35,7 @@ p {
     justify-content: center;
     align-items: center;
 
-    border-radius: 50%;
+    border-radius: 50% !important;
     border: 10px solid #3F9FD7;
 }
 
