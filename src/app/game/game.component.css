@@ -78,7 +78,7 @@ p {
     background: white;
     width: 22px;
     height: 32px;
-    border-radius: 2px;
+    border-radius: 2px !important;
     cursor: pointer;
 }
 

@@ -24,93 +24,93 @@ export class GameComponent implements OnInit {
         this.cards = [
             {
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
-                "priority": 6,
+                "priority": 0,
                 "_id": "1"
             },
             {
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
-                "priority": 6,
+                "priority": 0,
                 "_id": "2"
             },
             {
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
-                "priority": 6,
+                "priority": 0,
                 "_id": "3"
             },
             {
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
-                "priority": 6,
+                "priority": 0,
                 "_id": "4"
             },
             {
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
-                "priority": 6,
+                "priority": 0,
                 "_id": "5"
             },
             {
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
-                "priority": 6,
-                "_id": "6"
+                "priority": 0,
+                "_id": "0"
             },
             {
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
-                "priority": 6,
+                "priority": 0,
                 "_id": "7"
             },
             {
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
-                "priority": 6,
+                "priority": 0,
                 "_id": "8"
             },
             {
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
-                "priority": 6,
+                "priority": 0,
                 "_id": "9"
             },
             {
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
-                "priority": 6,
+                "priority": 0,
                 "_id": "10"
             },
             {
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
-                "priority": 6,
+                "priority": 0,
                 "_id": "11"
             },
             {
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
-                "priority": 6,
+                "priority": 0,
                 "_id": "12"
             }
             ,
             {
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
-                "priority": 6,
+                "priority": 0,
                 "_id": "7"
             },
             {
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
-                "priority": 6,
+                "priority": 0,
                 "_id": "8"
             },
             {
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
-                "priority": 6,
+                "priority": 0,
                 "_id": "9"
             },
             {
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
-                "priority": 6,
+                "priority": 0,
                 "_id": "10"
             },
             {
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
-                "priority": 6,
+                "priority": 0,
                 "_id": "11"
             },
             {
                 "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus fermentum magna placerat aliquet non nec augue. Phasellus vulputate interdum dui eget tempus. Vestibulum facilisis laoreet felis, eget posuere nunc fringilla eu. Duis eu odio lacus. Suspendisse odio mi, ullamcorper vel tempor vitae, elementum vulputate arcu.",
-                "priority": 6,
+                "priority": 0,
                 "_id": "12"
             }
         ];
@@ -126,11 +126,11 @@ export class GameComponent implements OnInit {
 
     addToCircle(card: Card) {
         if (this.circleFive.length != 12) {
-            if (card.priority === 6) {
+            if (card.priority === 0) {
                 this.cards.splice(this.cards.indexOf(card), 1);
                 card.circlePosition = "item-" + (this.circleFive.length + 1);
                 this.circleFive.push(card);
-                card.priority--;
+                card.priority = 5;
             }
             if (this.circleFive.length === 12) {
                 this.isCircleFilled = true;

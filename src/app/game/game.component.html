@@ -8,7 +8,7 @@
         </div>
         <div class="card-description" *ngIf="selectedCard">
             <p><b>Description</b><br>{{selectedCard.description}}</p>
-            <button class="btn" *ngIf="selectedCard.priority === 6 && !isCircleFilled"
+            <button class="btn" *ngIf="selectedCard.priority === 0 && !isCircleFilled"
                     (click)="addToCircle(selectedCard)">ADD TO CIRCLE
             </button>
             <button class="btn" *ngIf="(selectedCard.priority != 1 && selectedCard.priority != 6) && isCircleFilled"
