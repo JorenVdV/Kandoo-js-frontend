@@ -1,7 +1,7 @@
 <div *ngFor="let session of sessions" style="cursor: pointer">
     <div class="panel panel-default">
         <div class="panel-body">
-            <div class="col-md-10">
+            <div class="col-md-5">
                 <h4>{{session.title}}</h4>
             </div>
             <div class="col-md-7" *ngIf="session.creator == userId">
@@ -9,6 +9,7 @@
                 <div class="col-sm-6 col-lg-3"><button class="btn btn-primary btn-block" (click)="modal.open()">INVITE</button><br></div>
                 <div class="col-sm-6 col-lg-3"><button class="btn btn-primary btn-block" (click)="selectCards(session)">CARDS</button></div>
                 <div class="col-sm-6 col-lg-3"><button (click)="deleteSession(session)" class="btn btn-danger btn-block">DELETE</button><br></div>
+                <div class="col-md-8 col-md-offset-2"><button (click)="startSession(session)" class="btn btn-success btn-block">START</button></div>
 
             </div>
             <div class="col-md-7" *ngIf="session.creator != userId">

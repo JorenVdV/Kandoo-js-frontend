@@ -81,6 +81,27 @@ export class ParticipatingSessionComponent implements OnInit {
         this.modal.close();
     }
 
+    startSession(session: Session){
+        this.sessionService.startSession(session).subscribe(
+            done => {
+                this.alertService.success('Start successful', false);
+                let delay = (function () {
+                    let timer = 0;
+                    return function (callback, ms) {
+                        clearTimeout(timer);
+                        timer = setTimeout(callback, ms);
+                    };
+                })();
+                delay(function () {
+                    document.getElementsByTagName("alert")[0].innerHTML = "";
+                }, 600); // end delay
+            },
+            err => {
+                this.alertService.error(err,false);
+            });
+    }
+
+
     inviteToSession(session: Session){
         this.sessionService.inviteToSession(session).subscribe(
             done => {

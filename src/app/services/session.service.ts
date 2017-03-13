@@ -155,8 +155,15 @@ export class SessionService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    startSession(id: string) {
+    startSession(session: Session): Observable<Session> {
+        let currentUser = localStorage.getItem('currentUser');
+        const url = this.baseURL + '/session/' + session._id + '/start';
+        return this.http
+            .put(url, JSON.stringify({userId: JSON.parse(currentUser)._id}), {headers: this.headers})
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
+
 
     readInvitedSessions(): Observable<Session[]> {
         let currentUser = localStorage.getItem('currentUser');
