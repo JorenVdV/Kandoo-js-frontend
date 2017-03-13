@@ -25,6 +25,7 @@ export class Session {
     invitees: String [];
     sessionCards: Card[];
     pickedCards: Card[];
+    cardPriorities: Card[];
 
 }
 

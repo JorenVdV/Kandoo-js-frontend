@@ -85,16 +85,9 @@ export class ParticipatingSessionComponent implements OnInit {
         this.sessionService.startSession(session).subscribe(
             done => {
                 this.alertService.success('Start successful', false);
-                let delay = (function () {
-                    let timer = 0;
-                    return function (callback, ms) {
-                        clearTimeout(timer);
-                        timer = setTimeout(callback, ms);
-                    };
-                })();
-                delay(function () {
-                    document.getElementsByTagName("alert")[0].innerHTML = "";
-                }, 600); // end delay
+
+                    this.router.navigate(['/session', session._id, 'game']);
+
             },
             err => {
                 this.alertService.error(err,false);
