@@ -17,6 +17,7 @@ export class ParticipatingSessionComponent implements OnInit {
     session = new Session();
     userId: string;
 
+
     @ViewChild('modal')
     modal: ModalComponent;
 
@@ -81,13 +82,29 @@ export class ParticipatingSessionComponent implements OnInit {
     }
 
     startSession(session: Session) {
-        this.sessionService.startSession(session).subscribe(
-            done => {
-                this.router.navigate(['/session', session._id, 'game']);
-            },
-            err => {
-                this.alertService.error(err, false);
-            });
+        if (session.pickedCards.length < session.participants.length) {
+            this.alertService.error("Not everyone selected cards yet!")
+        } else {
+
+        }
+
+
+        if (session.status == "created") {
+            if (session.pickedCards.length < session.participants.length) {
+                this.alertService.error("Not everyone selected cards yet!")
+            } else {
+                this.sessionService.startSession(session).subscribe(
+                    done => {
+                        this.router.navigate(['/session', session._id, 'game']);
+                    },
+                    err => {
+                        this.alertService.error(err, false);
+                    });
+            }
+        } else {
+            this.router.navigate(['/session', session._id, 'game']);
+        }
+
     }
 
 

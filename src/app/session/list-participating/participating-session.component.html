@@ -9,7 +9,8 @@
                 <div class="col-sm-6 col-lg-3"><button class="btn btn-primary btn-block" (click)="modal.open()">INVITE</button><br></div>
                 <div class="col-sm-6 col-lg-3"><button class="btn btn-primary btn-block" (click)="selectCards(session)">CARDS</button></div>
                 <div class="col-sm-6 col-lg-3"><button (click)="deleteSession(session)" class="btn btn-danger btn-block">DELETE</button><br></div>
-                <div class="col-md-8 col-md-offset-2"><button (click)="startSession(session)" class="btn btn-success btn-block">START</button></div>
+                <div *ngIf="session.status == 'created'" class="col-md-8 col-md-offset-2"><button (click)="startSession(session)" class="btn btn-success btn-block">START</button></div>
+                <div *ngIf="session.status != 'created'" class="col-md-8 col-md-offset-2"><a (click)="startSession(session)" class="btn btn-success btn-block">GO TO GAME</a></div>
 
             </div>
             <div class="col-md-7" *ngIf="session.creator != userId">
@@ -31,7 +32,7 @@
             <alert></alert>
             <tag-input style="height: auto !important; padding: 0 !important;" [(ngModel)]="session.invitees"
                        separatorKeys="[32]" placeholder="Add another email" [validators]="validators"
-                       [errorMessages]="errorMessages" [theme]="'minimal'" name="invitees" class="form-control"
+                       [errorMessages]="errorMessages" [theme]="'minimal'" addOnBlur="[true]" name="invitees" class="form-control"
                        secondaryPlaceholder="Add a new email"></tag-input>
             <br>
             <button (click)="inviteToSession(session)" class="btn btn-primary btn-block">INVITE</button>
