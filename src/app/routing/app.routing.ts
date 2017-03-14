@@ -33,6 +33,7 @@ export const routes: Routes = [
     {path: 'session/:sessionId', component: SessionComponent},
     {path: 'changepwd', component: ChangePwdComponent},
     {path: 'game', component: GameComponent},
+    {path: 'session/:_id/game', component: GameComponent},
     {path: 'participating', component: ParticipatingSessionComponent},
     {path: 'theme/:_id/themesessions', component: ThemeSessionComponent},
     {path: 'session/:_id/selectcards', component: SelectCardComponent},
