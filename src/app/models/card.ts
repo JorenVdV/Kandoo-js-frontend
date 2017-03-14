@@ -1,13 +1,10 @@
 export class Card {
+    _id: string;
+    createdAt: string;
     description: string;
+    theme: string;
+    updatedAt: string;
     priority: number;
     listNumber: string;
     circlePosition: string;
-    _id: string;
-
-    constructor(description: string, priority: number, id: string) {
-        this.description = description;
-        this.priority = priority;
-        this._id = id;
-    }
 }

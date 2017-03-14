@@ -2,45 +2,64 @@
 <div class="container">
     <div class="col-md-3">
         <div class="card-list">
-            <div class="card-list-item card-item" *ngFor="let card of cards" (click)="selectCard(card, 0)">
+            <div class="card-list-item card-item" *ngFor="let card of cards" (click)="selectCard(card)">
                 <span>{{card.listNumber}}</span>
             </div>
         </div>
         <div class="card-description" *ngIf="selectedCard">
             <p><b>Description</b><br>{{selectedCard.description}}</p>
-            <button class="btn" *ngIf="selectedCard.priority === 0 && !isCircleFilled"
+            <button class="btn btn-success" *ngIf="selectedCard.priority === 0 && !isCircleFilled"
                     (click)="addToCircle(selectedCard)">ADD TO CIRCLE
             </button>
-            <button class="btn" *ngIf="(selectedCard.priority != 1 && selectedCard.priority != 6) && isCircleFilled"
+            <button *ngIf="(selectedCard.priority != 1
+                    && selectedCard.priority != 6)
+                    && isCircleFilled
+                    && currentParticipant?._id === userId"
+                    class="btn btn-primary"
                     (click)="increasePriority(selectedCard)">INCREASE PRIORITY
             </button>
         </div>
+        <button class="btn btn-danger btn-end-session" *ngIf="userId === session?.creator && isCircleFilled"
+                (click)="endSession()">END SESSION
+        </button>
     </div>
     <div class="col-md-6">
         <div class="circle-container">
-            <div class="circle" id="circle-5">
-                <div *ngFor="let card of circleFive;" [class]="'card-item circle-item ' + card.circlePosition"
+            <div class="circle" id="circle-5"
+                 [class.opportunity]="session?.circleType == 'opportunity'"
+                 [class.threat]="session?.circleType == 'threat'">
+                <div *ngFor="let card of circleFive;"
+                     [class]="'card-item circle-item ' + card.circlePosition"
                      (click)="selectCard(card)">
                     <span>{{card.listNumber}}</span>
                 </div>
-                <div class="circle" id="circle-4">
-                    <div *ngFor="let card of circleFour;" [class]="'card-item circle-item ' + card.circlePosition"
+                <div class="circle" id="circle-4"
+                     [class.opportunity]="session?.circleType == 'opportunity'"
+                     [class.threat]="session?.circleType == 'threat'">
+                    <div *ngFor="let card of circleFour;"
+                         [class]="'card-item circle-item ' + card.circlePosition"
                          (click)="selectCard(card)">
                         <span>{{card.listNumber}}</span>
                     </div>
-                    <div class="circle" id="circle-3">
+                    <div class="circle" id="circle-3"
+                         [class.opportunity]="session?.circleType == 'opportunity'"
+                         [class.threat]="session?.circleType == 'threat'">
                         <div *ngFor="let card of circleThree;"
                              [class]="'card-item circle-item ' + card.circlePosition"
                              (click)="selectCard(card)">
                             <span>{{card.listNumber}}</span>
                         </div>
-                        <div class="circle" id="circle-2">
+                        <div class="circle" id="circle-2"
+                             [class.opportunity]="session?.circleType == 'opportunity'"
+                             [class.threat]="session?.circleType == 'threat'">
                             <div *ngFor="let card of circleTwo;"
                                  [class]="'card-item circle-item ' + card.circlePosition"
                                  (click)="selectCard(card)">
                                 <span>{{card.listNumber}}</span>
                             </div>
-                            <div class="circle" id="circle-1">
+                            <div class="circle" id="circle-1"
+                                 [class.opportunity]="session?.circleType == 'opportunity'"
+                                 [class.threat]="session?.circleType == 'threat'">
                                 <div *ngFor="let card of circleOne; let i = index"
                                      [class]="'card-item circle-item ' + 'inner-item-' + i"
                                      data-toggle="modal"
@@ -55,13 +74,12 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3 timer-container">
-        <span [hidden]="!isCircleFilled">60 seconds to choose</span>
+    <div *ngIf="isCircleFilled && currentParticipant?._id === userId" class="col-md-3 timer-container">
+        <span>60 seconds to choose</span>
         <span class="timer"
               [class.green]="ticks < 35"
               [class.yellow]="ticks < 50 && ticks > 34"
-              [class.red]="ticks > 49"
-              [hidden]="!isCircleFilled">{{ticks}}</span>
+              [class.red]="ticks > 49">{{ticks}}</span>
     </div>
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
@@ -71,9 +89,15 @@
                     <h4 class="modal-title">Top cards</h4>
                 </div>
                 <div class="modal-body">
-                    <div *ngFor="let card of circleOne"
-                         class="card-item circle-item modal-item">
-                        <span>{{card.listNumber}}</span>
+                    <div class="modal-card-container">
+                        <div *ngFor="let card of circleOne"
+                             class="card-item circle-item modal-item"
+                             (click)="selectCard(card)">
+                            <span>{{card.listNumber}}</span>
+                        </div>
+                    </div>
+                    <div class="card-description" *ngIf="selectedCard">
+                        <p><b>Description</b><br>{{selectedCard.description}}</p>
                     </div>
                 </div>
             </div>

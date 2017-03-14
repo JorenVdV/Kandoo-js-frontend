@@ -13,15 +13,31 @@ p {
 }
 
 .green {
-    color: green;
+    color: #5cb85c;
 }
 
 .yellow {
-    color: yellow;
+    color: #f0ad4e;
 }
 
 .red {
-    color: red;
+    color: #d9534f;
+}
+
+.opportunity {
+    border: 10px solid #337ab7;
+}
+
+.threat {
+    border: 10px solid #d9534f;
+}
+
+.btn {
+    width: 100%;
+}
+
+.btn-end-session {
+    margin-top: 3%;
 }
 
 .circle-container {
@@ -36,7 +52,6 @@ p {
     align-items: center;
 
     border-radius: 50% !important;
-    border: 10px solid #3F9FD7;
 }
 
 #circle-1 {
@@ -80,6 +95,11 @@ p {
     height: 32px;
     border-radius: 2px !important;
     cursor: pointer;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .circle-item {
@@ -100,13 +120,18 @@ p {
 
 .modal-item {
     position: relative;
-    cursor: default;
     margin: 1%;
 }
 
 .modal-body {
     display: flex;
     justify-content: flex-start;
+    flex-direction: column;
+}
+
+.modal-card-container {
+    display: flex;
+    flex-direction: row;
 }
 
 .card-list {

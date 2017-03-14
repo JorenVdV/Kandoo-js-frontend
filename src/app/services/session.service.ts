@@ -78,8 +78,8 @@ export class SessionService {
             return obj === Object(obj);
         }
 
-        var invitees = [];
-        for(var i = 0; i < session.invitees.length; i++){
+        let invitees = [];
+        for(let i = 0; i < session.invitees.length; i++){
             if(isObject(session.invitees[i])){
                 invitees[i] = session.invitees[i]["display"];
             } else {
@@ -164,6 +164,21 @@ export class SessionService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
+    stopSession(session: Session, userId: string): Observable<Session> {
+        const url = this.baseURL + '/session/' + session._id + '/stop';
+        return this.http
+            .put(url, JSON.stringify({userId: userId}), {headers: this.headers})
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
+    playTurn(session: Session, userId: string, cardId: string): Observable<Session> {
+        const url = this.baseURL + '/session/' + session._id + '/turn';
+        return this.http
+            .put(url, JSON.stringify({userId: userId, cardId: cardId}), {headers: this.headers})
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
 
     readInvitedSessions(): Observable<Session[]> {
         let currentUser = localStorage.getItem('currentUser');

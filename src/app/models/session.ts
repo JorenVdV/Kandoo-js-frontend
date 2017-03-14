@@ -26,6 +26,5 @@ export class Session {
     sessionCards: Card[];
     pickedCards: Card[];
     cardPriorities: Card[];
-
 }
 
