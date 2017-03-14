@@ -17,6 +17,7 @@ export class ParticipatingSessionComponent implements OnInit {
     session = new Session();
     userId: string;
 
+
     @ViewChild('modal')
     modal: ModalComponent;
 
@@ -26,10 +27,9 @@ export class ParticipatingSessionComponent implements OnInit {
     }
 
 
-    selectCards(session: Session){
-        this.router.navigate(['/session',session._id,'selectcards']);
+    selectCards(session: Session) {
+        this.router.navigate(['/session', session._id, 'selectcards']);
     }
-
 
 
     getSessions(): void {
@@ -81,21 +81,34 @@ export class ParticipatingSessionComponent implements OnInit {
         this.modal.close();
     }
 
-    startSession(session: Session){
-        this.sessionService.startSession(session).subscribe(
-            done => {
-                this.alertService.success('Start successful', false);
+    startSession(session: Session) {
+        if (session.pickedCards.length < session.participants.length) {
+            this.alertService.error("Not everyone selected cards yet!")
+        } else {
 
-                    this.router.navigate(['/session', session._id, 'game']);
+        }
 
-            },
-            err => {
-                this.alertService.error(err,false);
-            });
+
+        if (session.status == "created") {
+            if (session.pickedCards.length < session.participants.length) {
+                this.alertService.error("Not everyone selected cards yet!")
+            } else {
+                this.sessionService.startSession(session).subscribe(
+                    done => {
+                        this.router.navigate(['/session', session._id, 'game']);
+                    },
+                    err => {
+                        this.alertService.error(err, false);
+                    });
+            }
+        } else {
+            this.router.navigate(['/session', session._id, 'game']);
+        }
+
     }
 
 
-    inviteToSession(session: Session){
+    inviteToSession(session: Session) {
         this.sessionService.inviteToSession(session).subscribe(
             done => {
                 this.alertService.success('Invite successful', false);
@@ -111,7 +124,7 @@ export class ParticipatingSessionComponent implements OnInit {
                 }, 600); // end delay
             },
             err => {
-                this.alertService.error(err,false);
+                this.alertService.error(err, false);
             });
     }
 }
