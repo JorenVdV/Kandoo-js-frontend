@@ -1,13 +1,20 @@
-﻿import {Injectable} from '@angular/core';
+﻿import {Component, Injectable} from '@angular/core';
 import {Http, Headers, Response} from '@angular/http';
 import 'rxjs/add/operator/map'
 import {Router} from "@angular/router";
 
+import {SocketService} from "./socket.service";
+import {ISocketItem} from "../socket-item.model";
+
 @Injectable()
+@Component({
+    providers: [SocketService]
+})
 export class AuthenticationService {
     private headers = new Headers({'Content-Type': 'application/json'});
-    private baseURL = 'https://kandoo-js-backend.herokuapp.com';
-    constructor(private http: Http, private router: Router) {
+    private baseURL = 'http://localhost:8000';
+
+    constructor(private http: Http, private router: Router, private socketService: SocketService) {
     }
 
     login(emailAddress: string, password: string) {
@@ -18,8 +25,12 @@ export class AuthenticationService {
         }), {headers: this.headers})
             .map((response: Response) => {
                 // if (!response) return;
-
                 let user = response.json().user;
+
+
+
+                this.socketService.init(user._id);
+
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 let currentUser = localStorage.getItem('currentUser');

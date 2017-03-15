@@ -29,6 +29,7 @@
     "@angular/platform-browser-dynamic": "^2.3.1",
     "@angular/router": "^3.3.1",
     "angular2-font-awesome": "^1.1.0",
+    "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
     "ng2-bs3-modal": "^0.10.4",
@@ -55,8 +56,8 @@
     "postcss-load-config": "1.0.0",
     "postcss-loader": "^1.0.0",
     "protractor": "~4.0.13",
-    "ts-node": "1.2.1",
+    "ts-node": "^1.2.1",
     "tslint": "^4.3.0",
-    "typescript": "~2.0.3"
+    "typescript": "^2.0.10"
   }
 }

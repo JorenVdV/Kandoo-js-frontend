@@ -33,6 +33,20 @@ export class ParticipatingSessionComponent implements OnInit {
     }
 
 
+    getOrganisers(session: Session){
+        this.sessionService.getSessionOrganisers(session).subscribe(
+            done => {
+                for(var i = 0; i < done.length; i++){
+                    this.organiserIds[i] = done[i]._id;
+                }
+                console.log(this.organiserIds);
+                this.alertService.success("Session cloned!" ,false)
+
+            },
+            err => {
+                this.alertService.error(err, false);
+            });
+    }
 
     cloneSession(session: Session) {
         this.sessionService.cloneSession(session._id).subscribe(
@@ -105,7 +119,7 @@ export class ParticipatingSessionComponent implements OnInit {
                 err => {
                     console.log(err);
                 });
-
+        console.log(this.sessions);
         this.userId = JSON.parse(localStorage.getItem('currentUser'))._id;
     }
 
