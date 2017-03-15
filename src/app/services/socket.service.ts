@@ -15,7 +15,11 @@ export class SocketService {
         let socketUrl = this.baseURL;
         if (!this.socket) {
 
-            this.socket = io(this.baseURL);
+            this.socket = io(this.baseURL, {
+                'reconnection': true,
+                'reconnectionDelay': 500,
+                'reconnectionAttempts': 10
+            });
         }
         this.socket.on("connect", () => this.connect());
         this.socket.on("disconnect", () => this.disconnect());
@@ -25,7 +29,7 @@ export class SocketService {
         this.socket.on("session_started", (item: any) => console.log(item));
         this.socket.on("messages", (item: any) => console.log(item));
         this.socket.on("test", (item: any) => console.log(item));
-        this.socket.on('ping', function(data){
+        this.socket.on('ping', function (data) {
             this.socket.emit('pong', {beat: 1});
         });
 
