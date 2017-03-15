@@ -1,7 +1,7 @@
 import {Params, ActivatedRoute} from "@angular/router";
-import {Card} from "../models/card";
 import {OnInit, Component} from "@angular/core";
 import {CardService} from "../../services/card.service";
+import {Card} from "../../models/card";
 
 @Component({
     selector: 'card-detail',

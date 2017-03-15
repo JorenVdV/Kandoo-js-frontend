@@ -72,7 +72,7 @@ export class SelectCardComponent implements OnInit {
 
     updateSessionCards() {
         if (!this.isInArray(this.userId, this.session.theme.organisers)) {
-            if (this.sessionCards.length < this.session.minCardsPerParticipant) {
+            if (this.sessionCards.length < parseInt(this.session.minCardsPerParticipant)) {
                 this.alertService.error("You have to take " + this.session.minCardsPerParticipant + " cards!");
                 return;
             }
@@ -89,7 +89,7 @@ export class SelectCardComponent implements OnInit {
 
     selectCard(card: Card) {
         if (!this.isInArray(this.userId, this.session.theme.organisers)) {
-            if (this.session.maxCardsPerParticipant <= this.sessionCards.length) {
+            if (this.session.maxCardsPerParticipant <= parseInt(this.sessionCards.length)) {
                 this.alertService.error("You can't take more than " + this.session.maxCardsPerParticipant + " cards!");
             } else {
                 this.cards.splice(this.cards.indexOf(card), 1);
@@ -110,7 +110,7 @@ export class SelectCardComponent implements OnInit {
     }
 
     submitCard(cardDescription: string) {
-        if (!description) {
+        if (!cardDescription) {
             return;
         }
 

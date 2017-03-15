@@ -99,6 +99,7 @@ export class LoginComponent implements OnInit {
             numberOfErrors++;
         }
 
+        let router = this.router;
         if (numberOfErrors == 0) {
             this.loading = true;
             this.userService.create(this.model)

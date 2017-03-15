@@ -21,8 +21,6 @@ export class ChangePwdComponent {
     constructor(private userService: UserService, private alertService: AlertService, private router: Router) {
     }
 
-    constructor() {
-    }
 
     open() {
         this.modal.open();

@@ -3,6 +3,7 @@
  */
 import {Card} from "./card";
 import {User} from "./user";
+import {Theme} from "./theme";
 
 export class Session {
     title: string;
@@ -27,5 +28,6 @@ export class Session {
     pickedCards: Card[];
     cardPriorities: Card[];
     status: string;
+    theme: Theme;
 }
 

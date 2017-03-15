@@ -121,7 +121,7 @@ export class SessionService {
     }
 
     updateSessionCards(session: Session, cards: Card[]): Observable<Session> {
-        const url;
+        let url;
         if(session.creator==JSON.parse(localStorage.getItem('currentUser'))._id){
             url = 'https://kandoo-js-backend.herokuapp.com/session/'+session._id +'/update';
             return this.http
@@ -135,11 +135,6 @@ export class SessionService {
                 .map((res: Response) => res.json())
                 .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
         }
-
-        return this.http
-            .put(url, JSON.stringify({sessionCards: cards}), {headers: this.headers})
-            .map((res: Response) => res.json())
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
     readParticipantSessions(): Observable<Session[]> {
@@ -167,7 +162,7 @@ export class SessionService {
 
     getSessionOrganisers(session: Session): Observable<Session[]> {
         return this.http
-            .get(this.baseURL + '/theme/' + session.theme)
+            .get(this.baseURL + '/theme/' + session.theme._id)
             .map((res: Response) => res.json().theme.organisers)
             .catch((error: any) => Observable.throw(error));
     }

@@ -2,6 +2,7 @@ import {Component, OnInit} from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Theme} from "../../models/theme";
 import {ThemeService} from "../../services/theme.service";
+import {Session} from "../../models/session";
 
 @Component({
     selector: 'theme-detail',
@@ -9,14 +10,15 @@ import {ThemeService} from "../../services/theme.service";
 })
 
 export class ThemeDetailComponent implements OnInit {
-    theme = new Theme();
-    sessions: Sessions[];
+    theme: Theme;
+    sessions: Session[];
     userId: string;
     isOrganiser: boolean;
 
     constructor(private themeService: ThemeService,
                 private route: ActivatedRoute,
                 private router: Router) {
+        this.theme = new Theme();
     }
 
     ngOnInit() {

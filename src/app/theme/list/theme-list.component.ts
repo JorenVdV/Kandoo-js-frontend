@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {Theme} from "../../models/theme";
 import {ThemeService} from "../../services/theme.service";
 import {UserService} from "../../services/user.service";
+import {AlertService} from "../../services/alert.service";
 
 @Component({
     selector: 'theme-list',
@@ -13,7 +14,7 @@ export class ThemeListComponent implements OnInit {
     themes: Theme[];
 
     constructor(private themeService: ThemeService,
-                private router: Router, private userService: UserService) {
+                private router: Router, private userService: UserService, private alertService: AlertService) {
     }
 
     ngOnInit() {
@@ -100,7 +101,6 @@ export class ThemeListComponent implements OnInit {
     */
 
     getOrganiser(userId: string){
-        console.log(userId)
         this.userService.get(userId).subscribe(
             user => {
                 return user
