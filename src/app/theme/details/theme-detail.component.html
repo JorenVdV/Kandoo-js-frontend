@@ -1,6 +1,6 @@
 <navbar></navbar>
 <div class="container" aria-readonly="true">
-    <div class="col-md-8 col-md-offset-2">
+    <div class="col-md-8 col-md-offset-2" *ngIf="isOrganiser">
         <h2>Theme: </h2>
         <label>Name<br><input id="title" type="text" [(ngModel)]="theme.title" class="form-control"></label><br>
         <label>Description<br><input id="description" type="text" [(ngModel)]="theme.description" class="form-control"></label><br>
@@ -12,15 +12,21 @@
         <label><input id="public" type="checkbox" [(ngModel)]="theme.publicAccess">Public</label><br>
         <button id="save" (click)="saveTheme()" class="btn btn-success">SAVE</button>
         <button id="delete" (click)="deleteTheme()" class="btn btn-danger">DELETE</button>
-    </div>
 
-
-    <div class="col-md-8 col-md-offset-2">
         <div class="row">
             <hr>
         </div>
-        <h2>Sessions: </h2>
-        <participating-session></participating-session>
+    </div>
+
+    <div class="col-md-8 col-md-offset-2" *ngIf="!isOrganiser">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h2><strong>{{theme.title}}</strong></h2>
+                <hr>
+                <h4>{{theme.description}}</h4>
+                <h4>Tags: <span class="text-muted">{{theme.tags}}</span> </h4>
+            </div>
+        </div>
     </div>
 
 

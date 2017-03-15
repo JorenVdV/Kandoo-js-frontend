@@ -17,6 +17,8 @@ export class SessionComponent implements OnInit {
     session = new Session();
     id: string;
     sessionLoaded: boolean;
+    userId: string;
+    isOrganiser: boolean;
 
     constructor(private sessionService: SessionService,
                 private router: Router, private route: ActivatedRoute) {
@@ -77,12 +79,14 @@ export class SessionComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.userId = JSON.parse(localStorage.getItem('currentUser'))._id;
         this.themeId = this.route.snapshot.params['_id'];
         this.id = this.route.snapshot.params['sessionId'];
         if (this.themeId) {
             this.sessionService.readSessions(this.themeId)
                 .subscribe(sessions => {
                         this.sessions = sessions;
+
                     },
                     err => {
                         console.log(err);

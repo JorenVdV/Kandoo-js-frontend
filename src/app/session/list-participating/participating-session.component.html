@@ -1,40 +1,62 @@
 <div *ngFor="let session of sessions" style="cursor: pointer">
+
     <div class="panel panel-default">
+
         <div class="panel-body">
+
             <div class="col-md-5">
                 <h4>{{session.title}}</h4>
             </div>
-            <div class="col-md-7" *ngIf="session.creator == userId">
-                <a class="btn btn-primary " (click)="selectSession(session)"><i class="fa fa-info-circle"
-                                                                                aria-hidden="true"></i></a>
-                <button class="btn btn-primary " (click)="modal.open()"><i class="fa fa-user-plus"
-                                                                           aria-hidden="true"></i></button>
-                <button class="btn btn-primary " (click)="selectCards(session)"><i class="fa fa-file-text-o"
-                                                                                   aria-hidden="true"></i>
+
+
+            <div class="col-md-7" *ngIf="getOrganisers(session)">
+                <a class="btn btn-primary " (click)="selectSession(session)">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                </a>
+
+                <button class="btn btn-primary " (click)="modal.open()">
+                    <i class="fa fa-user-plus" aria-hidden="true"></i>
                 </button>
-                <button (click)="deleteSession(session)" class="btn btn-danger "><i class="fa fa-times-circle"
-                                                                                    aria-hidden="true"></i></button>
-                <button (click)="cloneSession(session)" class="btn btn-primary "><i class="fa fa-clone"
-                                                                                    aria-hidden="true"></i></button>
-                <button (click)="getOrganisers(session)" class="btn btn-primary ">GET ORGANISERS</button>
-                <div *ngIf="session.status == 'created'">
-                    <button (click)="startSession(session)" class="btn btn-success ">START</button>
+
+                <button class="btn btn-primary " (click)="selectCards(session)">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </button>
+
+                <button (click)="cloneSession(session)" class="btn btn-primary ">
+                    <i class="fa fa-clone" aria-hidden="true"></i>
+                </button>
+
+                <div *ngIf="session.status == 'created'" style="display: inline">
+                    <button (click)="startSession(session)" class="btn btn-success ">
+                        <i class="fa fa-play-circle" aria-hidden="true"></i>
+                    </button>
                 </div>
-                <div *ngIf="session.status != 'created'"><a (click)="startSession(session)" class="btn btn-success ">GO
-                    TO GAME</a></div>
+
+                <div *ngIf="session.status != 'created'" style="display: inline">
+                    <a (click)="startSession(session)" class="btn btn-success ">
+                        <i class="fa fa-play-circle" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <button (click)="deleteSession(session)" class="btn btn-danger " style="display: inline">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                </button>
+            </div>
+
+
+            <div class="col-md-7" *ngIf="!getOrganisers(session)" style="display: inline">
+
+                <a class="btn btn-primary " (click)="selectCards(session)">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </a>
+
+                <a class="btn btn-primary " (click)="goToSession(session)">
+                    <i class="fa fa-play-circle" aria-hidden="true"></i>
+                </a>
 
             </div>
 
 
-            <div class="col-md-7" *ngIf="!getOrganisers(session)">
-                <div class="col-sm-6 col-lg-3"><br></div>
-                <div class="col-sm-6 col-lg-3"></div>
-                <div class="col-sm-6 col-lg-3"><a class="btn btn-primary btn-block"
-                                                  (click)="selectCards(session)">CARDS</a><br></div>
-                <div class="col-sm-6 col-lg-3"><a class="btn btn-primary btn-block"
-                                                  (click)="goToSession(session)">INFO</a><br></div>
-
-            </div>
         </div>
     </div>
 
@@ -54,7 +76,6 @@
 
         </modal-body>
     </modal>
-
 
 
 </div>

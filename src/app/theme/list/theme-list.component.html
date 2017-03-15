@@ -1,37 +1,41 @@
 <navbar></navbar>
 <!--<chat style="position: absolute; z-index: 9999"></chat>-->
 <div class="container">
-<alert></alert>
+    <alert></alert>
     <button id="create-btn" class="btn btn-success" (click)="createTheme()">CREATE THEME</button>
     <div class="row">
         <hr>
     </div>
     <div class="col-md-10 col-md-offset-1">
-        <h2>Themes:</h2>
+        <h2>My Themes:</h2>
         <div class="panel panel-default" *ngFor="let theme of themes">
             <div class="panel-body">
                 <div class="col-md-5">
                     <h4><strong>{{theme.title}}:</strong> {{theme.description}}</h4>
                 </div>
                 <div class="col-md-7">
-                    <div class="col-sm-6 col-lg-3">
-                        <button class="btn btn-primary btn-block" (click)="selectTheme(theme)">INFO</button>
-                        <br>
-                    </div>
-                    <div class=" col-sm-6 col-lg-3">
-                        <button class="btn btn-primary btn-block" (click)="addCards(theme)">CARDS</button>
-                        <br>
-                    </div>
-                    <div class="col-sm-6 col-lg-3">
-                        <button class="btn btn-primary btn-block" (click)="createSession(theme)">SESSION</button>
-                        <br>
-                    </div>
-                    <div class="col-sm-6 col-lg-3">
-                        <button class="btn btn-danger btn-block" (click)="deleteTheme(theme)">DELETE</button>
-                        <br>
-                    </div>
-                    <button class="btn btn-primary " (click)="organiser.open()"><i class="fa fa-user-plus"
-                                                                               aria-hidden="true"></i></button>
+
+                    <button class="btn btn-primary" (click)="selectTheme(theme)">
+                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                    </button>
+
+
+                    <button class="btn btn-primary " (click)="addCards(theme)">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    </button>
+
+
+                    <button class="btn btn-primary " (click)="createSession(theme)">
+                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    </button>
+
+                    <button class="btn btn-primary " (click)="organiser.open()">
+                        <i class="fa fa-user-plus" aria-hidden="true"></i>
+                    </button>
+
+                    <button class="btn btn-danger " (click)="deleteTheme(theme)">
+                        <i class="fa fa-times-circle" aria-hidden="true"></i>
+                    </button>
                 </div>
 
 
@@ -45,8 +49,9 @@
                     <alert></alert>
                     <p><strong>Current organisers:</strong></p>
                     <div *ngFor="let user of theme.organisers" style="cursor: pointer">
-                        <p>{{user.emailAddress}}    <i class="fa fa-times-circle text-danger"
-                                                       aria-hidden="true" (click)="deleteOrganiser(theme, user._id)"></i></p>
+                        <p>{{user.emailAddress}} <i class="fa fa-times-circle text-danger"
+                                                    aria-hidden="true" (click)="deleteOrganiser(theme, user._id)"></i>
+                        </p>
                     </div>
 
                     <alert></alert>

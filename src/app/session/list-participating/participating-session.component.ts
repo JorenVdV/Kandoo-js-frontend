@@ -27,27 +27,27 @@ export class ParticipatingSessionComponent implements OnInit {
     @ViewChild('modal')
     modal: ModalComponent;
 
-    constructor(private sessionService: SessionService, private alertService: AlertService, private userService: UserService,private themeService: ThemeService,
+    constructor(private sessionService: SessionService, private alertService: AlertService, private userService: UserService, private themeService: ThemeService,
                 private router: Router, private route: ActivatedRoute) {
         this.organiserIds = new Array(0);
     }
 
+    /*
+     getOrganisers(session: Session){
+     this.sessionService.getSessionOrganisers(session).subscribe(
+     done => {
+     for(var i = 0; i < done.length; i++){
+     this.organiserIds[i] = done[i]._id;
+     }
+     console.log(this.organiserIds);
+     this.alertService.success("Session cloned!" ,false)
 
-    getOrganisers(session: Session){
-        this.sessionService.getSessionOrganisers(session).subscribe(
-            done => {
-                for(var i = 0; i < done.length; i++){
-                    this.organiserIds[i] = done[i]._id;
-                }
-                console.log(this.organiserIds);
-                this.alertService.success("Session cloned!" ,false)
-
-            },
-            err => {
-                this.alertService.error(err, false);
-            });
-    }
-
+     },
+     err => {
+     this.alertService.error(err, false);
+     });
+     }
+     */
     cloneSession(session: Session) {
         this.sessionService.cloneSession(session._id).subscribe(
             done => {
@@ -112,9 +112,7 @@ export class ParticipatingSessionComponent implements OnInit {
         this.sessionService.readParticipantSessions()
             .subscribe(sessions => {
                     this.sessions = sessions;
-                    for (let i = 0; i < this.sessions.length; i++) {
-                        this.sessions[i].organisers = this.getUsers(this.sessions[i]);
-                    }
+
                 },
                 err => {
                     console.log(err);

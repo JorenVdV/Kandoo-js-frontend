@@ -11,6 +11,8 @@ import {ThemeService} from "../../services/theme.service";
 export class ThemeDetailComponent implements OnInit {
     theme = new Theme();
     sessions: Sessions[];
+    userId: string;
+    isOrganiser: boolean;
 
     constructor(private themeService: ThemeService,
                 private route: ActivatedRoute,
@@ -18,11 +20,20 @@ export class ThemeDetailComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        this.userId = JSON.parse(localStorage.getItem('currentUser'))._id;
         let id = this.route.snapshot.params['_id'];
         if (id) {
             this.themeService.readTheme(id)
                 .subscribe(t => {
+                        this.isOrganiser = false;
                         this.theme = t;
+                        for (let i = 0; i < this.theme.organisers.length; i++) {
+                            if (this.userId == this.theme.organisers[i]._id) {
+                                this.isOrganiser = true;
+                                return;
+                            }
+                        }
                     },
                     err => {
                         console.log(err);
@@ -34,9 +45,14 @@ export class ThemeDetailComponent implements OnInit {
                 err => {
                     console.log(err);
                 });
+        } else {
+            this.isOrganiser = true;
         }
 
+
+
     }
+
 
     saveTheme() {
         if (this.theme._id) {
