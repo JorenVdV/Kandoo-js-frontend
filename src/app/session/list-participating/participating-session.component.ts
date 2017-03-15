@@ -6,6 +6,8 @@ import {SessionService} from "../../services/session.service";
 import {AlertService} from "../../services/alert.service";
 import {ModalComponent} from "ng2-bs3-modal/components/modal";
 import {User} from "../../models/user";
+import {UserService} from "../../services/user.service";
+import {ThemeService} from "../../services/theme.service";
 
 @Component({
     selector: 'participating-session',
@@ -18,36 +20,24 @@ export class ParticipatingSessionComponent implements OnInit {
     session = new Session();
     userId: string;
     organiserIds: string[];
+    organisers: User[];
+    isOrganiser: boolean;
 
 
     @ViewChild('modal')
     modal: ModalComponent;
 
-    constructor(private sessionService: SessionService, private alertService: AlertService,
+    constructor(private sessionService: SessionService, private alertService: AlertService, private userService: UserService,private themeService: ThemeService,
                 private router: Router, private route: ActivatedRoute) {
         this.organiserIds = new Array(0);
     }
 
 
-    getOrganisers(session: Session){
-        this.sessionService.getSessionOrganisers(session).subscribe(
-            done => {
-                for(var i = 0; i < done.length; i++){
-                    this.organiserIds[i] = done[i]._id;
-                }
-                console.log(this.organiserIds);
-                this.alertService.success("Session cloned!" ,false)
 
-            },
-            err => {
-                this.alertService.error(err, false);
-            });
-    }
-
-    cloneSession(session: Session){
+    cloneSession(session: Session) {
         this.sessionService.cloneSession(session._id).subscribe(
             done => {
-                this.alertService.success("Session cloned!" ,false)
+                this.alertService.success("Session cloned!", false)
                 location.reload()
             },
             err => {
@@ -59,6 +49,21 @@ export class ParticipatingSessionComponent implements OnInit {
         this.router.navigate(['/session', session._id, 'selectcards']);
     }
 
+    getOrganisers(session: Session) {
+        function isInArray(value, array) {
+            return array.indexOf(value) > -1;
+        }
+
+        this.organiserIds = session.theme.organisers;
+
+        if (isInArray(this.userId, this.organiserIds)) {
+            this.isOrganiser = true;
+            return true;
+        } else {
+            this.isOrganiser = false;
+            return false;
+        }
+    }
 
     getSessions(): void {
         this.sessionService.readParticipantSessions().subscribe(
@@ -93,13 +98,17 @@ export class ParticipatingSessionComponent implements OnInit {
         this.sessionService.readParticipantSessions()
             .subscribe(sessions => {
                     this.sessions = sessions;
+                    for (let i = 0; i < this.sessions.length; i++) {
+                        this.sessions[i].organisers = this.getUsers(this.sessions[i]);
+                    }
                 },
                 err => {
                     console.log(err);
                 });
-        console.log(this.sessions);
+
         this.userId = JSON.parse(localStorage.getItem('currentUser'))._id;
     }
+
 
     selectSession(session: Session) {
         this.router.navigate(['/session', session._id]);
@@ -114,8 +123,8 @@ export class ParticipatingSessionComponent implements OnInit {
     }
 
     startSession(session: Session) {
-        if (session.pickedCards.length < session.participants.length) {
-            this.alertService.error("Not everyone selected cards yet!")
+        if (session.pickedCards.length < 2) {
+            this.alertService.error("You can't play a game on your own!")
         } else {
 
         }

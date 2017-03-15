@@ -30,10 +30,34 @@
                         <button class="btn btn-danger btn-block" (click)="deleteTheme(theme)">DELETE</button>
                         <br>
                     </div>
+                    <button class="btn btn-primary " (click)="organiser.open()"><i class="fa fa-user-plus"
+                                                                               aria-hidden="true"></i></button>
                 </div>
 
 
             </div>
+
+            <modal #organiser>
+                <modal-header [show-close]="true">
+                    <h4 class="modal-title">Make organiser</h4>
+                </modal-header>
+                <modal-body>
+                    <alert></alert>
+                    <p><strong>Current organisers:</strong></p>
+                    <div *ngFor="let user of theme.organisers" style="cursor: pointer">
+                        <p>{{user.emailAddress}}    <i class="fa fa-times-circle text-danger"
+                                                       aria-hidden="true" (click)="deleteOrganiser(theme, user._id)"></i></p>
+                    </div>
+
+                    <alert></alert>
+                    <input type="text" class="form-control" #email placeholder="Email">
+                    <br>
+                    <button (click)="addOrganiser(theme, email.value)" class="btn btn-primary btn-block">ADD</button>
+
+                </modal-body>
+            </modal>
+
+
         </div>
         <div class="row">
             <hr>

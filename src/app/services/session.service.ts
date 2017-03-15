@@ -81,6 +81,8 @@ export class SessionService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
+
+
     inviteToSession(session: Session): Observable<Session> {
         function isObject(obj) {
             return obj === Object(obj);

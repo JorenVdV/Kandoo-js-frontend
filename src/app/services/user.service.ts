@@ -28,7 +28,7 @@ export class UserService {
     //     return this.http.put('http://api.teamjs.xyz/users/' + user._id, user, this.jwt()).map((response: Response) => response.json());
     // }
 
-    delete(id: number) {
+    delete(id: string) {
         return this.http.delete(this.baseURL + '/users/'+id, this.jwt()).map((response: Response) => response.json());
     }
 

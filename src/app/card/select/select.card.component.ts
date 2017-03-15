@@ -18,6 +18,7 @@ export class SelectCardComponent implements OnInit {
     themeId: string;
     session: Session;
     cardsCanBeAdded: boolean;
+    userId: string;
 
     constructor(private cardService: CardService, private route: ActivatedRoute, private sessionService: SessionService, private alertService: AlertService) {
         this.route.params.subscribe(params => {
@@ -26,7 +27,14 @@ export class SelectCardComponent implements OnInit {
         });
     }
 
+    isInArray(value, array) {
+        return array.indexOf(value) > -1;
+    }
+
     ngOnInit() {
+
+
+        this.userId = JSON.parse(localStorage.getItem("currentUser"))._id;
         this.sessionId = this.route.snapshot.params['_id'];
         this.sessionService.readSession(this.sessionId)
             .subscribe(s => {
@@ -35,12 +43,12 @@ export class SelectCardComponent implements OnInit {
                     if (this.session.cardsCanBeAdded) {
                         this.cardsCanBeAdded = true;
                     }
-                    if (this.session.creator == JSON.parse(localStorage.getItem("currentUser"))._id) {
+                    if (this.isInArray(this.userId, this.session.theme.organisers)) {
                         this.sessionCards = this.session.sessionCards;
                     }
                     this.cardService.readCards(this.session.theme._id).subscribe(
                         cards => {
-                            if (this.session.creator == JSON.parse(localStorage.getItem("currentUser"))._id) {
+                            if (this.isInArray(this.userId, this.session.theme.organisers)) {
                                 this.cards = cards;
                                 for (let i = 0; i < this.sessionCards.length; i++) {
                                     for (let j = 0; j < this.cards.length; j++) {
@@ -63,7 +71,7 @@ export class SelectCardComponent implements OnInit {
     }
 
     updateSessionCards() {
-        if (this.session.creator != JSON.parse(localStorage.getItem('currentUser'))._id) {
+        if (!this.isInArray(this.userId, this.session.theme.organisers)) {
             if (this.sessionCards.length < this.session.minCardsPerParticipant) {
                 this.alertService.error("You have to take " + this.session.minCardsPerParticipant + " cards!");
                 return;
@@ -80,7 +88,7 @@ export class SelectCardComponent implements OnInit {
     }
 
     selectCard(card: Card) {
-        if (this.session.creator != JSON.parse(localStorage.getItem("currentUser"))._id) {
+        if (!this.isInArray(this.userId, this.session.theme.organisers)) {
             if (this.session.maxCardsPerParticipant <= this.sessionCards.length) {
                 this.alertService.error("You can't take more than " + this.session.maxCardsPerParticipant + " cards!");
             } else {

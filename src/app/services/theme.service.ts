@@ -5,6 +5,7 @@ import {Injectable} from "@angular/core";
 import {Headers, Http, Response} from "@angular/http";
 import {Observable} from "rxjs";
 import {Theme} from "../models/theme";
+import {Session} from "../models/session";
 
 @Injectable()
 export class ThemeService {
@@ -84,6 +85,20 @@ export class ThemeService {
             .put(url, theme, {headers: this.headers})
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
+    addOrganiser(theme: Theme, email: string): Observable<Theme> {
+        return this.http
+            .put(this.baseURL + '/theme/'+theme._id+'/addorganiser', JSON.stringify({organiserEmail: email}), {headers: this.headers})
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error));
+    }
+
+    deleteOrganiser(theme: Theme, userId: string): Observable<Theme> {
+        return this.http
+            .put(this.baseURL + '/theme/'+theme._id+'/removeorganiser', JSON.stringify({organiserId: userId}), {headers: this.headers})
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error));
     }
 
     deleteTheme(id: string): Observable<Theme> {
