@@ -7,9 +7,11 @@ import {Session} from "../models/session";
 import {User} from "../models/user";
 import {UserService} from "../services/user.service";
 
+
 @Component({
     selector: 'chat',
     templateUrl: './chat.component.html',
+    styleUrls: ['./chat.component.css']
 })
 
 export class ChatComponent implements OnInit {
@@ -20,7 +22,6 @@ export class ChatComponent implements OnInit {
 
     constructor(private sessionService: SessionService,
                 private userService: UserService,
-                private chatService: ChatService,
                 private route: ActivatedRoute,
                 private router: Router) {
     }

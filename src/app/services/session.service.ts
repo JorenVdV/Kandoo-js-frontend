@@ -10,6 +10,7 @@ import {Observable} from "rxjs";
 import {Session} from "../models/session";
 import {Theme} from "../models/theme";
 import {Card} from "../models/card";
+import {ThemeService} from "./theme.service";
 
 @Injectable()
 export class SessionService {
@@ -18,7 +19,7 @@ export class SessionService {
 
     private options = new RequestOptions({headers: this.headers});
 
-    constructor(private http: Http) {
+    constructor(private http: Http, private themeService: ThemeService) {
     }
 
     createSession(session: Session, themeId: string): Observable<Session> {
@@ -69,6 +70,13 @@ export class SessionService {
     readSessions(id: string): Observable<Session[]> {
         return this.http
             .get(this.baseURL + '/theme/' + id + '/sessions')
+            .map((res: Response) => res.json().sessions)
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
+    cloneSession(sessionId: String): Observable<Session[]> {
+        return this.http
+            .post(this.baseURL + '/session/'+sessionId+'/copy', JSON.stringify({userId: JSON.parse(localStorage.getItem('currentUser'))._id }), {headers: this.headers})
             .map((res: Response) => res.json().sessions)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
@@ -153,6 +161,13 @@ export class SessionService {
             .delete(url)
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
+    getSessionOrganisers(session: Session): Observable<Session[]> {
+        return this.http
+            .get(this.baseURL + '/theme/' + session.theme)
+            .map((res: Response) => res.json().theme.organisers)
+            .catch((error: any) => Observable.throw(error));
     }
 
     startSession(session: Session): Observable<Session> {

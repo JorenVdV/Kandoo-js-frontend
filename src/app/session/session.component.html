@@ -15,9 +15,7 @@
             </select></label>
             <label class="col-md-6 no-right-padding">Number of circles<br><input type="number" id="numberOfCircles"
                                                                       [(ngModel)]="session.amountOfCircles"
-                                                                      class="form-control" min="0" max="6" step="1" value="5"></label><br>
-            <label>Duration in minutes<br><input id="duration" type="number" [(ngModel)]="session.turnDuration"
-                                                 class="form-control" min="0" max="60" step="1" value="5"></label><br>
+                                                                      class="form-control" min="0" max="5" step="1" value="5"></label><br>
             <label>Startdate<br><input type="datetime-local" name="startDate" class="form-control"
                                        [(ngModel)]="session.startDate"></label><br>
 
@@ -28,9 +26,6 @@
             <label class="col-md-6 no-right-padding">Max Cards per Person<br><input id="maxCards" type="number"
                                                                                     [(ngModel)]="session.maxCardsPerParticipant"
                                                                                     class="form-control" min="1" max="16" step="1" value="5"></label>
-            <label class="col-md-6 no-left-padding"><input id="cardsCanBeReviewed" type="checkbox"
-                                                           [(ngModel)]="session.cardsCanBeReviewed">Cards Can Be
-                Reviewed</label><br>
             <label class="col-md-6 no-right-padding"><input id="cardsCanBeAdded" type="checkbox"
                                                             [(ngModel)]="session.cardsCanBeAdded">Cards Can Be
                 Added</label><br>

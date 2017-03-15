@@ -33,6 +33,8 @@ import {ThemeSessionComponent} from "./session/list-theme/theme-session.componen
 import {SelectCardComponent} from "./card/select/select.card.component";
 import {AccountComponent} from "./account/account.component";
 import {InvitedSessionComponent} from "./session/list-invited/invited-session.component";
+import { Angular2FontAwesomeModule } from 'angular2-font-awesome/angular2-font-awesome';
+import {ChatComponent} from "./chat/chat.component";
 
 @NgModule({
     declarations: [
@@ -54,7 +56,8 @@ import {InvitedSessionComponent} from "./session/list-invited/invited-session.co
         ThemeSessionComponent,
         SelectCardComponent,
         AccountComponent,
-        InvitedSessionComponent
+        InvitedSessionComponent,
+        ChatComponent
     ],
     imports: [
         BrowserModule,
@@ -62,7 +65,8 @@ import {InvitedSessionComponent} from "./session/list-invited/invited-session.co
         HttpModule,
         AppRouting,
         Ng2Bs3ModalModule,
-        TagInputModule
+        TagInputModule,
+        Angular2FontAwesomeModule
     ],
     providers: [
         ThemeService,

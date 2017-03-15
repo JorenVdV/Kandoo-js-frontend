@@ -1,15 +1,15 @@
 <navbar></navbar>
-<div class="container">
+<div class="container" aria-readonly="true">
     <div class="col-md-8 col-md-offset-2">
         <h2>Theme: </h2>
-        <label>Naam<br><input id="title" type="text" [(ngModel)]="theme.title" class="form-control"></label><br>
-        <label>Omschrijving<br><input id="description" type="text" [(ngModel)]="theme.description" class="form-control"></label><br>
+        <label>Name<br><input id="title" type="text" [(ngModel)]="theme.title" class="form-control"></label><br>
+        <label>Description<br><input id="description" type="text" [(ngModel)]="theme.description" class="form-control"></label><br>
         <label>Tags<br>
             <tag-input style="height: auto !important; padding: 0 !important;" [(ngModel)]="theme.tags"
                        separatorKeys="[32]" placeholder="Add another tag" [validators]="validators"
                        [errorMessages]="errorMessages" [theme]="'minimal'" name="tags" class="form-control"></tag-input>
         </label><br>
-        <label><input id="public" type="checkbox" [(ngModel)]="theme.publicAccess">Publiek</label><br>
+        <label><input id="public" type="checkbox" [(ngModel)]="theme.publicAccess">Public</label><br>
         <button id="save" (click)="saveTheme()" class="btn btn-success">SAVE</button>
         <button id="delete" (click)="deleteTheme()" class="btn btn-danger">DELETE</button>
     </div>
@@ -20,13 +20,7 @@
             <hr>
         </div>
         <h2>Sessions: </h2>
-        <a *ngFor="let session of sessions" style="cursor: pointer" (click)="selectSession(session)">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <h4>{{session.title}}</h4>
-                </div>
-            </div>
-        </a>
+        <participating-session></participating-session>
     </div>
 
 

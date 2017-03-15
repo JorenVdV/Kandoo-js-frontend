@@ -70,8 +70,18 @@ export class LoginComponent implements OnInit {
             numberOfErrors++;
         }
 
+        if (this.model.firstname.length < 3) {
+            this.alertService.error("Firstname must be 3 characters at least!");
+            numberOfErrors++;
+        }
+
         if (this.model.lastname == "" || this.model.lastname == null) {
             this.alertService.error("Lastname can't be empty!");
+            numberOfErrors++;
+        }
+
+        if (this.model.lastname.length < 3) {
+            this.alertService.error("Lastname must be 3 characters at least!");
             numberOfErrors++;
         }
 

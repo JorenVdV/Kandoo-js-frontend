@@ -38,7 +38,7 @@ export class SelectCardComponent implements OnInit {
                     if (this.session.creator == JSON.parse(localStorage.getItem("currentUser"))._id) {
                         this.sessionCards = this.session.sessionCards;
                     }
-                    this.cardService.readCards(this.session.theme).subscribe(
+                    this.cardService.readCards(this.session.theme._id).subscribe(
                         cards => {
                             if (this.session.creator == JSON.parse(localStorage.getItem("currentUser"))._id) {
                                 this.cards = cards;

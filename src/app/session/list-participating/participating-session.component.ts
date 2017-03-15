@@ -5,6 +5,7 @@ import {Session} from "../../models/session";
 import {SessionService} from "../../services/session.service";
 import {AlertService} from "../../services/alert.service";
 import {ModalComponent} from "ng2-bs3-modal/components/modal";
+import {User} from "../../models/user";
 
 @Component({
     selector: 'participating-session',
@@ -16,6 +17,7 @@ export class ParticipatingSessionComponent implements OnInit {
     themeId: string;
     session = new Session();
     userId: string;
+    organiserIds: string[];
 
 
     @ViewChild('modal')
@@ -23,9 +25,35 @@ export class ParticipatingSessionComponent implements OnInit {
 
     constructor(private sessionService: SessionService, private alertService: AlertService,
                 private router: Router, private route: ActivatedRoute) {
-
+        this.organiserIds = new Array(0);
     }
 
+
+    getOrganisers(session: Session){
+        this.sessionService.getSessionOrganisers(session).subscribe(
+            done => {
+                for(var i = 0; i < done.length; i++){
+                    this.organiserIds[i] = done[i]._id;
+                }
+                console.log(this.organiserIds);
+                this.alertService.success("Session cloned!" ,false)
+
+            },
+            err => {
+                this.alertService.error(err, false);
+            });
+    }
+
+    cloneSession(session: Session){
+        this.sessionService.cloneSession(session._id).subscribe(
+            done => {
+                this.alertService.success("Session cloned!" ,false)
+                location.reload()
+            },
+            err => {
+                this.alertService.error(err, false);
+            });
+    }
 
     selectCards(session: Session) {
         this.router.navigate(['/session', session._id, 'selectcards']);
@@ -75,6 +103,10 @@ export class ParticipatingSessionComponent implements OnInit {
 
     selectSession(session: Session) {
         this.router.navigate(['/session', session._id]);
+    }
+
+    goToSession(session: Session) {
+        this.router.navigate(['/session', session._id], 'game');
     }
 
     close() {
