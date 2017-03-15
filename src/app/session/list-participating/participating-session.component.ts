@@ -97,7 +97,7 @@ export class ParticipatingSessionComponent implements OnInit {
                 err => {
                     console.log(err);
                 });
-        console.log(this.sessions);
+        // console.log(this.sessions);
         this.userId = JSON.parse(localStorage.getItem('currentUser'))._id;
     }
 

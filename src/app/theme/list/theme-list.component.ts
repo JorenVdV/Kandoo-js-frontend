@@ -11,8 +11,7 @@ import {ThemeService} from "../../services/theme.service";
 export class ThemeListComponent implements OnInit {
     themes: Theme[];
 
-    constructor(private themeService: ThemeService,
-                private router: Router) {
+    constructor(private themeService: ThemeService,  private router: Router) {
     }
 
     ngOnInit() {

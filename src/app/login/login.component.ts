@@ -6,13 +6,12 @@ import {AlertService} from "../services/alert.service";
 import {UserService} from "../services/user.service";
 import {User} from "../models/user";
 import {ModalComponent} from "ng2-bs3-modal/components/modal";
-import {socketService} from "../services/socket.service";
+import {SocketService} from "../services/socket.service";
 
 @Component({
     templateUrl: 'login.component.html',
     selector: 'login',
     encapsulation: ViewEncapsulation.None,
-    providers: [socketService]
 })
 
 export class LoginComponent implements OnInit {
@@ -25,7 +24,7 @@ export class LoginComponent implements OnInit {
 
     constructor(private router: Router,
                 private authenticationService: AuthenticationService,
-                private alertService: AlertService, private userService: UserService, private socketService: socketService) {
+                private alertService: AlertService, private userService: UserService, private socketService: SocketService) {
     }
 
     open() {
@@ -47,12 +46,7 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 (response: Response) => {
                     console.log("Success Response" + response.json());
-                    this.socketService.listen().subscribe(data => {
-                        console.log(data);
-                    });
-
-                    this.socketService.sendMessage('loggedin', response.json().user._id);
-
+                    this.socketService.get('global').subscribe();
                     this.loading = false;
                     this.redirect();
                 },

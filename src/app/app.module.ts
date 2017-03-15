@@ -33,6 +33,7 @@ import {ThemeSessionComponent} from "./session/list-theme/theme-session.componen
 import {SelectCardComponent} from "./card/select/select.card.component";
 import {AccountComponent} from "./account/account.component";
 import {InvitedSessionComponent} from "./session/list-invited/invited-session.component";
+import {SocketService} from "./services/socket.service";
 import { Angular2FontAwesomeModule } from 'angular2-font-awesome/angular2-font-awesome';
 import {ChatComponent} from "./chat/chat.component";
 
@@ -73,6 +74,7 @@ import {ChatComponent} from "./chat/chat.component";
         AuthGuard,
         AlertService,
         AuthenticationService,
+        SocketService,
         UserService,
         CardService,
         MockBackend,
