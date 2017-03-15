@@ -11,7 +11,12 @@ app.use(compression());
 app.use(express.static(__dirname + '/dist'));
 
 // Start the app by listening on the default Heroku port
-app.listen(port);
+app.listen(port, function() {
+  // console.log(server);
+  // var host = this.server.address;
+  // var port = this.port;
+  // console.log('app listening to ' + host + ':' + port);
+});
 
 // For all GET requests, send back index.html so that PathLocationStrategy can be used
 app.get('/*', function(req, res) {
