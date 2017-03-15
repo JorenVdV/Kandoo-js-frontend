@@ -15,7 +15,7 @@ import {ThemeService} from "./theme.service";
 @Injectable()
 export class SessionService {
     private headers = new Headers({'Content-Type': 'application/json'});
-    private baseURL = 'http://localhost:8000';
+    private baseURL = 'https://kandoo-js-backend.herokuapp.com';
 
     private options = new RequestOptions({headers: this.headers});
 
