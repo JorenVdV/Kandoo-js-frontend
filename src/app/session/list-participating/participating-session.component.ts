@@ -8,6 +8,7 @@ import {ModalComponent} from "ng2-bs3-modal/components/modal";
 import {User} from "../../models/user";
 import {UserService} from "../../services/user.service";
 import {ThemeService} from "../../services/theme.service";
+import {SocketService} from "../../services/socket.service";
 
 @Component({
     selector: 'participating-session',
@@ -28,7 +29,7 @@ export class ParticipatingSessionComponent implements OnInit {
     modal: ModalComponent;
 
     constructor(private sessionService: SessionService, private alertService: AlertService, private userService: UserService, private themeService: ThemeService,
-                private router: Router, private route: ActivatedRoute) {
+                private router: Router, private route: ActivatedRoute, private socketService: SocketService ) {
         this.organiserIds = new Array(0);
     }
 
@@ -135,11 +136,11 @@ export class ParticipatingSessionComponent implements OnInit {
     }
 
     startSession(session: Session) {
-        if (session.pickedCards.length < 2) {
-            this.alertService.error("You can't play a game on your own!")
-        } else {
+        // if (session.pickedCards.length < 2) {
+        //     this.alertService.error("You can't play a game on your own!")
+        // } else {
 
-        }
+        // }
 
 
         if (session.status == "created") {
@@ -148,6 +149,8 @@ export class ParticipatingSessionComponent implements OnInit {
             } else {
                 this.sessionService.startSession(session).subscribe(
                     done => {
+                        console.log('session started event sending sockets');
+                        this.socketService.send("ping", JSON.parse(localStorage.getItem('currentUser'))._id, session._id);
                         this.router.navigate(['/session', session._id, 'game']);
                     },
                     err => {
