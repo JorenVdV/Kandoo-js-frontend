@@ -53,10 +53,24 @@ export class SocketService {
     }
 
     send(name: string, userID: string, message: string) {
+
         var data = {
             user: userID,
             data: message
         };
         this.socket.emit(name, data);
     }
+
+// Handle connection opening
+    private
+    connect() {
+        console.log(`Connected to "${this.baseURL}"`);
+    }
+
+// Handle connection closing
+    private
+    disconnect() {
+        console.log(`Disconnected from "${this.baseURL}"`);
+    }
+
 }
