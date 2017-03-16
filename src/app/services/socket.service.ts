@@ -4,7 +4,7 @@ import * as io from 'socket.io-client';
 
 @Injectable()
 export class SocketService {
-    private baseURL = 'http://localhost:8000';
+    private baseURL = 'https://kandoo-js-backend.herokuapp.com';
     socket: SocketIOClient.Socket;
 
     constructor() {

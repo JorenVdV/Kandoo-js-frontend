@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, AfterViewInit} from "@angular/core";
 import {Card} from "../models/card";
 import {Observable} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -12,7 +12,7 @@ import {User} from "../models/user";
     styleUrls: ['./game.component.css']
 })
 
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit, AfterViewInit {
     cards: Card[] = [];
     circleFive: Card[] = [];
     circleFour: Card[] = [];
@@ -31,6 +31,13 @@ export class GameComponent implements OnInit {
     constructor(private sessionService: SessionService,
                 private route: ActivatedRoute,
                 private router: Router) {
+    }
+
+    ngAfterViewInit() {
+        $(document).ready(function () {
+            $('#drag').draggable();
+        });
+
     }
 
     ngOnInit() {
@@ -109,7 +116,8 @@ export class GameComponent implements OnInit {
 
         this.nextParticipant();
         this.sessionService.playTurn(this.session, this.userId, card._id).subscribe(
-            done => {},
+            done => {
+            },
             err => {
                 console.log(err);
             });

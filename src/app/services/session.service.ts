@@ -14,7 +14,7 @@ import {ThemeService} from "./theme.service";
 @Injectable()
 export class SessionService {
     private headers = new Headers({'Content-Type': 'application/json'});
-    private baseURL = 'http://localhost:8000';
+    private baseURL = 'https://kandoo-js-backend.herokuapp.com';
 
     private options = new RequestOptions({headers: this.headers});
 
@@ -59,11 +59,25 @@ export class SessionService {
     }
 
 
+    getMessages(id: string): Observable<Session> {
+        return this.http
+            .get(this.baseURL + '/session/' + id +'/messages')
+            .map((res: Response) => res.json().messages)
+            .catch((error: any) => Observable.throw(error))
+    }
+
     readSession(id: string): Observable<Session> {
         return this.http
             .get(this.baseURL + '/session/' + id)
             .map((res: Response) => res.json().session)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
+    addMessage(sessionId: string, message: string, userId: string): Observable<Session> {
+        return this.http
+            .post(this.baseURL + '/session/' + sessionId + '/message', JSON.stringify({userId: userId, message: message}), {headers: this.headers})
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error));
     }
 
     readSessions(id: string): Observable<Session[]> {
