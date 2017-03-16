@@ -127,7 +127,7 @@ export class ParticipatingSessionComponent implements OnInit {
     }
 
     goToSession(session: Session) {
-        this.router.navigate(['/session', session._id], 'game');
+        this.router.navigate(['/session', session._id], 'circle');
     }
 
     close() {
@@ -136,7 +136,7 @@ export class ParticipatingSessionComponent implements OnInit {
 
     startSession(session: Session) {
         if (session.pickedCards.length < 2) {
-            this.alertService.error("You can't play a game on your own!")
+            this.alertService.error("You can't play a circle on your own!")
         } else {
 
         }
@@ -148,18 +148,17 @@ export class ParticipatingSessionComponent implements OnInit {
             } else {
                 this.sessionService.startSession(session).subscribe(
                     done => {
-                        this.router.navigate(['/session', session._id, 'game']);
+                        this.router.navigate(['/session', session._id, 'circle']);
                     },
                     err => {
                         this.alertService.error(err, false);
                     });
             }
         } else {
-            this.router.navigate(['/session', session._id, 'game']);
+            this.router.navigate(['/session', session._id, 'circle']);
         }
 
     }
-
 
     inviteToSession(session: Session) {
         this.sessionService.inviteToSession(session).subscribe(

@@ -21,7 +21,7 @@ import {AuthGuard} from "./guards/auth.guard";
 import {CardDetailComponent} from "./card/details/card-detail.component";
 import {SessionService} from "./services/session.service";
 import {SessionComponent} from "./session/session.component";
-import {GameComponent} from "./game/game.component";
+import {CircleComponent} from "./circle/circle.component";
 import {ThemeListComponent} from './theme/list/theme-list.component';
 import {LandingComponent} from "./landing/landing.component";
 import {Ng2Bs3ModalModule} from 'ng2-bs3-modal/ng2-bs3-modal';
@@ -48,7 +48,7 @@ import {ChatComponent} from "./chat/chat.component";
         CardComponent,
         CardDetailComponent,
         SessionComponent,
-        GameComponent,
+        CircleComponent,
         ThemeListComponent,
         LandingComponent,
         NavbarComponent,
