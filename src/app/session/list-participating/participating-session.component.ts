@@ -127,7 +127,7 @@ export class ParticipatingSessionComponent implements OnInit {
     }
 
     goToSession(session: Session) {
-        this.router.navigate(['/session', session._id], 'game');
+        this.router.navigate(['/session', session._id, 'game']);
     }
 
     close() {

@@ -74,7 +74,7 @@ export class SessionService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    cloneSession(sessionId: String): Observable<Session[]> {
+    cloneSession(sessionId: String): Observable<Session> {
         return this.http
             .post(this.baseURL + '/session/'+sessionId+'/copy', JSON.stringify({userId: JSON.parse(localStorage.getItem('currentUser'))._id }), {headers: this.headers})
             .map((res: Response) => res.json().sessions)
@@ -137,7 +137,7 @@ export class SessionService {
         }
     }
 
-    readParticipantSessions(): Observable<Session[]> {
+    readParticipantSessions(): Observable<Session> {
         let currentUser = localStorage.getItem('currentUser');
         return this.http
             .get(this.baseURL + '/user/' + JSON.parse(currentUser)._id + '/sessions/participating')
@@ -145,7 +145,7 @@ export class SessionService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    readThemeSessions(id: string): Observable<Session[]> {
+    readThemeSessions(id: string): Observable<Session> {
         return this.http
             .get(this.baseURL + '/theme/' + id + '/sessions')
             .map((res: Response) => res.json().sessions)
@@ -160,7 +160,7 @@ export class SessionService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    getSessionOrganisers(session: Session): Observable<Session[]> {
+    getSessionOrganisers(session: Session): Observable<Session> {
         return this.http
             .get(this.baseURL + '/theme/' + session.theme._id)
             .map((res: Response) => res.json().theme.organisers)
@@ -192,7 +192,7 @@ export class SessionService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    readInvitedSessions(): Observable<Session[]> {
+    readInvitedSessions(): Observable<Session> {
         let currentUser = localStorage.getItem('currentUser');
         return this.http
             .get(this.baseURL + '/user/' + JSON.parse(currentUser)._id + '/sessions/invited')
@@ -200,7 +200,7 @@ export class SessionService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    acceptInvite(session: Session): Observable<Session[]> {
+    acceptInvite(session: Session): Observable<Session> {
         let currentUser = localStorage.getItem('currentUser');
         const url = this.baseURL+'/session/'+session._id +'/accept';
         return this.http

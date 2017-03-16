@@ -38,50 +38,12 @@ export class SelectCardComponent implements OnInit {
         this.userId = JSON.parse(localStorage.getItem("currentUser"))._id;
         this.sessionId = this.route.snapshot.params['_id'];
 
+        this.getCards();
 
 
-        this.sessionService.readSession(this.sessionId)
-            .subscribe(s => {
-                    this.session = s;
-                    this.themeId = s.theme;
-                    if (this.session.cardsCanBeAdded) {
-                        this.cardsCanBeAdded = true;
-                    }
-                    if (this.isInArray(this.userId, this.session.theme.organisers)) {
-                        this.sessionCards = this.session.sessionCards;
-                    }
-                    this.cardService.readCards(this.session.theme._id).subscribe(
-                        cards => {
-                            if (this.isInArray(this.userId, this.session.theme.organisers)) {
-                                this.cards = cards;
-                                for (let i = 0; i < this.sessionCards.length; i++) {
-                                    for (let j = 0; j < this.cards.length; j++) {
-                                        if (this.sessionCards[i].description == this.cards[j].description) {
-                                            this.cards.splice(j, 1);
-                                        }
-                                    }
-                                }
-                            } else {
-                                this.cards = this.session.sessionCards;
-                            }
-                        },
-                        err => {
-
-                        });
-                },
-                err => {
-
-                })
     }
 
-
-    setPersonal(personal: string){
-        if(personal=='personal' ){
-            this.isPersonal = true;
-            this.sessionCards = [];
-        } else {
-            this.isPersonal = false;
-        }
+    getCards(){
 
         this.sessionService.readSession(this.sessionId)
             .subscribe(s => {
@@ -115,6 +77,17 @@ export class SelectCardComponent implements OnInit {
                 err => {
 
                 })
+    }
+
+
+    setPersonal(personal: string){
+        if(personal=='personal' ){
+            this.isPersonal = true;
+            this.sessionCards = [];
+        } else {
+            this.isPersonal = false;
+        }
+    this.getCars();
 
     }
 

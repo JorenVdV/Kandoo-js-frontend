@@ -36,6 +36,7 @@ import {InvitedSessionComponent} from "./session/list-invited/invited-session.co
 import {SocketService} from "./services/socket.service";
 import { Angular2FontAwesomeModule } from 'angular2-font-awesome/angular2-font-awesome';
 import {ChatComponent} from "./chat/chat.component";
+import {DeleteAccComponent} from "./account/delete.component";
 
 @NgModule({
     declarations: [
@@ -58,7 +59,8 @@ import {ChatComponent} from "./chat/chat.component";
         SelectCardComponent,
         AccountComponent,
         InvitedSessionComponent,
-        ChatComponent
+        ChatComponent,
+        DeleteAccComponent
     ],
     imports: [
         BrowserModule,
