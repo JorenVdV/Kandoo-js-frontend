@@ -26,18 +26,13 @@ export class SocketService {
         this.socket.on("error", (error: string) => {
             console.log(`ERROR: "${error}" (${socketUrl})`);
         });
-        this.socket.on("session_started", (item: any) => console.log(item));
-        this.socket.on("messages", (item: any) => console.log(item));
-        this.socket.on("test", (item: any) => console.log(item));
-        this.socket.on('ping', function (data) {
-            this.socket.emit('pong', {beat: 1});
-        });
+
 
         // Return observable which follows "create" and "remove" signals from socket stream
         return Observable.create((observer: any) => {
-            this.socket.on("session_started", (item: any) => console.log(item));
-            this.socket.on("messages", (item: any) => console.log(item));
-            this.socket.on("test", (item: any) => console.log(item));
+            // this.socket.on("session_started", (item: any) => console.log(item));
+            // this.socket.on("messages", (item: any) => console.log(item));
+            // this.socket.on("test", (item: any) => console.log(item));
             // return () => this.socket.close();
         });
 
@@ -53,25 +48,15 @@ export class SocketService {
         this.socket.emit("remove", name);
     }
 
-    init(userID: string) {
-        this.socket.emit("init", userID);
+    loggedin(userID: string) {
+        this.socket.emit("loggedin", userID);
     }
 
-    test(message: string) {
-        this.socket.emit("test", message);
-
+    send(name: string, userID: string, message: string) {
+        var data = {
+            user: userID,
+            data: message
+        };
+        this.socket.emit(name, data);
     }
-
-// Handle connection opening
-    private
-    connect() {
-        console.log(`Connected to "${this.baseURL}"`);
-    }
-
-// Handle connection closing
-    private
-    disconnect() {
-        console.log(`Disconnected from "${this.baseURL}"`);
-    }
-
 }
