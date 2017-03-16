@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, AfterViewInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {Theme} from "../../models/theme";
 import {ThemeService} from "../../services/theme.service";
@@ -10,12 +10,20 @@ import {AlertService} from "../../services/alert.service";
     templateUrl: 'theme-list.component.html',
 })
 
-export class ThemeListComponent implements OnInit {
+export class ThemeListComponent implements OnInit, AfterViewInit  {
     themes: Theme[];
 
     constructor(private themeService: ThemeService,
                 private router: Router, private userService: UserService, private alertService: AlertService) {
     }
+    ngAfterViewInit()
+    {
+        $(document).ready(function(){
+            $('#drag').draggable();
+        });
+
+    }
+
 
     ngOnInit() {
         this.themeService.readThemes().subscribe(

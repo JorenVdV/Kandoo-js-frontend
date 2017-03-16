@@ -6,7 +6,7 @@ import current = SyntaxKind.current;
 
 @Injectable()
 export class UserService {
-    private baseURL = 'https://kandoo-js-backend.herokuapp.com';
+    private baseURL = 'http://localhost:8000';
 
     private headers = new Headers({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers' : 'Origin, X-Requested-With, Content-Type, Accept', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS' });
     constructor(private http: Http) {
@@ -28,8 +28,8 @@ export class UserService {
     //     return this.http.put('http://api.teamjs.xyz/users/' + user._id, user, this.jwt()).map((response: Response) => response.json());
     // }
 
-    delete(id: string) {
-        return this.http.delete(this.baseURL + '/users/'+id, this.jwt()).map((response: Response) => response.json());
+    deleteAccount(id: string) {
+        return this.http.delete(this.baseURL + '/user/'+id+'/delete', this.jwt()).map((response: Response) => response.json());
     }
 
     get(id: string){
