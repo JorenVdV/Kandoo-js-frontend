@@ -120,9 +120,9 @@ export class SessionService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    updateSessionCards(session: Session, cards: Card[]): Observable<Session> {
+    updateSessionCards(session: Session, cards: Card[], isPersonal: boolean): Observable<Session> {
         let url;
-        if(session.creator==JSON.parse(localStorage.getItem('currentUser'))._id){
+        if(!isPersonal){
             url = 'https://kandoo-js-backend.herokuapp.com/session/'+session._id +'/update';
             return this.http
                 .put(url, JSON.stringify({sessionCards: cards}), {headers: this.headers})
