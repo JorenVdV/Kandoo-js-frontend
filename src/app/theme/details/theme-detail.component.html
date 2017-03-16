@@ -9,7 +9,6 @@
                        separatorKeys="[32]" placeholder="Add another tag" [validators]="validators"
                        [errorMessages]="errorMessages" [theme]="'minimal'" name="tags" class="form-control"></tag-input>
         </label><br>
-        <label><input id="public" type="checkbox" [(ngModel)]="theme.publicAccess">Public</label><br>
         <button id="save" (click)="saveTheme()" class="btn btn-success">SAVE</button>
         <button id="delete" (click)="deleteTheme()" class="btn btn-danger">DELETE</button>
 

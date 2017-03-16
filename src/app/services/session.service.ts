@@ -8,7 +8,6 @@ import {Injectable} from "@angular/core";
 import {Headers, Http, Response, RequestOptions} from "@angular/http";
 import {Observable} from "rxjs";
 import {Session} from "../models/session";
-import {Theme} from "../models/theme";
 import {Card} from "../models/card";
 import {ThemeService} from "./theme.service";
 
@@ -60,11 +59,25 @@ export class SessionService {
     }
 
 
+    getMessages(id: string): Observable<Session> {
+        return this.http
+            .get(this.baseURL + '/session/' + id +'/messages')
+            .map((res: Response) => res.json().messages)
+            .catch((error: any) => Observable.throw(error))
+    }
+
     readSession(id: string): Observable<Session> {
         return this.http
             .get(this.baseURL + '/session/' + id)
             .map((res: Response) => res.json().session)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
+    addMessage(sessionId: string, message: string, userId: string): Observable<Session> {
+        return this.http
+            .post(this.baseURL + '/session/' + sessionId + '/message', JSON.stringify({userId: userId, message: message}), {headers: this.headers})
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error));
     }
 
     readSessions(id: string): Observable<Session[]> {

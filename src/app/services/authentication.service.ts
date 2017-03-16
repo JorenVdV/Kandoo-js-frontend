@@ -12,8 +12,7 @@ import {ISocketItem} from "../socket-item.model";
 })
 export class AuthenticationService {
     private headers = new Headers({'Content-Type': 'application/json'});
-    private baseURL = 'http://localhost:8000';
-
+    private baseURL = 'https://kandoo-js-backend.herokuapp.com';
     constructor(private http: Http, private router: Router, private socketService: SocketService) {
     }
 
@@ -27,8 +26,6 @@ export class AuthenticationService {
                 // if (!response) return;
                 let user = response.json().user;
 
-
-                this.socketService.loggedin(user._id);
 
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify(user));
