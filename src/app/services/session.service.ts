@@ -134,9 +134,9 @@ export class SessionService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    updateSessionCards(session: Session, cards: Card[], isPersonal: boolean): Observable<Session> {
+    updateSessionCards(session: Session, cards: Card[], isPersonal: boolean, isOrganiser: boolean): Observable<Session> {
         let url;
-        if (!isPersonal) {
+        if (!isPersonal && isOrganiser) {
             url = this.baseURL + '/session/' + session._id + '/update';
             return this.http
                 .put(url, JSON.stringify({sessionCards: cards}), {headers: this.headers})
@@ -209,13 +209,6 @@ export class SessionService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  skipTurn(session: Session, userId: string): Observable<Session> {
-    const url = this.baseURL + '/session/' + session._id + '/turn';
-    return this.http
-      .put(url, JSON.stringify({userId: userId}), {headers: this.headers})
-      .map((res: Response) => res.json())
-      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-  }
 
     readInvitedSessions(): Observable<Session> {
         let currentUser = localStorage.getItem('currentUser');

@@ -17,14 +17,17 @@
 
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6" *ngIf="isOrganiser">
             <select name="isPersonal" #isPersonal  (change)="setPersonal(isPersonal.value)" class="form-control">
                 <option value="session">session</option>
                 <option value="personal">personal</option>
             </select>
-            <br>
-            <button class="btn btn-primary btn-block" (click)="updateSessionCards(isPersonal.value)">SAVE CARDS</button>
+            <br><button class="btn btn-primary btn-block" (click)="updateSessionCards(isPersonal.value)">SAVE CARDS</button>
         </div>
+        <div class="col-md-6" *ngIf="!isOrganiser">
+            <button class="btn btn-primary btn-block" (click)="updateSessionCards(false)">SAVE CARDS</button>
+        </div>
+
     </div>
 
     <div class="col-md-6">

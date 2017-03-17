@@ -20,11 +20,29 @@ export class SelectCardComponent implements OnInit {
     cardsCanBeAdded: boolean;
     userId: string;
     isPersonal: boolean;
+    organisers;
+    isOrganiser;
 
     constructor(private cardService: CardService, private route: ActivatedRoute, private sessionService: SessionService, private alertService: AlertService) {
         this.route.params.subscribe(params => {
             this.sessionId = params['_id'];
             this.sessionCards = new Array(0);
+            this.sessionService.readSession(this.sessionId).subscribe(
+                session => {
+
+                    this.session = session;
+                    console.log(this.session.theme);
+                    this.organisers = session.theme.organisers;
+                    if(this.isInArray(this.userId, this.organisers)){
+                        this.isOrganiser = true;
+                    } else {
+                        this.isOrganiser = false;
+                    }
+                },
+                err => {
+                    console.log(err);
+                });
+
         });
     }
 
@@ -37,6 +55,7 @@ export class SelectCardComponent implements OnInit {
 
         this.userId = JSON.parse(localStorage.getItem("currentUser"))._id;
         this.sessionId = this.route.snapshot.params['_id'];
+
 
         this.getCards();
 
@@ -98,7 +117,7 @@ export class SelectCardComponent implements OnInit {
                 return;
             }
         }
-        this.sessionService.updateSessionCards(this.session, this.sessionCards, this.isPersonal)
+        this.sessionService.updateSessionCards(this.session, this.sessionCards, this.isPersonal, this.isOrganiser)
             .subscribe(
                 card => {
                     this.alertService.success("Cards updated!");
