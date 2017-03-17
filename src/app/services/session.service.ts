@@ -13,8 +13,8 @@ import {ThemeService} from "./theme.service";
 
 @Injectable()
 export class SessionService {
-    private headers = new Headers({'Content-Type': 'application/json'});
-    private baseURL = 'https://kandoo-js-backend.herokuapp.com';
+  private headers = new Headers({'Content-Type': 'application/json'});
+  private baseURL = 'https://kandoo-js-backend.herokuapp.com';
 
     private options = new RequestOptions({headers: this.headers});
 
@@ -201,13 +201,21 @@ export class SessionService {
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
-    playTurn(session: Session, userId: string, cardId: string): Observable<Session> {
-        const url = this.baseURL + '/session/' + session._id + '/turn';
-        return this.http
-            .put(url, JSON.stringify({userId: userId, cardId: cardId}), {headers: this.headers})
-            .map((res: Response) => res.json())
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-    }
+  playTurn(session: Session, userId: string, cardId: string): Observable<Session> {
+    const url = this.baseURL + '/session/' + session._id + '/turn';
+    return this.http
+      .put(url, JSON.stringify({userId: userId, cardId: cardId}), {headers: this.headers})
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  skipTurn(session: Session, userId: string): Observable<Session> {
+    const url = this.baseURL + '/session/' + session._id + '/turn';
+    return this.http
+      .put(url, JSON.stringify({userId: userId}), {headers: this.headers})
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 
     readInvitedSessions(): Observable<Session> {
         let currentUser = localStorage.getItem('currentUser');

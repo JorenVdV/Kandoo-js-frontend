@@ -20,6 +20,22 @@
     <link rel="stylesheet" href="assets/balloon.css">
     <!--<script src="node_modules/ng2-bs3-modal/bundles/ng2-bs3-modal.js"></script>-->
 
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async='async'></script>
+    <script>
+        var OneSignal = window.OneSignal || [];
+        OneSignal.push(["init", {
+            appId: "1557f220-f307-429b-a8d3-7e2e4f133cb0",
+            autoRegister: false, /* Set to true to automatically prompt visitors */
+            subdomainName: 'teamjs',
+            httpPermissionRequest: {
+                enable: true
+            },
+            notifyButton: {
+                enable: true /* Set to false to hide */
+            }
+        }]);
+    </script>
+
     <style>
         label {
             max-width: 100%;

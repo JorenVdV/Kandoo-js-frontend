@@ -151,18 +151,17 @@ export class ParticipatingSessionComponent implements OnInit, AfterViewInit {
                     done => {
                         console.log('session started event sending sockets');
                         this.socketService.send("ping", JSON.parse(localStorage.getItem('currentUser'))._id, session._id);
-                        this.router.navigate(['/session', session._id, 'game']);
+                        this.router.navigate(['/session', session._id, 'circle']);
                     },
                     err => {
                         this.alertService.error(err, false);
                     });
             }
         } else {
-            this.router.navigate(['/session', session._id, 'game']);
+            this.router.navigate(['/session', session._id, 'circle']);
         }
 
     }
-
 
     inviteToSession(session: Session) {
         this.sessionService.inviteToSession(session).subscribe(
