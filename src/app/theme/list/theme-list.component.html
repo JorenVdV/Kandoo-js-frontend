@@ -15,25 +15,25 @@
                 </div>
                 <div class="col-md-7">
 
-                    <button class="btn btn-primary" (click)="selectTheme(theme)">
+                    <button class="btn btn-primary" (click)="selectTheme(theme)" data-balloon="Info!" data-balloon-pos="up" >
                         <i class="fa fa-info-circle" aria-hidden="true"></i>
                     </button>
 
 
-                    <button class="btn btn-primary " (click)="addCards(theme)">
+                    <button class="btn btn-primary " (click)="addCards(theme)" data-balloon="Add cards to theme!" data-balloon-pos="up" >
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                     </button>
 
 
-                    <button class="btn btn-primary " (click)="createSession(theme)">
+                    <button class="btn btn-primary " (click)="createSession(theme)" data-balloon="Create new session!" data-balloon-pos="up" >
                         <i class="fa fa-plus-circle" aria-hidden="true"></i>
                     </button>
 
-                    <button class="btn btn-primary " (click)="organiser.open()">
+                    <button class="btn btn-primary " (click)="organiser.open()" data-balloon="Add organisers!" data-balloon-pos="up" >
                         <i class="fa fa-user-plus" aria-hidden="true"></i>
                     </button>
 
-                    <button class="btn btn-danger " (click)="deleteTheme(theme)">
+                    <button class="btn btn-danger " (click)="deleteTheme(theme)" data-balloon="Delete theme!" data-balloon-pos="up" >
                         <i class="fa fa-times-circle" aria-hidden="true"></i>
                     </button>
                 </div>

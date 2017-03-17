@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {Params, ActivatedRoute} from "@angular/router";
 import {Session} from "../../models/session";
@@ -15,7 +15,7 @@ import {SocketService} from "../../services/socket.service";
     templateUrl: './participating-session.component.html',
 })
 
-export class ParticipatingSessionComponent implements OnInit {
+export class ParticipatingSessionComponent implements OnInit, AfterViewInit {
     sessions: Session[];
     themeId: string;
     session = new Session();
@@ -29,7 +29,7 @@ export class ParticipatingSessionComponent implements OnInit {
     modal: ModalComponent;
 
     constructor(private sessionService: SessionService, private alertService: AlertService, private userService: UserService, private themeService: ThemeService,
-                private router: Router, private route: ActivatedRoute, private socketService: SocketService ) {
+                private router: Router, private route: ActivatedRoute, private socketService: SocketService) {
         this.organiserIds = new Array(0);
     }
 

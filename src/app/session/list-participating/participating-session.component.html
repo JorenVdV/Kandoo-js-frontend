@@ -10,35 +10,36 @@
 
 
             <div class="col-md-7" *ngIf="getOrganisers(session)">
-                <a class="btn btn-primary " (click)="selectSession(session)">
-                    <i class="fa fa-info-circle" aria-hidden="true"></i>
-                </a>
 
-                <button class="btn btn-primary " (click)="modal.open()">
+                <button class="btn btn-primary" data-balloon="Info!" data-balloon-pos="up" (click)="selectSession(session)" md-tooltip="some message" tooltip-position="below">
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                </button>
+
+                <button class="btn btn-primary " (click)="modal.open()" data-balloon="Invite users!" data-balloon-pos="up" >
                     <i class="fa fa-user-plus" aria-hidden="true"></i>
                 </button>
 
-                <button class="btn btn-primary " (click)="selectCards(session)">
+                <button class="btn btn-primary " (click)="selectCards(session)" data-balloon="Select cards!" data-balloon-pos="up" >
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 </button>
 
-                <button (click)="cloneSession(session)" class="btn btn-primary ">
+                <button (click)="cloneSession(session)" class="btn btn-primary " data-balloon="Copy session!" data-balloon-pos="up" >
                     <i class="fa fa-clone" aria-hidden="true"></i>
                 </button>
 
-                <div *ngIf="session.status == 'created'" style="display: inline">
-                    <button (click)="startSession(session)" class="btn btn-success ">
+                <div *ngIf="session.status == 'created'" style="display: inline"  >
+                    <button (click)="startSession(session)" class="btn btn-success " data-balloon="Start session!" data-balloon-pos="up">
                         <i class="fa fa-play-circle" aria-hidden="true"></i>
                     </button>
                 </div>
 
-                <div *ngIf="session.status != 'created'" style="display: inline">
-                    <a (click)="startSession(session)" class="btn btn-success ">
+                <div *ngIf="session.status != 'created'" style="display: inline" >
+                    <button (click)="startSession(session)" class="btn btn-success " data-balloon="Go to game!" data-balloon-pos="up" >
                         <i class="fa fa-play-circle" aria-hidden="true"></i>
-                    </a>
+                    </button>
                 </div>
 
-                <button (click)="deleteSession(session)" class="btn btn-danger " style="display: inline">
+                <button (click)="deleteSession(session)" class="btn btn-danger " style="display: inline" data-balloon="Delete session!" data-balloon-pos="up" >
                     <i class="fa fa-times-circle" aria-hidden="true"></i>
                 </button>
             </div>
@@ -46,11 +47,11 @@
 
             <div class="col-md-7" *ngIf="!getOrganisers(session)" style="display: inline">
 
-                <a class="btn btn-primary " (click)="selectCards(session)">
+                <a class="btn btn-primary " (click)="selectCards(session)" data-balloon="Select cards!" data-balloon-pos="up" >
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 </a>
 
-                <a class="btn btn-primary " (click)="goToSession(session)">
+                <a class="btn btn-primary " (click)="goToSession(session)" data-balloon="Go to game!" data-balloon-pos="up" >
                     <i class="fa fa-play-circle" aria-hidden="true"></i>
                 </a>
 
