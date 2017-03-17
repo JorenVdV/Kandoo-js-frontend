@@ -10,14 +10,14 @@
       <p><b>Description</b><br>{{selectedCard.description}}</p>
       <button *ngIf="selectedCard.priority === 0
                     && !isCircleFilled
-                    && currentParticipant?._id === userId"
+                    && turnHolder?._id === userId"
               class="btn btn-success btn-big"
               (click)="addToCircle(selectedCard)">ADD TO CIRCLE
       </button>
       <button *ngIf="(selectedCard.priority != 5
                     && selectedCard.priority != 0)
                     && isCircleFilled
-                    && currentParticipant?._id === userId"
+                    && turnHolder?._id === userId"
               class="btn btn-primary btn-big"
               (click)="increasePriority(selectedCard)">INCREASE PRIORITY
       </button>
@@ -79,7 +79,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="currentParticipant?._id === userId" class="col-md-3 timer-container">
+  <div *ngIf="turnHolder?._id === userId" class="col-md-3 timer-container">
     <span>60 seconds to choose</span>
     <span class="timer"
           [class.green]="ticks < 35"
