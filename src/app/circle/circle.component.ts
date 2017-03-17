@@ -71,6 +71,9 @@ export class CircleComponent implements OnInit, AfterViewInit {
             }
           }
         }
+        if (this.cards.length === 0) {
+          this.isCircleFilled = true;
+        }
         this.turnHolder = s.currentUser;
         for (let i = 0; i < this.numberedCards.length; i++) {
           this.numberedCards[i].listNumber = i + 1;
@@ -95,7 +98,7 @@ export class CircleComponent implements OnInit, AfterViewInit {
       this.playTurn(card);
     }
 
-    if (this.circleFive === 11) {
+    if (this.circleFive === 11 || this.cards.length === 0) {
       this.isCircleFilled = true;
     }
   }

@@ -1,5 +1,5 @@
-<h2>Invited sessions:</h2>
-<div *ngFor="let session of sessions" style="cursor: pointer">
+<h2 *ngIf="sessions?.length != 0">Invited sessions:</h2>
+<div *ngFor="let session of sessions">
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="col-md-7">

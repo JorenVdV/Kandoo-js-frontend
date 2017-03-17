@@ -1,80 +1,84 @@
 <navbar></navbar>
 
 <div class="container">
+  <div class="col-md-10 col-md-offset-1">
     <alert></alert>
     <button id="create-btn" class="btn btn-success" (click)="createTheme()">CREATE THEME</button>
     <div class="row">
-        <hr>
+      <hr>
     </div>
-    <div class="col-md-10 col-md-offset-1">
-        <h2>My Themes:</h2>
-        <div class="panel panel-default" *ngFor="let theme of themes">
-            <div class="panel-body">
-                <div class="col-md-5">
-                    <h4><strong>{{theme.title}}:</strong> {{theme.description}}</h4>
-                </div>
-                <div class="col-md-7">
-
-                    <button class="btn btn-primary" (click)="selectTheme(theme)" data-balloon="Info!" data-balloon-pos="up" >
-                        <i class="fa fa-info-circle" aria-hidden="true"></i>
-                    </button>
-
-
-                    <button class="btn btn-primary " (click)="addCards(theme)" data-balloon="Add cards to theme!" data-balloon-pos="up" >
-                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    </button>
-
-
-                    <button class="btn btn-primary " (click)="createSession(theme)" data-balloon="Create new session!" data-balloon-pos="up" >
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                    </button>
-
-                    <button class="btn btn-primary " (click)="organiser.open()" data-balloon="Add organisers!" data-balloon-pos="up" >
-                        <i class="fa fa-user-plus" aria-hidden="true"></i>
-                    </button>
-
-                    <button class="btn btn-danger " (click)="deleteTheme(theme)" data-balloon="Delete theme!" data-balloon-pos="up" >
-                        <i class="fa fa-times-circle" aria-hidden="true"></i>
-                    </button>
-                </div>
-
-
-            </div>
-
-            <modal #organiser>
-                <modal-header [show-close]="true">
-                    <h4 class="modal-title">Make organiser</h4>
-                </modal-header>
-                <modal-body>
-                    <alert></alert>
-                    <p><strong>Current organisers:</strong></p>
-                    <div *ngFor="let user of theme.organisers" style="cursor: pointer">
-                        <p>{{user.emailAddress}} <i class="fa fa-times-circle text-danger"
-                                                    aria-hidden="true" (click)="deleteOrganiser(theme, user._id)"></i>
-                        </p>
-                    </div>
-
-                    <alert></alert>
-                    <input type="text" class="form-control" #email placeholder="Email">
-                    <br>
-                    <button (click)="addOrganiser(theme, email.value)" class="btn btn-primary btn-block">ADD</button>
-
-                </modal-body>
-            </modal>
-
-
+    <h2>My Themes:</h2>
+    <div class="panel panel-default" *ngFor="let theme of themes">
+      <div class="panel-body">
+        <div class="col-md-5">
+          <h4><strong>{{theme.title}}:</strong> {{theme.description}}</h4>
         </div>
-        <div class="row">
-            <hr>
+        <div class="col-md-7">
+
+          <button class="btn btn-primary" (click)="selectTheme(theme)" data-balloon="Info!" data-balloon-pos="up">
+            <i class="fa fa-info-circle" aria-hidden="true"></i>
+          </button>
+
+
+          <button class="btn btn-primary " (click)="addCards(theme)" data-balloon="Add cards to theme!"
+                  data-balloon-pos="up">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          </button>
+
+
+          <button class="btn btn-primary " (click)="createSession(theme)" data-balloon="Create new session!"
+                  data-balloon-pos="up">
+            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+          </button>
+
+          <button class="btn btn-primary " (click)="organiser.open()" data-balloon="Add organisers!"
+                  data-balloon-pos="up">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+          </button>
+
+          <button class="btn btn-danger " (click)="deleteTheme(theme)" data-balloon="Delete theme!"
+                  data-balloon-pos="up">
+            <i class="fa fa-times-circle" aria-hidden="true"></i>
+          </button>
         </div>
-        <h2>Participating sessions:</h2>
-        <participating-session></participating-session>
-        <div class="row">
-            <hr>
-        </div>
-        <invited-session></invited-session>
+
+
+      </div>
+
+      <modal #organiser>
+        <modal-header [show-close]="true">
+          <h4 class="modal-title">Make organiser</h4>
+        </modal-header>
+        <modal-body>
+          <alert></alert>
+          <p><strong>Current organisers:</strong></p>
+          <div *ngFor="let user of theme.organisers" style="cursor: pointer">
+            <p>{{user.emailAddress}} <i class="fa fa-times-circle text-danger"
+                                        aria-hidden="true" (click)="deleteOrganiser(theme, user._id)"></i>
+            </p>
+          </div>
+
+          <alert></alert>
+          <input type="text" class="form-control" #email placeholder="Email">
+          <br>
+          <button (click)="addOrganiser(theme, email.value)" class="btn btn-primary btn-block">ADD</button>
+
+        </modal-body>
+      </modal>
+
 
     </div>
+    <div class="row">
+      <hr>
+    </div>
+    <h2>Participating sessions:</h2>
+    <participating-session></participating-session>
+    <div class="row">
+      <hr>
+    </div>
+    <invited-session></invited-session>
+
+  </div>
 </div>
 
 
