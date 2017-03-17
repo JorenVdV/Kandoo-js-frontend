@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, ElementRef, AfterViewInit, ViewChild} from "@angular/core";
 import {Card} from "../models/card";
 import {Observable} from "rxjs";
 import {Router, ActivatedRoute} from "@angular/router";
@@ -17,7 +17,21 @@ import {ChatService} from "../services/chat.service";
     styleUrls: ['./chat.component.css']
 })
 
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, AfterViewInit {
+
+    @ViewChild('scrollMe') private myScrollContainer: ElementRef;
+
+
+    ngAfterViewChecked() {
+        this.scrollToBottom();
+    }
+
+    scrollToBottom(): void {
+        try {
+            this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+        } catch(err) { }
+    }
+
 
     messages: any[];
     session: Session;
@@ -51,7 +65,7 @@ export class ChatComponent implements OnInit {
 
 */
     ngOnInit() {
-
+        this.scrollToBottom();
         this.sessionId = this.route.snapshot.params['_id'];
         this.currentUserId = JSON.parse(localStorage.getItem('currentUser'))._id;
         this.user = JSON.parse(localStorage.getItem('currentUser')).firstname + ' ' + JSON.parse(localStorage.getItem('currentUser')).lastname;
