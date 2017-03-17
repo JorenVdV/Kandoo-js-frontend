@@ -1,11 +1,11 @@
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import {Injectable} from "@angular/core";
-import {Headers, Http, Response} from "@angular/http";
-import {Observable} from "rxjs";
-import {Theme} from "../models/theme";
-import {Session} from "../models/session";
+import {Injectable} from '@angular/core';
+import {Headers, Http, Response} from '@angular/http';
+import {Observable} from 'rxjs';
+import {Theme} from '../models/theme';
+import {Session} from '../models/session';
 
 @Injectable()
 export class ThemeService {
@@ -18,14 +18,18 @@ export class ThemeService {
 
 
     createTheme(theme: Theme): Observable<Theme> {
-        let currentUser = localStorage.getItem('currentUser');
+        const currentUser = localStorage.getItem('currentUser');
 
 
-        var tags = [];
-        for (var i = 0; i < theme.tags.length; i++) {
-            tags[i] = theme.tags[i]["display"];
+        const tags = [];
+        try {
+            for (let i = 0; i < theme.tags.length; i++) {
+                tags[i] = theme.tags[i]['display'];
+            }
+        } catch (exception) {
         }
-        console.log(tags);
+
+        // console.log(tags);
         const themeTags = tags;
 
 
@@ -57,7 +61,7 @@ export class ThemeService {
     }
 
     readThemes(): Observable<Theme[]> {
-        let currentUser = localStorage.getItem('currentUser');
+        const currentUser = localStorage.getItem('currentUser');
         return this.http
             .get(this.baseURL + '/user/' + JSON.parse(currentUser)._id + '/themes')
             .map((res: Response) => res.json().themes)
@@ -69,10 +73,10 @@ export class ThemeService {
             return obj === Object(obj);
         }
 
-        var tags = [];
-        for (var i = 0; i < theme.tags.length; i++) {
+        const tags = [];
+        for (let i = 0; i < theme.tags.length; i++) {
             if (isObject(theme.tags[i])) {
-                tags[i] = theme.tags[i]["display"];
+                tags[i] = theme.tags[i]['display'];
             } else {
                 tags[i] = theme.tags[i];
             }
@@ -89,14 +93,14 @@ export class ThemeService {
 
     addOrganiser(theme: Theme, email: string): Observable<Theme> {
         return this.http
-            .put(this.baseURL + '/theme/'+theme._id+'/addorganiser', JSON.stringify({organiserEmail: email}), {headers: this.headers})
+            .put(this.baseURL + '/theme/' + theme._id + '/addorganiser', JSON.stringify({organiserEmail: email}), {headers: this.headers})
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error));
     }
 
     deleteOrganiser(theme: Theme, userId: string): Observable<Theme> {
         return this.http
-            .put(this.baseURL + '/theme/'+theme._id+'/removeorganiser', JSON.stringify({organiserId: userId}), {headers: this.headers})
+            .put(this.baseURL + '/theme/' + theme._id + '/removeorganiser', JSON.stringify({organiserId: userId}), {headers: this.headers})
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error));
     }

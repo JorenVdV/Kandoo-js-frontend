@@ -20,7 +20,7 @@ describe('Landing page', function () {
         element.all(by.css('.intro-message login button')).then(function (items) {
             expect(items[0].getText()).toBe('LOGIN');
             items[0].click().then(function () {
-                browser.wait(ExpectedConditions.visibilityOf(element(by.id('loginModal'))), 1000);
+                browser.wait(ExpectedConditions.visibilityOf(element(by.id('loginModal'))), 2000);
             });
         });
     });
@@ -29,7 +29,7 @@ describe('Landing page', function () {
         element.all(by.css('.intro-message login button')).then(function (items) {
             expect(items[1].getText()).toBe('REGISTER');
             items[1].click().then(function () {
-                browser.wait(ExpectedConditions.visibilityOf(element(by.id('registerModal'))), 1000);
+                browser.wait(ExpectedConditions.visibilityOf(element(by.id('registerModal'))), 2000);
             });
         });
     });
@@ -39,18 +39,17 @@ describe('Landing page', function () {
         element.all(by.css('.intro-message login button')).then(function (items) {
             expect(items[0].getText()).toBe('LOGIN');
             items[0].click().then(function () {
-                browser.wait(ExpectedConditions.visibilityOf(loginModalWindow), 1000);
+                browser.wait(ExpectedConditions.visibilityOf(loginModalWindow), 2000);
                 const emailinput = loginModalWindow.element(by.name('emailAddress'));
                 const passwordinput = loginModalWindow.element(by.name('password'));
                 const loginbutton = loginModalWindow.element(by.buttonText('Login'));
 
-                emailinput.sendKeys('sander@teamjs.xyz');
-                passwordinput.sendKeys('sander');
+                emailinput.sendKeys('nick@teamjs.xyz');
+                passwordinput.sendKeys('nick');
 
-                expect(emailinput.getAttribute('value')).toBe('sander@teamjs.xyz');
+                expect(emailinput.getAttribute('value')).toBe('nick@teamjs.xyz');
                 loginbutton.click().then(function () {
-                    browser.driver.sleep(1000);
-                    // browser.waitForAngular();
+                    browser.driver.sleep(2000);
                     expect(browser.getCurrentUrl()).toBe('http://localhost:4200/themes');
                 });
             });
@@ -71,10 +70,10 @@ describe('Home page', function () {
                 const passwordinput = loginModalWindow.element(by.name('password'));
                 const loginbutton = loginModalWindow.element(by.buttonText('Login'));
 
-                emailinput.sendKeys('sander@teamjs.xyz');
-                passwordinput.sendKeys('sander');
+                emailinput.sendKeys('nick@teamjs.xyz');
+                passwordinput.sendKeys('nick');
                 loginbutton.click().then(function () {
-                    browser.driver.sleep(1000);
+                    browser.driver.sleep(2000);
                     expect(browser.getCurrentUrl()).toBe('http://localhost:4200/themes');
                 });
             });
@@ -98,25 +97,44 @@ describe('Home page', function () {
 
             const nameInput = element(by.id('title'));
             const descriptionInput = element(by.id('description'));
-            // const tagsInput = element(by.id('tags'));
+            const saveButton = element(by.id('save'));
 
             nameInput.sendKeys('This is a theme');
             descriptionInput.sendKeys('This is a theme description');
-            // tagsInput.sendKeys('tag1');
-            // tagsInput.sendKeys(protractor.Key.ENTER);
 
             expect(nameInput.getAttribute('value')).toBe('This is a theme');
             expect(descriptionInput.getAttribute('value')).toBe('This is a theme description');
-            // console.log(tagsInput.getAttribute('value'));
-            // expect(tagsInput.getAttribute('value')).toBe('tag1');
 
-
+            saveButton.click().then(() => {
+                browser.driver.sleep(2000);
+                expect(browser.getCurrentUrl()).toBe('http://localhost:4200/themes');
+                element(by.id('themes')).all(by.css('div.panel.panel-default')).then((themes) => {
+                    const bodyTheme = themes[themes.length - 1].element(by.css('.panel-body'));
+                    expect(bodyTheme.element(by.css('h4')).getText()).toBe('This is a theme: This is a theme description');
+                });
+            });
         });
+    });
 
+    it('should see the info of the theme', () => {
+        element(by.id('themes')).all(by.css('div.panel.panel-default')).then((themes) => {
+            const bodyTheme = themes[themes.length - 1].element(by.css('.panel-body'));
+            bodyTheme.all(by.css('.btn.btn-primary')).first().click().then(() => {
+                browser.driver.sleep(2000);
+                expect(element(by.css('h2')).getText()).toBe('Theme:');
+                expect(element(by.id('title')).getAttribute('value')).toBe('This is a theme');
+                expect(element(by.id('description')).getAttribute('value')).toBe('This is a theme description');
+            });
+        });
     });
 
     afterAll(() => {
-
+        browser.get('/themes');
+        element(by.id('themes')).all(by.css('div.panel.panel-default')).then((themes) => {
+            const bodyTheme = themes[themes.length - 1].element(by.css('.panel-body'));
+            bodyTheme.element(by.css('.btn.btn-danger')).click();
+            browser.driver.sleep(2000);
+        });
 
         /*Logout user*/
     });
