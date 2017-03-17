@@ -24,7 +24,6 @@ export class CircleComponent implements OnInit {
   selectedCard: Card;
   isCircleFilled: boolean = false;
   ticks: number = 0;
-  timerSub;
   session: Session;
   turnHolder: User;
   userId: string;
@@ -76,8 +75,6 @@ export class CircleComponent implements OnInit {
       });
 
     this.userId = JSON.parse(localStorage.getItem('currentUser'))._id;
-
-    this.initTimer();
   }
 
   selectCard(card: Card) {
@@ -128,35 +125,15 @@ export class CircleComponent implements OnInit {
       });
   }
 
-  initTimer() {
-    let timer = Observable.timer(0, 1000);
-    this.timerSub = timer.subscribe(t => {
-      this.ticks = t;
-      this.unsubTimer(t);
-    });
-  }
-
-  unsubTimer(t) {
-    if (t === 60) {
-      this.sessionService.skipTurn(this.session, this.turnHolder._id).subscribe(
-        done => {
-          this.turnHolder = done.currentUser;
-          this.timerSub.unsubscribe();
-          this.initTimer();
-        },
-        err => {
-          console.log(err);
-        });
-    }
-  }
-
   playTurn(card: Card) {
     this.sessionService.playTurn(this.session, this.userId, card._id).subscribe(
       done => {
-        card.priority++;
+        for (let cP of done.cardPriorities) {
+          if (cP.card._id === card._id) {
+            card.priority = cP.priority;
+          }
+        }
         this.turnHolder = done.currentUser;
-        this.timerSub.unsubscribe();
-        this.initTimer();
       },
       err => {
         console.log(err);
