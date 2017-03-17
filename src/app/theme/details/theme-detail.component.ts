@@ -6,9 +6,8 @@ import {Session} from "../../models/session";
 
 @Component({
     selector: 'theme-detail',
-    templateUrl: 'theme-detail.component.html',
+    templateUrl: 'theme-detail.component.html'
 })
-
 export class ThemeDetailComponent implements OnInit {
     theme: Theme;
     sessions: Session[];
@@ -24,7 +23,7 @@ export class ThemeDetailComponent implements OnInit {
     ngOnInit() {
 
         this.userId = JSON.parse(localStorage.getItem('currentUser'))._id;
-        let id = this.route.snapshot.params['_id'];
+        const id = this.route.snapshot.params['_id'];
         if (id) {
             this.themeService.readTheme(id)
                 .subscribe(t => {
@@ -42,7 +41,7 @@ export class ThemeDetailComponent implements OnInit {
                     });
             this.themeService.readThemeSessions(id).subscribe(
                 sessions => {
-                    this.sessions = sessions
+                    this.sessions = sessions;
                 },
                 err => {
                     console.log(err);

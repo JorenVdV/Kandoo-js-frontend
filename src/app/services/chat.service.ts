@@ -4,7 +4,7 @@ import {ReplaySubject} from 'rxjs/ReplaySubject';
 import 'rxjs/add/operator/map';
 
 import firebase from 'firebase';
-import {ChatMessage} from "../models/message";
+import {ChatMessage} from '../models/message';
 
 
 /*
