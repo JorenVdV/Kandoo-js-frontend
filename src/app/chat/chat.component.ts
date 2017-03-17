@@ -7,7 +7,8 @@ import {Session} from "../models/session";
 import {User} from "../models/user";
 import {UserService} from "../services/user.service";
 import {SocketService} from "../services/socket.service";
-import {Message} from "../models/message";
+import {Message, ChatMessage} from "../models/message";
+import {ChatService} from "../services/chat.service";
 
 
 @Component({
@@ -18,14 +19,17 @@ import {Message} from "../models/message";
 
 export class ChatComponent implements OnInit {
 
+    messages: any[];
+    session: Session;
     currentUserId: string;
     messages: any[];
     sessionId: string;
+    user: string;
 
     constructor(private sessionService: SessionService,
                 private userService: UserService,
                 private route: ActivatedRoute,
-                private router: Router, private socketService: SocketService) {
+                private router: Router, private socketService: SocketService, private chatService: ChatService) {
     }
 
 
@@ -50,6 +54,12 @@ export class ChatComponent implements OnInit {
 
         this.sessionId = this.route.snapshot.params['_id'];
         this.currentUserId = JSON.parse(localStorage.getItem('currentUser'))._id;
+        this.user = JSON.parse(localStorage.getItem('currentUser')).firstname + ' ' + JSON.parse(localStorage.getItem('currentUser')).lastname;
+        this.chatService.setup(this.sessionId);
+        this.chatService.messages.subscribe(
+            data => this.messages.push(data),
+            error => console.log(error)
+        );
 
 
         //this.yourFunction();
@@ -58,15 +68,7 @@ export class ChatComponent implements OnInit {
     }
 
 
-
-
     sendMessage(message: string) {
-        this.sessionService.addMessage(this.sessionId, message, this.currentUserId).subscribe(
-            done => {
-                this.getMessages();
-            },
-            err => {
-                console.log(err);
-            });
+        this.chatService.sendmessage(new ChatMessage(this.user, message));
     }
 }

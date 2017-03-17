@@ -1,5 +1,6 @@
 <navbar></navbar>
 <div class="container">
+  <chat style="z-index: 999; position: absolute; cursor: pointer; display: inline-block; max-width: 443px" id="drag"></chat>
   <div class="col-md-3">
     <div class="card-list">
       <div class="card-list-item card-item" *ngFor="let card of cards" (click)="selectCard(card)">
