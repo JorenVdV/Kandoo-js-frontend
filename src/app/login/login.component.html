@@ -4,7 +4,7 @@
 <br>
 <button type="button" class="btn btn-primary btn-block" (click)="registerModal.open()">REGISTER</button>
 
-<modal #modal>
+<modal #modal id="loginModal">
     <modal-header [show-close]="true">
         <h4 class="modal-title">Login</h4>
     </modal-header>
@@ -43,7 +43,7 @@
 </modal>
 
 
-<modal #registerModal>
+<modal #registerModal id="registerModal">
     <modal-header [show-close]="true">
         <h4 class="modal-title">Register</h4>
     </modal-header>
