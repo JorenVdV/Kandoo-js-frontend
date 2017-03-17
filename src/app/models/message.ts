@@ -1,9 +1,12 @@
 import {Card} from "./card";
 import {User} from "./user";
 
-export class Message {
-    message: string;
-    user: User;
-    dateTime: string;
+export class ChatMessage {
+    user:string;
+    text:string;
 
+    constructor(user:string, text:string){
+        this.user = user;
+        this.text = text;
+    }
 }

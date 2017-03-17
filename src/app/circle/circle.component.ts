@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, AfterViewInit} from "@angular/core";
 import {Card} from "../models/card";
 import {Observable} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -12,10 +12,10 @@ import {User} from "../models/user";
   styleUrls: ['circle.component.css']
 })
 
-export class CircleComponent implements OnInit {
+export class CircleComponent implements OnInit, AfterViewInit {
   cards: Card[] = [];
-  listNumberCards: Card[] = [];
-  circlePosCards: Card[] = [];
+  numberedCards: Card[] = [];
+  cardsInPlay: Card[] = [];
   circleFive: Card[] = [];
   circleFour: Card[] = [];
   circleThree: Card[] = [];
@@ -23,68 +23,67 @@ export class CircleComponent implements OnInit {
   circleOne: Card[] = [];
   selectedCard: Card;
   isCircleFilled: boolean = false;
-  ticks: number = 0;
-  subscription;
   session: Session;
-  currentParticipant: User;
+  turnHolder: User;
   userId: string;
-  circleLength = 0;
 
   constructor(private sessionService: SessionService,
               private route: ActivatedRoute,
               private router: Router) {
   }
 
+  ngAfterViewInit() {
+    $(document).ready(function () {
+      $('#drag').draggable();
+    });
+
+  }
+
   ngOnInit() {
     let sessionId = this.route.snapshot.params['_id'];
 
-    this.sessionService.readSession(sessionId)
-      .subscribe(s => {
-          console.log(s);
-          this.session = s;
-          for (let c of s.cardPriorities) {
-            let card = c.card;
-            card.priority = c.priority;
-            this.listNumberCards.push(card);
-            if (c.priority === 0) {
-              this.cards.push(card);
-            } else {
-              card.circlePosition = "item-" + (this.circlePosCards.length + 1);
-              this.circlePosCards.push(card);
+    this.sessionService.readSession(sessionId).subscribe(s => {
+        this.session = s;
+        for (let cP of s.cardPriorities) {
+          let card = cP.card;
+          card.priority = cP.priority;
+          this.numberedCards.push(card);
+          if (cP.priority === 0) {
+            this.cards.push(card);
+          } else {
+            card.circlePosition = "item-" + (this.cardsInPlay.length + 1);
+            this.cardsInPlay.push(card);
 
-              if (this.circlePosCards.length === 12) {
-                this.isCircleFilled = true;
-              }
+            if (cP.priority === 1) {
+              this.circleFive.push(card);
+            } else if (cP.priority === 2) {
+              this.circleFour.push(card);
+            } else if (cP.priority === 3) {
+              this.circleThree.push(card);
+            } else if (cP.priority === 4) {
+              this.circleTwo.push(card);
+            } else if (cP.priority === 5) {
+              this.circleOne.push(card);
+            }
 
-              if (c.priority === 1) {
-                this.circleFive.push(card);
-              } else if (c.priority === 2) {
-                this.circleFour.push(card);
-              } else if (c.priority === 3) {
-                this.circleThree.push(card);
-              } else if (c.priority === 4) {
-                this.circleTwo.push(card);
-              } else if (c.priority === 5) {
-                this.circleOne.push(card);
-              }
+            if (this.cardsInPlay.length === 12) {
+              this.isCircleFilled = true;
             }
           }
-          this.currentParticipant = s.currentUser;
-          for (let i = 0; i < this.listNumberCards.length; i++) {
-            this.listNumberCards[i].listNumber = i + 1;
-          }
-        },
-        err => {
-          console.log(err);
-        });
+        }
+        this.turnHolder = s.currentUser;
+        for (let i = 0; i < this.numberedCards.length; i++) {
+          this.numberedCards[i].listNumber = i + 1;
+        }
+      },
+      err => {
+        console.log(err);
+      });
 
     this.userId = JSON.parse(localStorage.getItem('currentUser'))._id;
-
-    this.initTimer();
   }
 
   selectCard(card: Card) {
-    console.log(card);
     this.selectedCard = card;
   }
 
@@ -96,18 +95,9 @@ export class CircleComponent implements OnInit {
       this.playTurn(card);
     }
 
-    if (this.circleLength === 11) {
+    if (this.circleFive === 11) {
       this.isCircleFilled = true;
     }
-
-    this.circleLength = this.circleFive.length
-      + this.circleFour.length
-      + this.circleThree.length
-      + this.circleTwo.length
-      + this.circleOne.length;
-
-    this.subscription.unsubscribe();
-    this.initTimer();
   }
 
   increasePriority(card: Card) {
@@ -127,8 +117,7 @@ export class CircleComponent implements OnInit {
       this.circleTwo.splice(this.circleTwo.indexOf(card), 1);
       this.circleOne.push(card);
     }
-    this.subscription.unsubscribe();
-    this.initTimer();
+
     this.playTurn(card);
   }
 
@@ -142,34 +131,15 @@ export class CircleComponent implements OnInit {
       });
   }
 
-  initTimer() {
-    let timer = Observable.timer(0, 1000);
-    this.subscription = timer.subscribe(t => {
-      this.ticks = t;
-      this.unsubTimer(t);
-    });
-  }
-
-  unsubTimer(t) {
-    if (t === 60) {
-      this.sessionService.skipTurn(this.session, this.currentParticipant._id).subscribe(
-        done => {
-          this.currentParticipant = done.currentUser;
-          this.subscription.unsubscribe();
-          this.initTimer();
-        },
-        err => {
-          console.log(err);
-        });
-    }
-  }
-
   playTurn(card: Card) {
     this.sessionService.playTurn(this.session, this.userId, card._id).subscribe(
       done => {
-        this.currentParticipant = done.currentUser;
-        card.priority++;
-        console.log(done);
+        for (let cP of done.cardPriorities) {
+          if (cP.card._id === card._id) {
+            card.priority = cP.priority;
+          }
+        }
+        this.turnHolder = done.currentUser;
       },
       err => {
         console.log(err);

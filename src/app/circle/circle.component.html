@@ -1,33 +1,45 @@
 <navbar></navbar>
 <div class="container">
+  <div class="col-md-12">
+    <h1>{{session?.title}}</h1>
+    <h3>{{session?.description}}</h3>
+  </div>
+
+  <chat style="z-index: 999; position: absolute; cursor: pointer; display: inline-block; max-width: 443px" id="drag"></chat>
   <div class="col-md-3">
-    <div class="card-list">
-      <div class="card-list-item card-item" *ngFor="let card of cards" (click)="selectCard(card)">
-        <span>{{card.listNumber}}</span>
-      </div>
-    </div>
-    <div class="card-description" *ngIf="selectedCard">
-      <p><b>Description</b><br>{{selectedCard.description}}</p>
-      <button *ngIf="selectedCard.priority === 0
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h4>Add cards</h4>
+        <div class="card-list">
+          <div class="card-list-item card-item" *ngFor="let card of cards" (click)="selectCard(card)">
+            <span>{{card.listNumber}}</span>
+          </div>
+        </div>
+        <div class="card-description" *ngIf="selectedCard">
+          <p><b>Description</b><br>{{selectedCard.description}}</p>
+          <button *ngIf="selectedCard.priority === 0
                     && !isCircleFilled
-                    && currentParticipant?._id === userId"
-              class="btn btn-success btn-big"
-              (click)="addToCircle(selectedCard)">ADD TO CIRCLE
-      </button>
-      <button *ngIf="(selectedCard.priority != 5
+                    && turnHolder?._id === userId"
+                  class="btn btn-success btn-big"
+                  (click)="addToCircle(selectedCard)">ADD TO CIRCLE
+          </button>
+          <button *ngIf="(selectedCard.priority != 5
                     && selectedCard.priority != 0)
                     && isCircleFilled
-                    && currentParticipant?._id === userId"
-              class="btn btn-primary btn-big"
-              (click)="increasePriority(selectedCard)">INCREASE PRIORITY
-      </button>
+                    && turnHolder?._id === userId"
+                  class="btn btn-primary btn-big"
+                  (click)="increasePriority(selectedCard)">INCREASE PRIORITY
+          </button>
+        </div>
+        <button class="btn btn-danger btn-end-session btn-big"
+                *ngIf="userId === session?.creator && isCircleFilled"
+                data-toggle="modal"
+                data-target="#myConfirm">END SESSION
+        </button>
+      </div>
     </div>
-    <button class="btn btn-danger btn-end-session btn-big"
-            *ngIf="userId === session?.creator && isCircleFilled"
-            data-toggle="modal"
-            data-target="#myConfirm">END SESSION
-    </button>
   </div>
+
   <div class="col-md-6">
     <div class="circle-container">
       <div class="circle" id="circle-5"
@@ -79,13 +91,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="currentParticipant?._id === userId" class="col-md-3 timer-container">
-    <span>60 seconds to choose</span>
-    <span class="timer"
-          [class.green]="ticks < 35"
-          [class.yellow]="ticks < 50 && ticks > 34"
-          [class.red]="ticks > 49">{{ticks}}</span>
-  </div>
+
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">

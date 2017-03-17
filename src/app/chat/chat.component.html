@@ -12,34 +12,34 @@
             </div>
             <div class="panel-collapse collapse" id="collapseOne">
                 <div class="panel-body">
-                    <ul class="chat" >
-                        <li class="left clearfix" *ngFor="let chatMessage of messages" >
-                                <span class="chat-img pull-left">
-                            <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle"/>
-                        </span>
-                            <div class="chat-body clearfix">
+                    <ul class="chat">
+                        <li class="left clearfix" *ngFor="let chatMessage of messages">
+
                                 <div class="header">
-                                    <strong class="primary-font">{{chatMessage.user.firstname}} {{chatMessage.user.lastname}}</strong>
+                                    <strong class="primary-font">{{chatMessage.user}}</strong>
                                     <!--<small class="pull-right text-muted">
                                         <span class="glyphicon glyphicon-time"></span>12 mins ago
                                     </small>-->
                                 </div>
                                 <p>
-                                    {{chatMessage.content}}
+                                    {{chatMessage.text}}
                                 </p>
-                            </div>
+
                         </li>
                     </ul>
                 </div>
                 <div class="panel-footer">
-                    <div class="input-group">
-                        <input id="btn-input" type="text" class="form-control input-sm"
-                               placeholder="Type your message here..." #message/>
-                        <span class="input-group-btn">
-                            <button class="btn btn-primary btn-sm" id="btn-chat" (click)="sendMessage(message.value)">
+                    <form name="sender" onsubmit="this.reset();">
+                        <div class="input-group">
+                            <input id="btn-input" type="text" class="form-control input-sm"
+                                   placeholder="Type your message here..." #message/>
+                            <span class="input-group-btn">
+                            <button type="submit" class="btn btn-primary btn-sm" id="btn-chat" (click)="sendMessage(message.value)">
                                 Send</button>
                         </span>
-                    </div>
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </div>
