@@ -23,7 +23,6 @@ export class CircleComponent implements OnInit {
   circleOne: Card[] = [];
   selectedCard: Card;
   isCircleFilled: boolean = false;
-  ticks: number = 0;
   session: Session;
   turnHolder: User;
   userId: string;
