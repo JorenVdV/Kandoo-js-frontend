@@ -37,6 +37,7 @@ import {SocketService} from "./services/socket.service";
 import { Angular2FontAwesomeModule } from 'angular2-font-awesome/angular2-font-awesome';
 import {ChatComponent} from "./chat/chat.component";
 import {DeleteAccComponent} from "./account/delete.component";
+import {ChatService} from "./services/chat.service";
 
 @NgModule({
     declarations: [
@@ -81,7 +82,8 @@ import {DeleteAccComponent} from "./account/delete.component";
         CardService,
         MockBackend,
         BaseRequestOptions,
-        SessionService
+        SessionService,
+        ChatService
     ],
     bootstrap: [AppComponent]
 })

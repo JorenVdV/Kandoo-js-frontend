@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, AfterViewInit} from "@angular/core";
 import {Card} from "../models/card";
 import {Observable} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -12,7 +12,7 @@ import {User} from "../models/user";
   styleUrls: ['circle.component.css']
 })
 
-export class CircleComponent implements OnInit {
+export class CircleComponent implements OnInit, AfterViewInit {
   cards: Card[] = [];
   numberedCards: Card[] = [];
   cardsInPlay: Card[] = [];
@@ -30,6 +30,13 @@ export class CircleComponent implements OnInit {
   constructor(private sessionService: SessionService,
               private route: ActivatedRoute,
               private router: Router) {
+  }
+
+  ngAfterViewInit() {
+    $(document).ready(function () {
+      $('#drag').draggable();
+    });
+
   }
 
   ngOnInit() {
