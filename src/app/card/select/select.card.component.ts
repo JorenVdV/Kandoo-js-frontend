@@ -87,7 +87,7 @@ export class SelectCardComponent implements OnInit {
         } else {
             this.isPersonal = false;
         }
-    this.getCars();
+    this.getCards();
 
     }
 
