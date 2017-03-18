@@ -10,7 +10,7 @@ import {Session} from '../models/session';
 @Injectable()
 export class ThemeService {
     private headers = new Headers({'Content-Type': 'application/json', 'X-Access-Token' : JSON.parse(localStorage.getItem('currentUser_token'))});
-    private baseURL = 'http://localhost:8000';//'https://kandoo-js-backend.herokuapp.com';
+    private baseURL = 'https://kandoo-js-backend.herokuapp.com';//'http://localhost:8000';//
 
 
     constructor(private http: Http) {

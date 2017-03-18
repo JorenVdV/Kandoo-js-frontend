@@ -6,7 +6,7 @@ import {Observable} from "rxjs";
 
 @Injectable()
 export class UserService {
-    private baseURL = 'http://localhost:8000';//'https://kandoo-js-backend.herokuapp.com';
+    private baseURL = 'https://kandoo-js-backend.herokuapp.com';//'http://localhost:8000';//
 
     private headers = new Headers({'Content-Type': 'application/json', 'X-Access-Token' : JSON.parse(localStorage.getItem('currentUser_token')), 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers' : 'Origin, X-Requested-With, Content-Type, Accept', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS' });
     constructor(private http: Http) {
