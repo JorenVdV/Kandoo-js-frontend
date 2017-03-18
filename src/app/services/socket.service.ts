@@ -12,65 +12,65 @@ export class SocketService {
 
     // Get items observable
     get(): Observable<any> {
-        let socketUrl = this.baseURL;
-        if (!this.socket) {
-
-            this.socket = io(this.baseURL, {
-                'reconnection': true,
-                'reconnectionDelay': 500,
-                'reconnectionAttempts': 10
-            });
-        }
-        this.socket.on("connect", () => this.connect());
-        this.socket.on("disconnect", () => this.disconnect());
-        this.socket.on("error", (error: string) => {
-            console.log(`ERROR: "${error}" (${socketUrl})`);
-        });
+        // let socketUrl = this.baseURL;
+        // if (!this.socket) {
+        //
+        //     this.socket = io(this.baseURL, {
+        //         'reconnection': true,
+        //         'reconnectionDelay': 500,
+        //         'reconnectionAttempts': 10
+        //     });
+        // }
+        // this.socket.on("connect", () => this.connect());
+        // this.socket.on("disconnect", () => this.disconnect());
+        // this.socket.on("error", (error: string) => {
+        //     console.log(`ERROR: "${error}" (${socketUrl})`);
+        // });
 
 
         // Return observable which follows "create" and "remove" signals from socket stream
-        return Observable.create((observer: any) => {
+        // return Observable.create((observer: any) => {
             // this.socket.on("session_started", (item: any) => console.log(item));
             // this.socket.on("messages", (item: any) => console.log(item));
             // this.socket.on("test", (item: any) => console.log(item));
             // return () => this.socket.close();
-        });
+        // });
 
     }
 
 // Create signal
-    create(name: string) {
-        this.socket.emit("create", name);
-    }
+//     create(name: string) {
+//         this.socket.emit("create", name);
+//     }
 
 // Remove signal
-    remove(name: string) {
-        this.socket.emit("remove", name);
-    }
+//     remove(name: string) {
+//         this.socket.emit("remove", name);
+//     }
 
-    loggedin(userID: string) {
-        this.socket.emit("loggedin", userID);
-    }
+    // loggedin(userID: string) {
+    //     this.socket.emit("loggedin", userID);
+    // }
 
-    send(name: string, userID: string, message: string) {
-
-        var data = {
-            user: userID,
-            data: message
-        };
-        this.socket.emit(name, data);
-    }
+    // send(name: string, userID: string, message: string) {
+    //
+    //     var data = {
+    //         user: userID,
+    //         data: message
+    //     };
+    //     this.socket.emit(name, data);
+    // }
 
 // Handle connection opening
-    private
-    connect() {
-        console.log(`Connected to "${this.baseURL}"`);
-    }
+//     private
+//     connect() {
+//         console.log(`Connected to "${this.baseURL}"`);
+//     }
 
 // Handle connection closing
-    private
-    disconnect() {
-        console.log(`Disconnected from "${this.baseURL}"`);
-    }
+//     private
+//     disconnect() {
+//         console.log(`Disconnected from "${this.baseURL}"`);
+//     }
 
 }

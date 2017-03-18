@@ -13,8 +13,8 @@ import {ThemeService} from "./theme.service";
 
 @Injectable()
 export class SessionService {
-  private headers = new Headers({'Content-Type': 'application/json'});
-  private baseURL = 'https://kandoo-js-backend.herokuapp.com';
+  private headers = new Headers({'Content-Type': 'application/json', 'X-Access-Token' : JSON.parse(localStorage.getItem('currentUser_token'))});
+  private baseURL = 'http://localhost:8000';//'https://kandoo-js-backend.herokuapp.com';
 
     private options = new RequestOptions({headers: this.headers});
 
@@ -61,14 +61,14 @@ export class SessionService {
 
     getMessages(id: string): Observable<Session> {
         return this.http
-            .get(this.baseURL + '/session/' + id +'/messages')
+            .get(this.baseURL + '/session/' + id +'/messages', {headers: this.headers})
             .map((res: Response) => res.json().messages)
             .catch((error: any) => Observable.throw(error))
     }
 
     readSession(id: string): Observable<Session> {
         return this.http
-            .get(this.baseURL + '/session/' + id)
+            .get(this.baseURL + '/session/' + id, {headers: this.headers})
             .map((res: Response) => res.json().session)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
@@ -82,7 +82,7 @@ export class SessionService {
 
     readSessions(id: string): Observable<Session[]> {
         return this.http
-            .get(this.baseURL + '/theme/' + id + '/sessions')
+            .get(this.baseURL + '/theme/' + id + '/sessions', {headers: this.headers})
             .map((res: Response) => res.json().sessions)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
@@ -157,14 +157,14 @@ export class SessionService {
     readParticipantSessions(): Observable<Session> {
         let currentUser = localStorage.getItem('currentUser');
         return this.http
-            .get(this.baseURL + '/user/' + JSON.parse(currentUser)._id + '/sessions/participating')
+            .get(this.baseURL + '/user/' + JSON.parse(currentUser)._id + '/sessions/participating', {headers: this.headers})
             .map((res: Response) => res.json().sessions)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
     readThemeSessions(id: string): Observable<Session> {
         return this.http
-            .get(this.baseURL + '/theme/' + id + '/sessions')
+            .get(this.baseURL + '/theme/' + id + '/sessions', {headers: this.headers})
             .map((res: Response) => res.json().sessions)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
@@ -172,14 +172,14 @@ export class SessionService {
     deleteSession(id: string): Observable<Session> {
         const url = this.baseURL + '/session/' + id + '/delete';
         return this.http
-            .delete(url)
+            .delete(url, {headers: this.headers})
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
     getSessionOrganisers(session: Session): Observable<Session> {
         return this.http
-            .get(this.baseURL + '/theme/' + session.theme._id)
+            .get(this.baseURL + '/theme/' + session.theme._id, {headers: this.headers})
             .map((res: Response) => res.json().theme.organisers)
             .catch((error: any) => Observable.throw(error));
     }
@@ -213,7 +213,7 @@ export class SessionService {
     readInvitedSessions(): Observable<Session> {
         let currentUser = localStorage.getItem('currentUser');
         return this.http
-            .get(this.baseURL + '/user/' + JSON.parse(currentUser)._id + '/sessions/invited')
+            .get(this.baseURL + '/user/' + JSON.parse(currentUser)._id + '/sessions/invited', {headers: this.headers})
             .map((res: Response) => res.json().sessions)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }

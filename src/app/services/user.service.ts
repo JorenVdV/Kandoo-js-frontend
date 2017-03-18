@@ -2,18 +2,18 @@ import {Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions, Response} from '@angular/http';
 import {User} from "../models/user";
 import {Observable} from "rxjs";
-import current = SyntaxKind.current;
+// import current = SyntaxKind.current;
 
 @Injectable()
 export class UserService {
-    private baseURL = 'https://kandoo-js-backend.herokuapp.com';
+    private baseURL = 'http://localhost:8000';//'https://kandoo-js-backend.herokuapp.com';
 
-    private headers = new Headers({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers' : 'Origin, X-Requested-With, Content-Type, Accept', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS' });
+    private headers = new Headers({'Content-Type': 'application/json', 'X-Access-Token' : JSON.parse(localStorage.getItem('currentUser_token')), 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers' : 'Origin, X-Requested-With, Content-Type, Accept', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS' });
     constructor(private http: Http) {
     }
 
     getAll() {
-        return this.http.get(this.baseURL + '/users', this.jwt()).map((response: Response) => response.json().users);
+        return this.http.get(this.baseURL + '/users', {headers: this.headers}).map((response: Response) => response.json().users);
     }
 
     // getById(_id: number) {
@@ -21,7 +21,7 @@ export class UserService {
     // }
 
     create(user: User) {
-        return this.http.post(this.baseURL + '/register', user, this.jwt()).map((response: Response) => response.json());
+        return this.http.post(this.baseURL + '/register', user, {headers: this.headers}).map((response: Response) => response.json());
     }
 
     // update(user: User) {
@@ -29,11 +29,11 @@ export class UserService {
     // }
 
     deleteAccount(id: string) {
-        return this.http.delete(this.baseURL + '/user/'+id+'/delete', this.jwt()).map((response: Response) => response.json());
+        return this.http.delete(this.baseURL + '/user/'+id+'/delete', {headers: this.headers}).map((response: Response) => response.json());
     }
 
     get(id: string){
-        return this.http.get(this.baseURL + '/user/'+id, this.jwt()).map((response: Response) => response.json());
+        return this.http.get(this.baseURL + '/user/'+id, {headers: this.headers}).map((response: Response) => response.json());
     }
 
     /*
@@ -64,12 +64,12 @@ export class UserService {
     }
 
 
-    private jwt() {
+    // private jwt() {
         // create authorization header with jwt token
-        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        if (currentUser && currentUser.token) {
-            let headers = new Headers({'Authorization': 'Bearer ' + currentUser.token});
-            return new RequestOptions({headers: headers});
-        }
-    }
+        // let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        // if (currentUser && currentUser.token) {
+        //     let headers = new Headers({'Authorization': 'Bearer ' + currentUser.token});
+        //     return new RequestOptions({headers: headers});
+        // }
+    // }
 }

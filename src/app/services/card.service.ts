@@ -9,8 +9,8 @@ import {Theme} from "../models/theme";
 
 @Injectable()
 export class CardService {
-  private headers = new Headers({'Content-Type': 'application/json'});
-    private baseURL = 'https://kandoo-js-backend.herokuapp.com';
+  private headers = new Headers({'Content-Type': 'application/json', 'X-Access-Token' : JSON.parse(localStorage.getItem('currentUser_token'))});
+    private baseURL = 'http://localhost:8000';//'https://kandoo-js-backend.herokuapp.com';
 
 
     constructor(private http: Http) {
@@ -28,14 +28,14 @@ export class CardService {
     readCard(id: number): Observable<Card> {
         const url = `${this.baseURL}/${id}`;
         return this.http
-            .get(url)
+            .get(url, {headers: this.headers})
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
     readCards(id: string): Observable<Card[]> {
         return this.http
-            .get(this.baseURL + '/theme/' + id + '/cards')
+            .get(this.baseURL + '/theme/' + id + '/cards', {headers: this.headers})
             .map((res: Response) => res.json().cards)
             .catch((error: any) => Observable.throw(error));
     }
@@ -51,7 +51,7 @@ export class CardService {
   deleteCard(id: string): Observable<Card> {
     const url = this.baseURL + '/card/' + id +'/delete';
     return this.http
-      .delete(url)
+      .delete(url, {headers: this.headers})
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }

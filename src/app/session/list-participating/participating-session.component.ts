@@ -11,175 +11,175 @@ import {ThemeService} from "../../services/theme.service";
 import {SocketService} from "../../services/socket.service";
 
 @Component({
-    selector: 'participating-session',
-    templateUrl: './participating-session.component.html',
+  selector: 'participating-session',
+  templateUrl: './participating-session.component.html',
 })
 
 export class ParticipatingSessionComponent implements OnInit, AfterViewInit {
-    sessions: Session[];
-    themeId: string;
-    session = new Session();
-    userId: string;
-    organiserIds: string[];
-    organisers: User[];
-    isOrganiser: boolean;
+  sessions: Session[];
+  themeId: string;
+  session = new Session();
+  userId: string;
+  organiserIds: string[] = [];
+  organisers: User[];
+  isOrganiser: boolean;
 
 
-    @ViewChild('modal')
-    modal: ModalComponent;
+  @ViewChild('modal')
+  modal: ModalComponent;
 
-    constructor(private sessionService: SessionService, private alertService: AlertService, private userService: UserService, private themeService: ThemeService,
-                private router: Router, private route: ActivatedRoute, private socketService: SocketService) {
-        this.organiserIds = new Array(0);
+  constructor(private sessionService: SessionService, private alertService: AlertService, private userService: UserService, private themeService: ThemeService,
+              private router: Router, private route: ActivatedRoute, private socketService: SocketService) {
+    // this.organiserIds = new Array(0);
+  }
+
+  /*
+   getOrganisers(session: Session){
+   this.sessionService.getSessionOrganisers(session).subscribe(
+   done => {
+   for(var i = 0; i < done.length; i++){
+   this.organiserIds[i] = done[i]._id;
+   }
+   console.log(this.organiserIds);
+   this.alertService.success("Session cloned!" ,false)
+
+   },
+   err => {
+   this.alertService.error(err, false);
+   });
+   }
+   */
+  cloneSession(session: Session) {
+    this.sessionService.cloneSession(session._id).subscribe(
+      done => {
+        this.alertService.success("Session cloned!", false)
+        location.reload()
+      },
+      err => {
+        this.alertService.error(err, false);
+      });
+  }
+
+  selectCards(session: Session) {
+    this.router.navigate(['/session', session._id, 'selectcards']);
+  }
+
+  getOrganisers(session: Session) {
+    function isInArray(value, array) {
+      return array.indexOf(value) > -1;
     }
 
-    /*
-     getOrganisers(session: Session){
-     this.sessionService.getSessionOrganisers(session).subscribe(
-     done => {
-     for(var i = 0; i < done.length; i++){
-     this.organiserIds[i] = done[i]._id;
-     }
-     console.log(this.organiserIds);
-     this.alertService.success("Session cloned!" ,false)
+    this.organiserIds = session.theme.organisers;
 
-     },
-     err => {
-     this.alertService.error(err, false);
-     });
-     }
-     */
-    cloneSession(session: Session) {
-        this.sessionService.cloneSession(session._id).subscribe(
-            done => {
-                this.alertService.success("Session cloned!", false)
-                location.reload()
-            },
-            err => {
-                this.alertService.error(err, false);
-            });
+    if (isInArray(this.userId, this.organiserIds)) {
+      this.isOrganiser = true;
+      return true;
+    } else {
+      this.isOrganiser = false;
+      return false;
     }
+  }
 
-    selectCards(session: Session) {
-        this.router.navigate(['/session', session._id, 'selectcards']);
-    }
+  getSessions(): void {
+    this.sessionService.readParticipantSessions().subscribe(
+      sessions => {
+        this.sessions = sessions
+      },
+      err => {
+        console.log(err);
+      });
+  }
 
-    getOrganisers(session: Session) {
-        function isInArray(value, array) {
-            return array.indexOf(value) > -1;
+  deleteSession(session: Session) {
+    this.sessionService.deleteSession(session._id).subscribe(
+      sessionObject => {
+        let index = -1;
+        for (let i = 0; i < this.sessions.length; i++) {
+          if (this.sessions[i]._id === session._id) {
+            index = i;
+            break;
+          }
         }
+        if (index != -1)
+          this.sessions.splice(index, 1);
+      },
+      err => {
+        console.log(err);
+      });
+  }
 
-        this.organiserIds = session.theme.organisers;
+  ngOnInit() {
+    let currentUser = localStorage.getItem('currentUser');
+    this.sessionService.readParticipantSessions()
+      .subscribe(sessions => {
+          this.sessions = sessions;
 
-        if (isInArray(this.userId, this.organiserIds)) {
-            this.isOrganiser = true;
-            return true;
-        } else {
-            this.isOrganiser = false;
-            return false;
-        }
-    }
-
-    getSessions(): void {
-        this.sessionService.readParticipantSessions().subscribe(
-            sessions => {
-                this.sessions = sessions
-            },
-            err => {
-                console.log(err);
-            });
-    }
-
-    deleteSession(session: Session) {
-        this.sessionService.deleteSession(session._id).subscribe(
-            sessionObject => {
-                let index = -1;
-                for (let i = 0; i < this.sessions.length; i++) {
-                    if (this.sessions[i]._id === session._id) {
-                        index = i;
-                        break;
-                    }
-                }
-                if (index != -1)
-                    this.sessions.splice(index, 1);
-            },
-            err => {
-                console.log(err);
-            });
-    }
-
-    ngOnInit() {
-        let currentUser = localStorage.getItem('currentUser');
-        this.sessionService.readParticipantSessions()
-            .subscribe(sessions => {
-                    this.sessions = sessions;
-
-                },
-                err => {
-                    console.log(err);
-                });
-        console.log(this.sessions);
-        this.userId = JSON.parse(localStorage.getItem('currentUser'))._id;
-    }
+        },
+        err => {
+          console.log(err);
+        });
+    console.log(this.sessions);
+    this.userId = JSON.parse(localStorage.getItem('currentUser'))._id;
+  }
 
 
-    selectSession(session: Session) {
-        this.router.navigate(['/session', session._id]);
-    }
+  selectSession(session: Session) {
+    this.router.navigate(['/session', session._id]);
+  }
 
-    goToSession(session: Session) {
-        this.router.navigate(['/session', session._id, 'circle']);
-    }
+  goToSession(session: Session) {
+    this.router.navigate(['/session', session._id, 'circle']);
+  }
 
-    close() {
-        this.modal.close();
-    }
+  close() {
+    this.modal.close();
+  }
 
-    startSession(session: Session) {
-        // if (session.pickedCards.length < 2) {
-        //     this.alertService.error("You can't play a game on your own!")
-        // } else {
+  startSession(session: Session) {
+    // if (session.pickedCards.length < 2) {
+    //     this.alertService.error("You can't play a game on your own!")
+    // } else {
 
-        // }
+    // }
 
 
-        if (session.status == "created") {
-            if (session.pickedCards.length < session.participants.length) {
-                this.alertService.error("Not everyone selected cards yet!")
-            } else {
-                this.sessionService.startSession(session).subscribe(
-                    done => {
-                        console.log('session started event sending sockets');
-                        this.socketService.send("ping", JSON.parse(localStorage.getItem('currentUser'))._id, session._id);
-                        this.router.navigate(['/session', session._id, 'circle']);
-                    },
-                    err => {
-                        this.alertService.error(err, false);
-                    });
-            }
-        } else {
+    if (session.status == "created") {
+      if (session.pickedCards.length < session.participants.length) {
+        this.alertService.error("Not everyone selected cards yet!")
+      } else {
+        this.sessionService.startSession(session).subscribe(
+          done => {
+            console.log('session started event sending sockets');
+            this.socketService.send("ping", JSON.parse(localStorage.getItem('currentUser'))._id, session._id);
             this.router.navigate(['/session', session._id, 'circle']);
-        }
-
+          },
+          err => {
+            this.alertService.error(err, false);
+          });
+      }
+    } else {
+      this.router.navigate(['/session', session._id, 'circle']);
     }
 
-    inviteToSession(session: Session) {
-        this.sessionService.inviteToSession(session).subscribe(
-            done => {
-                this.alertService.success('Invite successful', false);
-                let delay = (function () {
-                    let timer = 0;
-                    return function (callback, ms) {
-                        clearTimeout(timer);
-                        timer = setTimeout(callback, ms);
-                    };
-                })();
-                delay(function () {
-                    document.getElementsByTagName("alert")[0].innerHTML = "";
-                }, 600); // end delay
-            },
-            err => {
-                this.alertService.error(err, false);
-            });
-    }
+  }
+
+  inviteToSession(session: Session) {
+    this.sessionService.inviteToSession(session).subscribe(
+      done => {
+        this.alertService.success('Invite successful', false);
+        let delay = (function () {
+          let timer = 0;
+          return function (callback, ms) {
+            clearTimeout(timer);
+            timer = setTimeout(callback, ms);
+          };
+        })();
+        delay(function () {
+          document.getElementsByTagName("alert")[0].innerHTML = "";
+        }, 600); // end delay
+      },
+      err => {
+        this.alertService.error(err, false);
+      });
+  }
 }

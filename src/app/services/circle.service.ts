@@ -2,7 +2,7 @@ import {Http} from "@angular/http";
 export class CircleService{
 
     private circleCardRef: any;
-    private circleCards: any
+    private circleCards: any;
 
     constructor(http: Http){
         console.log("Allo!!")

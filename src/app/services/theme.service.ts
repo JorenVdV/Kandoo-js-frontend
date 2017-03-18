@@ -9,8 +9,8 @@ import {Session} from '../models/session';
 
 @Injectable()
 export class ThemeService {
-    private headers = new Headers({'Content-Type': 'application/json'});
-    private baseURL = 'https://kandoo-js-backend.herokuapp.com';
+    private headers = new Headers({'Content-Type': 'application/json', 'X-Access-Token' : JSON.parse(localStorage.getItem('currentUser_token'))});
+    private baseURL = 'http://localhost:8000';//'https://kandoo-js-backend.herokuapp.com';
 
 
     constructor(private http: Http) {
@@ -48,14 +48,14 @@ export class ThemeService {
     readTheme(id: string): Observable<Theme> {
         const url = `${this.baseURL + '/theme'}/${id}`;
         return this.http
-            .get(url)
+            .get(url, {headers: this.headers})
             .map((res: Response) => res.json().theme)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
     readThemeSessions(themeId: string): Observable<Theme> {
         return this.http
-            .get(this.baseURL + '/theme/' + themeId + '/sessions')
+            .get(this.baseURL + '/theme/' + themeId + '/sessions', {headers: this.headers})
             .map((res: Response) => res.json().sessions)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
@@ -63,7 +63,7 @@ export class ThemeService {
     readThemes(): Observable<Theme[]> {
         const currentUser = localStorage.getItem('currentUser');
         return this.http
-            .get(this.baseURL + '/user/' + JSON.parse(currentUser)._id + '/themes')
+            .get(this.baseURL + '/user/' + JSON.parse(currentUser)._id + '/themes', {headers: this.headers})
             .map((res: Response) => res.json().themes)
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
@@ -108,7 +108,7 @@ export class ThemeService {
     deleteTheme(id: string): Observable<Theme> {
         const url = this.baseURL + '/theme/' + id + '/delete';
         return this.http
-            .delete(url)
+            .delete(url, {headers: this.headers})
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }

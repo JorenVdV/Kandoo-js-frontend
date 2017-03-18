@@ -46,9 +46,9 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 (response: Response) => {
                     console.log("Success Response" + response.json());
-                    this.socketService.get('global').subscribe();
+                    // this.socketService.get('global').subscribe();
                     this.loading = false;
-                    this.redirect();
+                    // this.redirect();
                 },
                 error => {
                     this.alertService.error(JSON.parse(error._body).error);
