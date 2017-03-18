@@ -12,7 +12,7 @@
       <div class="panel-body">
         <h4>Add cards</h4>
         <div class="card-list">
-          <div class="card-list-item card-item" *ngFor="let card of cards" (click)="selectCard(card)">
+          <div class="card-list-item card-item" *ngFor="let card of cardsOutOfPlay" (click)="selectCard(card)">
             <span>{{card.listNumber}}</span>
           </div>
         </div>
@@ -20,16 +20,16 @@
           <p><b>Description</b><br>{{selectedCard.description}}</p>
           <button *ngIf="selectedCard.priority === 0
                     && !isCircleFilled
-                    && turnHolder?._id === userId"
+                    && turnHolder === userId"
                   class="btn btn-success btn-big"
-                  (click)="addToCircle(selectedCard)">ADD TO CIRCLE
+                  (click)="addToCircle(selectedCard, true)">ADD TO CIRCLE
           </button>
           <button *ngIf="(selectedCard.priority != 5
                     && selectedCard.priority != 0)
                     && isCircleFilled
-                    && turnHolder?._id === userId"
+                    && turnHolder === userId"
                   class="btn btn-primary btn-big"
-                  (click)="increasePriority(selectedCard)">INCREASE PRIORITY
+                  (click)="increasePriority(selectedCard, true)">INCREASE PRIORITY
           </button>
         </div>
         <button class="btn btn-danger btn-end-session btn-big"

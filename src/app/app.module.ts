@@ -34,58 +34,60 @@ import {SelectCardComponent} from "./card/select/select.card.component";
 import {AccountComponent} from "./account/account.component";
 import {InvitedSessionComponent} from "./session/list-invited/invited-session.component";
 import {SocketService} from "./services/socket.service";
-import { Angular2FontAwesomeModule } from 'angular2-font-awesome/angular2-font-awesome';
+import {Angular2FontAwesomeModule} from 'angular2-font-awesome/angular2-font-awesome';
 import {ChatComponent} from "./chat/chat.component";
 import {DeleteAccComponent} from "./account/delete.component";
 import {ChatService} from "./services/chat.service";
+import {CircleService} from "./services/circle.service";
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        ThemeDetailComponent,
-        AlertComponent,
-        HomeComponent,
-        LoginComponent,
-        RegisterComponent,
-        CardComponent,
-        CardDetailComponent,
-        SessionComponent,
-        CircleComponent,
-        ThemeListComponent,
-        LandingComponent,
-        NavbarComponent,
-        ChangePwdComponent,
-        ParticipatingSessionComponent,
-        ThemeSessionComponent,
-        SelectCardComponent,
-        AccountComponent,
-        InvitedSessionComponent,
-        ChatComponent,
-        DeleteAccComponent
-    ],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        HttpModule,
-        AppRouting,
-        Ng2Bs3ModalModule,
-        TagInputModule,
-        Angular2FontAwesomeModule
-    ],
-    providers: [
-        ThemeService,
-        AuthGuard,
-        AlertService,
-        AuthenticationService,
-        SocketService,
-        UserService,
-        CardService,
-        MockBackend,
-        BaseRequestOptions,
-        SessionService,
-        ChatService
-    ],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    ThemeDetailComponent,
+    AlertComponent,
+    HomeComponent,
+    LoginComponent,
+    RegisterComponent,
+    CardComponent,
+    CardDetailComponent,
+    SessionComponent,
+    CircleComponent,
+    ThemeListComponent,
+    LandingComponent,
+    NavbarComponent,
+    ChangePwdComponent,
+    ParticipatingSessionComponent,
+    ThemeSessionComponent,
+    SelectCardComponent,
+    AccountComponent,
+    InvitedSessionComponent,
+    ChatComponent,
+    DeleteAccComponent
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    AppRouting,
+    Ng2Bs3ModalModule,
+    TagInputModule,
+    Angular2FontAwesomeModule
+  ],
+  providers: [
+    ThemeService,
+    AuthGuard,
+    AlertService,
+    AuthenticationService,
+    SocketService,
+    UserService,
+    CardService,
+    MockBackend,
+    BaseRequestOptions,
+    SessionService,
+    ChatService,
+    CircleService
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }
