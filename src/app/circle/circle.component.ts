@@ -34,7 +34,7 @@ export class CircleComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     $(document).ready(function () {
-      $('#drag').draggable();
+      $('#drag').draggable({ containment: "#containment-wrapper", scroll: false });
     });
 
   }

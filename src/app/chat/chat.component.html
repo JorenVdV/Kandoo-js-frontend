@@ -1,19 +1,17 @@
-<div class="container" style="display:inline-block;">
-    <div class="col-md-5">
-        <div class="panel panel-primary">
-            <div class="panel-heading" id="accordion">
-                <span class="glyphicon glyphicon-comment"></span> Chat
-                <div class="btn-group pull-right">
-                    <a type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-parent="#accordion"
-                       href="#collapseOne">
-                        <span class="glyphicon glyphicon-chevron-down"></span>
-                    </a>
+            <div class="panel panel-primary">
+                <div class="panel-heading" id="accordion">
+                    <span class="glyphicon glyphicon-comment"></span> Chat
+                    <div class="btn-group pull-right">
+                        <a type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseOne">
+                            <span class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="panel-collapse collapse" id="collapseOne">
-                <div class="panel-body" #scrollMe>
-                    <ul class="chat">
-                        <li class="left clearfix" *ngFor="let chatMessage of messages">
+                <div class="panel-collapse collapse" id="collapseOne">
+                    <div class="panel-body" #scrollMe>
+                        <ul class="chat">
+                            <li class="left clearfix" *ngFor="let chatMessage of messages">
 
                                 <div class="header">
                                     <strong class="primary-font">{{chatMessage.user}}</strong>
@@ -25,24 +23,22 @@
                                     {{chatMessage.text}}
                                 </p>
 
-                        </li>
-                    </ul>
-                </div>
-                <div class="panel-footer">
-                    <form name="sender" onsubmit="this.reset();">
-                        <div class="input-group">
-                            <input id="btn-input" type="text" class="form-control input-sm"
-                                   placeholder="Type your message here..." #message/>
-                            <span class="input-group-btn">
-                            <button type="submit" class="btn btn-primary btn-sm" id="btn-chat" (click)="sendMessage(message.value)">
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="panel-footer">
+                        <form name="sender" onsubmit="this.reset();">
+                            <div class="input-group">
+                                <input id="btn-input" type="text" class="form-control input-sm"
+                                       placeholder="Type your message here..." #message/>
+                                <span class="input-group-btn">
+                            <button type="submit" class="btn btn-primary btn-sm" id="btn-chat"
+                                    (click)="sendMessage(message.value)">
                                 Send</button>
                         </span>
-                        </div>
-                    </form>
+                            </div>
+                        </form>
 
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-</div>
