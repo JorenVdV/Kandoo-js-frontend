@@ -9,15 +9,20 @@ import {Session} from '../models/session';
 
 @Injectable()
 export class ThemeService {
-    private headers = new Headers({'Content-Type': 'application/json', 'X-Access-Token' : JSON.parse(localStorage.getItem('currentUser_token'))});
-    private baseURL = 'https://kandoo-js-backend.herokuapp.com';//'http://localhost:8000';//
+    private headers = new Headers({'Content-Type': 'application/json'});
+    private baseURL = 'http://localhost:8000';//'https://kandoo-js-backend.herokuapp.com';//
 
 
     constructor(private http: Http) {
     }
+  setHeaders(){
+    if(!this.headers.has('X-Access-Token'))
+      this.headers.set('X-Access-Token', JSON.parse(localStorage.getItem('currentUser_token')));
+  }
 
 
     createTheme(theme: Theme): Observable<Theme> {
+      this.setHeaders();
         const currentUser = localStorage.getItem('currentUser');
 
 
@@ -46,6 +51,7 @@ export class ThemeService {
     }
 
     readTheme(id: string): Observable<Theme> {
+      this.setHeaders();
         const url = `${this.baseURL + '/theme'}/${id}`;
         return this.http
             .get(url, {headers: this.headers})
@@ -54,6 +60,7 @@ export class ThemeService {
     }
 
     readThemeSessions(themeId: string): Observable<Theme> {
+      this.setHeaders();
         return this.http
             .get(this.baseURL + '/theme/' + themeId + '/sessions', {headers: this.headers})
             .map((res: Response) => res.json().sessions)
@@ -61,6 +68,7 @@ export class ThemeService {
     }
 
     readThemes(): Observable<Theme[]> {
+      this.setHeaders();
         const currentUser = localStorage.getItem('currentUser');
         return this.http
             .get(this.baseURL + '/user/' + JSON.parse(currentUser)._id + '/themes', {headers: this.headers})
@@ -69,6 +77,7 @@ export class ThemeService {
     }
 
     updateTheme(theme: Theme): Observable<Theme> {
+      this.setHeaders();
         function isObject(obj) {
             return obj === Object(obj);
         }
@@ -92,6 +101,7 @@ export class ThemeService {
     }
 
     addOrganiser(theme: Theme, email: string): Observable<Theme> {
+      this.setHeaders();
         return this.http
             .put(this.baseURL + '/theme/' + theme._id + '/addorganiser', JSON.stringify({organiserEmail: email}), {headers: this.headers})
             .map((res: Response) => res.json())
@@ -99,6 +109,7 @@ export class ThemeService {
     }
 
     deleteOrganiser(theme: Theme, userId: string): Observable<Theme> {
+      this.setHeaders();
         return this.http
             .put(this.baseURL + '/theme/' + theme._id + '/removeorganiser', JSON.stringify({organiserId: userId}), {headers: this.headers})
             .map((res: Response) => res.json())
@@ -106,6 +117,7 @@ export class ThemeService {
     }
 
     deleteTheme(id: string): Observable<Theme> {
+      this.setHeaders();
         const url = this.baseURL + '/theme/' + id + '/delete';
         return this.http
             .delete(url, {headers: this.headers})

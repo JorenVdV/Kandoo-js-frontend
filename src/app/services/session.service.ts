@@ -13,16 +13,21 @@ import {ThemeService} from "./theme.service";
 
 @Injectable()
 export class SessionService {
-  private headers = new Headers({'Content-Type': 'application/json', 'X-Access-Token' : JSON.parse(localStorage.getItem('currentUser_token'))});
-  private baseURL = 'https://kandoo-js-backend.herokuapp.com';//'http://localhost:8000';//
+  private headers = new Headers({'Content-Type': 'application/json'});
+  private baseURL = 'http://localhost:8000';//'https://kandoo-js-backend.herokuapp.com';//
 
     private options = new RequestOptions({headers: this.headers});
 
     constructor(private http: Http, private themeService: ThemeService) {
     }
 
-    createSession(session: Session, themeId: string): Observable<Session> {
+  setHeaders(){
+    if(!this.headers.has('X-Access-Token'))
+      this.headers.set('X-Access-Token', JSON.parse(localStorage.getItem('currentUser_token')));
+  }
 
+    createSession(session: Session, themeId: string): Observable<Session> {
+      this.setHeaders();
         // if(session.startDate == ""){
         //     startDate = new Date();
         // }
@@ -60,6 +65,7 @@ export class SessionService {
 
 
     getMessages(id: string): Observable<Session> {
+      this.setHeaders();
         return this.http
             .get(this.baseURL + '/session/' + id +'/messages', {headers: this.headers})
             .map((res: Response) => res.json().messages)
@@ -67,6 +73,7 @@ export class SessionService {
     }
 
     readSession(id: string): Observable<Session> {
+      this.setHeaders();
         return this.http
             .get(this.baseURL + '/session/' + id, {headers: this.headers})
             .map((res: Response) => res.json().session)
@@ -74,6 +81,7 @@ export class SessionService {
     }
 
     addMessage(sessionId: string, message: string, userId: string): Observable<Session> {
+      this.setHeaders();
         return this.http
             .post(this.baseURL + '/session/' + sessionId + '/message', JSON.stringify({userId: userId, message: message}), {headers: this.headers})
             .map((res: Response) => res.json())
@@ -81,6 +89,7 @@ export class SessionService {
     }
 
     readSessions(id: string): Observable<Session[]> {
+      this.setHeaders();
         return this.http
             .get(this.baseURL + '/theme/' + id + '/sessions', {headers: this.headers})
             .map((res: Response) => res.json().sessions)
@@ -88,6 +97,7 @@ export class SessionService {
     }
 
     cloneSession(sessionId: String): Observable<Session> {
+      this.setHeaders();
         return this.http
             .post(this.baseURL + '/session/' + sessionId + '/copy', JSON.stringify({userId: JSON.parse(localStorage.getItem('currentUser'))._id}), {headers: this.headers})
             .map((res: Response) => res.json().sessions)
@@ -96,6 +106,7 @@ export class SessionService {
 
 
     inviteToSession(session: Session): Observable<Session> {
+      this.setHeaders();
         function isObject(obj) {
             return obj === Object(obj);
         }
@@ -119,6 +130,7 @@ export class SessionService {
     }
 
     updateSession(session: Session): Observable<Session> {
+      this.setHeaders();
         const url = this.baseURL + '/session/' + session._id + '/update';
         return this.http
             .put(url, JSON.stringify({
@@ -135,6 +147,7 @@ export class SessionService {
     }
 
     updateSessionCards(session: Session, cards: Card[], isPersonal: boolean, isOrganiser: boolean): Observable<Session> {
+      this.setHeaders();
         let url;
         if (!isPersonal && isOrganiser) {
             url = this.baseURL + '/session/' + session._id + '/update';
@@ -155,6 +168,7 @@ export class SessionService {
     }
 
     readParticipantSessions(): Observable<Session> {
+      this.setHeaders();
         let currentUser = localStorage.getItem('currentUser');
         return this.http
             .get(this.baseURL + '/user/' + JSON.parse(currentUser)._id + '/sessions/participating', {headers: this.headers})
@@ -163,6 +177,7 @@ export class SessionService {
     }
 
     readThemeSessions(id: string): Observable<Session> {
+      this.setHeaders();
         return this.http
             .get(this.baseURL + '/theme/' + id + '/sessions', {headers: this.headers})
             .map((res: Response) => res.json().sessions)
@@ -170,6 +185,7 @@ export class SessionService {
     }
 
     deleteSession(id: string): Observable<Session> {
+      this.setHeaders();
         const url = this.baseURL + '/session/' + id + '/delete';
         return this.http
             .delete(url, {headers: this.headers})
@@ -178,6 +194,7 @@ export class SessionService {
     }
 
     getSessionOrganisers(session: Session): Observable<Session> {
+      this.setHeaders();
         return this.http
             .get(this.baseURL + '/theme/' + session.theme._id, {headers: this.headers})
             .map((res: Response) => res.json().theme.organisers)
@@ -185,6 +202,7 @@ export class SessionService {
     }
 
     startSession(session: Session): Observable<Session> {
+      this.setHeaders();
         let currentUser = localStorage.getItem('currentUser');
         const url = this.baseURL + '/session/' + session._id + '/start';
         return this.http
@@ -194,6 +212,7 @@ export class SessionService {
     }
 
     stopSession(session: Session, userId: string): Observable<Session> {
+      this.setHeaders();
         const url = this.baseURL + '/session/' + session._id + '/stop';
         return this.http
             .put(url, JSON.stringify({userId: userId}), {headers: this.headers})
@@ -202,6 +221,7 @@ export class SessionService {
     }
 
   playTurn(session: Session, userId: string, cardId: string): Observable<Session> {
+    this.setHeaders();
     const url = this.baseURL + '/session/' + session._id + '/turn';
     return this.http
       .put(url, JSON.stringify({userId: userId, cardId: cardId}), {headers: this.headers})
@@ -211,6 +231,7 @@ export class SessionService {
 
 
     readInvitedSessions(): Observable<Session> {
+      this.setHeaders();
         let currentUser = localStorage.getItem('currentUser');
         return this.http
             .get(this.baseURL + '/user/' + JSON.parse(currentUser)._id + '/sessions/invited', {headers: this.headers})
@@ -219,6 +240,7 @@ export class SessionService {
     }
 
     acceptInvite(session: Session): Observable<Session> {
+      this.setHeaders();
         let currentUser = localStorage.getItem('currentUser');
         const url = this.baseURL + '/session/' + session._id + '/accept';
         return this.http

@@ -13,7 +13,7 @@ import {UserService} from "./user.service";
 })
 export class AuthenticationService {
   private headers = new Headers({'Content-Type': 'application/json'});
-  private baseURL = 'https://kandoo-js-backend.herokuapp.com';//'http://localhost:8000';//
+  private baseURL = 'http://localhost:8000';//'https://kandoo-js-backend.herokuapp.com';//
   constructor(private http: Http, private router: Router, private socketService: SocketService, private userService: UserService) {
   }
 

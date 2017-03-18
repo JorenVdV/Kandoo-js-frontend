@@ -6,13 +6,19 @@ import {Observable} from "rxjs";
 
 @Injectable()
 export class UserService {
-    private baseURL = 'https://kandoo-js-backend.herokuapp.com';//'http://localhost:8000';//
+    private baseURL = 'http://localhost:8000';//'https://kandoo-js-backend.herokuapp.com';//
 
-    private headers = new Headers({'Content-Type': 'application/json', 'X-Access-Token' : JSON.parse(localStorage.getItem('currentUser_token')), 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers' : 'Origin, X-Requested-With, Content-Type, Accept', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS' });
+    private headers = new Headers({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers' : 'Origin, X-Requested-With, Content-Type, Accept', 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS' });
     constructor(private http: Http) {
     }
 
+    setHeaders(){
+      if(!this.headers.has('X-Access-Token'))
+      this.headers.set('X-Access-Token', JSON.parse(localStorage.getItem('currentUser_token')));
+    }
+
     getAll() {
+      this.setHeaders();
         return this.http.get(this.baseURL + '/users', {headers: this.headers}).map((response: Response) => response.json().users);
     }
 
@@ -21,6 +27,7 @@ export class UserService {
     // }
 
     create(user: User) {
+      this.setHeaders();
         return this.http.post(this.baseURL + '/register', user, {headers: this.headers}).map((response: Response) => response.json());
     }
 
@@ -29,10 +36,13 @@ export class UserService {
     // }
 
     deleteAccount(id: string) {
+      this.setHeaders();
         return this.http.delete(this.baseURL + '/user/'+id+'/delete', {headers: this.headers}).map((response: Response) => response.json());
     }
 
     get(id: string){
+      this.setHeaders();
+      console.log(this.headers.getAll('X-Access-Token'));
         return this.http.get(this.baseURL + '/user/'+id, {headers: this.headers}).map((response: Response) => response.json());
     }
 
@@ -47,6 +57,7 @@ export class UserService {
     }
 */
     changepwd(id: string, currentPwd: string, newPwd: string): Observable<User> {
+      this.setHeaders();
         const url = this.baseURL + '/user/' + id + '/update';
         return this.http
             .put(url, JSON.stringify({password: newPwd, originalPassword: currentPwd}), {headers: this.headers})
@@ -55,6 +66,7 @@ export class UserService {
     }
 
     updateAccount(user: User, id:string): Observable<User> {
+      this.setHeaders();
         const url = this.baseURL + '/user/' + id + '/update';
 
         return this.http
