@@ -12,17 +12,7 @@ import {CircleService} from "../services/circle.service";
 })
 
 export class CircleComponent implements OnInit, AfterViewInit {
-  cardsOutOfPlay: Card[] = [];
-  numberedCards: Card[] = [];
-  cardsInPlay: Card[] = [];
-
-  circleFive: Card[] = [];
-  circleFour: Card[] = [];
-  circleThree: Card[] = [];
-  circleTwo: Card[] = [];
-  circleOne: Card[] = [];
   selectedCard: Card;
-  isCircleFilled: boolean = false;
   session: Session;
   turnHolder: string;
   userId: string;
@@ -37,48 +27,6 @@ export class CircleComponent implements OnInit, AfterViewInit {
               private route: ActivatedRoute,
               private router: Router) {
     this.sessionId = this.route.snapshot.params['_id'];
-    // this.sessionService.readSession(this.sessionId).subscribe(s => {
-    //     this.turnHolder = s.currentUser._id;
-    //     console.log(s);
-    //     this.session = s;
-    //     for (let cP of s.cardPriorities) {
-    //       let card = cP.card;
-    //       card.priority = cP.priority;
-    //       this.numberedCards.push(card);
-    //       if (cP.priority === 0) {
-    //         this.cardsOutOfPlay.push(card);
-    //       } else {
-    //         card.circlePosition = "item-" + (this.cardsInPlay.length + 1);
-    //         this.cardsInPlay.push(card);
-    //
-    //         if (cP.priority === 1) {
-    //           this.circleFive.push(card);
-    //         } else if (cP.priority === 2) {
-    //           this.circleFour.push(card);
-    //         } else if (cP.priority === 3) {
-    //           this.circleThree.push(card);
-    //         } else if (cP.priority === 4) {
-    //           this.circleTwo.push(card);
-    //         } else if (cP.priority === 5) {
-    //           this.circleOne.push(card);
-    //         }
-    //
-    //         if (this.cardsInPlay.length === 12) {
-    //           this.isCircleFilled = true;
-    //         }
-    //       }
-    //     }
-    //     if (this.cardsOutOfPlay.length === 0) {
-    //       this.isCircleFilled = true;
-    //     }
-    //     for (let i = 0; i < this.numberedCards.length; i++) {
-    //       this.numberedCards[i].listNumber = i + 1;
-    //     }
-    //   },
-    //   err => {
-    //     console.log(err);
-    //   });
-
     this.userId = JSON.parse(localStorage.getItem('currentUser'))._id;
   }
 
@@ -92,88 +40,21 @@ export class CircleComponent implements OnInit, AfterViewInit {
     this.sessionService.readSession(this.sessionId).subscribe(session => {
         this.session = session;
         let currUserIndex = session.participants.findIndex(user => user._id.toString() === this.userId.toString());
-        console.log('currUserIndex: ' + currUserIndex);
-        console.log('user id: ' + session.participants[currUserIndex]._id + ' name: ' + session.participants[currUserIndex].firstname + ' ' + session.participants[currUserIndex].lastname);
         let nextUserIndex = (currUserIndex < session.participants.length - 1) ? currUserIndex + 1 : 0;
-        console.log('nextUserIndex: ' + nextUserIndex);
-        console.log('user id: ' + session.participants[nextUserIndex]._id + ' name: ' + session.participants[nextUserIndex].firstname + ' ' + session.participants[nextUserIndex].lastname);
         this.circleService.setup(this.sessionId, session.participants[nextUserIndex]);
-        // this.circleService.setup(this.sessionId, s.currentUser._id);
         this.circleService.circleCards.subscribe(
           data => {
             let cardId = data.cardID;
-            // let userId = data.userID;
             let cardIndex = this.cardsOnCircle.findIndex(card => card._id == cardId);
             let card = this.cardsOnCircle[cardIndex];
-
-            // let index = this.circleFive.findIndex(card => card._id.toString() === cardId);
-            // if (index === -1) {
-            //   index = this.circleFour.findIndex(card => card._id.toString() === cardId);
-            //   if (index === -1) {
-            //     index = this.circleThree.findIndex(card => card._id.toString() === cardId);
-            //     if (index === -1) {
-            //       index = this.circleTwo.findIndex(card => card._id.toString() === cardId);
-            //       if (index !== -1) {
-            //         console.log('Card belongs to circleTwo');
-            //         card = this.circleTwo[index];
-            //       }
-            //     } else {
-            //       console.log('Card belongs to circleThree');
-            //       card = this.circleThree[index];
-            //     }
-            //   } else {
-            //     console.log('Card belongs to circleFour');
-            //     card = this.circleFour[index];
-            //   }
-            // } else {
-            //   console.log('Card belongs to circleFive');
-            //   card = this.circleFive[index];
-            // }
-
             if (card) {
-              console.log('Found the card! woohoo');
-              console.log('card:');
-              console.log(card);
-              console.log('Increasing priority of card: ' + card.description + ' card nr: ' + this.cardsOnCircle.find(c => c._id == card._id).listNumber);
-              console.log('Card priority:' + card.priority++);
-              console.log('Card priority increased to +1 in circleCards.subscribe: ' + card.priority);
               this.increasePriority(card, false);
             }
-
-            // this.updateView(this.circleFive, cc);
-            // this.updateView(this.circleFour, cc);
-            // this.updateView(this.circleThree, cc);
-            // this.updateView(this.circleTwo, cc);
-            // this.updateView(this.circleOne, cc);
           },
           error => console.log(error));
-        // this.circleService.circleCards.subscribe(
-        //   cc => {
-        //     console.log('cc: ');
-        //     console.log(cc);
-        //     console.log();
-        //     for (c of s.cardsOutOfPlay) {
-        //       if (c._id === cc.cardID) {
-        //         this.addToCircle(c, false);
-        //         return;
-        //       }
-        //     }
-        //     this.updateView(this.circleFive, cc);
-        //     this.updateView(this.circleFour, cc);
-        //     this.updateView(this.circleThree, cc);
-        //     this.updateView(this.circleTwo, cc);
-        //   },
-        //   err => {
-        //     console.log(err);
-        //   });
+
         this.circleService.circleTurn.subscribe(
           ct => {
-            console.log('ct: ');
-            console.log(ct);
-            console.log();
-            // if (ct.userID._id)
-            //   this.turnHolder = ct.userID._id;
-            // else
             this.turnHolder = ct.userID;
           },
           err => {
@@ -200,134 +81,19 @@ export class CircleComponent implements OnInit, AfterViewInit {
       let cardPriority = cards[i];
       let card = cardPriority.card;
       card.priority = 0;
-      // console.log('card: ' + card.description + ' prio: ' + card.priority);
-      // this.numberedCards.push(card);
-      // console.log('added to numberedCards');
-      // this.cardsInPlay.push(card);
-      // console.log('added to cardsInPlay');
       card.circlePosition = 'item-' + ((i % 12) + 1);
       card.listNumber = i+1;
       this.cardsOnCircle.push(card);
-      // console.log('circlePosition: ' + card.circlePosition);
-      // switch (card.priority) {
-      //   case 0:
-      //     this.circleFive.push(card);
-      //     break;
-      //   case 1:
-      //     this.circleFour.push(card);
-      //     break;
-      //   case 2:
-      //     this.circleThree.push(card);
-      //     break;
-      //   case 3:
-      //     this.circleTwo.push(card);
-      //     break;
-      //   case 4:
-      //     this.circleOne.push(card);
-      //     break;
-      // }
     }
 
-    // for (let i = 0; i < cards.length; i++) {
-    //   let cardPriority = cards[i];
-    //   let card = cardPriority.card;
-    //   card.priority = cardPriority.priority;
-      // console.log('card: ' + card.description + ' prio: ' + card.priority);
-      // this.numberedCards.push(card);
-      // console.log('added to numberedCards');
-      // this.cardsInPlay.push(card);
-      // console.log('added to cardsInPlay');
-      // card.circlePosition = 'item-' + ((this.cardsInPlay.length % 12) + 1);
-      // console.log('circlePosition: ' + card.circlePosition);
-      // switch (card.priority) {
-      //   case 0:
-      //     this.circleFive.push(card);
-      //     break;
-      //   case 1:
-      //     this.circleFour.push(card);
-      //     break;
-      //   case 2:
-      //     this.circleThree.push(card);
-      //     break;
-      //   case 3:
-      //     this.circleTwo.push(card);
-      //     break;
-      //   case 4:
-      //     this.circleOne.push(card);
-      //     break;
-      // }
-    // }
-    // for (let i = 0; i < this.numberedCards.length; i++) {
-    //   this.numberedCards[i].listNumber = i + 1;
-    // }
-  }
-
-  updateView(cards: Card[], cc) {
-    for (c of cards) {
-      if (c._id === cc.cardID) {
-        this.increasePriority(c, false);
-        return;
-      }
-    }
   }
 
   selectCard(card: Card) {
-    console.log('turnholder:');
-    console.log(this.turnHolder);
-    console.log('userId:');
-    console.log(this.userId);
     this.selectedCard = card;
-    console.log('selectedCard - ID: ' + this.selectedCard._id);
-    console.log('selectedCard - priority: ' + this.selectedCard.priority);
-    console.log('selectedCard - listnumber: ' + this.selectedCard.listNumber);
-    // console.log('selectedcard prio <= 4:');
-    // console.log(this.selectedCard.priority <= 4);
-    // console.log('selectedcard prio >= 0:');
-    // console.log(this.selectedCard.priority >= 0);
-    // console.log('turnholder = userId:');
-    // console.log(this.turnHolder === this.userId);
-
   }
 
-  // addToCircle(card: Card, isLocalTurn: boolean) {
-  //   if (card.priority === 0) {
-  //     this.cardsOutOfPlay.splice(this.cardsOutOfPlay.indexOf(card), 1);
-  //     card.circlePosition = "item-" + (this.circleFive.length + 1);
-  //     this.circleFive.push(card);
-  //     if (isLocalTurn) {
-  //       this.playTurn(card);
-  //     }
-  //   }
-  //
-  //   if (this.circleFive === 11 || this.cardsOutOfPlay.length === 0) {
-  //     this.isCircleFilled = true;
-  //   }
-  // }
-
   increasePriority(card: Card, isLocalTurn: boolean) {
-    // if (card.priority === 0) {
-    //   this.circleFive.splice(this.circleFive.indexOf(card), 1);
-    //   this.circleFour.push(card);
-    // }
-    // if (card.priority === 1) {
-    //   this.circleFour.splice(this.circleFour.indexOf(card), 1);
-    //   this.circleThree.push(card);
-    // }
-    // if (card.priority === 2) {
-    //   this.circleThree.splice(this.circleThree.indexOf(card), 1);
-    //   this.circleTwo.push(card);
-    // }
-    // if (card.priority === 3) {
-    //   this.circleTwo.splice(this.circleTwo.indexOf(card), 1);
-    //   this.circleOne.push(card);
-    // }
-
-    let index = this.cardsOnCircle.findIndex(c => c._id == card._id);
-    // this.cardsOnCircle[index].priority++;
-
-    console.log('cardsOnCircle - ID: ' + this.cardsOnCircle[index]._id);
-    console.log('cardsOnCircle - priority: ' + this.cardsOnCircle[index].priority);
-    if (isLocalTurn) {
+    if (isLocalTurn && card.priority < 4) {
       this.playTurn(card);
     }
   }
@@ -349,13 +115,8 @@ export class CircleComponent implements OnInit, AfterViewInit {
   }
 
   getBackgroundColor(card: Card) {
-    if (!this.selectedCard) {
-      return '#ffffff';
-    }
-    // console.log('getBackgroundColor - card:');
-    // console.log(card);
-    if (this.selectedCard._id == card._id)
-      return "#7FFFD4";//"#6E8DB7";
+    if (this.selectedCard && this.selectedCard._id == card._id)
+      return "#7FFFD4";
     else
       return "#ffffff"
   }

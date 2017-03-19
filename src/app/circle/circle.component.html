@@ -26,7 +26,7 @@
                   <!--(click)="addToCircle(selectedCard, true)">ADD TO CIRCLE-->
           <!--</button>-->
           <!--&& isCircleFilled-->
-          <button *ngIf="(selectedCard.priority <= 4
+          <button *ngIf="(selectedCard.priority < 4
                     && selectedCard.priority >= 0)
                     && turnHolder._id == userId"
                   class="btn btn-primary btn-big"
@@ -105,7 +105,7 @@
         </div>
         <div class="modal-body">
           <div class="modal-card-container">
-            <div *ngFor="let card of circleOne"
+            <div *ngFor="let card of getCardsOfPriority(4)" [style.background-color]="getBackgroundColor(card)"
                  class="card-item circle-item modal-item"
                  (click)="selectCard(card)">
               <span>{{card.listNumber}}</span>
