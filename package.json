@@ -46,9 +46,9 @@
   "devDependencies": {
     "@angular/cli": "^1.0.0-rc.1",
     "@angular/compiler-cli": "^2.3.1",
+    "@ngtools/webpack": "1.2.12",
     "@types/jasmine": "2.5.38",
     "@types/node": "^6.0.42",
-    "@ngtools/webpack": "1.2.12",
     "codelyzer": "~2.0.0-beta.1",
     "grunt-browser-sync": "^2.2.0",
     "jasmine-core": "2.5.2",
@@ -60,7 +60,7 @@
     "karma-remap-istanbul": "^0.2.1",
     "postcss-load-config": "1.0.0",
     "postcss-loader": "^1.0.0",
-    "protractor": "~4.0.13",
+    "protractor": "^4.0.14",
     "ts-node": "^1.2.1",
     "tslint": "^4.3.0",
     "typescript": "^2.0.10"
