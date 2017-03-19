@@ -127,6 +127,8 @@ export class CircleComponent implements OnInit, AfterViewInit {
             if (card) {
               console.log('Found the card! woohoo');
               console.log('Increasing priority of card: ' + card.description + ' card nr: ' + this.numberedCards.find(c => c._id == card._id).listNumber);
+              console.log('Card priority:' + card.priority++);
+              console.log('Card priority increased to +1 in circleCards.subscribe: ' + card.priority);
               this.increasePriority(card, false);
             }
 
