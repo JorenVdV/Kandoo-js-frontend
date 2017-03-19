@@ -12,7 +12,6 @@ import {CircleService} from "../services/circle.service";
 })
 
 export class CircleComponent implements OnInit, AfterViewInit {
-
   selectedCard: Card;
   session: Session;
   turnHolder: string;
@@ -49,6 +48,7 @@ export class CircleComponent implements OnInit, AfterViewInit {
             let cardIndex = this.cardsOnCircle.findIndex(card => card._id == cardId);
             let card = this.cardsOnCircle[cardIndex];
             if (card) {
+              card.priority++;
               this.increasePriority(card, false);
             }
           },
@@ -71,8 +71,6 @@ export class CircleComponent implements OnInit, AfterViewInit {
   }
 
   initCards(cards) {
-    console.log('init Cards');
-
     for (let i = 0; i < cards.length; i++) {
       let cardPriority = cards[i];
       let card = cardPriority.card;
@@ -91,8 +89,7 @@ export class CircleComponent implements OnInit, AfterViewInit {
 
 
   increasePriority(card: Card, isLocalTurn: boolean) {
-    let index = this.cardsOnCircle.findIndex(c => c._id == card._id);
-    if (isLocalTurn) {
+    if (isLocalTurn && card.priority < 4) {
       this.playTurn(card);
     }
   }
@@ -114,10 +111,7 @@ export class CircleComponent implements OnInit, AfterViewInit {
   }
 
   getBackgroundColor(card: Card) {
-    if (!this.selectedCard) {
-      return '#ffffff';
-    }
-    if (this.selectedCard._id == card._id)
+    if (this.selectedCard &&this.selectedCard._id == card._id)
       return "#7FFFD4";
     else
       return "#ffffff"
