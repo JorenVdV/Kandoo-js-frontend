@@ -1,85 +1,97 @@
 <navbar></navbar>
 <div id="containment-wrapper">
 
-<div class="container" *ngIf="fullyLoaded">
-  <div class="col-md-12">
-    <h1>{{session?.title}}</h1>
-    <h3>{{session?.description}}</h3>
-  </div>
+  <div class="container" *ngIf="fullyLoaded">
+    <div class="col-md-12">
+      <h1>{{session?.title}}</h1>
+      <h3>{{session?.description}}</h3>
+    </div>
 
-  <div class="col-md-3">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <h4>Current user: <span *ngIf="turnHolder._id == userId" style="color: red">You</span> <span *ngIf="turnHolder._id != userId">{{turnHolder.firstname}} {{turnHolder.lastname}}</span></h4>
-        <div class="card-list">
-          <div class="card-list-item card-item" *ngFor="let card of cardsOnCircle" [style.background-color]="getBackgroundColor(card)" (click)="selectCard(card)">
-            <span>{{card.listNumber}}</span>
+    <div class="col-md-3">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h4>Current user: <span *ngIf="turnHolder._id == userId" style="color: red">You</span> <span
+            *ngIf="turnHolder._id != userId">{{turnHolder.firstname}} {{turnHolder.lastname}}</span></h4>
+          <div class="card-list">
+            <div class="card-list-item card-item" *ngFor="let card of cardsOnCircle"
+                 [style.background-color]="getBackgroundColor(card)" (click)="selectCard(card)">
+              <span>{{card.listNumber}}</span>
+            </div>
           </div>
-        </div>
-        <div class="card-description" *ngIf="selectedCard">
-          <p><b>Description</b><br>{{selectedCard.description}}</p>
-          <p><b>Priority</b><br>{{selectedCard.priority}}</p>
-          <button *ngIf="(selectedCard.priority < 4
+          <div class="card-description" >
+            <div *ngIf="selectedCard">
+              <h5 [style.background-color]="getBackgroundColor(selectedCard)">Selected</h5>
+              <p><b>Description</b><br>{{selectedCard.description}}</p>
+              <p><b>Priority</b><br>{{selectedCard.priority}}</p>
+              <button *ngIf="(selectedCard.priority < 4
                     && selectedCard.priority >= 0)
                     && turnHolder._id == userId"
-                  class="btn btn-primary btn-big"
-                  (click)="increasePriority(selectedCard, true)">INCREASE PRIORITY
+                      class="btn btn-primary btn-big"
+                      (click)="increasePriority(selectedCard, true)">INCREASE PRIORITY
+              </button>
+            </div>
+            <div *ngIf="mostRecentTurn" >
+              <h5 [style.background-color]="getBackgroundColor(mostRecentTurn)">Most recent</h5>
+              <p><b>Description</b><br>{{mostRecentTurn.description}}</p>
+              <p><b>Priority</b><br>{{mostRecentTurn.priority}}</p>
+            </div>
+          </div>
+          <!--&& isCircleFilled-->
+          <button class="btn btn-danger btn-end-session btn-big"
+                  *ngIf="userId === session?.creator"
+                  data-toggle="modal"
+                  data-target="#myConfirm">END SESSION
           </button>
         </div>
-        <!--&& isCircleFilled-->
-        <button class="btn btn-danger btn-end-session btn-big"
-                *ngIf="userId === session?.creator"
-                data-toggle="modal"
-                data-target="#myConfirm">END SESSION
-        </button>
       </div>
     </div>
-  </div>
 
-  <div class="col-md-6">
-    <div class="circle-container">
-      <div class="circle" id="circle-5"
-           [class.opportunity]="session?.circleType == 'opportunity'"
-           [class.threat]="session?.circleType == 'threat'">
-        <!--circleFive-->
-        <div *ngFor="let card of getCardsOfPriority(0)" [style.background-color]="getBackgroundColor(card)"
-             [class]="'card-item circle-item ' + card.circlePosition"
-             (click)="selectCard(card)">
-          <span>{{card.listNumber}}</span>
-        </div>
-        <div class="circle" id="circle-4"
+    <div class="col-md-6">
+      <div class="circle-container">
+        <div class="circle" id="circle-5"
              [class.opportunity]="session?.circleType == 'opportunity'"
              [class.threat]="session?.circleType == 'threat'">
-          <div *ngFor="let card of getCardsOfPriority(1);" [style.background-color]="getBackgroundColor(card)"
+          <!--circleFive-->
+          <div *ngFor="let card of getCardsOfPriority(0)" [style.background-color]="getBackgroundColor(card)"
                [class]="'card-item circle-item ' + card.circlePosition"
                (click)="selectCard(card)">
             <span>{{card.listNumber}}</span>
           </div>
-          <div class="circle" id="circle-3"
+          <div class="circle" id="circle-4"
                [class.opportunity]="session?.circleType == 'opportunity'"
                [class.threat]="session?.circleType == 'threat'">
-            <div *ngFor="let card of getCardsOfPriority(2);" [style.background-color]="getBackgroundColor(card)"
+            <div *ngFor="let card of getCardsOfPriority(1);" [style.background-color]="getBackgroundColor(card)"
                  [class]="'card-item circle-item ' + card.circlePosition"
                  (click)="selectCard(card)">
               <span>{{card.listNumber}}</span>
             </div>
-            <div class="circle" id="circle-2"
+            <div class="circle" id="circle-3"
                  [class.opportunity]="session?.circleType == 'opportunity'"
                  [class.threat]="session?.circleType == 'threat'">
-              <div *ngFor="let card of getCardsOfPriority(3);" [style.background-color]="getBackgroundColor(card)"
+              <div *ngFor="let card of getCardsOfPriority(2);" [style.background-color]="getBackgroundColor(card)"
                    [class]="'card-item circle-item ' + card.circlePosition"
                    (click)="selectCard(card)">
                 <span>{{card.listNumber}}</span>
               </div>
-              <div class="circle" id="circle-1"
+              <div class="circle" id="circle-2"
                    [class.opportunity]="session?.circleType == 'opportunity'"
                    [class.threat]="session?.circleType == 'threat'">
-                <div *ngFor="let card of getCardsOfPriority(4); let i = index" [style.background-color]="getBackgroundColor(card)"
-                     [class]="'card-item circle-item ' + 'inner-item-' + i"
-                     data-toggle="modal"
-                     data-target="#myModal"
+                <div *ngFor="let card of getCardsOfPriority(3);" [style.background-color]="getBackgroundColor(card)"
+                     [class]="'card-item circle-item ' + card.circlePosition"
                      (click)="selectCard(card)">
                   <span>{{card.listNumber}}</span>
+                </div>
+                <div class="circle" id="circle-1"
+                     [class.opportunity]="session?.circleType == 'opportunity'"
+                     [class.threat]="session?.circleType == 'threat'">
+                  <div *ngFor="let card of getCardsOfPriority(4); let i = index"
+                       [style.background-color]="getBackgroundColor(card)"
+                       [class]="'card-item circle-item ' + 'inner-item-' + i"
+                       data-toggle="modal"
+                       data-target="#myModal"
+                       (click)="selectCard(card)">
+                    <span>{{card.listNumber}}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -87,45 +99,46 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Top cards</h4>
-        </div>
-        <div class="modal-body">
-          <div class="modal-card-container">
-            <div *ngFor="let card of getCardsOfPriority(4)" [style.background-color]="getBackgroundColor(card)"
-                 class="card-item circle-item modal-item"
-                 (click)="selectCard(card)">
-              <span>{{card.listNumber}}</span>
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Top cards</h4>
+          </div>
+          <div class="modal-body">
+            <div class="modal-card-container">
+              <div *ngFor="let card of getCardsOfPriority(4)" [style.background-color]="getBackgroundColor(card)"
+                   class="card-item circle-item modal-item"
+                   (click)="selectCard(card)">
+                <span>{{card.listNumber}}</span>
+              </div>
+            </div>
+            <div class="card-description" *ngIf="selectedCard">
+              <p><b>Description</b><br>{{selectedCard.description}}</p>
             </div>
           </div>
-          <div class="card-description" *ngIf="selectedCard">
-            <p><b>Description</b><br>{{selectedCard.description}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="myConfirm" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Are you sure you wish to end the session?</h4>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="endSession()">End session</button>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <div class="modal fade" id="myConfirm" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Are you sure you wish to end the session?</h4>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" (click)="endSession()">End session</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-  <chat style="z-index: 999; position: absolute; cursor: pointer; display: inline-block; max-width: 443px; width: 443px !important;" id="drag"></chat>
+  <chat
+    style="z-index: 999; position: absolute; cursor: pointer; display: inline-block; max-width: 443px; width: 443px !important;"
+    id="drag"></chat>
 </div>
