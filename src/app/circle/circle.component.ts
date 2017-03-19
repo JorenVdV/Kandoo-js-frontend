@@ -97,7 +97,7 @@ export class CircleComponent implements OnInit, AfterViewInit {
         let nextUserIndex = (currUserIndex < session.participants.length - 1) ? currUserIndex + 1 : 0;
         console.log('nextUserIndex: ' + nextUserIndex);
         console.log('user id: ' + session.participants[nextUserIndex]._id + ' name: ' + session.participants[nextUserIndex].firstname + ' ' + session.participants[nextUserIndex].lastname);
-        this.circleService.setup(this.sessionId, session.participants[nextUserIndex]._id);
+        this.circleService.setup(this.sessionId, session.participants[nextUserIndex]);
         // this.circleService.setup(this.sessionId, s.currentUser._id);
         this.circleService.circleCards.subscribe(
           data => {
