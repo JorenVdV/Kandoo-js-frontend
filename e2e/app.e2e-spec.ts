@@ -1,4 +1,6 @@
 import {browser, element, by, ExpectedConditions, protractor} from 'protractor';
+import * as webdriver from "selenium-webdriver";
+import all = webdriver.promise.all;
 
 describe('Landing page', function () {
     beforeEach(() => {
@@ -123,6 +125,52 @@ describe('Home page', function () {
                 expect(element(by.css('h2')).getText()).toBe('Theme:');
                 expect(element(by.id('title')).getAttribute('value')).toBe('This is a theme');
                 expect(element(by.id('description')).getAttribute('value')).toBe('This is a theme description');
+
+            });
+        });
+    });
+
+    it('should add a card to the theme', () => {
+        browser.get('/themes');
+        browser.driver.sleep(2000);
+        element(by.id('themes')).all(by.css('div.panel.panel-default')).then((themes) => {
+            const bodyTheme = themes[themes.length - 1].element(by.css('.panel-body'));
+            bodyTheme.all(by.css('button.btn.btn-primary')).then((buttons) => {
+                buttons[1].click().then(() => {
+                    browser.driver.sleep(2000);
+                    expect(element(by.css('h1')).getText()).toBe('Voeg een kaart toe');
+                    element(by.id('description')).sendKeys('This is a card');
+                    element(by.id('submit')).click().then(() => {
+                        browser.driver.sleep(2000);
+                        element.all(by.css('div.panel.panel-default')).then((cards) => {
+                            expect(cards[0].element(by.css('h4')).getText()).toBe('This is a card');
+                            expect(cards[0].element(by.css('button.btn.btn-default')).getText()).toBe('X');
+                        });
+                    });
+                });
+            });
+        });
+    });
+    it('should delete a card from a theme', () => {
+        browser.get('/themes');
+        browser.driver.sleep(2000);
+        element(by.id('themes')).all(by.css('div.panel.panel-default')).then((themes) => {
+            const bodyTheme = themes[themes.length - 1].element(by.css('.panel-body'));
+            bodyTheme.all(by.css('button.btn.btn-primary')).then((buttons) => {
+                buttons[1].click().then(() => {
+                    browser.driver.sleep(2000);
+                    element.all(by.css('div.panel.panel-default')).then((cards) => {
+                        expect(cards[0].element(by.css('h4')).getText()).toBe('This is a card');
+                        expect(cards[0].element(by.css('button.btn.btn-default')).getText()).toBe('X');
+                        cards[0].element(by.css('button.btn.btn-default')).click().then(() => {
+                            browser.driver.sleep(2000);
+                            element.all(by.css('div.panel.panel-default')).then((nocards) => {
+                                browser.driver.sleep(2000);
+                                expect(nocards.length).toBe(0);
+                            });
+                        });
+                    });
+                });
             });
         });
     });
