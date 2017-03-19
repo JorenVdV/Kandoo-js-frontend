@@ -309,7 +309,7 @@ export class CircleComponent implements OnInit, AfterViewInit {
       this.circleOne.push(card);
     }
 
-    // let index = this.cardsOnCircle.findIndex(c => c._id == card._id);
+    let index = this.cardsOnCircle.findIndex(c => c._id == card._id);
     // this.cardsOnCircle[index].priority++;
 
     console.log('cardsOnCircle - ID: ' + this.cardsOnCircle[index]._id);
