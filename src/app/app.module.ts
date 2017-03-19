@@ -62,7 +62,7 @@ import {CircleService} from "./services/circle.service";
     AccountComponent,
     InvitedSessionComponent,
     ChatComponent,
-    DeleteAccComponent
+    DeleteAccComponent,
   ],
   imports: [
     BrowserModule,

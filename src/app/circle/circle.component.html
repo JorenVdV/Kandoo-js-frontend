@@ -10,8 +10,8 @@
     <div class="col-md-3">
       <div class="panel panel-default">
         <div class="panel-body">
-          <h4>Current user: <span *ngIf="turnHolder._id == userId" style="color: #d9534f">You</span> <span
-            *ngIf="turnHolder._id != userId">{{turnHolder.firstname}} {{turnHolder.lastname}}</span></h4>
+          <h4>Current user: <span *ngIf="turnHolder?._id == userId" style="color: #d9534f">You</span> <span
+            *ngIf="turnHolder?._id != userId">{{turnHolder?.firstname}} {{turnHolder?.lastname}}</span></h4>
           <div class="card-list">
             <div class="card-list-item card-item" *ngFor="let card of cardsOnCircle"
                  [style.background-color]="getBackgroundColor(card)" (click)="selectCard(card)">
@@ -28,10 +28,12 @@
               <p><b>Priority</b><br>{{selectedCard.priority}}</p>
               <button *ngIf="(selectedCard.priority < 4
                     && selectedCard.priority >= 0)
-                    && turnHolder._id == userId"
+                    && turnHolder?._id == userId
+                    && isCircle"
                       class="btn btn-primary btn-big"
                       (click)="increasePriority(selectedCard, true)">INCREASE PRIORITY
               </button>
+            </div>
             </div>
             <div *ngIf="mostRecentTurn">
               <div class="circle-legend-container">
@@ -41,13 +43,22 @@
               <p><b>Description</b><br>{{mostRecentTurn.description}}</p>
               <p><b>Priority</b><br>{{mostRecentTurn.priority}}</p>
             </div>
-          </div>
           <!--&& isCircleFilled-->
-          <button class="btn btn-danger btn-end-session btn-big"
-                  *ngIf="userId === session?.creator"
+          <button class="btn btn-danger btn-margin-top btn-big"
+                  *ngIf="userId === session?.creator && isCircle"
                   data-toggle="modal"
                   data-target="#myConfirm">END SESSION
           </button>
+          <div *ngIf="!isCircle">
+            <button *ngIf="turnEvents.length != 0"
+                    class="btn btn-success btn-margin-top btn-big"
+                    (click)="nextMove()">NEXT MOVE
+            </button>
+            <button *ngIf="reverseTurns.length != 0"
+                    class="btn btn-primary btn-margin-top btn-big"
+                    (click)="previousMove()">PREVIOUS MOVE
+            </button>
+          </div>
         </div>
       </div>
     </div>

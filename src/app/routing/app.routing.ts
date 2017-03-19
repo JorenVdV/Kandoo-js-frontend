@@ -32,6 +32,7 @@ export const routes: Routes = [
   {path: 'theme/:_id/session', component: SessionComponent},
   {path: 'session/:sessionId', component: SessionComponent},
   {path: 'changepwd', component: ChangePwdComponent},
+  {path: 'session/:_id/history', component: CircleComponent},
   {path: 'session/:_id/circle', component: CircleComponent},
   {path: 'participating', component: ParticipatingSessionComponent},
   {path: 'theme/:_id/themesessions', component: ThemeSessionComponent},

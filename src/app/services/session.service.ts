@@ -204,6 +204,15 @@ export class SessionService {
       .catch((error: any) => Observable.throw(error));
   }
 
+  historySession(sessionId: string): Observable<Session> {
+    this.setHeaders();
+    const url = this.baseURL + '/session/' + sessionId + '/history';
+    return this.http
+      .get(url, {headers: this.headers})
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
   startSession(session: Session): Observable<Session> {
     this.setHeaders();
     let currentUser = localStorage.getItem('currentUser');

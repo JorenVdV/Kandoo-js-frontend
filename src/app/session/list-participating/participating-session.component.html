@@ -36,7 +36,13 @@
         </button>
 
         <button *ngIf="session.status != 'created'" (click)="startSession(session)" class="btn btn-success "
-                data-balloon="Go to game!"
+                data-balloon="Go to circle!"
+                data-balloon-pos="up">
+          <i class="fa fa-play-circle" aria-hidden="true"></i>
+        </button>
+
+        <button *ngIf="session.status != 'created'" (click)="showHistory(session)" class="btn btn-warning "
+                data-balloon="Show history!"
                 data-balloon-pos="up">
           <i class="fa fa-play-circle" aria-hidden="true"></i>
         </button>

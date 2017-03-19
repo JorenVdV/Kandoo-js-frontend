@@ -163,6 +163,10 @@ export class ParticipatingSessionComponent implements OnInit, AfterViewInit {
 
   }
 
+  showHistory(session: Session) {
+    this.router.navigate(['/session', session._id, 'history']);
+  }
+
   inviteToSession(session: Session) {
     this.sessionService.inviteToSession(session).subscribe(
       done => {
