@@ -43,7 +43,7 @@ export class CircleComponent implements OnInit, AfterViewInit {
         this.session = session;
         let currUserIndex = session.participants.findIndex(user => user._id.toString() === this.userId.toString());
         let nextUserIndex = (currUserIndex < session.participants.length - 1) ? currUserIndex + 1 : 0;
-        this.circleService.setup(this.sessionId, session.participants[nextUserIndex]);
+        this.circleService.setup(this.sessionId, session.participants[nextUserIndex]._id);
         this.circleService.circleCards.subscribe(
           data => {
             let cardId = data.cardID;
@@ -58,7 +58,8 @@ export class CircleComponent implements OnInit, AfterViewInit {
           error => console.log(error));
         this.circleService.circleTurn.subscribe(
           ct => {
-            this.turnHolder = ct.userID;
+            let ctIndex = this.session.participants.findIndex(user => user._id == ct.userID);
+            this.turnHolder = this.session.participants[ctIndex];
           },
           err => {
             console.log(err);

@@ -27,7 +27,6 @@ export class UserService {
     // }
 
     create(user: User) {
-      this.setHeaders();
         return this.http.post(this.baseURL + '/register', user, {headers: this.headers}).map((response: Response) => response.json());
     }
 
