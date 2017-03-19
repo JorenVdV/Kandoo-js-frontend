@@ -199,9 +199,10 @@ export class CircleComponent implements OnInit, AfterViewInit {
       // console.log('card: ' + card.description + ' prio: ' + card.priority);
       // this.numberedCards.push(card);
       // console.log('added to numberedCards');
-      this.cardsInPlay.push(card);
+      // this.cardsInPlay.push(card);
       // console.log('added to cardsInPlay');
-      card.circlePosition = 'item-' + ((this.cardsInPlay.length % 12) + 1);
+      card.circlePosition = 'item-' + ((i % 12) + 1);
+      card.listNumber = i+1;
       this.cardsOnCircle.push(card);
       // console.log('circlePosition: ' + card.circlePosition);
       // switch (card.priority) {
@@ -223,38 +224,38 @@ export class CircleComponent implements OnInit, AfterViewInit {
       // }
     }
 
-    for (let i = 0; i < cards.length; i++) {
-      let cardPriority = cards[i];
-      let card = cardPriority.card;
-      card.priority = cardPriority.priority;
+    // for (let i = 0; i < cards.length; i++) {
+    //   let cardPriority = cards[i];
+    //   let card = cardPriority.card;
+    //   card.priority = cardPriority.priority;
       // console.log('card: ' + card.description + ' prio: ' + card.priority);
-      this.numberedCards.push(card);
+      // this.numberedCards.push(card);
       // console.log('added to numberedCards');
       // this.cardsInPlay.push(card);
       // console.log('added to cardsInPlay');
       // card.circlePosition = 'item-' + ((this.cardsInPlay.length % 12) + 1);
       // console.log('circlePosition: ' + card.circlePosition);
-      switch (card.priority) {
-        case 0:
-          this.circleFive.push(card);
-          break;
-        case 1:
-          this.circleFour.push(card);
-          break;
-        case 2:
-          this.circleThree.push(card);
-          break;
-        case 3:
-          this.circleTwo.push(card);
-          break;
-        case 4:
-          this.circleOne.push(card);
-          break;
-      }
-    }
-    for (let i = 0; i < this.numberedCards.length; i++) {
-      this.numberedCards[i].listNumber = i + 1;
-    }
+      // switch (card.priority) {
+      //   case 0:
+      //     this.circleFive.push(card);
+      //     break;
+      //   case 1:
+      //     this.circleFour.push(card);
+      //     break;
+      //   case 2:
+      //     this.circleThree.push(card);
+      //     break;
+      //   case 3:
+      //     this.circleTwo.push(card);
+      //     break;
+      //   case 4:
+      //     this.circleOne.push(card);
+      //     break;
+      // }
+    // }
+    // for (let i = 0; i < this.numberedCards.length; i++) {
+    //   this.numberedCards[i].listNumber = i + 1;
+    // }
   }
 
   updateView(cards: Card[], cc) {

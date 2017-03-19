@@ -12,7 +12,7 @@
       <div class="panel-body">
         <h4>Current user: <span *ngIf="turnHolder._id == userId" style="color: red">You</span> <span *ngIf="turnHolder._id != userId">{{turnHolder.firstname}} {{turnHolder.lastname}}</span></h4>
         <div class="card-list">
-          <div class="card-list-item card-item" *ngFor="let card of cardsInPlay" [style.background-color]="getBackgroundColor(card)" (click)="selectCard(card)">
+          <div class="card-list-item card-item" *ngFor="let card of cardsOnCircle" [style.background-color]="getBackgroundColor(card)" (click)="selectCard(card)">
             <span>{{card.listNumber}}</span>
           </div>
         </div>
