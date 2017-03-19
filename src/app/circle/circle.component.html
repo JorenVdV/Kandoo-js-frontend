@@ -19,13 +19,6 @@
         <div class="card-description" *ngIf="selectedCard">
           <p><b>Description</b><br>{{selectedCard.description}}</p>
           <p><b>Priority</b><br>{{selectedCard.priority}}</p>
-          <!--<button *ngIf="selectedCard.priority === 0-->
-                    <!--&& !isCircleFilled-->
-                    <!--&& turnHolder === userId && false"-->
-                  <!--class="btn btn-success btn-big"-->
-                  <!--(click)="addToCircle(selectedCard, true)">ADD TO CIRCLE-->
-          <!--</button>-->
-          <!--&& isCircleFilled-->
           <button *ngIf="(selectedCard.priority < 4
                     && selectedCard.priority >= 0)
                     && turnHolder._id == userId"

@@ -12,6 +12,7 @@ import {CircleService} from "../services/circle.service";
 })
 
 export class CircleComponent implements OnInit, AfterViewInit {
+
   selectedCard: Card;
   session: Session;
   turnHolder: string;
@@ -52,7 +53,6 @@ export class CircleComponent implements OnInit, AfterViewInit {
             }
           },
           error => console.log(error));
-
         this.circleService.circleTurn.subscribe(
           ct => {
             this.turnHolder = ct.userID;
@@ -62,11 +62,7 @@ export class CircleComponent implements OnInit, AfterViewInit {
           });
 
         this.initCards(session.cardPriorities);
-        console.log(session.currentUser);
         this.turnHolder = session.currentUser;
-        console.log('turnHolder: ' + this.turnHolder._id);
-        console.log(this.turnHolder);
-        console.log('userId: ' + this.userId);
         this.fullyLoaded = true;
       },
       err => {
@@ -85,15 +81,18 @@ export class CircleComponent implements OnInit, AfterViewInit {
       card.listNumber = i+1;
       this.cardsOnCircle.push(card);
     }
-
   }
+
+
 
   selectCard(card: Card) {
     this.selectedCard = card;
   }
 
+
   increasePriority(card: Card, isLocalTurn: boolean) {
-    if (isLocalTurn && card.priority < 4) {
+    let index = this.cardsOnCircle.findIndex(c => c._id == card._id);
+    if (isLocalTurn) {
       this.playTurn(card);
     }
   }
@@ -115,7 +114,10 @@ export class CircleComponent implements OnInit, AfterViewInit {
   }
 
   getBackgroundColor(card: Card) {
-    if (this.selectedCard && this.selectedCard._id == card._id)
+    if (!this.selectedCard) {
+      return '#ffffff';
+    }
+    if (this.selectedCard._id == card._id)
       return "#7FFFD4";
     else
       return "#ffffff"
