@@ -103,7 +103,9 @@ export class CircleComponent implements OnInit, AfterViewInit {
           data => {
             let cardId = data.cardID;
             // let userId = data.userID;
-            let card = this.cardsOnCircle.findIndex(card => card._id == cardId);
+            let cardIndex = this.cardsOnCircle.findIndex(card => card._id == cardId);
+            let card = this.cardsOnCircle[cardIndex];
+
             // let index = this.circleFive.findIndex(card => card._id.toString() === cardId);
             // if (index === -1) {
             //   index = this.circleFour.findIndex(card => card._id.toString() === cardId);
@@ -130,7 +132,9 @@ export class CircleComponent implements OnInit, AfterViewInit {
 
             if (card) {
               console.log('Found the card! woohoo');
-              console.log('Increasing priority of card: ' + card.description + ' card nr: ' + this.numberedCards.find(c => c._id == card._id).listNumber);
+              console.log('card:');
+              console.log(card);
+              console.log('Increasing priority of card: ' + card.description + ' card nr: ' + this.cardsOnCircle.find(c => c._id == card._id).listNumber);
               console.log('Card priority:' + card.priority++);
               console.log('Card priority increased to +1 in circleCards.subscribe: ' + card.priority);
               this.increasePriority(card, false);
