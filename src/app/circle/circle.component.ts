@@ -92,8 +92,12 @@ export class CircleComponent implements OnInit, AfterViewInit {
     this.sessionService.readSession(this.sessionId).subscribe(session => {
         this.session = session;
         let currUserIndex = session.participants.findIndex(user => user._id.toString() === this.userId.toString());
+        console.log('currUserIndex: ' + currUserIndex);
+        console.log('user id: ' + session.participants[currUserIndex]._id + ' name: ' + session.participants[currUserIndex].firstname + ' ' + session.participants[currUserIndex].lastname);
         let nextUserIndex = (currUserIndex < session.participants.length - 1) ? currUserIndex + 1 : 0;
-        this.circleService.setup(this.sessionId, session.participants[nextUserIndex]);
+        console.log('nextUserIndex: ' + nextUserIndex);
+        console.log('user id: ' + session.participants[nextUserIndex]._id + ' name: ' + session.participants[nextUserIndex].firstname + ' ' + session.participants[nextUserIndex].lastname);
+        this.circleService.setup(this.sessionId, session.participants[nextUserIndex]._id);
         // this.circleService.setup(this.sessionId, s.currentUser._id);
         this.circleService.circleCards.subscribe(
           data => {
@@ -175,7 +179,8 @@ export class CircleComponent implements OnInit, AfterViewInit {
         this.initCards(session.cardPriorities);
         console.log(session.currentUser);
         this.turnHolder = session.currentUser;
-        console.log('turnHolder: ' + this.turnHolder);
+        console.log('turnHolder: ' + this.turnHolder._id);
+        console.log(this.turnHolder);
         console.log('userId: ' + this.userId);
         this.fullyLoaded = true;
       },
