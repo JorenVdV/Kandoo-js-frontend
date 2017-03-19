@@ -22,6 +22,8 @@ export class CircleComponent implements OnInit, AfterViewInit {
 
   fullyLoaded: boolean = false;
 
+  mostRecentTurn: Card;
+
   constructor(private circleService: CircleService,
               private sessionService: SessionService,
               private route: ActivatedRoute,
@@ -48,6 +50,7 @@ export class CircleComponent implements OnInit, AfterViewInit {
             let cardIndex = this.cardsOnCircle.findIndex(card => card._id == cardId);
             let card = this.cardsOnCircle[cardIndex];
             if (card) {
+              this.mostRecentTurn = card;
               card.priority++;
               this.increasePriority(card, false);
             }
@@ -76,11 +79,10 @@ export class CircleComponent implements OnInit, AfterViewInit {
       let card = cardPriority.card;
       card.priority = 0;
       card.circlePosition = 'item-' + ((i % 12) + 1);
-      card.listNumber = i+1;
+      card.listNumber = i + 1;
       this.cardsOnCircle.push(card);
     }
   }
-
 
 
   selectCard(card: Card) {
@@ -111,8 +113,10 @@ export class CircleComponent implements OnInit, AfterViewInit {
   }
 
   getBackgroundColor(card: Card) {
-    if (this.selectedCard &&this.selectedCard._id == card._id)
+    if (this.selectedCard && this.selectedCard._id == card._id)
       return "#7FFFD4";
+    else if(this.mostRecentTurn && this.mostRecentTurn._id == card._id)
+      return "#7CFC00";
     else
       return "#ffffff"
   }
