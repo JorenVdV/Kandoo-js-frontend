@@ -99,30 +99,30 @@ export class CircleComponent implements OnInit, AfterViewInit {
           data => {
             let cardId = data.cardID;
             // let userId = data.userID;
-            let card;
-            let index = this.circleFive.findIndex(card => card._id.toString() === cardId);
-            if (index === -1) {
-              index = this.circleFour.findIndex(card => card._id.toString() === cardId);
-              if (index === -1) {
-                index = this.circleThree.findIndex(card => card._id.toString() === cardId);
-                if (index === -1) {
-                  index = this.circleTwo.findIndex(card => card._id.toString() === cardId);
-                  if (index !== -1) {
-                    console.log('Card belongs to circleTwo');
-                    card = this.circleTwo[index];
-                  }
-                } else {
-                  console.log('Card belongs to circleThree');
-                  card = this.circleThree[index];
-                }
-              } else {
-                console.log('Card belongs to circleFour');
-                card = this.circleFour[index];
-              }
-            } else {
-              console.log('Card belongs to circleFive');
-              card = this.circleFive[index];
-            }
+            let card = this.cardsOnCircle.findIndex(card => card._id == cardId);
+            // let index = this.circleFive.findIndex(card => card._id.toString() === cardId);
+            // if (index === -1) {
+            //   index = this.circleFour.findIndex(card => card._id.toString() === cardId);
+            //   if (index === -1) {
+            //     index = this.circleThree.findIndex(card => card._id.toString() === cardId);
+            //     if (index === -1) {
+            //       index = this.circleTwo.findIndex(card => card._id.toString() === cardId);
+            //       if (index !== -1) {
+            //         console.log('Card belongs to circleTwo');
+            //         card = this.circleTwo[index];
+            //       }
+            //     } else {
+            //       console.log('Card belongs to circleThree');
+            //       card = this.circleThree[index];
+            //     }
+            //   } else {
+            //     console.log('Card belongs to circleFour');
+            //     card = this.circleFour[index];
+            //   }
+            // } else {
+            //   console.log('Card belongs to circleFive');
+            //   card = this.circleFive[index];
+            // }
 
             if (card) {
               console.log('Found the card! woohoo');
@@ -262,6 +262,10 @@ export class CircleComponent implements OnInit, AfterViewInit {
   }
 
   selectCard(card: Card) {
+    console.log('turnholder:');
+    console.log(this.turnHolder);
+    console.log('userId:');
+    console.log(this.userId);
     this.selectedCard = card;
     console.log('selectedCard - ID: ' + this.selectedCard._id);
     console.log('selectedCard - priority: ' + this.selectedCard.priority);
@@ -272,10 +276,7 @@ export class CircleComponent implements OnInit, AfterViewInit {
     // console.log(this.selectedCard.priority >= 0);
     // console.log('turnholder = userId:');
     // console.log(this.turnHolder === this.userId);
-    // console.log('turnholder:');
-    // console.log(this.turnHolder);
-    // console.log('userId:');
-    // console.log(this.userId);
+
   }
 
   // addToCircle(card: Card, isLocalTurn: boolean) {
@@ -294,22 +295,22 @@ export class CircleComponent implements OnInit, AfterViewInit {
   // }
 
   increasePriority(card: Card, isLocalTurn: boolean) {
-    if (card.priority === 0) {
-      this.circleFive.splice(this.circleFive.indexOf(card), 1);
-      this.circleFour.push(card);
-    }
-    if (card.priority === 1) {
-      this.circleFour.splice(this.circleFour.indexOf(card), 1);
-      this.circleThree.push(card);
-    }
-    if (card.priority === 2) {
-      this.circleThree.splice(this.circleThree.indexOf(card), 1);
-      this.circleTwo.push(card);
-    }
-    if (card.priority === 3) {
-      this.circleTwo.splice(this.circleTwo.indexOf(card), 1);
-      this.circleOne.push(card);
-    }
+    // if (card.priority === 0) {
+    //   this.circleFive.splice(this.circleFive.indexOf(card), 1);
+    //   this.circleFour.push(card);
+    // }
+    // if (card.priority === 1) {
+    //   this.circleFour.splice(this.circleFour.indexOf(card), 1);
+    //   this.circleThree.push(card);
+    // }
+    // if (card.priority === 2) {
+    //   this.circleThree.splice(this.circleThree.indexOf(card), 1);
+    //   this.circleTwo.push(card);
+    // }
+    // if (card.priority === 3) {
+    //   this.circleTwo.splice(this.circleTwo.indexOf(card), 1);
+    //   this.circleOne.push(card);
+    // }
 
     let index = this.cardsOnCircle.findIndex(c => c._id == card._id);
     // this.cardsOnCircle[index].priority++;
