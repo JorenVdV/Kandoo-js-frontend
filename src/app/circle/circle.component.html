@@ -10,7 +10,7 @@
     <div class="col-md-3">
       <div class="panel panel-default">
         <div class="panel-body">
-          <h4>Current user: <span *ngIf="turnHolder._id == userId" style="color: red">You</span> <span
+          <h4>Current user: <span *ngIf="turnHolder._id == userId" style="color: #d9534f">You</span> <span
             *ngIf="turnHolder._id != userId">{{turnHolder.firstname}} {{turnHolder.lastname}}</span></h4>
           <div class="card-list">
             <div class="card-list-item card-item" *ngFor="let card of cardsOnCircle"
@@ -18,9 +18,12 @@
               <span>{{card.listNumber}}</span>
             </div>
           </div>
-          <div class="card-description" >
+          <div class="card-description">
             <div *ngIf="selectedCard">
-              <h5 [style.background-color]="getBackgroundColor(selectedCard)">Selected</h5>
+              <div class="circle-legend-container">
+                <div class="circle-legend" [style.background-color]="getBackgroundColor(selectedCard)"></div>
+                <h4>&nbsp;Selected card</h4>
+              </div>
               <p><b>Description</b><br>{{selectedCard.description}}</p>
               <p><b>Priority</b><br>{{selectedCard.priority}}</p>
               <button *ngIf="(selectedCard.priority < 4
@@ -30,8 +33,11 @@
                       (click)="increasePriority(selectedCard, true)">INCREASE PRIORITY
               </button>
             </div>
-            <div *ngIf="mostRecentTurn" >
-              <h5 [style.background-color]="getBackgroundColor(mostRecentTurn)">Most recent</h5>
+            <div *ngIf="mostRecentTurn">
+              <div class="circle-legend-container">
+                <div class="circle-legend" [style.background-color]="getBackgroundColor(mostRecentTurn)"></div>
+                <h4>&nbsp;Most recent move</h4>
+              </div>
               <p><b>Description</b><br>{{mostRecentTurn.description}}</p>
               <p><b>Priority</b><br>{{mostRecentTurn.priority}}</p>
             </div>
@@ -47,50 +53,54 @@
     </div>
 
     <div class="col-md-6">
-      <div class="circle-container">
-        <div class="circle" id="circle-5"
-             [class.opportunity]="session?.circleType == 'opportunity'"
-             [class.threat]="session?.circleType == 'threat'">
-          <!--circleFive-->
-          <div *ngFor="let card of getCardsOfPriority(0)" [style.background-color]="getBackgroundColor(card)"
-               [class]="'card-item circle-item ' + card.circlePosition"
-               (click)="selectCard(card)">
-            <span>{{card.listNumber}}</span>
-          </div>
-          <div class="circle" id="circle-4"
-               [class.opportunity]="session?.circleType == 'opportunity'"
-               [class.threat]="session?.circleType == 'threat'">
-            <div *ngFor="let card of getCardsOfPriority(1);" [style.background-color]="getBackgroundColor(card)"
-                 [class]="'card-item circle-item ' + card.circlePosition"
-                 (click)="selectCard(card)">
-              <span>{{card.listNumber}}</span>
-            </div>
-            <div class="circle" id="circle-3"
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="circle-container">
+            <div class="circle" id="circle-5"
                  [class.opportunity]="session?.circleType == 'opportunity'"
                  [class.threat]="session?.circleType == 'threat'">
-              <div *ngFor="let card of getCardsOfPriority(2);" [style.background-color]="getBackgroundColor(card)"
+              <!--circleFive-->
+              <div *ngFor="let card of getCardsOfPriority(0)" [style.background-color]="getBackgroundColor(card)"
                    [class]="'card-item circle-item ' + card.circlePosition"
                    (click)="selectCard(card)">
                 <span>{{card.listNumber}}</span>
               </div>
-              <div class="circle" id="circle-2"
+              <div class="circle" id="circle-4"
                    [class.opportunity]="session?.circleType == 'opportunity'"
                    [class.threat]="session?.circleType == 'threat'">
-                <div *ngFor="let card of getCardsOfPriority(3);" [style.background-color]="getBackgroundColor(card)"
+                <div *ngFor="let card of getCardsOfPriority(1);" [style.background-color]="getBackgroundColor(card)"
                      [class]="'card-item circle-item ' + card.circlePosition"
                      (click)="selectCard(card)">
                   <span>{{card.listNumber}}</span>
                 </div>
-                <div class="circle" id="circle-1"
+                <div class="circle" id="circle-3"
                      [class.opportunity]="session?.circleType == 'opportunity'"
                      [class.threat]="session?.circleType == 'threat'">
-                  <div *ngFor="let card of getCardsOfPriority(4); let i = index"
-                       [style.background-color]="getBackgroundColor(card)"
-                       [class]="'card-item circle-item ' + 'inner-item-' + i"
-                       data-toggle="modal"
-                       data-target="#myModal"
+                  <div *ngFor="let card of getCardsOfPriority(2);" [style.background-color]="getBackgroundColor(card)"
+                       [class]="'card-item circle-item ' + card.circlePosition"
                        (click)="selectCard(card)">
                     <span>{{card.listNumber}}</span>
+                  </div>
+                  <div class="circle" id="circle-2"
+                       [class.opportunity]="session?.circleType == 'opportunity'"
+                       [class.threat]="session?.circleType == 'threat'">
+                    <div *ngFor="let card of getCardsOfPriority(3);" [style.background-color]="getBackgroundColor(card)"
+                         [class]="'card-item circle-item ' + card.circlePosition"
+                         (click)="selectCard(card)">
+                      <span>{{card.listNumber}}</span>
+                    </div>
+                    <div class="circle" id="circle-1"
+                         [class.opportunity]="session?.circleType == 'opportunity'"
+                         [class.threat]="session?.circleType == 'threat'">
+                      <div *ngFor="let card of getCardsOfPriority(4); let i = index"
+                           [style.background-color]="getBackgroundColor(card)"
+                           [class]="'card-item circle-item ' + 'inner-item-' + i"
+                           data-toggle="modal"
+                           data-target="#myModal"
+                           (click)="selectCard(card)">
+                        <span>{{card.listNumber}}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

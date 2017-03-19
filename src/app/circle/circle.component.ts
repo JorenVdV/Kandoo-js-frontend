@@ -115,11 +115,11 @@ export class CircleComponent implements OnInit, AfterViewInit {
 
   getBackgroundColor(card: Card) {
     if (this.selectedCard && this.selectedCard._id == card._id)
-      return "#7FFFD4";
+      return "#A6E883";
     else if(this.mostRecentTurn && this.mostRecentTurn._id == card._id)
-      return "#7CFC00";
+      return "#FF9B7C";
     else
-      return "#ffffff"
+      return "#f8f8f8"
   }
 
   getCardsOfPriority(priority: number) {

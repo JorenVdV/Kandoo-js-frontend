@@ -36,6 +36,18 @@ h1 {
     border-radius: 50% !important;
 }
 
+.circle-legend-container {
+  display: flex;
+  align-items: center;
+}
+
+.circle-legend {
+  border-radius: 50% !important;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #333;
+}
+
 #circle-1 {
     width: 60%;
     height: 60%;
