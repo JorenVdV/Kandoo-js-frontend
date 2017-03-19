@@ -84,7 +84,6 @@ describe('Home page', function () {
         element.all(by.css('h2')).then(function (items) {
             expect(items[0].getText()).toBe('My Themes:');
             expect(items[1].getText()).toBe('Participating sessions:');
-            expect(items[2].getText()).toBe('Invited sessions:');
         });
 
         expect(element(by.buttonText('CREATE THEME'))).toBeDefined();
