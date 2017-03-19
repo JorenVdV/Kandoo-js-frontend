@@ -187,7 +187,7 @@ export class CircleComponent implements OnInit, AfterViewInit {
       console.log('added to numberedCards');
       this.cardsInPlay.push(card);
       console.log('added to cardsInPlay');
-      card.circlePosition = 'item-' + ((this.cardsInPlay.length % 11) + 1);
+      card.circlePosition = 'item-' + ((this.cardsInPlay.length % 12) + 1);
       console.log('circlePosition: ' + card.circlePosition);
       switch (card.priority) {
         case 0:
@@ -286,5 +286,6 @@ export class CircleComponent implements OnInit, AfterViewInit {
   playTurn(card: Card) {
     this.circleService.playTurn(card._id, this.userId);
     this.circleService.nextUser();
+    this.selectedCard = undefined;
   }
 }
