@@ -122,6 +122,7 @@ export class LoginComponent implements OnInit {
                     error => {
                         console.log(error);
                         if (error instanceof SyntaxError) {
+                            this.loading = false;
                             let router = this.router;
                             this.alertService.success('Registration successful', true);
                             let delay = (function () {
