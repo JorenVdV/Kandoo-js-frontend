@@ -107,6 +107,7 @@ export class LoginComponent implements OnInit {
                 .subscribe(
                     (response: Response) => {
                         this.alertService.success('Registration successful', true);
+                      this.loading = false;
                         let delay = (function () {
                             let timer = 0;
                             return function (callback, ms) {
