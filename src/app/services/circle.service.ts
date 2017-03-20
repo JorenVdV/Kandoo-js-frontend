@@ -71,14 +71,14 @@ export class CircleService {
   playTurn(cardID: string, userID: string) {
     this.setHeaders();
     const url = this.baseURL + '/session/' + this._sessionID + '/turn';
-    this.http.put(url, JSON.stringify({userId: userID, cardId: cardID}), {headers: this.headers})
+    this.http.put(url, JSON.stringify({userId: userID, cardId: cardID }), {headers: this.headers})
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
       .subscribe();
 
     return this._circleCardRef.push({
       userID: userID,
-      cardID: cardID
+      cardID: cardID, time: new Date().getTime()
     }).key;
   }
 
